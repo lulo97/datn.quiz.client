@@ -1,14 +1,10 @@
 import { Link } from 'react-router-dom'
+import { components } from '@/main'
 function App() {
   return (
     <div>
       <ul>
-        <li><Link to="createquestion">Tạo câu hỏi</Link></li>
-        <li><Link to="homepage">Trang chủ</Link></li>
-        <li><Link to="createquiz">Tạo đề</Link></li>
-        <li><Link to="quizdetail">Chi tiết đề</Link></li>
-        <li><Link to="quizplaytime">Làm đề tính giờ</Link></li>
-        <li><Link to="quizplayrevise">Làm đề ôn tập</Link></li>
+        {components.map(ele => <li><Link to={ele.name}>{ele.name}</Link></li>)}
       </ul>
     </div>
   )

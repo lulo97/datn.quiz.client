@@ -1,7 +1,5 @@
 import { Card, CardHeader } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { ChevronRight } from "lucide-react";
-import QuizCard from "./QuizCard";
+import QuizCardCollection from "./QuizCardCollection";
 
 export default function Content() {
     return (
@@ -13,35 +11,11 @@ export default function Content() {
                 </div>
 
                 <div className="pt-10">
-                    <Label>Mới nổi</Label>
-                    <CardHeader className="border rounded-lg flex flex-row">
-                        <div className="flex flex-row items-center justify-between gap-2 w-11/12">
-                            <QuizCard />
-                            <QuizCard />
-                            <QuizCard />
-                            <QuizCard />
-                            <QuizCard />
-                        </div>
-                        <div className="w-1/12 flex items-center justify-end">
-                            <ChevronRight size={64} />
-                        </div>
-                    </CardHeader>
+                    <QuizCardCollection label="Mới nổi" />
                 </div>
 
                 <div className="pt-10">
-                    <Label>Chơi nhiều nhất</Label>
-                    <CardHeader className="border rounded-lg flex flex-row">
-                        <div className="flex flex-row items-center justify-between gap-2 w-11/12">
-                            <QuizCard />
-                            <QuizCard />
-                            <QuizCard />
-                            <QuizCard />
-                            <QuizCard />
-                        </div>
-                        <div className="w-1/12 flex items-center justify-end">
-                            <ChevronRight size={64} />
-                        </div>
-                    </CardHeader>
+                    <QuizCardCollection label="Chơi nhiều nhất" />
                 </div>
             </CardHeader>
         </Card>

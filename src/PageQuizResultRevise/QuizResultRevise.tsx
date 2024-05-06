@@ -9,7 +9,7 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Content from "./Content/Content";
 
-export default function Starter() {
+export default function QuizResultRevise() {
     return (
         <div className={CardParentClass}>
             <Card>

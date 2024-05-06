@@ -13,7 +13,7 @@ const imgdata = [
 
 export default function QuizCard() {
     return (
-        <div className="w-1/6 h-24 flex flex-col items-center border rounded-sm mt-0">
+        <div className=" w-1/6 h-24 flex flex-col items-center border rounded-sm mt-0">
             <img
                 className="object-contain h-3/4"
                 src={imgdata[Math.floor(Math.random() * imgdata.length)]}
