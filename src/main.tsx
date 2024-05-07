@@ -13,7 +13,7 @@ import QuizPlayTime from "./PageQuizPlayTime/QuizPlayTime";
 import QuizPlayRevise from "./PageQuizPlayRevise/QuizPlayRevise";
 import QuizResultRevise from "./PageQuizResultRevise/QuizResultRevise";
 import QuizResultTime from "./PageQuizResultTime/QuizResultTime";
-import AdminManagement from "./PageAdmin/AdminManagement";
+import AdminManagement from "./PageAdminManagement/AdminManagement";
 
 export const components = [
     CreateQuestion,

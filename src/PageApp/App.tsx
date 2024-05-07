@@ -4,7 +4,7 @@ function App() {
   return (
     <div>
       <ul>
-        {components.map(ele => <li><Link to={ele.name}>{ele.name}</Link></li>)}
+        {components.map(ele => <li key={ele.name}><Link to={ele.name}>{ele.name}</Link></li>)}
       </ul>
     </div>
   )

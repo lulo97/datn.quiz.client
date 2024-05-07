@@ -1,10 +1,14 @@
-import { QuestionTableProps } from "@/Interfaces";
-import { Button } from "@/components/ui/button";
+import { Table as TanstackTable } from "@tanstack/react-table";
 import { TableBody, TableRow, TableCell } from "@/components/ui/table";
 import { flexRender } from "@tanstack/react-table";
-import { Plus } from "lucide-react";
 
-export default function QuestionTableBody(table: QuestionTableProps) {
+interface MyTableBodyProps {
+    table: TanstackTable<any>, 
+    action_col: JSX.Element,
+}
+
+export default function MyTableBody(props: MyTableBodyProps) {
+    const { table, action_col } = props
     return (
         <TableBody>
             {table.getRowModel().rows.map((row) => {
@@ -13,14 +17,7 @@ export default function QuestionTableBody(table: QuestionTableProps) {
                         {row.getVisibleCells().map((cell) => {
                             return (
                                 <TableCell key={cell.id}>
-                                    <p
-                                        className={`line-clamp-1 ${
-                                            cell.getContext().column.id ==
-                                            "Content"
-                                                ? `w-[200px]`
-                                                : ""
-                                        }`}
-                                    >
+                                    <p>
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()
@@ -29,11 +26,7 @@ export default function QuestionTableBody(table: QuestionTableProps) {
                                 </TableCell>
                             );
                         })}
-                        <TableCell className="flex justify-between">
-                            <Button>
-                                <Plus />
-                            </Button>
-                        </TableCell>
+                        {action_col}
                     </TableRow>
                 );
             })}
