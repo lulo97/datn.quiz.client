@@ -39,7 +39,7 @@ export default function MyTableHeader(props: MyTableHeader) {
                                 </TableHead>
                             );
                         })}
-                        <TableHead className="w-fit min-w-24 text-end">
+                        <TableHead className="min-w-24 text-end">
                             Hành động
                         </TableHead>
                     </TableRow>

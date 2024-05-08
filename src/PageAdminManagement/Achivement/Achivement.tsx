@@ -1,7 +1,5 @@
-
-import { TableCell } from "@/components/ui/table";
-import { PenBox, X } from "lucide-react";
 import BaseScreen from "../BaseScreen";
+import ActionColumn from "@/components/action_column/ActionColumn";
 
 const data = [
     {
@@ -22,12 +20,7 @@ const columns_data = [
     { accessor: "CreateAt", header: "Ngày tạo" },
 ];
 
-const action_col = (
-    <TableCell className="flex justify-between">
-        <PenBox className="text-blue-500" />
-        <X className="text-red-500" />
-    </TableCell>
-);
+const action_col = <ActionColumn isDelete={true} isRead={false} isUpdate={true} />
 
 const header_class_condition = [{}];
 
@@ -42,9 +35,6 @@ export default function Achievement() {
     };
 
     return (
-        <BaseScreen 
-            screen_title="Thành tựu người dùng" 
-            mtf_props={mtf_props} 
-        />
+        <BaseScreen screen_title="Thành tựu người dùng" mtf_props={mtf_props} />
     );
 }

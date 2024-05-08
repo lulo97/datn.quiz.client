@@ -14,9 +14,7 @@ export default function MyTableBody(props: MyTableBodyProps) {
             {table.getRowModel().rows.map((row, idx) => {
                 return (
                     <TableRow key={row.id}>
-                        <TableCell>
-                            {idx + 1}
-                        </TableCell>
+                        <TableCell>{idx + 1}</TableCell>
                         {row.getVisibleCells().map((cell) => {
                             return (
                                 <TableCell key={cell.id}>
@@ -29,7 +27,9 @@ export default function MyTableBody(props: MyTableBodyProps) {
                                 </TableCell>
                             );
                         })}
-                        {action_col}
+                        <TableCell className="flex justify-end gap-3">
+                            {action_col}
+                        </TableCell>
                     </TableRow>
                 );
             })}

@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { TableCell } from "@/components/ui/table";
-import { Eye, PenBox, X } from "lucide-react";
 import BaseScreen from "../BaseScreen";
-import { QuestionData, data } from "./MockData";
-import { head } from "lodash";
+import { data } from "./MockData";
+import ActionColumn from "@/components/action_column/ActionColumn";
 
 const columns_data = [
     { accessor: "Content", header: "Nội dung" },
@@ -14,13 +11,7 @@ const columns_data = [
     { accessor: "Language", header: "Ngôn ngữ" },
 ];
 
-const action_col = (
-    <TableCell className="flex justify-between">
-        <Eye className="text-yellow-500" />
-        <PenBox className="text-blue-500" />
-        <X className="text-red-500" />
-    </TableCell>
-);
+const action_col = <ActionColumn isDelete={true} isRead={true} isUpdate={true} />
 
 const header_class_condition = [
     {header: "Loại câu hỏi", class: "w-24"},

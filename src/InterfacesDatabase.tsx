@@ -13,14 +13,14 @@ export interface Achievement {
     AchievementId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface UserAchievement {
     UserAchievementId: string;
     UserId: string;
     AchievementId: string;
-    CreateAt: string;
+    CreatedAt: string;
 }
 
 export interface Question {
@@ -83,35 +83,35 @@ export interface SubSubject {
     SubjectId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface EducationLevel {
     EducationLevelId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface Language {
     LanguageId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface Type {
     TypeId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface DifficultLevel {
     DifficultLevelId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 export interface Play {
     PlayId: string;
@@ -133,7 +133,7 @@ export interface Like {
     LikeId: string;
     QuizId: string;
     UserId: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface Comment {
@@ -143,8 +143,20 @@ export interface Comment {
     CreatedAt: Date;
     UpdatedAt: Date;
     Content: string;
-    UpvoteCount: number;
-    DownvoteCount: number;
+}
+
+export interface UpvoteComment {
+    UpvoteCommentId: string;
+    CommentId: string;
+    UserId: string;
+    CreatedAt: Date;
+}
+
+export interface DownvoteComment {
+    DownvoteCommentId: string;
+    CommentId: string;
+    UserId: string;
+    CreatedAt: Date;
 }
 
 export interface Follow {
@@ -187,7 +199,7 @@ export interface Role {
     RoleId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface UserRole {
@@ -200,7 +212,7 @@ export interface Permission {
     PermissionId: string;
     Name: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface RolePermission {
@@ -214,6 +226,7 @@ export interface Rating {
     UserId: string;
     QuizId: string;
     Score: number;
+    CreatedAt: Date;
 }
 
 export interface Report {
@@ -222,7 +235,7 @@ export interface Report {
     UserId: string;
     ParentId: string;
     Content: string;
-    CreateAt: Date;
+    CreatedAt: Date;
     IsResolved: boolean;
     UserResolve: string;
 }
@@ -231,7 +244,7 @@ export interface ReportTarget {
     ReportTargetId: string;
     Title: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
 
 export interface ReportReason {
@@ -240,5 +253,5 @@ export interface ReportReason {
     ParentId: string;
     Title: string;
     Description: string;
-    CreateAt: Date;
+    CreatedAt: Date;
 }
