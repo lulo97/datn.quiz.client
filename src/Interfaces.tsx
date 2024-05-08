@@ -1,7 +1,7 @@
 export interface Answer {
     id: string;
     content: string;
-    correct: boolean
+    correct: boolean;
 }
 
 export interface AnswerManipulation {
@@ -32,7 +32,45 @@ export type QuestionTableDataType = {
     EducationLevel: string;
 };
 
-import { Table as TanstackTable } from "@tanstack/react-table";
+import { ColumnDef, Table as TanstackTable } from "@tanstack/react-table";
 
 export type QuestionTableProps = TanstackTable<QuestionTableDataType>;
 
+export interface TableHeaderClassContidion {
+    header: string;
+    class: string;
+}
+
+export interface BaseTableProps {
+    data: any[];
+    page_index: number;
+    page_size: number;
+    action_col: JSX.Element;
+    header_class_condition: TableHeaderClassContidion[] | any[];
+}
+
+export interface MyTableProps extends BaseTableProps {
+    columns: ColumnDef<any>[];
+}
+
+interface ColumnsData {
+    accessor: string;
+    header: string;
+}
+
+export interface MyTableFactoryProps extends BaseTableProps {
+    columns_data: ColumnsData[];
+}
+
+export interface MenuItem {
+    name: string;
+    element?: JSX.Element | string;
+    child?: MenuItem[];
+}
+
+export type MenuClickTarget = React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<HTMLButtonElement, MouseEvent>
+
+export interface NavbarProps {
+    handleMenubarClick: (event: MenuClickTarget) => void,
+    menu_names: MenuItem[]
+}

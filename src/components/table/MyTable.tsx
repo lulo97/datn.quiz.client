@@ -2,25 +2,18 @@ import {
     useReactTable,
     getCoreRowModel,
     getPaginationRowModel,
-    ColumnDef,
 } from "@tanstack/react-table";
 
 import { Table } from "@/components/ui/table";
 import MyTableHeader from "./MyTableHeader";
 import MyTableBody from "./MyTableBody";
 import MyTablePagination from "./MyTablePagination";
-
-export interface MyTableProps {
-    data: any[],
-    columns: ColumnDef<any>[],
-    pageIndex: number,
-    pageSize: number,
-    action_col: JSX.Element
-}
+import { MyTableProps } from "@/Interfaces";
 
 export default function MyTable(props: MyTableProps) {
-    const { data, columns, pageIndex, pageSize, action_col } = props
-    
+    const { data, columns, page_index, page_size, action_col, header_class_condition } =
+        props;
+
     const table = useReactTable({
         data,
         columns,
@@ -28,16 +21,16 @@ export default function MyTable(props: MyTableProps) {
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
             pagination: {
-                pageIndex: pageIndex, //custom initial page index
-                pageSize: pageSize, //custom default page size
+                pageIndex: page_index, //custom initial page index
+                pageSize: page_size, //custom default page size
             },
         },
     });
 
     return (
-        <div>
+        <div className="min-h-full flex flex-col justify-between">
             <Table>
-                <MyTableHeader {...table} />
+                <MyTableHeader table={table} header_class_condition={header_class_condition} />
                 <MyTableBody table={table} action_col={action_col} />
             </Table>
             <div>

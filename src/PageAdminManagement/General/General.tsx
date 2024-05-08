@@ -10,7 +10,6 @@ import UserRankCollection from "./UserRankCollection";
 
 export default function General() {
     return (
-        <div className="bg-gray-200 py-2 w-full">
             <Card>
                 <CardHeader>
                     <CardTitle>Tổng quan</CardTitle>
@@ -24,6 +23,5 @@ export default function General() {
                     </div>
                 </CardContent>
             </Card>
-        </div>
     );
 }

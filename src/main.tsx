@@ -14,6 +14,7 @@ import QuizPlayRevise from "./PageQuizPlayRevise/QuizPlayRevise";
 import QuizResultRevise from "./PageQuizResultRevise/QuizResultRevise";
 import QuizResultTime from "./PageQuizResultTime/QuizResultTime";
 import AdminManagement from "./PageAdminManagement/AdminManagement";
+import UserManagement from "./PageUserManagement/UserManagement";
 
 export const components = [
     CreateQuestion,
@@ -24,7 +25,8 @@ export const components = [
     QuizPlayRevise,
     QuizResultRevise,
     QuizResultTime,
-    AdminManagement
+    AdminManagement,
+    UserManagement
 ];
 
 const browser_routes = components.map((Component) => ({

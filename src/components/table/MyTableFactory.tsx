@@ -2,19 +2,19 @@ import { Table as TanstackTable } from "@tanstack/react-table";
 import MyTable from "@/components/table/MyTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import { property } from "lodash";
+import { MyTableFactoryProps } from "@/Interfaces";
 
-interface ColumnData {
-    accessor: string;
-    header: string;
-}
+export default function MyTableFactory(props: MyTableFactoryProps) {
+    
+    const {
+        data,
+        columns_data,
+        page_index,
+        page_size,
+        action_col,
+        header_class_condition,
+    } = props;
 
-export default function MyTableFactory(
-    data: any[],
-    columns_data: ColumnData[],
-    page_index: number,
-    page_size: number,
-    action_col: JSX.Element
-) {
     const columnHelper = createColumnHelper<TanstackTable<(typeof data)[0]>>();
 
     const columns = columns_data.map((ele) =>
@@ -26,10 +26,11 @@ export default function MyTableFactory(
     const mytable_data = {
         data: data,
         columns: columns,
-        pageIndex: page_index,
-        pageSize: page_size,
+        page_index: page_index,
+        page_size: page_size,
         action_col: action_col,
+        header_class_condition: header_class_condition,
     };
 
-    return <MyTable {...mytable_data} />
+    return <MyTable {...mytable_data} />;
 }
