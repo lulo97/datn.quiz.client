@@ -3,10 +3,10 @@ interface SubjectProps {
 }
 
 export default function Subject(props: SubjectProps) {
-    const { SubjectId, Name, LinkTo } = props
+    const { SubjectId } = props
     return (
         <div>
-            123
+            {SubjectId}
         </div>
     )
 }
