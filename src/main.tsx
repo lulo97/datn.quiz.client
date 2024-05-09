@@ -15,6 +15,8 @@ import QuizResultRevise from "./PageQuizResultRevise/QuizResultRevise";
 import QuizResultTime from "./PageQuizResultTime/QuizResultTime";
 import AdminManagement from "./PageAdminManagement/AdminManagement";
 import UserManagement from "./PageUserManagement/UserManagement";
+import { smi } from "./PageHomepage/Header/Header";
+import Subject from "./PageHomepage/Subject/Subject";
 
 export const components = [
     CreateQuestion,
@@ -26,7 +28,7 @@ export const components = [
     QuizResultRevise,
     QuizResultTime,
     AdminManagement,
-    UserManagement
+    UserManagement,
 ];
 
 const browser_routes = components.map((Component) => ({
@@ -37,6 +39,13 @@ const browser_routes = components.map((Component) => ({
 browser_routes.push({
     path: "/",
     element: <App />,
+});
+
+smi.forEach((ele) => {
+    browser_routes.push({
+        path: `/subject/${ele.UrlName}`,
+        element: <Subject SubjectId={ele.SubjectId} />, // Render Subject component with props
+    });
 });
 
 const router = createBrowserRouter(browser_routes);
