@@ -5,11 +5,11 @@ import {
     CardHeader,
 } from "@/components/ui/card";
 import { CardParentClass } from "@/Utils";
-import Header from "./Header/Header";
-import Content from "./Content/Content";
-import Footer from "./Footer/Footer";
+import { Header } from "./Header/Header";
+import { Content } from "./Content/Content";
+import { Footer } from "./Footer/Footer";
 
-export default function CreateQuiz() {
+export function CreateQuiz() {
     return (
         <div className={CardParentClass}>
             <Card>

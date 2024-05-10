@@ -1,4 +1,4 @@
-import SettingSelect from "./SettingSelect";
+import { SettingSelect } from "./SettingSelect";
 
 const difficulty = {
     placeholder: "Độ khó",
@@ -11,6 +11,6 @@ const difficulty = {
     defaultValue: "nb",
 };
 
-export default function SelectDifficult() {
+export function SelectDifficult() {
     return <SettingSelect {...difficulty} />;
 }

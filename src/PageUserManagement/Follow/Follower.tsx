@@ -1,6 +1,6 @@
 import { getObjectId, getRandomDate, strToDate } from "@/Utils";
-import ActionColumn from "@/components/action_column/ActionColumn";
-import BaseScreen from "@/components/base_screen/BaseScreen";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
+import { BaseScreen } from "@/components/base_screen/BaseScreen";
 import { TableColumnsType } from "antd";
 
 const data = [
@@ -65,7 +65,7 @@ columns.push({
     width: "10%",
 });
 
-export default function Follower() {
+export function Follower() {
     return (
         <BaseScreen
             screen_title="Người theo dõi bạn"

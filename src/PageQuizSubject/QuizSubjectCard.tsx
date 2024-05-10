@@ -1,17 +1,7 @@
-import QuizCardRank from "@/PageAdminManagement/General/QuizCardRank";
-import QuizCard from "../Content/QuizCard";
-import {
-    Card,
-    CardHeader,
-    CardTitle,
-    CardDescription,
-    CardContent,
-    CardFooter,
-} from "@/components/ui/card";
-import { getObjectId, getRandomAvatar, getRandomWallpaper } from "@/Utils";
+import { getRandomAvatar, getRandomWallpaper } from "@/Utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { ChevronRight, Star } from "lucide-react";
+import { Star } from "lucide-react";
 
 /*
 Search by Quiz Name
@@ -44,11 +34,11 @@ const data = {
     TotalTime: 45,
 };
 
-export default function SubjectCard() {
+export function QuizSubjectCard() {
     return (
         <div className="flex flex-row gap-3">
             <img
-                className="w-1/3 rounded-xl shadow object-contain"
+                className="w-1/3 rounded-xl border shadow object-contain"
                 src={data.ImageUrl}
             ></img>
             <div className="w-full border rounded-lg py-1 px-2">

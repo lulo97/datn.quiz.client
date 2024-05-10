@@ -2,10 +2,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import SelectSubject from "@/PageCreateQuestion/ModalSetting/SelectSubject";
-import SelectEducationLevel from "@/PageCreateQuestion/ModalSetting/SelectEducation";
+import { SelectSubject } from "@/PageCreateQuestion/ModalSetting/SelectSubject";
+import { SelectEducationLevel } from "@/PageCreateQuestion/ModalSetting/SelectEducation";
 
-export default function ModalSettingContentLeft() {
+export function ModalSettingContentLeft() {
     return (
         <div className="w-1/2">
             <Label>Tên đề</Label>

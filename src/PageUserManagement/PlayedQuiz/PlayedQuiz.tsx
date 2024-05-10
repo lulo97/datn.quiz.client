@@ -1,8 +1,8 @@
 import { TableColumnsType } from "antd";
 
 import { data } from "./MockData";
-import ActionColumn from "@/components/action_column/ActionColumn";
-import BaseScreen from "@/components/base_screen/BaseScreen";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
+import { BaseScreen } from "@/components/base_screen/BaseScreen";
 
 type DataType = (typeof data)[0];
 
@@ -42,7 +42,7 @@ columns.push({
     width: "10%",
 });
 
-export default function CreatedQuiz() {
+export function PlayedQuiz() {
     return (
         <BaseScreen
             screen_title="Đề đã làm"

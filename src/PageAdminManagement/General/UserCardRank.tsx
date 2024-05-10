@@ -2,7 +2,7 @@ import { getRandomAvatar } from "@/Utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 
-export default function UserCardRank() {
+export function UserCardRank() {
     return (
         <div className="border shadow rounded-xl py-1 px-3">
             <Label>Hoàng Lê Lương</Label>

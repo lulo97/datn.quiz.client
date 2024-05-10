@@ -1,6 +1,6 @@
 import { getRandomWallpaper } from "@/Utils";
 
-export default function QuizCard() {
+export function QuizCard() {
     return (
         <div className=" w-1/6 h-24 flex flex-col items-center border shadow rounded-sm mt-0">
             <img

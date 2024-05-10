@@ -1,4 +1,4 @@
-import SettingSelect from "./SettingSelect";
+import { SettingSelect } from "./SettingSelect";
 
 const penaty_point = {
     placeholder: "Điểm phạt",
@@ -10,6 +10,6 @@ const penaty_point = {
     defaultValue: "10",
 };
 
-export default function SelectPenaltyPoint() {
+export function SelectPenaltyPoint() {
     return <SettingSelect {...penaty_point} />;
 }

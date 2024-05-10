@@ -5,11 +5,11 @@ import {
     CardContent,
     CardFooter,
 } from "@/components/ui/card";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import Content from "./Content/Content";
+import { Header } from "./Header/Header";
+import { Footer } from "./Footer/Footer";
+import { Content } from "./Content/Content";
 
-export default function Starter() {
+export function Starter() {
     return (
         <div className={CardParentClass}>
             <Card>

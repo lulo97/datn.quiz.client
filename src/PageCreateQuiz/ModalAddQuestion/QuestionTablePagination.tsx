@@ -13,7 +13,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 
-export default function QuestionTablePagination(table: QuestionTableProps) {
+export function QuestionTablePagination(table: QuestionTableProps) {
     return (
         <Pagination className="flex justify-end">
             <PaginationContent>

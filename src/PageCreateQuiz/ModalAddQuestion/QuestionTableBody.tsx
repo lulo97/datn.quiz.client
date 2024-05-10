@@ -4,7 +4,7 @@ import { TableBody, TableRow, TableCell } from "@/components/ui/table";
 import { flexRender } from "@tanstack/react-table";
 import { Plus } from "lucide-react";
 
-export default function QuestionTableBody(table: QuestionTableProps) {
+export function QuestionTableBody(table: QuestionTableProps) {
     return (
         <TableBody>
             {table.getRowModel().rows.map((row) => {

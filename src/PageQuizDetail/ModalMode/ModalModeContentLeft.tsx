@@ -17,7 +17,7 @@ import {
     SelectItem,
 } from "@/components/ui/select";
 
-export default function ModalModeContentLeft() {
+export function ModalModeContentLeft() {
     return (
         <Card className="w-1/2">
             <CardHeader>

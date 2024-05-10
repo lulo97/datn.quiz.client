@@ -1,4 +1,4 @@
-import SettingSelect from "./SettingSelect";
+import { SettingSelect } from "./SettingSelect";
 
 const point = {
     placeholder: "Điểm",
@@ -10,6 +10,6 @@ const point = {
     defaultValue: "10",
 };
 
-export default function SelectPoint() {
+export function SelectPoint() {
     return <SettingSelect {...point} />;
 }

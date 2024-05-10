@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import QuizCardRank from "./QuizCardRank";
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardContent,
+    CardFooter,
+} from "@/components/ui/card";
+import { QuizCardRank } from "./QuizCardRank";
 
-export default function QuizRankCollection() {
+export function QuizRankCollection() {
     return (
         <div className="w-1/2">
             <Card className="shadow">

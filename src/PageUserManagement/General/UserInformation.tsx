@@ -4,7 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { getRandomAvatar } from "@/Utils";
 
-export default function UserInformation() {
+export function UserInformation() {
     return (
         <Card>
             <CardHeader>
@@ -16,7 +16,7 @@ export default function UserInformation() {
             <CardContent>
                 <div className="flex gap-5 mb-3">
                     <Avatar className="w-20 h-20">
-                        <AvatarImage src={getRandomAvatar()}/>
+                        <AvatarImage src={getRandomAvatar()} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div>

@@ -1,5 +1,4 @@
 import { TableColumnsType } from "antd";
-import ActionColumn from "../action_column/ActionColumn";
 
 export const data = [
     {
@@ -110,5 +109,5 @@ export const columns: TableColumnsType<DataType> = [
         ],
         onFilter: (value, record) =>
             record.address.indexOf(value as string) === 0,
-    }
+    },
 ];

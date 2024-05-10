@@ -8,10 +8,10 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import ModalSettingContentRight from "./ModalSettingRight";
-import ModalSettingContentLeft from "./ModalSettingLeft";
+import { ModalSettingContentRight } from "./ModalSettingRight";
+import { ModalSettingContentLeft } from "./ModalSettingLeft";
 
-export default function ModalSetting() {
+export function ModalSetting() {
     return (
         <div>
             <Dialog>

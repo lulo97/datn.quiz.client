@@ -1,6 +1,6 @@
 import { Label } from "@/components/ui/label";
 
-export default function Information() {
+export function Information() {
     return (
         <div className="flex justify-between gap-5">
             <Label className="w-full border shadow p-4 rounded-xl">

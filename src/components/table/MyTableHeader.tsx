@@ -8,16 +8,14 @@ interface MyTableHeader {
     header_class_condition: TableHeaderClassContidion[];
 }
 
-export default function MyTableHeader(props: MyTableHeader) {
+export function MyTableHeader(props: MyTableHeader) {
     const { table, header_class_condition } = props;
     return (
         <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => {
                 return (
                     <TableRow key={headerGroup.id}>
-                        <TableHead className="w-16 text-start">
-                            STT
-                        </TableHead>
+                        <TableHead className="w-16 text-start">STT</TableHead>
                         {headerGroup.headers.map((header) => {
                             let header_class = "";
                             header_class_condition.map((ele) => {

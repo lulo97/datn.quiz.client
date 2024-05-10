@@ -58,7 +58,7 @@ function QuizResultCard() {
     );
 }
 
-export default function Content() {
+export function Content() {
     return (
         <div>
             <Card className="bg-gray-200">

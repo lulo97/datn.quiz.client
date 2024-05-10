@@ -13,7 +13,7 @@ interface SettingSelectProps {
     defaultValue: string;
 }
 
-export default function SettingSelect(props: SettingSelectProps) {
+export function SettingSelect(props: SettingSelectProps) {
     const { placeholder, options, defaultValue } = props;
     return (
         <div>

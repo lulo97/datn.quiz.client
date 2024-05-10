@@ -7,13 +7,13 @@ import {
     DialogTitle,
     DialogDescription,
 } from "@/components/ui/dialog";
-import ChatGPT_SVG from "@/PageCreateQuestion/ModalAI/ChatGPT_SVG";
+import { ChatGPT_SVG } from "@/PageCreateQuestion/ModalAI/ChatGPT_SVG";
 import { Left } from "./Left";
 import { Right } from "./Right";
 import { Plus } from "lucide-react";
 import { ModalSizeClass } from "@/Utils";
 
-export default function ModalAI() {
+export function ModalAI() {
     return (
         <div>
             <Dialog>

@@ -1,7 +1,7 @@
-import HeaderLeft from "./HeaderLeft";
-import HeaderRight from "./HeaderRight";
+import { HeaderLeft } from "./HeaderLeft";
+import { HeaderRight } from "./HeaderRight";
 
-export default function Header() {
+export function Header() {
     return (
         <div className="flex gap-5">
             <HeaderLeft />

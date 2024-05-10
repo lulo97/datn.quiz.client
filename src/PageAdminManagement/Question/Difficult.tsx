@@ -1,6 +1,6 @@
 import { TableColumnsType } from "antd";
-import BaseScreen from "../../components/base_screen/BaseScreen";
-import ActionColumn from "@/components/action_column/ActionColumn";
+import { BaseScreen } from "../../components/base_screen/BaseScreen";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
 import { strToDate } from "@/Utils";
 
 const data = [
@@ -68,7 +68,7 @@ columns.push({
     width: "10%",
 });
 
-export default function Difficult() {
+export function Difficult() {
     return (
         <BaseScreen
             screen_title="Độ khó câu hỏi"

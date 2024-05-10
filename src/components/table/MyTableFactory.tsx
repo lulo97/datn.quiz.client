@@ -1,11 +1,10 @@
 import { Table as TanstackTable } from "@tanstack/react-table";
-import MyTable from "@/components/table/MyTable";
+import { MyTable } from "@/components/table/MyTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import { property } from "lodash";
 import { MyTableFactoryProps } from "@/Interfaces";
 
-export default function MyTableFactory(props: MyTableFactoryProps) {
-    
+export function MyTableFactory(props: MyTableFactoryProps) {
     const {
         data,
         columns_data,

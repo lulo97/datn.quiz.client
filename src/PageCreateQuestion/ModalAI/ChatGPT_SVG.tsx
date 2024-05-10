@@ -1,4 +1,4 @@
-export default function ChatGPT_SVG() {
+export function ChatGPT_SVG() {
     return (
         <div>
             <svg

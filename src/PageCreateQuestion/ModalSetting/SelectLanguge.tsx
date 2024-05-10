@@ -1,4 +1,4 @@
-import SettingSelect from "./SettingSelect";
+import { SettingSelect } from "./SettingSelect";
 
 const language = {
     placeholder: "Ngôn ngữ",
@@ -9,6 +9,6 @@ const language = {
     defaultValue: "vi",
 };
 
-export default function SelectLanguage() {
+export function SelectLanguage() {
     return <SettingSelect {...language} />;
 }

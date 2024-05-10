@@ -1,7 +1,7 @@
-import BaseScreen from "@/components/base_screen/BaseScreen";
+import { BaseScreen } from "@/components/base_screen/BaseScreen";
 import { TableColumnsType } from "antd";
 import { data } from "./MockData";
-import ActionColumn from "@/components/action_column/ActionColumn";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
 
 type DataType = (typeof data)[0];
 
@@ -31,7 +31,7 @@ columns.push({
     width: "10%",
 });
 
-export default function RecycleBin() {
+export function RecycleBin() {
     return (
         <BaseScreen
             screen_title="Thùng rác"

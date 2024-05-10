@@ -1,4 +1,4 @@
-import SettingSelect from "./SettingSelect";
+import { SettingSelect } from "./SettingSelect";
 
 const type = {
     placeholder: "Loại câu hỏi",
@@ -9,6 +9,6 @@ const type = {
     defaultValue: "mc",
 };
 
-export default function SelectType() {
+export function SelectType() {
     return <SettingSelect {...type} />;
 }

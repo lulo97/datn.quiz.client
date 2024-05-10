@@ -9,9 +9,9 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 
-import ModalModeContent from "./ModalModeContent";
+import { ModalModeContent } from "./ModalModeContent";
 
-export default function ModalMode() {
+export function ModalMode() {
     return (
         <div className="w-2/3">
             <Dialog>

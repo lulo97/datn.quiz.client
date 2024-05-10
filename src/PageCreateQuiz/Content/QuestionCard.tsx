@@ -1,11 +1,11 @@
 import { Card } from "@/components/ui/card";
-import QuestionCardContent from "./QuestionCardContent";
-import QuestionCardOptions from "./QuestionCardOptions";
-import QuestionCardExplanation from "./QuestionCardExplanation";
-import QuestionCardImage from "./QuestionCardImage";
-import QuestionCardButtons from "./QuestionCardButtons";
+import { QuestionCardContent } from "./QuestionCardContent";
+import { QuestionCardOptions } from "./QuestionCardOptions";
+import { QuestionCardExplanation } from "./QuestionCardExplanation";
+import { QuestionCardImage } from "./QuestionCardImage";
+import { QuestionCardButtons } from "./QuestionCardButtons";
 
-export default function QuestionCard() {
+export function QuestionCard() {
     return (
         <div>
             <Card className="px-6 py-4">

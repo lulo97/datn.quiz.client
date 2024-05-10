@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import UserInformation from "./UserInformation";
-import AchievementPreview from "./AchievementPreview";
+import { UserInformation } from "./UserInformation";
+import { AchievementPreview } from "./AchievementPreview";
 
-export default function General() {
+export function General() {
     return (
         <Card className="h-full flex flex-col">
             <CardHeader className="h-1/6">

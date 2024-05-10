@@ -1,18 +1,18 @@
-import General from "./General/General";
+import { General } from "./General/General";
 import { useEffect, useState } from "react";
-import Achievement from "./Achivement/Achivement";
-import Permission from "./Permission/Permission";
-import Difficult from "./Question/Difficult";
-import EducationLevel from "./Question/EducationLevel";
-import Language from "./Question/Language";
-import SubSubject from "./Question/SubSubject";
-import Subject from "./Question/Subject";
-import ReportReason from "./Report/ReportReason";
-import ReportTarget from "./Report/ReportTarget";
-import Role from "./Role/Role";
-import Type from "./Question/Type";
+import { Achievement } from "./Achivement/Achivement";
+import { Permission } from "./Permission/Permission";
+import { Difficult } from "./Question/Difficult";
+import { EducationLevel } from "./Question/EducationLevel";
+import { Language } from "./Question/Language";
+import { SubSubject } from "./Question/SubSubject";
+import { Subject } from "./Question/Subject";
+import { ReportReason } from "./Report/ReportReason";
+import { ReportTarget } from "./Report/ReportTarget";
+import { Role } from "./Role/Role";
+import { Type } from "./Question/Type";
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
-import Navbar from "@/components/navbar/Navbar";
+import { Navbar } from "@/components/navbar/Navbar";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
@@ -40,10 +40,7 @@ export const menu_names: MenuItem[] = [
 ];
 
 // Recursive function to find an element by name
-function findMenuItemByName(
-    menu: MenuItem[],
-    name: string
-): MenuItem | null {
+function findMenuItemByName(menu: MenuItem[], name: string): MenuItem | null {
     for (const item of menu) {
         if (item.name === name) {
             return item;
@@ -58,7 +55,7 @@ function findMenuItemByName(
     return null; // Return null if not found
 }
 
-export default function AdminManagement() {
+export function AdminManagement() {
     const [curMenuItem, setCurMenuItem] = useState<MenuItem>(menu_names[0]);
 
     function handleMenubarClick(event: MenuClickTarget) {
@@ -81,7 +78,10 @@ export default function AdminManagement() {
 
     return (
         <div className="flex bg-gray-200 h-fit min-h-screen">
-            <Navbar menu_names={menu_names} handleMenubarClick={handleMenubarClick} />
+            <Navbar
+                menu_names={menu_names}
+                handleMenubarClick={handleMenubarClick}
+            />
             <div className="bg-gray-200 py-2 pr-2 w-full">
                 {curMenuItem.element}
             </div>

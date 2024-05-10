@@ -4,11 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { X } from "lucide-react";
 
-export default function Answer(props: AnswerProps) {
-    const { answer, deleteAnswer, updateAnswerContent, updateAnswerCorrect } = props;
+export function Answer(props: AnswerProps) {
+    const { answer, deleteAnswer, updateAnswerContent, updateAnswerCorrect } =
+        props;
     return (
         <div className="flex gap-5 justify-between items-center">
-            <Switch 
+            <Switch
                 className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-slate-200"
                 onClick={() => updateAnswerCorrect(answer.id)}
             />
@@ -17,7 +18,9 @@ export default function Answer(props: AnswerProps) {
                 id="option"
                 placeholder={answer.id}
                 value={answer.content}
-                onChange={(event) => updateAnswerContent(answer.id, event.target.value)}
+                onChange={(event) =>
+                    updateAnswerContent(answer.id, event.target.value)
+                }
             />
             <Button
                 onClick={() => deleteAnswer(answer.id)}

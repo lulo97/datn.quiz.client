@@ -1,5 +1,5 @@
 import { getObjectId } from "@/Utils";
-import MyMenubarItem from "@/components/menubar_item/MyMenubarItem";
+import { MyMenubarItem } from "@/components/menubar_item/MyMenubarItem";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -35,7 +35,7 @@ export const smi = [
     },
 ];
 
-export default function Header() {
+export function Header() {
     return (
         <Card className="py-2 px-4 flex items-center justify-between">
             <div className="text-xl font-bold">QuizQuest</div>

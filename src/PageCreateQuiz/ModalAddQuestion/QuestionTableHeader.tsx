@@ -2,7 +2,7 @@ import { QuestionTableProps } from "@/Interfaces";
 import { TableHeader, TableRow, TableHead } from "@/components/ui/table";
 import { flexRender } from "@tanstack/react-table";
 
-export default function QuestionTableHeader(table: QuestionTableProps) {
+export function QuestionTableHeader(table: QuestionTableProps) {
     return (
         <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => {

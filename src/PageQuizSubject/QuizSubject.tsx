@@ -6,13 +6,13 @@ import {
     CardFooter,
     CardTitle,
 } from "@/components/ui/card";
-import SubjectCard from "./SubjectCard";
+import { QuizSubjectCard } from "./QuizSubjectCard";
 
 interface SubjectProps {
     SubjectId: string;
 }
 
-export default function Subject(props: SubjectProps) {
+export function QuizSubject(props: SubjectProps) {
     const { SubjectId } = props;
     return (
         <div className={CardParentClass}>
@@ -22,17 +22,15 @@ export default function Subject(props: SubjectProps) {
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col gap-5">
-                        <SubjectCard />
-                        <SubjectCard />
-                        <SubjectCard />
-                        <SubjectCard />
-                        <SubjectCard />
-                        <SubjectCard />
+                        <QuizSubjectCard />
+                        <QuizSubjectCard />
+                        <QuizSubjectCard />
+                        <QuizSubjectCard />
+                        <QuizSubjectCard />
+                        <QuizSubjectCard />
                     </div>
                 </CardContent>
-                <CardFooter>
-                    Footer
-                </CardFooter>
+                <CardFooter>Footer</CardFooter>
             </Card>
         </div>
     );

@@ -1,15 +1,15 @@
+import { ModalAddQuestionContent } from "@/PageCreateQuiz/ModalAddQuestion/ModalAddQuestionContent";
+import { ModalSizeClass } from "@/Utils";
+import { DialogHeader } from "@/components/ui/dialog";
 import {
     Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
     DialogTrigger,
+    DialogContent,
+    DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ModalSizeClass } from "@/Utils";
-import { ModalAddQuestionContent } from "./ModalAddQuestionContent";
 
-export function ModalAddQuestion() {
+export function ModalFindQuiz() {
     return (
         <div>
             <div>

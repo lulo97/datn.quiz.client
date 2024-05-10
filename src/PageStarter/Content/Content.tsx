@@ -1,7 +1,3 @@
-export default function Content() {
-    return(
-        <div>
-            Content
-        </div>
-    )
+export function Content() {
+    return <div>Content</div>;
 }

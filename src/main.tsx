@@ -1,22 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./PageApp/App";
+import { App } from "./PageApp/App";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import CreateQuestion from "./PageCreateQuestion/CreateQuestion";
-import Homepage from "./PageHomepage/Homepage";
-import CreateQuiz from "./PageCreateQuiz/CreateQuiz";
-import QuizDetail from "./PageQuizDetail/QuizDetail";
-import QuizPlayTime from "./PageQuizPlayTime/QuizPlayTime";
-import QuizPlayRevise from "./PageQuizPlayRevise/QuizPlayRevise";
-import QuizResultRevise from "./PageQuizResultRevise/QuizResultRevise";
-import QuizResultTime from "./PageQuizResultTime/QuizResultTime";
-import AdminManagement from "./PageAdminManagement/AdminManagement";
-import UserManagement from "./PageUserManagement/UserManagement";
+import { CreateQuestion } from "./PageCreateQuestion/CreateQuestion";
+import { Homepage } from "./PageHomepage/Homepage";
+import { CreateQuiz } from "./PageCreateQuiz/CreateQuiz";
+import { QuizDetail } from "./PageQuizDetail/QuizDetail";
+import { QuizPlayTime } from "./PageQuizPlayTime/QuizPlayTime";
+import { QuizPlayRevise } from "./PageQuizPlayRevise/QuizPlayRevise";
+import { QuizResultRevise } from "./PageQuizResultRevise/QuizResultRevise";
+import { QuizResultTime } from "./PageQuizResultTime/QuizResultTime";
+import { AdminManagement } from "./PageAdminManagement/AdminManagement";
+import { UserManagement } from "./PageUserManagement/UserManagement";
 import { smi } from "./PageHomepage/Header/Header";
-import Subject from "./PageHomepage/Subject/Subject";
+import { QuizSubject } from "./PageQuizSubject/QuizSubject";
+import { ExportPdf } from "./PageExportPdf/ExportPdf";
 
 export const components = [
     CreateQuestion,
@@ -29,6 +30,7 @@ export const components = [
     QuizResultTime,
     AdminManagement,
     UserManagement,
+    ExportPdf,
 ];
 
 const browser_routes = components.map((Component) => ({
@@ -44,7 +46,7 @@ browser_routes.push({
 smi.forEach((ele) => {
     browser_routes.push({
         path: `/subject/${ele.UrlName}`,
-        element: <Subject SubjectId={ele.SubjectId} />, // Render Subject component with props
+        element: <QuizSubject SubjectId={ele.SubjectId} />, // Render Subject component with props
     });
 });
 

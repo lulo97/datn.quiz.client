@@ -1,7 +1,6 @@
-
 import { getObjectId, getRandomDate, strToDate } from "@/Utils";
-import ActionColumn from "@/components/action_column/ActionColumn";
-import BaseScreen from "@/components/base_screen/BaseScreen";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
+import { BaseScreen } from "@/components/base_screen/BaseScreen";
 import { TableColumnsType } from "antd";
 
 const data = [
@@ -9,25 +8,25 @@ const data = [
         FollowId: getObjectId(),
         FollowerId: getObjectId(),
         FolloweeId: getObjectId(),
-        FollowDate: getRandomDate()
+        FollowDate: getRandomDate(),
     },
     {
         FollowId: getObjectId(),
         FollowerId: getObjectId(),
         FolloweeId: getObjectId(),
-        FollowDate: getRandomDate()
+        FollowDate: getRandomDate(),
     },
     {
         FollowId: getObjectId(),
         FollowerId: getObjectId(),
         FolloweeId: getObjectId(),
-        FollowDate: getRandomDate()
+        FollowDate: getRandomDate(),
     },
     {
         FollowId: getObjectId(),
         FollowerId: getObjectId(),
         FolloweeId: getObjectId(),
-        FollowDate: getRandomDate()
+        FollowDate: getRandomDate(),
     },
 ];
 
@@ -37,7 +36,9 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Ngày theo dõi",
         dataIndex: "FollowDate",
-        sorter: (a, b) => strToDate(a.FollowDate).getTime() - strToDate(b.FollowDate).getTime(),
+        sorter: (a, b) =>
+            strToDate(a.FollowDate).getTime() -
+            strToDate(b.FollowDate).getTime(),
     },
     {
         title: "Người dùng",
@@ -64,7 +65,7 @@ columns.push({
     width: "10%",
 });
 
-export default function Followee() {
+export function Followee() {
     return (
         <BaseScreen
             screen_title="Người bạn theo dõi"

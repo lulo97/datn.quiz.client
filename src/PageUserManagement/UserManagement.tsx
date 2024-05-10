@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
-import Navbar from "@/components/navbar/Navbar";
-import CreatedQuiz from "./CreatedQuiz/CreatedQuiz";
-import General from "./General/General";
-import CreatedQuestion from "./CreatedQuestion/CreatedQuestion";
-import Like from "./Interact/Like";
-import Comment from "./Interact/Comment";
-import Followee from "./Follow/Followee";
-import RecycleBin from "./RecycleBin/RecycleBin";
-import Notification from "./Interact/Notification";
-import Follower from "./Follow/Follower";
-import Rating from "./Interact/Rating";
-import PlayedQuiz from "./PlayedQuiz/PlayedQuiz";
+import { Navbar } from "@/components/navbar/Navbar";
+import { CreatedQuiz } from "./CreatedQuiz/CreatedQuiz";
+import { General } from "./General/General";
+import { CreatedQuestion } from "./CreatedQuestion/CreatedQuestion";
+import { Like } from "./Interact/Like";
+import { Comment } from "./Interact/Comment";
+import { Followee } from "./Follow/Followee";
+import { RecycleBin } from "./RecycleBin/RecycleBin";
+import { Notification } from "./Interact/Notification";
+import { Follower } from "./Follow/Follower";
+import { Rating } from "./Interact/Rating";
+import { PlayedQuiz } from "./PlayedQuiz/PlayedQuiz";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
@@ -53,7 +53,7 @@ function findMenuItemByName(menu: MenuItem[], name: string): MenuItem | null {
     return null; // Return null if not found
 }
 
-export default function UserManagement() {
+export function UserManagement() {
     const [curMenuItem, setCurMenuItem] = useState<MenuItem>(menu_names[0]);
 
     function handleMenubarClick(event: MenuClickTarget) {

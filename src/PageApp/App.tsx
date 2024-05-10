@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { components } from "@/main";
 
-function App() {
+export function App() {
     return (
         <div>
             <ul>
@@ -14,5 +14,3 @@ function App() {
         </div>
     );
 }
-
-export default App;

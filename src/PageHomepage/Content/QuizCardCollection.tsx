@@ -1,15 +1,15 @@
 import { CardHeader } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
-import QuizCard from "./QuizCard";
+import { QuizCard } from "./QuizCard";
 import { Label } from "@/components/ui/label";
 
 interface QuizCardCollectionProps {
-    label: string
+    label: string;
 }
 
-export default function QuizCardCollection(props: QuizCardCollectionProps) {
-    const { label } = props
-    
+export function QuizCardCollection(props: QuizCardCollectionProps) {
+    const { label } = props;
+
     return (
         <div>
             <Label>{label}</Label>

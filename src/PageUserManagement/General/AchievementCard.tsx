@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { Award } from "lucide-react";
 
-export default function AchievementCard() {
+export function AchievementCard() {
     return (
         <div className="flex flex-col items-center border shadow rounded-lg w-fit p-1">
             <Award size={50} />

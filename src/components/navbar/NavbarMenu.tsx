@@ -7,7 +7,7 @@ import {
     MenubarTrigger,
 } from "@/components/ui/menubar";
 
-export default function NavbarMenu(props: NavbarProps) {
+export function NavbarMenu(props: NavbarProps) {
     const { handleMenubarClick, menu_names } = props;
     return (
         <Menubar className="w-fit h-full flex flex-col justify-start shadow">

@@ -1,4 +1,4 @@
-import SettingSelect from "./SettingSelect";
+import { SettingSelect } from "./SettingSelect";
 
 const education_level = {
     placeholder: "Trình độ học vấn",
@@ -10,6 +10,6 @@ const education_level = {
     defaultValue: "lop3",
 };
 
-export default function SelectEducationLevel() {
+export function SelectEducationLevel() {
     return <SettingSelect {...education_level} />;
 }

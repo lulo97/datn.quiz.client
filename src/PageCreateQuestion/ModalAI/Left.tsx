@@ -2,8 +2,8 @@ import { Card, CardHeader } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { SelectQuestionNumber } from "./SelectQuestionNumber";
-import SelectDifficult from "../ModalSetting/SelectDifficult";
-import SelectLanguage from "../ModalSetting/SelectLanguge";
+import { SelectDifficult } from "../ModalSetting/SelectDifficult";
+import { SelectLanguage } from "../ModalSetting/SelectLanguge";
 
 export function Left() {
     return (

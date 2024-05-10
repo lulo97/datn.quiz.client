@@ -1,4 +1,4 @@
-import SettingSelect from "./SettingSelect";
+import { SettingSelect } from "./SettingSelect";
 
 const sub_subject = {
     placeholder: "Chủ đề phụ",
@@ -10,6 +10,6 @@ const sub_subject = {
     defaultValue: "math",
 };
 
-export default function SelectSubSubject() {
+export function SelectSubSubject() {
     return <SettingSelect {...sub_subject} />;
 }

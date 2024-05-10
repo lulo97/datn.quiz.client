@@ -1,7 +1,7 @@
 import { getRandomWallpaper } from "@/Utils";
 import { Label } from "@/components/ui/label";
 
-export default function QuizCardRank() {
+export function QuizCardRank() {
     return (
         <div className="border shadow rounded-xl py-1 px-3">
             <Label>Đề toán 12 chương Hàm số</Label>

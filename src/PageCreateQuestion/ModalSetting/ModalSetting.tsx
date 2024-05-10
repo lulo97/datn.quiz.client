@@ -10,17 +10,17 @@ import {
 import { Settings } from "lucide-react";
 
 import { ModalSizeClass } from "@/Utils";
-import SelectDifficult from "./SelectDifficult";
-import SelectEducationLevel from "./SelectEducation";
-import SelectLanguage from "./SelectLanguge";
-import SelectPenaltyPoint from "./SelectPenatyPoint";
-import SelectPoint from "./SelectPoint";
-import SelectSubSubject from "./SelectSubSubject";
-import SelectSubject from "./SelectSubject";
-import SelectType from "./SelectType";
-import SwitchPenaltyAllow from "./SwitchPenaltyAllow";
+import { SelectDifficult } from "./SelectDifficult";
+import { SelectEducationLevel } from "./SelectEducation";
+import { SelectLanguage } from "./SelectLanguge";
+import { SelectPenaltyPoint } from "./SelectPenatyPoint";
+import { SelectPoint } from "./SelectPoint";
+import { SelectSubSubject } from "./SelectSubSubject";
+import { SelectSubject } from "./SelectSubject";
+import { SelectType } from "./SelectType";
+import { SwitchPenaltyAllow } from "./SwitchPenaltyAllow";
 
-export default function ModalSetting() {
+export function ModalSetting() {
     return (
         <div>
             <Dialog>

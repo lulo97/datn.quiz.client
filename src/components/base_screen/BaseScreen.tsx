@@ -1,4 +1,4 @@
-import AntdTable from "@/components/antd_table/AntdTable";
+import { AntdTable } from "@/components/antd_table/AntdTable";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TableColumnsType } from "antd";
@@ -10,7 +10,7 @@ interface BaseScreenProps {
     defaultPageSize: number;
 }
 
-export default function BaseScreen(props: BaseScreenProps) {
+export function BaseScreen(props: BaseScreenProps) {
     const { screen_title, columns, data, defaultPageSize } = props;
     return (
         <Card className="h-full flex flex-col">

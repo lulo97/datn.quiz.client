@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { SquarePen, X } from "lucide-react";
 
-export default function QuestionCardButtons() {
+export function QuestionCardButtons() {
     return (
         <div className="w-full flex justify-between">
             <Button className="bg-blue-500">

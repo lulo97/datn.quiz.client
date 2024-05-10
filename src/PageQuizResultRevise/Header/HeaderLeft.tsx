@@ -9,7 +9,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
-export default function HeaderLeft() {
+export function HeaderLeft() {
     return (
         <div className="w-2/3">
             <Card className="min-h-full">
@@ -26,9 +26,9 @@ export default function HeaderLeft() {
                     ></img>
                 </CardContent>
                 <CardFooter className="flex gap-5 justify-between">
-                        <Button className="w-full">Lịch sử chơi</Button>
-                        <Button className="w-full">Chia sẻ</Button>
-                        <Button className="w-full">Báo cáo</Button>
+                    <Button className="w-full">Lịch sử chơi</Button>
+                    <Button className="w-full">Chia sẻ</Button>
+                    <Button className="w-full">Báo cáo</Button>
                 </CardFooter>
             </Card>
         </div>

@@ -8,9 +8,9 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import ModalReportContent from "./ModalReportContent";
+import { ModalReportContent } from "./ModalReportContent";
 
-export default function ModalReport() {
+export function ModalReport() {
     return (
         <div className="w-1/3">
             <Dialog>

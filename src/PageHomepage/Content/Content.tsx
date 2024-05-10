@@ -1,7 +1,7 @@
 import { Card, CardHeader } from "@/components/ui/card";
-import QuizCardCollection from "./QuizCardCollection";
+import { QuizCardCollection } from "./QuizCardCollection";
 
-export default function Content() {
+export function Content() {
     return (
         <Card>
             <CardHeader>

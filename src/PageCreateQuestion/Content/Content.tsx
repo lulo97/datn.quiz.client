@@ -1,7 +1,7 @@
 import { CreateQuestionData } from "@/Interfaces";
-import Answer from "./Answer";
+import { Answer } from "./Answer";
 
-export default function Content(props: CreateQuestionData) {
+export function Content(props: CreateQuestionData) {
     const { answers, deleteAnswer, updateAnswerContent, updateAnswerCorrect } =
         props;
 

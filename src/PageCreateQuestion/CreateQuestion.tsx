@@ -7,12 +7,12 @@ import {
 import { useEffect, useState } from "react";
 import { CardParentClass, initialAnswer } from "@/Utils";
 import { Answer, CreateQuestionData } from "@/Interfaces";
-import Content from "./Content/Content";
-import Footer from "./Footer/Footer";
-import Header from "./Header/Header";
+import { Content } from "./Content/Content";
+import { Footer } from "./Footer/Footer";
+import { Header } from "./Header/Header";
 import { AnswersStateController } from "./Content/AnswersManipulate";
 
-export default function CreateQuestion() {
+export function CreateQuestion() {
     const [answers, setAnswers] = useState<Answer[]>([
         initialAnswer(),
         initialAnswer(),

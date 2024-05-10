@@ -13,7 +13,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 
-export default function MyTablePagination(table: TanstackTable<any>) {
+export function MyTablePagination(table: TanstackTable<any>) {
     return (
         <Pagination className="flex justify-end mt-1">
             <PaginationContent>

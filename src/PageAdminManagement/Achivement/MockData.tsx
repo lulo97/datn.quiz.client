@@ -1,5 +1,5 @@
 import { strToDate } from "@/Utils";
-import ActionColumn from "@/components/action_column/ActionColumn";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
 import { TableColumnsType } from "antd";
 
 export const data = [
@@ -80,14 +80,14 @@ export const columns: TableColumnsType<DataType> = [
 columns.unshift({
     title: "STT",
     dataIndex: "STT",
-    render: (item, record, index) => <div>{data.indexOf(record) + 1}</div>,
+    render: (_item, record, _index) => <div>{data.indexOf(record) + 1}</div>,
     width: "5%",
 });
 
 columns.push({
     title: "Hành động",
     key: "action",
-    render: (item, record, index) => (
+    render: (_item, _record, _index) => (
         <div className="flex gap-2 justify-end">
             <ActionColumn isDelete={true} isRead={true} isUpdate={true} />
         </div>

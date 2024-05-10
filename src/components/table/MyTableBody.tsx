@@ -7,7 +7,7 @@ interface MyTableBodyProps {
     action_col: JSX.Element;
 }
 
-export default function MyTableBody(props: MyTableBodyProps) {
+export function MyTableBody(props: MyTableBodyProps) {
     const { table, action_col } = props;
     return (
         <TableBody>

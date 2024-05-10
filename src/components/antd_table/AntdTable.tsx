@@ -8,7 +8,7 @@ interface AntdTableProps {
     defaultPageSize: number;
 }
 
-export default function AntdTable(props: AntdTableProps) {
+export function AntdTable(props: AntdTableProps) {
     const { columns, data, defaultPageSize } = props;
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = defaultPageSize;

@@ -1,6 +1,6 @@
 import { getObjectId, strToDate } from "@/Utils";
-import BaseScreen from "../../components/base_screen/BaseScreen";
-import ActionColumn from "@/components/action_column/ActionColumn";
+import { BaseScreen } from "../../components/base_screen/BaseScreen";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
 import { TableColumnsType } from "antd";
 
 const data = [
@@ -62,7 +62,7 @@ columns.push({
     width: "10%",
 });
 
-export default function SubSubject() {
+export function SubSubject() {
     return (
         <BaseScreen
             screen_title="Chủ đề phụ"

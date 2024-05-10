@@ -4,7 +4,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "../../components/ui/label";
 import { Textarea } from "../../components/ui/textarea";
 
-export default function Footer(props: CreateQuestionData) {
+export function Footer(props: CreateQuestionData) {
     const { addAnswer } = props;
     return (
         <div className="flex flex-col justify-between w-full gap-5">

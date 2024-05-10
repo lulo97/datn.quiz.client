@@ -2,7 +2,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export default function ModalReportContent() {
+export function ModalReportContent() {
     return (
         <div className="flex flex-col gap-5 justify-start">
             <Label>Lý do báo cáo</Label>

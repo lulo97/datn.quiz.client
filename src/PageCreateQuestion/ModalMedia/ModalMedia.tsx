@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload } from "lucide-react";
 
-export default function ModalMedia() {
+export function ModalMedia() {
     return (
         <div>
             <Dialog>
@@ -31,7 +31,10 @@ export default function ModalMedia() {
                     </DialogHeader>
                     <div className="flex gap-2">
                         <div className="border rounded-lg w-2/3 flex justify-center">
-                            <img className="object-contain h-[350px]" src={getRandomWallpaper()}></img>
+                            <img
+                                className="object-contain h-[350px]"
+                                src={getRandomWallpaper()}
+                            ></img>
                         </div>
 
                         <div className="w-1/3 flex flex-col gap-3">

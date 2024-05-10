@@ -1,7 +1,7 @@
-import ModalMode from "../ModalMode/ModalMode";
-import ModalReport from "../ModalReport/ModalReport";
+import { ModalMode } from "../ModalMode/ModalMode";
+import { ModalReport } from "../ModalReport/ModalReport";
 
-export default function Content() {
+export function Content() {
     return (
         <div className="flex gap-10">
             <ModalMode />

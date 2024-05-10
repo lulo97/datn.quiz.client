@@ -1,8 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getRandomWallpaper } from "@/Utils";
@@ -35,7 +31,10 @@ function QuizResultCard() {
                         </div>
                     </div>
                     <div className="w-1/2">
-                        <img className="object-contain rounded-lg" src={getRandomWallpaper()}></img>
+                        <img
+                            className="object-contain rounded-lg"
+                            src={getRandomWallpaper()}
+                        ></img>
                         <audio controls className="w-full mt-5">
                             <source
                                 type="audio/ogg"
@@ -59,11 +58,11 @@ function QuizResultCard() {
     );
 }
 
-export default function Content() {
+export function Content() {
     return (
-        <div >
+        <div>
             <Card className="bg-gray-200">
-                <CardHeader className="flex flex-col gap-3" >
+                <CardHeader className="flex flex-col gap-3">
                     <QuizResultCard />
                     <QuizResultCard />
                     <QuizResultCard />

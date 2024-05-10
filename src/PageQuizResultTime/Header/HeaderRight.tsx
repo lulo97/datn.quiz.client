@@ -13,7 +13,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/Utils";
 
-export default function HeaderRight() {
+export function HeaderRight() {
     return (
         <div className="w-1/3 flex flex-col gap-3">
             <Card>

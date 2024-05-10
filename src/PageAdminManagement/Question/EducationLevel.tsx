@@ -1,7 +1,7 @@
 import { strToDate } from "@/Utils";
 import { TableColumnsType } from "antd";
-import BaseScreen from "../../components/base_screen/BaseScreen";
-import ActionColumn from "@/components/action_column/ActionColumn";
+import { BaseScreen } from "../../components/base_screen/BaseScreen";
+import { ActionColumn } from "@/components/action_column/ActionColumn";
 
 const data = [
     { Name: "Lớp 1", Description: "Lớp 1", CreateAt: "07/05/2024" },
@@ -57,7 +57,7 @@ columns.push({
     width: "10%",
 });
 
-export default function EducationLevel() {
+export function EducationLevel() {
     return (
         <BaseScreen
             screen_title="Trình độ câu hỏi"

@@ -1,7 +1,7 @@
 import { columns, data } from "./MockData";
-import BaseScreen from "../../components/base_screen/BaseScreen";
+import { BaseScreen } from "../../components/base_screen/BaseScreen";
 
-export default function Achievement() {
+export function Achievement() {
     return (
         <BaseScreen
             screen_title="Thành tựu"

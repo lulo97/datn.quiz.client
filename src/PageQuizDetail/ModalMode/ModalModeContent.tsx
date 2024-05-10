@@ -1,7 +1,7 @@
-import ModalModeContentLeft from "./ModalModeContentLeft";
-import ModalModeContentRight from "./ModalModeContentRight";
+import { ModalModeContentLeft } from "./ModalModeContentLeft";
+import { ModalModeContentRight } from "./ModalModeContentRight";
 
-export default function ModalModeContent() {
+export function ModalModeContent() {
     return (
         <div className="flex gap-5">
             <ModalModeContentLeft />

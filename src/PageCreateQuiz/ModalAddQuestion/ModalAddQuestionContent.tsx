@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import QuestionTable from "./QuestionTable";
+import { QuestionTable } from "./QuestionTable";
 
-export default function ModalAddQuestionContent() {
+export function ModalAddQuestionContent() {
     return (
         <div>
             <div className="flex justify-between gap-3 mb-3">

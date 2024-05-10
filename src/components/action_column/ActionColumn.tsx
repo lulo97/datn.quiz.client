@@ -6,7 +6,7 @@ interface ActionColumn {
     isDelete: boolean;
 }
 
-export default function ActionColumn(props: ActionColumn) {
+export function ActionColumn(props: ActionColumn) {
     const { isRead, isUpdate, isDelete } = props;
     return (
         <>

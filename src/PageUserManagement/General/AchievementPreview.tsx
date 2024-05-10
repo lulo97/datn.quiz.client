@@ -1,9 +1,9 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { ChevronRight } from "lucide-react";
-import AchievementCard from "./AchievementCard";
+import { AchievementCard } from "./AchievementCard";
 
-export default function AchievementPreview() {
+export function AchievementPreview() {
     return (
         <Card>
             <CardHeader>

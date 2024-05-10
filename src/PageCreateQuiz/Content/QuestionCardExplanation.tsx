@@ -1,7 +1,7 @@
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
-export default function QuestionCardExplanation() {
+export function QuestionCardExplanation() {
     return (
         <div>
             <Label>Giải thích:</Label>

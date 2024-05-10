@@ -1,8 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import UserCardRank from "./UserCardRank";
+import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardContent,
+    CardFooter,
+} from "@/components/ui/card";
+import { UserCardRank } from "./UserCardRank";
 
-export default function UserRankCollection() {
+export function UserRankCollection() {
     return (
         <div className="w-1/2">
             <Card>

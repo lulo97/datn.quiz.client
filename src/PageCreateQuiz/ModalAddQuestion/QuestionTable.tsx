@@ -4,16 +4,14 @@ import {
     getPaginationRowModel,
 } from "@tanstack/react-table";
 
-import {
-    Table
-} from "@/components/ui/table";
+import { Table } from "@/components/ui/table";
 import { data } from "./MockData";
-import QuestionTableHeader from "./QuestionTableHeader";
-import QuestionTableBody from "./QuestionTableBody";
+import { QuestionTableHeader } from "./QuestionTableHeader";
+import { QuestionTableBody } from "./QuestionTableBody";
 import { columns } from "./MockColumns";
-import QuestionTablePagination from "./QuestionTablePagination";
+import { QuestionTablePagination } from "./QuestionTablePagination";
 
-export default function QuestionTable() {
+export function QuestionTable() {
     const table = useReactTable({
         data,
         columns,

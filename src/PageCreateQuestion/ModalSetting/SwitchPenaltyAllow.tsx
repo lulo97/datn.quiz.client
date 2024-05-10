@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
-export default function SwitchPenaltyAllow() {
+export function SwitchPenaltyAllow() {
     return (
         <div className="flex gap-2 items-center">
             <Label>Cho phép phạt</Label>
