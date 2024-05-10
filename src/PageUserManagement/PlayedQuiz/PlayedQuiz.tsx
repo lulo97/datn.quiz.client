@@ -1,29 +1,54 @@
-import BaseScreen from "../BaseScreen";
+import { TableColumnsType } from "antd";
+
 import { data } from "./MockData";
 import ActionColumn from "@/components/action_column/ActionColumn";
+import BaseScreen from "@/components/base_screen/BaseScreen";
 
-const columns_data = [
-    { accessor: "Name", header: "Tên đề" },
-    { accessor: "Subject", header: "Chủ đề" },
-    { accessor: "EducationLevel", header: "Trình độ" },
+type DataType = (typeof data)[0];
+
+const columns: TableColumnsType<DataType> = [
+    {
+        title: "Tên",
+        dataIndex: "Name",
+        sorter: (a, b) => a.Name.localeCompare(b.Name),
+    },
+    {
+        title: "Trình độ",
+        dataIndex: "EducationLevel",
+        sorter: (a, b) => a.EducationLevel.localeCompare(b.EducationLevel),
+    },
+    {
+        title: "Chủ đề",
+        dataIndex: "Subject",
+        sorter: (a, b) => a.Subject.localeCompare(b.Subject),
+    },
 ];
 
-const action_col = <ActionColumn isDelete={true} isRead={true} isUpdate={false} />
+columns.unshift({
+    title: "STT",
+    dataIndex: "STT",
+    render: (_item, record, _index) => <div>{data.indexOf(record) + 1}</div>,
+    width: "5%",
+});
 
-const header_class_condition = [
-    { header: "Chủ đề", class: "w-20" },
-    { header: "Trình độ", class: "w-20" },
-];
+columns.push({
+    title: "Hành động",
+    key: "action",
+    render: (_item, _record, _index) => (
+        <div className="flex gap-2 justify-end">
+            <ActionColumn isDelete={true} isRead={true} isUpdate={true} />
+        </div>
+    ),
+    width: "10%",
+});
 
-export default function PlayedQuiz() {
-    const mtf_props = {
-        data: data,
-        columns_data: columns_data,
-        page_index: 0,
-        page_size: 7,
-        action_col: action_col,
-        header_class_condition: header_class_condition,
-    };
-
-    return <BaseScreen screen_title="Đề đã làm" mtf_props={mtf_props} />;
+export default function CreatedQuiz() {
+    return (
+        <BaseScreen
+            screen_title="Đề đã làm"
+            columns={columns}
+            data={data}
+            defaultPageSize={5}
+        />
+    );
 }

@@ -1,4 +1,6 @@
-import BaseScreen from "../BaseScreen";
+import { strToDate } from "@/Utils";
+import { TableColumnsType } from "antd";
+import BaseScreen from "../../components/base_screen/BaseScreen";
 import ActionColumn from "@/components/action_column/ActionColumn";
 
 const data = [
@@ -9,45 +11,61 @@ const data = [
     },
     {
         Name: "Văn",
-        Description:
-            "Văn học",
+        Description: "Văn học",
         CreateAt: "02/03/2023",
     },
     {
         Name: "Anh",
-        Description:
-            "Tiếng Anh",
+        Description: "Tiếng Anh",
         CreateAt: "02/03/2023",
-    }
+    },
+];
+type DataType = (typeof data)[0];
+
+const columns: TableColumnsType<DataType> = [
+    {
+        title: "Tên",
+        dataIndex: "Name",
+        sorter: (a, b) => a.Name.localeCompare(b.Name),
+    },
+    {
+        title: "Mô tả",
+        dataIndex: "Description",
+        sorter: (a, b) => a.Description.localeCompare(b.Description),
+    },
+    {
+        title: "Ngày tạo",
+        dataIndex: "CreateAt",
+        sorter: (a, b) =>
+            strToDate(a.CreateAt).getTime() - strToDate(b.CreateAt).getTime(),
+    },
 ];
 
-const columns_data = [
-    { accessor: "Name", header: "Chủ đề" },
-    { accessor: "Description", header: "Mô tả" },
-    { accessor: "CreateAt", header: "Ngày tạo" },
-];
+columns.unshift({
+    title: "STT",
+    dataIndex: "STT",
+    render: (_item, record, _index) => <div>{data.indexOf(record) + 1}</div>,
+    width: "5%",
+});
 
-const action_col = <ActionColumn isDelete={true} isRead={false} isUpdate={true} />
-
-const header_class_condition = [
-    {header: "STT", class: "w-16"},
-]
+columns.push({
+    title: "Hành động",
+    key: "action",
+    render: (_item, _record, _index) => (
+        <div className="flex gap-2 justify-end">
+            <ActionColumn isDelete={true} isRead={true} isUpdate={true} />
+        </div>
+    ),
+    width: "10%",
+});
 
 export default function Subject() {
-    
-    const mtf_props = {
-        data: data, 
-        columns_data: columns_data, 
-        page_index: 0, 
-        page_size: 7, 
-        action_col: action_col, 
-        header_class_condition: header_class_condition
-    }
-
     return (
-        <BaseScreen 
-            screen_title="Chủ đề câu hỏi" 
-            mtf_props={mtf_props} 
+        <BaseScreen
+            screen_title="Chủ đề"
+            columns={columns}
+            data={data}
+            defaultPageSize={5}
         />
     );
 }

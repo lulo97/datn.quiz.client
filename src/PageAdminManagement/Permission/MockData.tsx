@@ -1,23 +1,23 @@
 import { strToDate } from "@/Utils";
-import { TableColumnsType } from "antd";
-import BaseScreen from "../../components/base_screen/BaseScreen";
 import ActionColumn from "@/components/action_column/ActionColumn";
+import { TableColumnsType } from "antd";
 
-const data = [
+export const data = [
     {
-        Name: "Phản cảm",
-        Description: "Nội dung phản cảm",
+        Name: "Xóa người dùng",
+        Description: "Người dùng có thể xóa người dùng khác",
         CreateAt: "07/05/2024",
     },
     {
-        Name: "Thù ghét",
-        Description: "Nội dung thù ghét",
+        Name: "Xem báo cáo",
+        Description: "Người dùng có thể xem các báo cáo được gửi về",
         CreateAt: "02/03/2023",
     },
 ];
-type DataType = (typeof data)[0];
 
-const columns: TableColumnsType<DataType> = [
+export type DataType = (typeof data)[0];
+
+export const columns: TableColumnsType<DataType> = [
     {
         title: "Tên",
         dataIndex: "Name",
@@ -53,14 +53,3 @@ columns.push({
     ),
     width: "10%",
 });
-
-export default function ReportReason() {
-    return (
-        <BaseScreen
-            screen_title="Lý do báo cáo"
-            columns={columns}
-            data={data}
-            defaultPageSize={5}
-        />
-    );
-}

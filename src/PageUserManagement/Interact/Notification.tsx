@@ -1,5 +1,7 @@
-import BaseScreen from "../BaseScreen";
+import { strToDate } from "@/Utils";
 import ActionColumn from "@/components/action_column/ActionColumn";
+import BaseScreen from "@/components/base_screen/BaseScreen";
+import { TableColumnsType } from "antd";
 
 const data = [
     {
@@ -222,27 +224,62 @@ const data = [
     },
 ];
 
-const columns_data = [
-    { accessor: "SourceId", header: "Người gửi" },
-    { accessor: "Name", header: "Tựa đề" },
-    { accessor: "Content", header: "Nội dung" },
-    { accessor: "Date", header: "Ngày" },
-    { accessor: "IsRead", header: "Đã đọc" },
+type DataType = (typeof data)[0];
+
+const columns: TableColumnsType<DataType> = [
+    {
+        title: "Người gửi",
+        dataIndex: "SourceId",
+        sorter: (a, b) => a.SourceId.localeCompare(b.SourceId),
+    },
+    {
+        title: "Ngày tạo",
+        dataIndex: "Date",
+        sorter: (a, b) =>
+            strToDate(a.Date).getTime() - strToDate(b.Date).getTime(),
+    },
+    {
+        title: "Tựa đề",
+        dataIndex: "Name",
+        sorter: (a, b) => a.Name.localeCompare(b.Name),
+    },
+    {
+        title: "Nội dung",
+        dataIndex: "Content",
+        sorter: (a, b) => a.Content.localeCompare(b.Content),
+    },
+    {
+        title: "Đã đọc",
+        dataIndex: "IsRead",
+        sorter: (a, b) => Number(a.IsRead) - Number(b.IsRead),
+    },
 ];
 
-const action_col = <ActionColumn isDelete={true} isRead={true} isUpdate={false} />
+columns.unshift({
+    title: "STT",
+    dataIndex: "STT",
+    render: (_item, record, _index) => <div>{data.indexOf(record) + 1}</div>,
+    width: "5%",
+});
 
-const header_class_condition = [{}];
+columns.push({
+    title: "Hành động",
+    key: "action",
+    render: (_item, _record, _index) => (
+        <div className="flex gap-2 justify-end">
+            <ActionColumn isDelete={true} isRead={true} isUpdate={true} />
+        </div>
+    ),
+    width: "10%",
+});
 
 export default function Notification() {
-    const mtf_props = {
-        data: data,
-        columns_data: columns_data,
-        page_index: 0,
-        page_size: 7,
-        action_col: action_col,
-        header_class_condition: header_class_condition,
-    };
-
-    return <BaseScreen screen_title="Thông báo" mtf_props={mtf_props} />;
+    return (
+        <BaseScreen
+            screen_title="Thông báo"
+            columns={columns}
+            data={data}
+            defaultPageSize={5}
+        />
+    );
 }

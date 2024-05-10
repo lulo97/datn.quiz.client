@@ -1,4 +1,5 @@
 import { getObjectId } from "@/Utils";
+import MyMenubarItem from "@/components/menubar_item/MyMenubarItem";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,7 +8,6 @@ import {
     MenubarMenu,
     MenubarTrigger,
     MenubarContent,
-    MenubarItem,
     MenubarSeparator,
 } from "@/components/ui/menubar";
 import { Search } from "lucide-react";
@@ -44,41 +44,54 @@ export default function Header() {
                 <MenubarMenu>
                     <MenubarTrigger>Tạo</MenubarTrigger>
                     <MenubarContent>
-                        <MenubarItem>
-                            <Link to="/CreateQuestion">Tạo câu hỏi</Link>
-                        </MenubarItem>
-                        <MenubarItem>
-                            <Link to="/CreateQuestion">
+                        <MyMenubarItem>
+                            <Link className="w-full" to="/CreateQuestion">
+                                Tạo câu hỏi
+                            </Link>
+                        </MyMenubarItem>
+                        <MyMenubarItem>
+                            <Link className="w-full" to="/CreateQuestion">
                                 Tạo câu hỏi bằng AI
                             </Link>
-                        </MenubarItem>
+                        </MyMenubarItem>
                         <MenubarSeparator />
-                        <MenubarItem>
-                            <Link to="/CreateQuiz">Tạo đề</Link>
-                        </MenubarItem>
+                        <MyMenubarItem>
+                            <Link className="w-full" to="/CreateQuiz">
+                                Tạo đề
+                            </Link>
+                        </MyMenubarItem>
                         <MenubarSeparator />
-                        <MenubarItem>
-                            <Link to="/CreateRoom">Tạo phòng</Link>
-                        </MenubarItem>
+                        <MyMenubarItem>
+                            <Link className="w-full" to="/CreateRoom">
+                                Tạo phòng
+                            </Link>
+                        </MyMenubarItem>
                     </MenubarContent>
                 </MenubarMenu>
                 <MenubarMenu>
                     <MenubarTrigger>Chủ đề</MenubarTrigger>
                     <MenubarContent className="grid grid-cols-3">
                         {smi.map((ele) => (
-                            <MenubarItem key={ele.SubjectId}>
-                                <a href={`/subject/${ele.UrlName}`}>
+                            <MyMenubarItem key={ele.SubjectId}>
+                                <Link
+                                    className="w-full"
+                                    to={`/subject/${ele.UrlName}`}
+                                >
                                     {ele.Name}
-                                </a>
-                            </MenubarItem>
+                                </Link>
+                            </MyMenubarItem>
                         ))}
                     </MenubarContent>
                 </MenubarMenu>
                 <MenubarMenu>
                     <MenubarTrigger>Xuất đề</MenubarTrigger>
                     <MenubarContent>
-                        <MenubarItem>Xuất PDF</MenubarItem>
-                        <MenubarItem>Chấm đề</MenubarItem>
+                        <MyMenubarItem>
+                            <Link to="#">Xuất PDF</Link>
+                        </MyMenubarItem>
+                        <MyMenubarItem>
+                            <Link to="#">Chấm đề</Link>
+                        </MyMenubarItem>
                     </MenubarContent>
                 </MenubarMenu>
             </Menubar>
