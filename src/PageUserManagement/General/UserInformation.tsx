@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
+import { getRandomAvatar } from "@/Utils";
 
 export default function UserInformation() {
     return (
@@ -15,7 +16,7 @@ export default function UserInformation() {
             <CardContent>
                 <div className="flex gap-5 mb-3">
                     <Avatar className="w-20 h-20">
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarImage src={getRandomAvatar()}/>
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div>

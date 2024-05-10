@@ -1,3 +1,4 @@
+import { getRandomWallpaper } from "@/Utils";
 import { Label } from "@/components/ui/label";
 
 export default function QuestionCardImage() {
@@ -6,7 +7,7 @@ export default function QuestionCardImage() {
             <Label>Hình ảnh:</Label>
             <img
                 className="object-contain"
-                src="https://c4.wallpaperflare.com/wallpaper/198/347/689/fish-underwater-coral-reef-ecosystem-wallpaper-preview.jpg"
+                src={getRandomWallpaper()}
             ></img>
         </div>
     );

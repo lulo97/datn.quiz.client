@@ -1,3 +1,4 @@
+import { getRandomAvatar } from "@/Utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 
@@ -8,7 +9,7 @@ export default function UserCardRank() {
             <div className="flex gap-2 h-20">
                 <div className="flex items-center justify-end">
                     <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarImage src={getRandomAvatar()} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                 </div>

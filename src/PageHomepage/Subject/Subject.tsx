@@ -8,10 +8,6 @@ import {
 } from "@/components/ui/card";
 import SubjectCard from "./SubjectCard";
 
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import Content from "./Content/Content";
-
 interface SubjectProps {
     SubjectId: string;
 }
@@ -25,10 +21,17 @@ export default function Subject(props: SubjectProps) {
                     <CardTitle>{SubjectId}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <Content />
+                    <div className="flex flex-col gap-5">
+                        <SubjectCard />
+                        <SubjectCard />
+                        <SubjectCard />
+                        <SubjectCard />
+                        <SubjectCard />
+                        <SubjectCard />
+                    </div>
                 </CardContent>
                 <CardFooter>
-                    <Footer />
+                    Footer
                 </CardFooter>
             </Card>
         </div>

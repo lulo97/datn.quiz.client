@@ -1,3 +1,4 @@
+import { getRandomWallpaper } from "@/Utils";
 import { Label } from "@/components/ui/label";
 
 export default function HeaderLeft() {
@@ -8,7 +9,7 @@ export default function HeaderLeft() {
 
             <img
                 className="object-contain rounded-2xl"
-                src="https://mcdn.wallpapersafari.com/medium/46/30/S7zpL2.png"
+                src={getRandomWallpaper()}
             ></img>
         </div>
     );

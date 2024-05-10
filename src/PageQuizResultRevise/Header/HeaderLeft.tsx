@@ -1,3 +1,4 @@
+import { getRandomWallpaper } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -21,7 +22,7 @@ export default function HeaderLeft() {
                 <CardContent>
                     <img
                         className="object-contain rounded-lg"
-                        src="https://asset.gecdesigns.com/img/wallpapers/beautiful-fantasy-wallpaper-ultra-hd-wallpaper-4k-sr10012418-1706506236698-cover.webp"
+                        src={getRandomWallpaper()}
                     ></img>
                 </CardContent>
                 <CardFooter className="flex gap-5 justify-between">

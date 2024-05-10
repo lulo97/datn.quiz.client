@@ -1,3 +1,4 @@
+import { getRandomWallpaper } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
@@ -26,7 +27,7 @@ export default function Content() {
                 <div className="w-1/2 flex flex-col gap-3">
                     <img
                         className="object-contain rounded-xl"
-                        src="https://mcdn.wallpapersafari.com/medium/46/30/S7zpL2.png"
+                        src={getRandomWallpaper()}
                     ></img>
                     <audio className="w-full" controls>
                         <source

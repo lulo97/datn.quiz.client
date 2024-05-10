@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { getRandomAvatar } from "@/Utils";
 
 export default function HeaderRight() {
     return (
@@ -54,7 +55,7 @@ export default function HeaderRight() {
                                 <TableCell>
                                     <Avatar className="border">
                                         <AvatarImage
-                                            src="https://gravatar.com/avatar/6e372becff877f3e922c76d52c348b67?s=400&d=robohash&r=x"
+                                            src={getRandomAvatar()}
                                             alt="@shadcn"
                                         />
                                         <AvatarFallback>CN</AvatarFallback>
@@ -67,7 +68,7 @@ export default function HeaderRight() {
                                 <TableCell>
                                     <Avatar className="border">
                                         <AvatarImage
-                                            src="https://gravatar.com/avatar/6e372becff123f3e922c76d52c348b67?s=400&d=robohash&r=x"
+                                            src={getRandomAvatar()}
                                             alt="@shadcn"
                                         />
                                         <AvatarFallback>CN</AvatarFallback>
@@ -80,7 +81,7 @@ export default function HeaderRight() {
                                 <TableCell>
                                     <Avatar className="border">
                                         <AvatarImage
-                                            src="https://gravatar.com/avatar/6e372becff456f3e922c76d52c348b67?s=400&d=robohash&r=x"
+                                            src={getRandomAvatar()}
                                             alt="@shadcn"
                                         />
                                         <AvatarFallback>CN</AvatarFallback>

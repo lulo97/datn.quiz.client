@@ -1,4 +1,4 @@
-import { ModalSizeClass } from "@/Utils";
+import { ModalSizeClass, getRandomWallpaper } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -31,7 +31,7 @@ export default function ModalMedia() {
                     </DialogHeader>
                     <div className="flex gap-2">
                         <div className="border rounded-lg w-2/3 flex justify-center">
-                            <img className="object-contain h-[350px]" src="https://cdn.magicdecor.in/com/2023/10/20175244/Beautiful-Rural-Village-Mountain-Nature-Anime-Wallpaper-for-Wall.jpg"></img>
+                            <img className="object-contain h-[350px]" src={getRandomWallpaper()}></img>
                         </div>
 
                         <div className="w-1/3 flex flex-col gap-3">

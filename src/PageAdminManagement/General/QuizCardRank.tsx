@@ -1,3 +1,4 @@
+import { getRandomWallpaper } from "@/Utils";
 import { Label } from "@/components/ui/label";
 
 export default function QuizCardRank() {
@@ -7,7 +8,7 @@ export default function QuizCardRank() {
             <div className="flex gap-2 h-20">
                 <img
                     className="object-contain rounded-xl"
-                    src="https://c4.wallpaperflare.com/wallpaper/142/751/831/landscape-anime-digital-art-fantasy-art-wallpaper-preview.jpg"
+                    src={getRandomWallpaper()}
                 ></img>
                 <ul className="flex flex-col justify-center items-start">
                     <li>

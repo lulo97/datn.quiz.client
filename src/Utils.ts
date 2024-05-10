@@ -12,6 +12,14 @@ export function getObjectId() {
     );
 }
 
+export function getRandomAvatar() {
+    return `https://robohash.org/${getObjectId()}`
+}
+
+export function getRandomWallpaper() {
+    return "https://random.imagecdn.app/1920/1080"
+}
+
 export function initialAnswer() {
     return { id: getObjectId(), content: "", correct: false };
 }
