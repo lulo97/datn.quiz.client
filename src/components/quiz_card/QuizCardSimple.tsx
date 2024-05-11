@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 
 export function QuizCardSimple() {
     return (
-        <div className="w-48">
+        <div className="w-fit">
             <img className="object-contain rounded-lg" src={getRandomWallpaper()}></img>
             <div className="font-bold text-sm">Đề toán 12 chương Hàm số</div>
             <div className="flex items-center gap-2">

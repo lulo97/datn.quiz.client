@@ -21,6 +21,7 @@ import { ExportPdf } from "./PageExportPdf/ExportPdf";
 import { ScanAnswerSheet } from "./PageScanAnswerSheet/ScanAnswerSheet";
 import { ModeratorManagement } from "./PageModeratorManagement/ModeratorManagement";
 import { CreateRoom } from "./PageCreateRoom/CreateRoom";
+import { RoomWait } from "./PageRoomWait/RoomWait";
 
 export const components = [
     CreateQuestion,
@@ -37,6 +38,7 @@ export const components = [
     ScanAnswerSheet,
     ModeratorManagement,
     CreateRoom,
+    RoomWait,
 ];
 
 const browser_routes = components.map((Component) => ({

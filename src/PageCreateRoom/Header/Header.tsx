@@ -8,12 +8,12 @@ import { QuizCardDetail } from "@/components/quiz_card/QuizCardDetailed";
 export function Header() {
     return (
         <div className="flex flex-col gap-5">
-            <div className="flex justify-between items-center">
-                <div className="w-2/3">
+            <div className="flex justify-between items-start">
+                <div className="w-2/3 flex flex-col justify-between gap-3">
                     <Label>Tên phòng</Label>
                     <Input placeholder="Phòng ABC..." />
                 </div>
-                <div>
+                <div className="border rounded-lg p-1">
                     <div>
                         <Label>Thời gian bắt đầu: </Label>12:00:00 11/05/2024
                     </div>
@@ -26,15 +26,15 @@ export function Header() {
                 </div>
             </div>
             <div>
-                <div className="flex justify-between items-center mb-2">
-                    <Label>Đề thi</Label>
-                    <ModalFindQuiz />
-                </div>
-
+                <Label>Đề thi</Label>
                 <QuizCardDetail />
             </div>
             <div className="flex justify-between items-center">
-                <ModalSetting />
+                <div className="flex justify-between items-center gap-5">
+                    <ModalSetting />
+                    <ModalFindQuiz />
+                </div>
+
                 <Button>Tạo phòng</Button>
             </div>
         </div>

@@ -1,6 +1,5 @@
 import { CardHeader } from "@/components/ui/card";
 import { ChevronRight } from "lucide-react";
-import { QuizCard } from "./QuizCard";
 import { Label } from "@/components/ui/label";
 import { QuizCardSimple } from "@/components/quiz_card/QuizCardSimple";
 
