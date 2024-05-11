@@ -18,6 +18,9 @@ import { UserManagement } from "./PageUserManagement/UserManagement";
 import { smi } from "./PageHomepage/Header/Header";
 import { QuizSubject } from "./PageQuizSubject/QuizSubject";
 import { ExportPdf } from "./PageExportPdf/ExportPdf";
+import { ScanAnswerSheet } from "./PageScanAnswerSheet/ScanAnswerSheet";
+import { ModeratorManagement } from "./PageModeratorManagement/ModeratorManagement";
+import { CreateRoom } from "./PageCreateRoom/CreateRoom";
 
 export const components = [
     CreateQuestion,
@@ -31,6 +34,9 @@ export const components = [
     AdminManagement,
     UserManagement,
     ExportPdf,
+    ScanAnswerSheet,
+    ModeratorManagement,
+    CreateRoom,
 ];
 
 const browser_routes = components.map((Component) => ({

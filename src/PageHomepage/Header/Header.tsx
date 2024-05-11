@@ -87,7 +87,7 @@ export function Header() {
                     <MenubarTrigger>Xuất đề</MenubarTrigger>
                     <MenubarContent>
                         <MyMenubarItem>
-                            <Link to="#">Xuất PDF</Link>
+                            <Link to="/ExportPdf">Xuất PDF</Link>
                         </MyMenubarItem>
                         <MyMenubarItem>
                             <Link to="#">Chấm đề</Link>

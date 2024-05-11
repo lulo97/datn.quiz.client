@@ -13,6 +13,7 @@ import { Role } from "./Role/Role";
 import { Type } from "./Question/Type";
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
 import { Navbar } from "@/components/navbar/Navbar";
+import { findMenuItemByName } from "@/Utils";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
@@ -38,22 +39,6 @@ export const menu_names: MenuItem[] = [
     { name: "Vai trò", element: <Role /> },
     { name: "Quyền", element: <Permission /> },
 ];
-
-// Recursive function to find an element by name
-function findMenuItemByName(menu: MenuItem[], name: string): MenuItem | null {
-    for (const item of menu) {
-        if (item.name === name) {
-            return item;
-        }
-        if (item.child) {
-            const found = findMenuItemByName(item.child, name);
-            if (found) {
-                return found;
-            }
-        }
-    }
-    return null; // Return null if not found
-}
 
 export function AdminManagement() {
     const [curMenuItem, setCurMenuItem] = useState<MenuItem>(menu_names[0]);

@@ -1,14 +1,14 @@
-import { QuizSubjectCard } from "@/PageQuizSubject/QuizSubjectCard";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function Footer() {
     return (
-        <div className="border p-4">
-            <div>
-                <Label className="text-xl">Đề đã chọn</Label>
+        <div className="flex justify-between items-center w-full">
+            <div className="flex items-center gap-2">
+                <Checkbox />
+                <p>Bỏ qua ảnh</p>
             </div>
-
-            <QuizSubjectCard />
+            <Button>Tải xuống</Button>
         </div>
     );
 }

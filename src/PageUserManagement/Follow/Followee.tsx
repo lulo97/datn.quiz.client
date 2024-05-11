@@ -59,7 +59,7 @@ columns.push({
     key: "action",
     render: (_item, _record, _index) => (
         <div className="flex gap-2 justify-end">
-            <ActionColumn isDelete={true} isRead={true} isUpdate={true} />
+            <ActionColumn isDelete isRead isUpdate />{" "}
         </div>
     ),
     width: "10%",

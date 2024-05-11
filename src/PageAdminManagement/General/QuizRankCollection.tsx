@@ -6,24 +6,22 @@ import {
     CardContent,
     CardFooter,
 } from "@/components/ui/card";
-import { QuizCardRank } from "./QuizCardRank";
+import { QuizCardCompact } from "@/components/quiz_card/QuizCardCompact";
 
 export function QuizRankCollection() {
     return (
-        <div className="w-1/2">
-            <Card className="shadow">
-                <CardHeader>
-                    <CardTitle>Xếp hạng đề</CardTitle>
-                </CardHeader>
-                <CardContent className="flex flex-col gap-2">
-                    <QuizCardRank />
-                    <QuizCardRank />
-                    <QuizCardRank />
-                </CardContent>
-                <CardFooter className="flex justify-end">
-                    <Button variant="link">Xem thêm</Button>
-                </CardFooter>
-            </Card>
-        </div>
+        <Card className="w-1/2 min-h-full flex flex-col justify-between">
+            <CardHeader>
+                <CardTitle>Xếp hạng đề</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-5">
+                <QuizCardCompact />
+                <QuizCardCompact />
+                <QuizCardCompact />
+            </CardContent>
+            <CardFooter className="flex justify-end">
+                <Button variant="link">Xem thêm</Button>
+            </CardFooter>
+        </Card>
     );
 }

@@ -232,6 +232,7 @@ export interface Rating {
 export interface Report {
     ReportId: string;
     ReportReasonId: string;
+    ReportTargetId: string;
     UserId: string;
     ParentId: string;
     Content: string;
@@ -249,8 +250,6 @@ export interface ReportTarget {
 
 export interface ReportReason {
     ReportReasonId: string;
-    ReportTargetId: string;
-    ParentId: string;
     Title: string;
     Description: string;
     CreatedAt: Date;

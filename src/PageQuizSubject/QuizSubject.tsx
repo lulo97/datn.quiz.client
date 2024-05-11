@@ -6,7 +6,7 @@ import {
     CardFooter,
     CardTitle,
 } from "@/components/ui/card";
-import { QuizSubjectCard } from "./QuizSubjectCard";
+import { QuizCardDetail } from "@/components/quiz_card/QuizCardDetailed";
 
 interface SubjectProps {
     SubjectId: string;
@@ -22,12 +22,12 @@ export function QuizSubject(props: SubjectProps) {
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col gap-5">
-                        <QuizSubjectCard />
-                        <QuizSubjectCard />
-                        <QuizSubjectCard />
-                        <QuizSubjectCard />
-                        <QuizSubjectCard />
-                        <QuizSubjectCard />
+                        <QuizCardDetail />
+                        <QuizCardDetail />
+                        <QuizCardDetail />
+                        <QuizCardDetail />
+                        <QuizCardDetail />
+                        <QuizCardDetail />
                     </div>
                 </CardContent>
                 <CardFooter>Footer</CardFooter>

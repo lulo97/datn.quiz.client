@@ -4,17 +4,19 @@ import { Label } from "@/components/ui/label";
 
 export function UserCardRank() {
     return (
-        <div className="border shadow rounded-xl py-1 px-3">
-            <Label>Hoàng Lê Lương</Label>
+        <div className="py-1 px-3">
             <div className="flex gap-2 h-20">
                 <div className="flex items-center justify-end">
-                    <Avatar>
+                    <Avatar className="border">
                         <AvatarImage src={getRandomAvatar()} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                 </div>
 
                 <ul className="flex flex-col justify-center items-start">
+                    <li>
+                        <Label>Hoàng Lê Lương</Label>
+                    </li>
                     <li>
                         <Label>Đề tạo: </Label> 1234
                     </li>

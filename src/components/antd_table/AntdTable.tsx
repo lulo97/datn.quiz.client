@@ -34,7 +34,7 @@ export function AntdTable(props: AntdTableProps) {
                 pagination={false}
             />
             <Pagination
-                className="mr-5 mb-5"
+                className="mr-5 mb-5 mt-2"
                 total={data.length}
                 defaultCurrent={1}
                 current={currentPage} // Pass current page state

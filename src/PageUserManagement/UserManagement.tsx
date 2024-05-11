@@ -12,6 +12,7 @@ import { Notification } from "./Interact/Notification";
 import { Follower } from "./Follow/Follower";
 import { Rating } from "./Interact/Rating";
 import { PlayedQuiz } from "./PlayedQuiz/PlayedQuiz";
+import { findMenuItemByName } from "@/Utils";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
@@ -36,22 +37,6 @@ export const menu_names: MenuItem[] = [
     },
     { name: "Thùng rác", element: <RecycleBin /> },
 ];
-
-// Recursive function to find an element by name
-function findMenuItemByName(menu: MenuItem[], name: string): MenuItem | null {
-    for (const item of menu) {
-        if (item.name === name) {
-            return item;
-        }
-        if (item.child) {
-            const found = findMenuItemByName(item.child, name);
-            if (found) {
-                return found;
-            }
-        }
-    }
-    return null; // Return null if not found
-}
 
 export function UserManagement() {
     const [curMenuItem, setCurMenuItem] = useState<MenuItem>(menu_names[0]);

@@ -1,5 +1,7 @@
 //Pure function: Not change input or state of system and always return output
 
+import { MenuItem } from "./Interfaces";
+
 export function getObjectId() {
     var timestamp = ((new Date().getTime() / 1000) | 0).toString(16);
     return (
@@ -13,11 +15,11 @@ export function getObjectId() {
 }
 
 export function getRandomAvatar() {
-    return `https://robohash.org/${getObjectId()}`
+    return `https://robohash.org/${getObjectId()}`;
 }
 
 export function getRandomWallpaper() {
-    return "https://random.imagecdn.app/1920/1080"
+    return "https://random.imagecdn.app/1920/1080";
 }
 
 export function initialAnswer() {
@@ -44,7 +46,29 @@ export function getRandomDate(): string {
 }
 
 export function strToDate(date: string): Date {
-    const [day, month, year] = date.split('/');
+    const [day, month, year] = date.split("/");
     return new Date(`${year}-${month}-${day}`);
+}
 
+export function getRandomInt(a: number, b: number) {
+    return Math.floor(Math.random() * (b - a + 1)) + a;
+}
+
+// Recursive function to find an element by name
+export function findMenuItemByName(
+    menu: MenuItem[],
+    name: string
+): MenuItem | null {
+    for (const item of menu) {
+        if (item.name === name) {
+            return item;
+        }
+        if (item.child) {
+            const found = findMenuItemByName(item.child, name);
+            if (found) {
+                return found;
+            }
+        }
+    }
+    return null; // Return null if not found
 }
