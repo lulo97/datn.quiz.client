@@ -2,8 +2,6 @@ import { Button } from "@/components/ui/button";
 import { WebcamCapture } from "./WebcamCapture";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { AnswerSheetResults } from "./AnswerSheetResults";
 
 export function Content() {

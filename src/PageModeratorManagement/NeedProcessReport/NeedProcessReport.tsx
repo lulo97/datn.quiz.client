@@ -1,4 +1,4 @@
-import { getObjectId, getRandomDate, strToDate } from "@/Utils";
+import { strToDate } from "@/Utils";
 import { ActionColumn } from "@/components/action_column/ActionColumn";
 import { BaseScreen } from "@/components/base_screen/BaseScreen";
 import { TableColumnsType } from "antd";

@@ -72,3 +72,15 @@ export function findMenuItemByName(
     }
     return null; // Return null if not found
 }
+
+export const BACKEND_URL = "http://localhost:3000/";
+
+export function toDDMMYYY(date_str: string) {
+    const date = new Date(date_str)
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1;
+    const year = date.getUTCFullYear();
+    const formattedDay = String(day).padStart(2, "0");
+    const formattedMonth = String(month).padStart(2, "0");
+    return `${formattedDay}/${formattedMonth}/${year}`;
+}

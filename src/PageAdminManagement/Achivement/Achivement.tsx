@@ -1,13 +1,88 @@
-import { columns, data } from "./MockData";
-import { BaseScreen } from "../../components/base_screen/BaseScreen";
+import { AddModal } from "./AddModal";
+import { useState, useEffect, useMemo } from "react";
+import { TableColumnsType } from "antd";
+import { Achievement as IAchievement } from "@/InterfacesDatabase";
+import { BaseScreen } from "@/components/base_screen/BaseScreen";
+import { getAll } from "./UtilApi";
+import { DeleteModal } from "./DeleteModal";
+import { ReadModal } from "./ReadModal";
+import { UpdateModal } from "./UpdateModal";
+import { toDDMMYYY } from "@/Utils";
 
 export function Achievement() {
+    const [data, setData] = useState<IAchievement[]>([]);
+
+    async function fetchData() {
+        const data_fetched = await getAll();
+        setData(data_fetched);
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
+
+    const columns: TableColumnsType<IAchievement> = useMemo(
+        () => [
+            {
+                title: "Ảnh",
+                dataIndex: "ImageUrl",
+                render: (_item, record, _index) => (
+                    <img
+                        className="object-contain w-8"
+                        src={`public/image/${record.ImageUrl}`}
+                    ></img>
+                ),
+            },
+            {
+                title: "Tên",
+                dataIndex: "Name",
+                sorter: (a, b) => a.Name.localeCompare(b.Name),
+                width: "20%",
+            },
+            {
+                title: "Mô tả",
+                dataIndex: "Description",
+                sorter: (a, b) => a.Description.localeCompare(b.Description),
+                render: (_item, record, _index) => (
+                    <div className="line-clamp-1">{record.Description}</div>
+                ),
+            },
+            {
+                title: "Ngày tạo",
+                dataIndex: "CreatedAt",
+                sorter: (a, b) =>
+                    new Date(a.CreatedAt).getTime() -
+                    new Date(b.CreatedAt).getTime(),
+                render: (_item, record, _index) => toDDMMYYY(record.CreatedAt),
+                width: "15%",
+            },
+            {
+                title: "Hành động",
+                key: "action",
+                render: (_item, _record, _index) => (
+                    <div className="flex gap-2 justify-end">
+                        <DeleteModal record={_record} fetchData={fetchData} />
+                        <ReadModal record={_record} fetchData={fetchData} />
+                        <UpdateModal record={_record} fetchData={fetchData} />
+                    </div>
+                ),
+                width: "10%",
+            },
+        ],
+        [fetchData]
+    );
+
     return (
         <BaseScreen
             screen_title="Thành tựu"
             columns={columns}
             data={data}
             defaultPageSize={5}
+            addModal={<AddModal fetchData={fetchData} />}
         />
     );
 }

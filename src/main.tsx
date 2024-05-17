@@ -22,6 +22,10 @@ import { ScanAnswerSheet } from "./PageScanAnswerSheet/ScanAnswerSheet";
 import { ModeratorManagement } from "./PageModeratorManagement/ModeratorManagement";
 import { CreateRoom } from "./PageCreateRoom/CreateRoom";
 import { RoomWait } from "./PageRoomWait/RoomWait";
+import { RoomMonitor } from "./PageRoomMonitor/RoomMonitor";
+import { RoomJoin } from "./PageRoomJoin/RoomJoin";
+import { RoomView } from "./PageRoomView/RoomView";
+import { RoomRanking } from "./PageRoomRanking/RoomRanking";
 
 export const components = [
     CreateQuestion,
@@ -39,6 +43,10 @@ export const components = [
     ModeratorManagement,
     CreateRoom,
     RoomWait,
+    RoomMonitor,
+    RoomJoin,
+    RoomView,
+    RoomRanking,
 ];
 
 const browser_routes = components.map((Component) => ({

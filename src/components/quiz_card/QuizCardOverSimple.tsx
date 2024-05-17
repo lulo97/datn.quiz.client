@@ -2,7 +2,7 @@ import { getRandomWallpaper } from "@/Utils";
 
 export function QuizCardOverSimple() {
     return (
-        <div className="w-48">
+        <div className="w-fit">
             <img
                 className="object-contain rounded-lg"
                 src={getRandomWallpaper()}
