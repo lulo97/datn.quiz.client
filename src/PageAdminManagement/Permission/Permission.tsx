@@ -30,13 +30,13 @@ export function Permission() {
             {
                 title: "Tên",
                 dataIndex: "Name",
-                sorter: (a, b) => a.Name.localeCompare(b.Name),
+                sorter: true,
                 width: "20%",
             },
             {
                 title: "Mô tả",
                 dataIndex: "Description",
-                sorter: (a, b) => a.Description.localeCompare(b.Description),
+                sorter: true,
                 render: (_item, record, _index) => (
                     <div className="line-clamp-1">{record.Description}</div>
                 ),
@@ -44,9 +44,7 @@ export function Permission() {
             {
                 title: "Ngày tạo",
                 dataIndex: "CreatedAt",
-                sorter: (a, b) =>
-                    new Date(a.CreatedAt).getTime() -
-                    new Date(b.CreatedAt).getTime(),
+                sorter: true,
                 render: (_item, record, _index) => toDDMMYYY(record.CreatedAt),
                 width: "15%",
             },

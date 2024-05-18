@@ -32,7 +32,7 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Mã đề",
         dataIndex: "QuizId",
-        sorter: (a, b) => a.QuizId.localeCompare(b.QuizId),
+        sorter: true,
     },
     {
         title: "Ngày tạo",
@@ -43,7 +43,7 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Mã người dùng",
         dataIndex: "UserId",
-        sorter: (a, b) => a.UserId.localeCompare(b.UserId),
+        sorter: true,
     },
 ];
 

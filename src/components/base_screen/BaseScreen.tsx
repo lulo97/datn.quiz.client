@@ -2,21 +2,29 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TableColumnsType } from "antd";
 import { getObjectId } from "@/Utils";
 import { Pagination, Table } from "antd";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { OnChangeAntd } from "@/Interfaces";
 
 interface BaseScreen {
-    columns: TableColumnsType<any>, 
-    data: any[], 
-    defaultPageSize: number, 
-    screen_title: string, 
-    addModal: JSX.Element,
-    onChange?: OnChangeAntd,
-    filter?: JSX.Element,
+    columns: TableColumnsType<any>;
+    data: any[];
+    defaultPageSize: number;
+    screen_title: string;
+    addModal: JSX.Element;
+    onChange?: OnChangeAntd;
+    filter?: JSX.Element;
 }
 
 export function BaseScreen(props: BaseScreen) {
-    const { columns, data, defaultPageSize, screen_title, addModal, onChange, filter } = props;
+    const {
+        columns,
+        data,
+        defaultPageSize,
+        screen_title,
+        addModal,
+        onChange,
+        filter,
+    } = props;
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = defaultPageSize;
 
@@ -31,10 +39,9 @@ export function BaseScreen(props: BaseScreen) {
                 <div className="flex justify-between">
                     <CardTitle>{screen_title}</CardTitle>
                     <div className="flex gap-4">
-                    {filter}
-                    {addModal}
+                        {filter}
+                        {addModal}
                     </div>
-
                 </div>
             </CardHeader>
             <CardContent className="h-5/6">

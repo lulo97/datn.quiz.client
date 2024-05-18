@@ -1,10 +1,18 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { TableColumnsType, TableProps } from "antd";
 import { toDDMMYYY } from "@/Utils";
-import { SubSubjectDetail } from "./UtilApi";
+import {
+    GetAllOptions,
+    SubSubjectDetail,
+    getAll,
+} from "./UtilApi";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
 import { UpdateModal } from "./UpdateModal";
+import { getAll as getAllSubjectApi } from "../Subject/UtilApi";
+import { Subject } from "@/InterfacesDatabase";
+
+const subjects: Subject[] = await getAllSubjectApi();
 
 export function getColumns(fetchData: () => Promise<void>) {
     const columns: TableColumnsType<SubSubjectDetail> = useMemo(
@@ -21,13 +29,16 @@ export function getColumns(fetchData: () => Promise<void>) {
             {
                 title: "Chủ đề",
                 dataIndex: "SubjectName",
-                sorter: (a, b) => a.SubjectName.localeCompare(b.SubjectName),
+                sorter: true,
+                filters: subjects.map((ele) => {
+                    return { text: ele.Name, value: ele.Name };
+                }),
                 width: "20%",
             },
             {
                 title: "Mô tả",
                 dataIndex: "Description",
-                sorter: (a, b) => a.Description.localeCompare(b.Description),
+                sorter: true,
                 render: (_, record) => (
                     <div className="line-clamp-1">{record.Description}</div>
                 ),
@@ -35,9 +46,7 @@ export function getColumns(fetchData: () => Promise<void>) {
             {
                 title: "Ngày tạo",
                 dataIndex: "CreatedAt",
-                sorter: (a, b) =>
-                    new Date(a.CreatedAt).getTime() -
-                    new Date(b.CreatedAt).getTime(),
+                sorter: true,
                 render: (_, record) => toDDMMYYY(record.CreatedAt),
                 width: "15%",
             },
@@ -59,27 +68,26 @@ export function getColumns(fetchData: () => Promise<void>) {
     return columns;
 }
 
-export function getSorter(
-    data: SubSubjectDetail[],
-    setData: React.Dispatch<React.SetStateAction<SubSubjectDetail[]>>,
-    fetchData: () => Promise<void>
+export function getOnChange(
+    setData: React.Dispatch<React.SetStateAction<SubSubjectDetail[]>>
 ) {
-    const handleTableChange: TableProps<SubSubjectDetail>["onChange"] = (
+    const onChange: TableProps<SubSubjectDetail>["onChange"] = async (
         _pagination,
-        _filters,
+        filters,
         sorter
     ) => {
         if (Array.isArray(sorter)) return;
-        if (sorter.field === "Name") {
-            const sortedData = [...data].sort((a, b) =>
-                sorter.order === "ascend"
-                    ? a.Name.localeCompare(b.Name)
-                    : b.Name.localeCompare(a.Name)
-            );
-            setData(sortedData);
-        } else {
-            fetchData();
+        const { column, field, order, columnKey } = sorter;
+        const options: GetAllOptions = {}
+        if (field && order) {
+            const _order = order == "ascend" ? "asc" : "desc";
+            options.sortField = field.toString()
+            options.sortDirection = _order
         }
+        if (filters.SubjectName) {
+            options.filterFields = filters.SubjectName
+        }
+        setData(await getAll(options));
     };
-    return handleTableChange;
+    return onChange;
 }

@@ -9,32 +9,32 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Nội dung",
         dataIndex: "Content",
-        sorter: (a, b) => a.Content.localeCompare(b.Content),
+        sorter: true,
     },
     {
         title: "Loại câu hỏi",
         dataIndex: "Type",
-        sorter: (a, b) => a.Type.localeCompare(b.Type),
+        sorter: true,
     },
     {
         title: "Chủ đề",
         dataIndex: "SubSubject",
-        sorter: (a, b) => a.SubSubject.localeCompare(b.SubSubject),
+        sorter: true,
     },
     {
         title: "Trình độ",
         dataIndex: "EducationLevel",
-        sorter: (a, b) => a.EducationLevel.localeCompare(b.EducationLevel),
+        sorter: true,
     },
     {
         title: "Độ khó",
         dataIndex: "DifficultLevel",
-        sorter: (a, b) => a.DifficultLevel.localeCompare(b.DifficultLevel),
+        sorter: true,
     },
     {
         title: "Ngôn ngữ",
         dataIndex: "Language",
-        sorter: (a, b) => a.Language.localeCompare(b.Language),
+        sorter: true,
     },
 ];
 

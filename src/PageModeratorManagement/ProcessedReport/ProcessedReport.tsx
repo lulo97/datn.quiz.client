@@ -122,17 +122,17 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Lý do",
         dataIndex: "ReportReason",
-        sorter: (a, b) => a.ReportReason.localeCompare(b.ReportReason),
+        sorter: true,
     },
     {
         title: "Người báo cáo",
         dataIndex: "User",
-        sorter: (a, b) => a.User.localeCompare(b.User),
+        sorter: true,
     },
     {
         title: "Mã đối tượng báo cáo",
         dataIndex: "ParentId",
-        sorter: (a, b) => a.ParentId.localeCompare(b.ParentId),
+        sorter: true,
     },
     {
         title: "Ngày báo cáo dõi",

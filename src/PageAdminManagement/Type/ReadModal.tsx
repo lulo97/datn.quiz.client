@@ -1,4 +1,4 @@
-import { Achievement } from "@/InterfacesDatabase";
+import { Type } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -21,7 +21,7 @@ import {
 import { ModalSizeClass } from "@/Utils";
 
 interface ReadModalProps {
-    record: Achievement;
+    record: Type;
     fetchData: () => Promise<void>;
 }
 
@@ -42,16 +42,7 @@ export function ReadModal(props: ReadModalProps) {
                         <TableBody>
                             <TableRow>
                                 <TableHead>Mã:</TableHead>
-                                <TableCell>{record.AchievementId}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableHead>Ảnh:</TableHead>
-                                <TableCell>
-                                    <img
-                                        className="object-contain w-24"
-                                        src={`image/${record.ImageUrl}`}
-                                    ></img>
-                                </TableCell>
+                                <TableCell>{record.TypeId}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableHead>Tên:</TableHead>

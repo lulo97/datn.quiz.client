@@ -43,7 +43,7 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Người dùng",
         dataIndex: "FolloweeId",
-        sorter: (a, b) => a.FolloweeId.localeCompare(b.FolloweeId),
+        sorter: true,
     },
 ];
 

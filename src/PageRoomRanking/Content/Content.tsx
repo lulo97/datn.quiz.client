@@ -1,6 +1,4 @@
-import {
-    getRandomAvatar,
-} from "@/Utils";
+import { getRandomAvatar } from "@/Utils";
 import { AntdTable } from "@/components/antd_table/AntdTable";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
@@ -85,7 +83,7 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Người dùng",
         dataIndex: "Username",
-        sorter: (a, b) => a.Username.localeCompare(b.Username),
+        sorter: true,
         render: (_item, record, _index) => (
             <div className="w-fit flex gap-2 items-center">
                 <Avatar className="border">
@@ -99,17 +97,17 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Điểm",
         dataIndex: "Score",
-        sorter: (a, b) => a.Score - b.Score,
+        sorter: true,
     },
     {
         title: "Thời gian",
         dataIndex: "TimeTaken",
-        sorter: (a, b) => a.TimeTaken - b.TimeTaken,
+        sorter: true,
     },
     {
         title: "Số câu đúng",
         dataIndex: "TotalCorrectAnswer",
-        sorter: (a, b) => a.TotalCorrectAnswer - b.TotalCorrectAnswer,
+        sorter: true,
     },
 ];
 

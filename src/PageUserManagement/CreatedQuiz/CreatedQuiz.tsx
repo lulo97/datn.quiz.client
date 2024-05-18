@@ -10,17 +10,17 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Tên",
         dataIndex: "Name",
-        sorter: (a, b) => a.Name.localeCompare(b.Name),
+        sorter: true,
     },
     {
         title: "Trình độ",
         dataIndex: "EducationLevel",
-        sorter: (a, b) => a.EducationLevel.localeCompare(b.EducationLevel),
+        sorter: true,
     },
     {
         title: "Chủ đề",
         dataIndex: "Subject",
-        sorter: (a, b) => a.Subject.localeCompare(b.Subject),
+        sorter: true,
     },
 ];
 

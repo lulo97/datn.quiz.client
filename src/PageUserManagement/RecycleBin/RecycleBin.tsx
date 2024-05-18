@@ -9,7 +9,7 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Mã",
         dataIndex: "ItemId",
-        sorter: (a, b) => a.ItemId.localeCompare(b.ItemId),
+        sorter: true,
     },
 ];
 

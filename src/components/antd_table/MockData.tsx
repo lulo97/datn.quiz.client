@@ -85,14 +85,14 @@ export const columns: TableColumnsType<DataType> = [
         // specify the condition of filtering result
         // here is that finding the name started with `value`
         onFilter: (value, record) => record.name.indexOf(value as string) === 0,
-        sorter: (a, b) => a.name.length - b.name.length,
+        sorter: true,
         sortDirections: ["descend"],
     },
     {
         title: "Age",
         dataIndex: "age",
         defaultSortOrder: "descend",
-        sorter: (a, b) => a.age - b.age,
+        sorter: true,
     },
     {
         title: "Address",

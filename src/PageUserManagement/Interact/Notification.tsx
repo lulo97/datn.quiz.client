@@ -230,7 +230,7 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Người gửi",
         dataIndex: "SourceId",
-        sorter: (a, b) => a.SourceId.localeCompare(b.SourceId),
+        sorter: true,
     },
     {
         title: "Ngày tạo",
@@ -241,12 +241,12 @@ const columns: TableColumnsType<DataType> = [
     {
         title: "Tựa đề",
         dataIndex: "Name",
-        sorter: (a, b) => a.Name.localeCompare(b.Name),
+        sorter: true,
     },
     {
         title: "Nội dung",
         dataIndex: "Content",
-        sorter: (a, b) => a.Content.localeCompare(b.Content),
+        sorter: true,
     },
     {
         title: "Đã đọc",

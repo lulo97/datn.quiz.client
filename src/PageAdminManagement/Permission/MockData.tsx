@@ -21,18 +21,17 @@ export const columns: TableColumnsType<DataType> = [
     {
         title: "Tên",
         dataIndex: "Name",
-        sorter: (a, b) => a.Name.localeCompare(b.Name),
+        sorter: true,
     },
     {
         title: "Mô tả",
         dataIndex: "Description",
-        sorter: (a, b) => a.Description.localeCompare(b.Description),
+        sorter: true,
     },
     {
         title: "Ngày tạo",
         dataIndex: "CreateAt",
-        sorter: (a, b) =>
-            strToDate(a.CreateAt).getTime() - strToDate(b.CreateAt).getTime(),
+        sorter: true,
     },
 ];
 

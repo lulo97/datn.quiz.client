@@ -23,7 +23,7 @@ export const columns: TableColumnsType<DataType> = [
     {
         title: "Điểm",
         dataIndex: "Score",
-        sorter: (a, b) => a.Score - b.Score,
+        sorter: true,
         filters: [
             { text: "1", value: 1 },
             { text: "15", value: 15 },
@@ -35,7 +35,7 @@ export const columns: TableColumnsType<DataType> = [
     {
         title: "Mã đề",
         dataIndex: "QuizId",
-        sorter: (a, b) => a.QuizId.localeCompare(b.QuizId),
+        sorter: true,
         filterSearch: true,
         onFilter: (value, record) => record.QuizId.includes(value as string),
     },
