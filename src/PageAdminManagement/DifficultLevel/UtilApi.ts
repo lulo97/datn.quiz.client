@@ -1,7 +1,7 @@
-import { Achievement } from "@/InterfacesDatabase";
+import { DifficultLevel, EducationLevel } from "@/InterfacesDatabase";
 import { BACKEND_URL } from "@/Utils";
 
-const BACKEND_PAGE = "Achievements";
+const BACKEND_PAGE = "DifficultLevel";
 const API_URL = BACKEND_URL + BACKEND_PAGE;
 
 export async function getAll() {
@@ -16,7 +16,7 @@ export async function getAll() {
     }
 }
 
-export async function deleteOne(AchievementId: string) {
+export async function deleteOne(EducationLevelId: string) {
     try {
         const response = await fetch(API_URL, {
             method: "DELETE",
@@ -24,7 +24,7 @@ export async function deleteOne(AchievementId: string) {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ AchievementId: AchievementId }),
+            body: JSON.stringify({ EducationLevelId: EducationLevelId }),
         });
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
@@ -35,7 +35,7 @@ export async function deleteOne(AchievementId: string) {
     }
 }
 
-export async function updateOne(data: Achievement) {
+export async function updateOne(data: DifficultLevel) {
     try {
         const response = await fetch(API_URL, {
             method: "PUT",
@@ -55,7 +55,7 @@ export async function updateOne(data: Achievement) {
 }
 
 export async function createOne(
-    data: Omit<Achievement, "AchievementId" | "CreatedAt" | "UpdateAt">
+    data: Omit<EducationLevel, "EducationLevelId" | "CreatedAt" | "UpdateAt">
 ) {
     try {
         const response = await fetch(API_URL, {

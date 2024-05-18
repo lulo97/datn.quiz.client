@@ -1,4 +1,4 @@
-import { Permission } from "@/InterfacesDatabase";
+import { ReportReason } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -21,7 +21,7 @@ import {
 import { ModalSizeClass } from "@/Utils";
 
 interface ReadModalProps {
-    record: Permission;
+    record: ReportReason;
     fetchData: () => Promise<void>;
 }
 
@@ -42,7 +42,7 @@ export function ReadModal(props: ReadModalProps) {
                         <TableBody>
                             <TableRow>
                                 <TableHead>Mã:</TableHead>
-                                <TableCell>{record.PermissionId}</TableCell>
+                                <TableCell>{record.ReportReasonId}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableHead>Tên:</TableHead>

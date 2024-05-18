@@ -1,8 +1,20 @@
-import { Achievement } from "@/InterfacesDatabase";
+import { SubSubject } from "@/InterfacesDatabase";
 import { BACKEND_URL } from "@/Utils";
 
-const BACKEND_PAGE = "Achievements";
-const API_URL = BACKEND_URL + BACKEND_PAGE;
+const BACKEND_PAGE = "SubSubject"
+const API_URL = BACKEND_URL + BACKEND_PAGE
+
+export interface SubSubjectDetail extends SubSubject {
+    SubjectName: string;
+    SubjectDescription: string | null;
+    SubjectCreatedAt: string; // Assuming it's a string representing a date in ISO 8601 format
+    SubjectUpdatedAt: string; // Assuming it's a string representing a date in ISO 8601 format
+}
+
+export function toSubSubject(detail: SubSubjectDetail): SubSubject {
+    const { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdateAt } = detail;
+    return { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdateAt };
+}
 
 export async function getAll() {
     try {
@@ -16,7 +28,7 @@ export async function getAll() {
     }
 }
 
-export async function deleteOne(AchievementId: string) {
+export async function deleteOne(SubSubjectId: string) {
     try {
         const response = await fetch(API_URL, {
             method: "DELETE",
@@ -24,7 +36,7 @@ export async function deleteOne(AchievementId: string) {
                 Accept: "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ AchievementId: AchievementId }),
+            body: JSON.stringify({ SubSubjectId: SubSubjectId }),
         });
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
@@ -35,7 +47,7 @@ export async function deleteOne(AchievementId: string) {
     }
 }
 
-export async function updateOne(data: Achievement) {
+export async function updateOne(data: SubSubject) {
     try {
         const response = await fetch(API_URL, {
             method: "PUT",
@@ -55,7 +67,7 @@ export async function updateOne(data: Achievement) {
 }
 
 export async function createOne(
-    data: Omit<Achievement, "AchievementId" | "CreatedAt" | "UpdateAt">
+    data: Omit<SubSubject, "SubSubjectId" | "CreatedAt" | "UpdateAt">
 ) {
     try {
         const response = await fetch(API_URL, {

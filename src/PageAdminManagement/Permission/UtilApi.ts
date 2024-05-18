@@ -1,8 +1,8 @@
 import { Permission } from "@/InterfacesDatabase";
 import { BACKEND_URL } from "@/Utils";
 
-const BACKEND_PAGE = "permission"
-const API_URL = BACKEND_URL + BACKEND_PAGE
+const BACKEND_PAGE = "permission";
+const API_URL = BACKEND_URL + BACKEND_PAGE;
 
 export async function getAll() {
     try {
@@ -55,7 +55,7 @@ export async function updateOne(data: Permission) {
 }
 
 export async function createOne(
-    data: Omit<Permission, "PermissionId" | "CreatedAt">
+    data: Omit<Permission, "PermissionId" | "CreatedAt" | "UpdateAt">
 ) {
     try {
         const response = await fetch(API_URL, {

@@ -1,4 +1,3 @@
-import { Permission } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -19,9 +18,10 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { ModalSizeClass } from "@/Utils";
+import { SubSubjectDetail } from "./UtilApi";
 
 interface ReadModalProps {
-    record: Permission;
+    record: SubSubjectDetail;
     fetchData: () => Promise<void>;
 }
 
@@ -41,11 +41,11 @@ export function ReadModal(props: ReadModalProps) {
                     <Table>
                         <TableBody>
                             <TableRow>
-                                <TableHead>Mã:</TableHead>
-                                <TableCell>{record.PermissionId}</TableCell>
+                                <TableHead>Chủ đề:</TableHead>
+                                <TableCell>{record.SubjectName}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableHead>Tên:</TableHead>
+                                <TableHead>Chủ đề phụ:</TableHead>
                                 <TableCell>{record.Name}</TableCell>
                             </TableRow>
                             <TableRow>
@@ -56,6 +56,12 @@ export function ReadModal(props: ReadModalProps) {
                                 <TableHead>Ngày tạo:</TableHead>
                                 <TableCell>
                                     {record.CreatedAt.toString()}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableHead>Ngày sửa:</TableHead>
+                                <TableCell>
+                                    {record.UpdateAt.toString()}
                                 </TableCell>
                             </TableRow>
                         </TableBody>

@@ -33,6 +33,8 @@ export type QuestionTableDataType = {
 };
 
 import { ColumnDef, Table as TanstackTable } from "@tanstack/react-table";
+import { TablePaginationConfig } from "antd";
+import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/es/table/interface";
 
 export type QuestionTableProps = TanstackTable<QuestionTableDataType>;
 
@@ -74,3 +76,5 @@ export interface NavbarProps {
     handleMenubarClick: (event: MenuClickTarget) => void,
     menu_names: MenuItem[]
 }
+
+export type OnChangeAntd = (pagination: TablePaginationConfig, filters: Record<string, FilterValue | null>, sorter: SorterResult<any> | SorterResult<any>[], extra: TableCurrentDataSource<any>) => void

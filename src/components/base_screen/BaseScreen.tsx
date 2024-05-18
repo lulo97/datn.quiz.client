@@ -3,17 +3,20 @@ import { TableColumnsType } from "antd";
 import { getObjectId } from "@/Utils";
 import { Pagination, Table } from "antd";
 import { useState } from "react";
+import { OnChangeAntd } from "@/Interfaces";
 
 interface BaseScreen {
     columns: TableColumnsType<any>, 
     data: any[], 
     defaultPageSize: number, 
     screen_title: string, 
-    addModal: JSX.Element
+    addModal: JSX.Element,
+    onChange?: OnChangeAntd,
+    filter?: JSX.Element,
 }
 
 export function BaseScreen(props: BaseScreen) {
-    const { columns, data, defaultPageSize, screen_title, addModal } = props;
+    const { columns, data, defaultPageSize, screen_title, addModal, onChange, filter } = props;
     const [currentPage, setCurrentPage] = useState(1);
     const pageSize = defaultPageSize;
 
@@ -27,7 +30,11 @@ export function BaseScreen(props: BaseScreen) {
             <CardHeader className="h-1/6">
                 <div className="flex justify-between">
                     <CardTitle>{screen_title}</CardTitle>
+                    <div className="flex gap-4">
+                    {filter}
                     {addModal}
+                    </div>
+
                 </div>
             </CardHeader>
             <CardContent className="h-5/6">
@@ -39,6 +46,7 @@ export function BaseScreen(props: BaseScreen) {
                         showSorterTooltip={{ target: "sorter-icon" }}
                         pagination={false}
                         rowKey={(_record) => getObjectId()}
+                        onChange={onChange}
                     />
                     <Pagination
                         className="mr-5 mb-5 mt-2"

@@ -1,4 +1,4 @@
-import { Achievement } from "@/InterfacesDatabase";
+import { ReportReason } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -15,14 +15,13 @@ import { useState } from "react";
 import { updateOne } from "./UtilApi";
 
 interface DeleteModalProps {
-    record: Achievement;
+    record: ReportReason;
     fetchData: () => Promise<void>;
 }
 
 export function UpdateModal(props: DeleteModalProps) {
     const { record, fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [_file, setFile] = useState<File | null>(null);
     const [data, setData] = useState(record);
 
     const handleAddClick = async () => {
@@ -30,14 +29,6 @@ export function UpdateModal(props: DeleteModalProps) {
         await updateOne(data)
         await fetchData()
         setIsOpen(false)
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const fileList = e.target.files;
-        if (fileList && fileList.length > 0) {
-            const selectedFile = fileList[0];
-            setFile(selectedFile);
-        }
     };
 
     return (
@@ -51,7 +42,7 @@ export function UpdateModal(props: DeleteModalProps) {
                 </DialogHeader>
                 <div>
                     <div>
-                        <Label>Id: </Label>{record.AchievementId}
+                        <Label>Id: </Label>{record.ReportReasonId}
                     </div>
                     <div>
                         <Label>Tên</Label>
@@ -73,19 +64,6 @@ export function UpdateModal(props: DeleteModalProps) {
                                 })
                             }
                         />
-                    </div>
-                    <div>
-                        <Label>Đường dẫn ảnh</Label>
-                        <Input
-                            value={data.ImageUrl}
-                            onChange={(e) =>
-                                setData({ ...data, ImageUrl: e.target.value })
-                            }
-                        />
-                    </div>
-                    <div>
-                        <Label>File Ảnh</Label>
-                        <Input type="file" onChange={handleFileChange} />
                     </div>
                 </div>
                 <DialogFooter>

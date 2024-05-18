@@ -1,16 +1,16 @@
-import { AddModal } from "./AddModal";
-import { useState, useEffect, useMemo } from "react";
+import { toDDMMYYY } from "@/Utils";
 import { TableColumnsType } from "antd";
-import { Achievement as IAchievement } from "@/InterfacesDatabase";
-import { BaseScreen } from "@/components/base_screen/BaseScreen";
-import { getAll } from "./UtilApi";
+import { BaseScreen } from "../../components/base_screen/BaseScreen";
+import { useState, useEffect, useMemo } from "react";
+import { AddModal } from "./AddModal";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
 import { UpdateModal } from "./UpdateModal";
-import { toDDMMYYY } from "@/Utils";
+import { getAll } from "./UtilApi";
+import { EducationLevel as IEducationLevel } from "@/InterfacesDatabase";
 
-export function Achievement() {
-    const [data, setData] = useState<IAchievement[]>([]);
+export function EducationLevel() {
+    const [data, setData] = useState<IEducationLevel[]>([]);
 
     async function fetchData() {
         const data_fetched = await getAll();
@@ -25,18 +25,8 @@ export function Achievement() {
         console.log(data.length);
     }, [data]);
 
-    const columns: TableColumnsType<IAchievement> = useMemo(
+    const columns: TableColumnsType<IEducationLevel> = useMemo(
         () => [
-            {
-                title: "Ảnh",
-                dataIndex: "ImageUrl",
-                render: (_item, record, _index) => (
-                    <img
-                        className="object-contain w-8"
-                        src={`public/image/${record.ImageUrl}`}
-                    ></img>
-                ),
-            },
             {
                 title: "Tên",
                 dataIndex: "Name",
@@ -75,10 +65,9 @@ export function Achievement() {
         ],
         [fetchData]
     );
-
     return (
         <BaseScreen
-            screen_title="Thành tựu"
+            screen_title="Trình độ câu hỏi"
             columns={columns}
             data={data}
             defaultPageSize={5}

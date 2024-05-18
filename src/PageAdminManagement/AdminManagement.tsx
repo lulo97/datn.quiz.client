@@ -1,16 +1,16 @@
 import { General } from "./General/General";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { Achievement } from "./Achivement/Achivement";
 import { Permission } from "./Permission/Permission";
-import { Difficult } from "./Question/Difficult";
-import { EducationLevel } from "./Question/EducationLevel";
-import { Language } from "./Question/Language";
-import { SubSubject } from "./Question/SubSubject";
-import { Subject } from "./Question/Subject";
-import { ReportReason } from "./Report/ReportReason";
-import { ReportTarget } from "./Report/ReportTarget";
+import { DifficultLevel } from "./DifficultLevel/DifficultLevel";
+import { EducationLevel } from "./EducationLevel/EducationLevel";
+import { Language } from "./Language/Language";
+import { SubSubject } from "./SubSubject/SubSubject";
+import { Subject } from "./Subject/Subject";
+import { ReportReason } from "./ReportReason/ReportReason";
+import { ReportTarget } from "./ReportTarget/ReportTarget";
 import { Role } from "./Role/Role";
-import { Type } from "./Question/Type";
+import { Type } from "./Type/Type";
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
 import { Navbar } from "@/components/navbar/Navbar";
 import { findMenuItemByName } from "@/Utils";
@@ -25,7 +25,7 @@ export const menu_names: MenuItem[] = [
             { name: "Chủ đề phụ", element: <SubSubject /> },
             { name: "Loại câu hỏi", element: <Type /> },
             { name: "Ngôn ngữ", element: <Language /> },
-            { name: "Độ khó", element: <Difficult /> },
+            { name: "Độ khó", element: <DifficultLevel /> },
         ],
     },
     { name: "Thành tựu", element: <Achievement /> },
@@ -53,13 +53,6 @@ export function AdminManagement() {
             setCurMenuItem(found_menu_name);
         }
     }
-
-    useEffect(
-        function () {
-            console.log(curMenuItem);
-        },
-        [curMenuItem]
-    );
 
     return (
         <div className="flex bg-gray-200 h-fit min-h-screen">

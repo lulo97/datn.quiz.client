@@ -1,4 +1,4 @@
-import { Achievement } from "@/InterfacesDatabase";
+import { Subject } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -11,33 +11,40 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PenBox } from "lucide-react";
-import { useState } from "react";
-import { updateOne } from "./UtilApi";
-
+import { useEffect, useState } from "react";
+import { SubSubjectDetail, toSubSubject, updateOne } from "./UtilApi";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 interface DeleteModalProps {
-    record: Achievement;
+    record: SubSubjectDetail;
     fetchData: () => Promise<void>;
 }
+import { getAll as getAllSubjectApi } from "../Subject/UtilApi";
 
 export function UpdateModal(props: DeleteModalProps) {
     const { record, fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [_file, setFile] = useState<File | null>(null);
-    const [data, setData] = useState(record);
+    const [data, setData] = useState(toSubSubject(record));
+    const [subjects, setSubjects] = useState<Subject[]>([]);
+
+    async function fetchSubjects() {
+        setSubjects(await getAllSubjectApi());
+    }
+
+    useEffect(() => {
+        fetchSubjects();
+    }, []);
 
     const handleAddClick = async () => {
-        if (data.Name == "") return
-        await updateOne(data)
-        await fetchData()
-        setIsOpen(false)
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const fileList = e.target.files;
-        if (fileList && fileList.length > 0) {
-            const selectedFile = fileList[0];
-            setFile(selectedFile);
-        }
+        if (data.Name == "") return;
+        await updateOne(data);
+        await fetchData();
+        setIsOpen(false);
     };
 
     return (
@@ -51,10 +58,30 @@ export function UpdateModal(props: DeleteModalProps) {
                 </DialogHeader>
                 <div>
                     <div>
-                        <Label>Id: </Label>{record.AchievementId}
+                        <Label>Id: </Label>
+                        {data.SubSubjectId}
                     </div>
+                    <Select
+                        onValueChange={(value) =>
+                            setData({ ...data, SubjectId: value })
+                        }
+                    >
+                        <SelectTrigger>
+                            <SelectValue placeholder={record.SubjectName} />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {subjects.map((ele) => (
+                                <SelectItem
+                                    key={ele.SubjectId}
+                                    value={ele.SubjectId}
+                                >
+                                    {ele.Name}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <div>
-                        <Label>Tên</Label>
+                        <Label>Chủ đề phụ</Label>
                         <Input
                             value={data.Name}
                             onChange={(e) =>
@@ -73,19 +100,6 @@ export function UpdateModal(props: DeleteModalProps) {
                                 })
                             }
                         />
-                    </div>
-                    <div>
-                        <Label>Đường dẫn ảnh</Label>
-                        <Input
-                            value={data.ImageUrl}
-                            onChange={(e) =>
-                                setData({ ...data, ImageUrl: e.target.value })
-                            }
-                        />
-                    </div>
-                    <div>
-                        <Label>File Ảnh</Label>
-                        <Input type="file" onChange={handleFileChange} />
                     </div>
                 </div>
                 <DialogFooter>

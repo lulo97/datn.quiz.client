@@ -22,9 +22,8 @@ export function Permission() {
     }, []);
 
     useEffect(() => {
-        console.log(data);
+        console.log(data.length);
     }, [data]);
-
 
     const columns: TableColumnsType<IPermission> = useMemo(
         () => [
@@ -38,7 +37,7 @@ export function Permission() {
                 title: "Mô tả",
                 dataIndex: "Description",
                 sorter: (a, b) => a.Description.localeCompare(b.Description),
-                render: (item, record, index) => (
+                render: (_item, record, _index) => (
                     <div className="line-clamp-1">{record.Description}</div>
                 ),
             },
@@ -48,7 +47,7 @@ export function Permission() {
                 sorter: (a, b) =>
                     new Date(a.CreatedAt).getTime() -
                     new Date(b.CreatedAt).getTime(),
-                render: (item, record, index) => toDDMMYYY(record.CreatedAt),
+                render: (_item, record, _index) => toDDMMYYY(record.CreatedAt),
                 width: "15%",
             },
             {

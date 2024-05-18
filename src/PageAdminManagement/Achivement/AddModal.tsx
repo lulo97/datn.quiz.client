@@ -18,7 +18,7 @@ interface AddModalProps {
 
 export function AddModal(props: AddModalProps) {
     const { fetchData } = props
-    const [file, setFile] = useState<File | null>(null);
+    const [_file, setFile] = useState<File | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const [data, setData] = useState({
         Name: "",

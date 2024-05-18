@@ -8,17 +8,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { Eye } from "lucide-react";
 import { useState } from "react";
 
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
-    TableHeader,
     TableRow,
 } from "@/components/ui/table";
 import { ModalSizeClass } from "@/Utils";
@@ -29,7 +26,7 @@ interface ReadModalProps {
 }
 
 export function ReadModal(props: ReadModalProps) {
-    const { record, fetchData } = props;
+    const { record } = props;
     const [isOpen, setIsOpen] = useState(false);
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>

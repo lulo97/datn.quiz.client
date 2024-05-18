@@ -1,4 +1,3 @@
-import { Achievement } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -10,49 +9,38 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PenBox } from "lucide-react";
 import { useState } from "react";
-import { updateOne } from "./UtilApi";
+import { createOne } from "./UtilApi";
 
-interface DeleteModalProps {
-    record: Achievement;
-    fetchData: () => Promise<void>;
+interface AddModalProps {
+    fetchData: () => Promise<void>
 }
 
-export function UpdateModal(props: DeleteModalProps) {
-    const { record, fetchData } = props;
+export function AddModal(props: AddModalProps) {
+    const { fetchData } = props
     const [isOpen, setIsOpen] = useState(false);
-    const [_file, setFile] = useState<File | null>(null);
-    const [data, setData] = useState(record);
+    const [data, setData] = useState({
+        Name: "",
+        Description: "",
+    });
 
     const handleAddClick = async () => {
         if (data.Name == "") return
-        await updateOne(data)
+        await createOne(data)
         await fetchData()
         setIsOpen(false)
     };
 
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const fileList = e.target.files;
-        if (fileList && fileList.length > 0) {
-            const selectedFile = fileList[0];
-            setFile(selectedFile);
-        }
-    };
-
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}> 
             <DialogTrigger asChild>
-                <PenBox className="text-green-500 hover:text-green-600" />
+                <Button>Thêm</Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Sửa</DialogTitle>
+                    <DialogTitle>Thêm</DialogTitle>
                 </DialogHeader>
                 <div>
-                    <div>
-                        <Label>Id: </Label>{record.AchievementId}
-                    </div>
                     <div>
                         <Label>Tên</Label>
                         <Input
@@ -74,22 +62,9 @@ export function UpdateModal(props: DeleteModalProps) {
                             }
                         />
                     </div>
-                    <div>
-                        <Label>Đường dẫn ảnh</Label>
-                        <Input
-                            value={data.ImageUrl}
-                            onChange={(e) =>
-                                setData({ ...data, ImageUrl: e.target.value })
-                            }
-                        />
-                    </div>
-                    <div>
-                        <Label>File Ảnh</Label>
-                        <Input type="file" onChange={handleFileChange} />
-                    </div>
                 </div>
                 <DialogFooter>
-                    <Button onClick={handleAddClick}>Sửa</Button>{" "}
+                    <Button onClick={handleAddClick}>Thêm</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
