@@ -19,8 +19,10 @@ import { SelectSubSubject } from "./SelectSubSubject";
 import { SelectSubject } from "./SelectSubject";
 import { SelectType } from "./SelectType";
 import { SwitchPenaltyAllow } from "./SwitchPenaltyAllow";
+import { CreateQuestionProps } from "../Utils";
 
-export function ModalSetting() {
+export function ModalSetting(props: CreateQuestionProps) {
+    //const { state, dispatch } = props;
     return (
         <div>
             <Dialog>

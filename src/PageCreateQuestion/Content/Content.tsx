@@ -1,20 +1,13 @@
-import { CreateQuestionData } from "@/Interfaces";
+import { CreateQuestionProps } from "../Utils";
 import { Answer } from "./Answer";
 
-export function Content(props: CreateQuestionData) {
-    const { answers, deleteAnswer, updateAnswerContent, updateAnswerCorrect } =
-        props;
+export function Content(props: CreateQuestionProps) {
+    const { state, dispatch } = props;
 
     return (
         <div className="flex flex-col gap-1">
-            {answers.map((ele) => (
-                <Answer
-                    key={ele.id}
-                    answer={ele}
-                    deleteAnswer={deleteAnswer}
-                    updateAnswerContent={updateAnswerContent}
-                    updateAnswerCorrect={updateAnswerCorrect}
-                />
+            {state.Answers.map((ele) => (
+                <Answer key={ele.Id} answer={ele} state={state} dispatch={dispatch} />
             ))}
         </div>
     );

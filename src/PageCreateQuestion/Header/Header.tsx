@@ -1,32 +1,35 @@
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { CreateQuestionData } from "@/Interfaces";
-import { ModalAI } from "@/PageCreateQuestion/ModalAI/ModalAI";
-import { ModalSetting } from "@/PageCreateQuestion/ModalSetting/ModalSetting";
-import { ModalMedia } from "@/PageCreateQuestion/ModalMedia/ModalMedia";
-import { SelectType } from "../ModalSetting/SelectType";
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
+import katex from "katex";
+import "katex/dist/katex.min.css";
+import { ActionType, CreateQuestionProps } from "../Utils";
 
-export function Header(props: CreateQuestionData) {
-    const { setQuestion } = props;
+const editorOptions = {
+    buttonList: [
+        ["undo", "redo"],
+        ["removeFormat"],
+        ["bold", "underline", "italic", "fontSize"],
+        ["fontColor", "hiliteColor"],
+        ["align", "horizontalRule", "list"],
+        ["showBlocks", "codeView"],
+        ["math"],
+    ],
+    katex: katex,
+};
+
+export function Header(props: CreateQuestionProps) {
+    const { state, dispatch } = props;
+    function handleChangeQuestion(content: string) {
+        dispatch({ type: ActionType.ChangeQuestion, payload: content });
+    }
     return (
-        <div className="flex gap-5 justify-between">
-            <div className="w-3/4 flex gap-5 justify-between">
-                <div className="w-3/4">
-                    <Label htmlFor="content">Câu hỏi</Label>
-                    <Input
-                        type="text"
-                        id="content"
-                        placeholder="Nội dung câu hỏi..."
-                        onChange={(event) => setQuestion(event.target.value)}
-                    />
-                </div>
-
-                <SelectType />
-            </div>
-
-            <ModalMedia />
-            <ModalSetting />
-            <ModalAI />
+        <div>
+            <Label htmlFor="content">Câu hỏi</Label>
+            <SunEditor
+                setOptions={editorOptions}
+                onChange={(content) => handleChangeQuestion(content)}
+            />
         </div>
     );
 }

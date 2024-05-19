@@ -13,26 +13,29 @@ import { useState } from "react";
 import { createOne } from "./UtilApi";
 
 interface AddModalProps {
-    fetchData: () => Promise<void>
+    fetchData: () => Promise<void>;
+}
+
+const inital_data = {
+    Name: "",
+    Description: "",
 }
 
 export function AddModal(props: AddModalProps) {
-    const { fetchData } = props
+    const { fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState({
-        Name: "",
-        Description: "",
-    });
+    const [data, setData] = useState(inital_data);
 
     const handleAddClick = async () => {
-        if (data.Name == "") return
-        await createOne(data)
-        await fetchData()
-        setIsOpen(false)
+        if (data.Name == "") return;
+        await createOne(data);
+        await fetchData();
+        setData(inital_data);
+        setIsOpen(false);
     };
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}> 
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button>Thêm</Button>
             </DialogTrigger>

@@ -14,6 +14,7 @@ import { Type } from "./Type/Type";
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
 import { Navbar } from "@/components/navbar/Navbar";
 import { findMenuItemByName } from "@/Utils";
+import { Point } from "./Point/Point";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
@@ -26,6 +27,7 @@ export const menu_names: MenuItem[] = [
             { name: "Loại câu hỏi", element: <Type /> },
             { name: "Ngôn ngữ", element: <Language /> },
             { name: "Độ khó", element: <DifficultLevel /> },
+            { name: "Điểm", element: <Point /> },
         ],
     },
     { name: "Thành tựu", element: <Achievement /> },

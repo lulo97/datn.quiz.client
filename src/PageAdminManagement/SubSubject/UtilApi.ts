@@ -1,9 +1,9 @@
 import { SubSubject } from "@/InterfacesDatabase";
-import { BACKEND_URL } from "@/Utils";
+import { MY_HEADER, BACKEND_URL } from "@/Utils";
 import { FilterValue } from "antd/es/table/interface";
 
-const BACKEND_PAGE = "SubSubject"
-const API_URL = BACKEND_URL + BACKEND_PAGE
+const BACKEND_PAGE = "SubSubject";
+const API_URL = BACKEND_URL + BACKEND_PAGE;
 
 export interface SubSubjectDetail extends SubSubject {
     SubjectName: string;
@@ -13,24 +13,34 @@ export interface SubSubjectDetail extends SubSubject {
 }
 
 export function toSubSubject(detail: SubSubjectDetail): SubSubject {
-    const { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdateAt } = detail;
+    const { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdateAt } =
+        detail;
     return { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdateAt };
 }
 
 export interface GetAllOptions {
     filterFields?: FilterValue | string[]; // Array of filter fields
     sortField?: string; // Field to sort by
-    sortDirection?: 'asc' | 'desc'; // Sorting direction
+    sortDirection?: "asc" | "desc"; // Sorting direction
 }
 
-function buildFilterQueryParams(filterFields: FilterValue | string[]): string[] {
-    return filterFields.map(field => `fields=${encodeURIComponent(field.toString())}`);
+function buildFilterQueryParams(
+    filterFields: FilterValue | string[]
+): string[] {
+    return filterFields.map(
+        (field) => `fields=${encodeURIComponent(field.toString())}`
+    );
 }
 
-function buildSortQueryParams(sortField: string, sortDirection: string): string[] {
-    return [`sortField=${encodeURIComponent(sortField)}`, `sortDirection=${sortDirection}`];
+function buildSortQueryParams(
+    sortField: string,
+    sortDirection: string
+): string[] {
+    return [
+        `sortField=${encodeURIComponent(sortField)}`,
+        `sortDirection=${sortDirection}`,
+    ];
 }
-
 
 export async function getAll(options?: GetAllOptions) {
     let url = API_URL;
@@ -44,8 +54,8 @@ export async function getAll(options?: GetAllOptions) {
         if (sortField && sortDirection) {
             queryParams.push(...buildSortQueryParams(sortField, sortDirection));
         }
-        const joinedQuery = queryParams.join('&');
-        url += (joinedQuery.length > 0) ? `?${joinedQuery}` : '';
+        const joinedQuery = queryParams.join("&");
+        url += joinedQuery.length > 0 ? `?${joinedQuery}` : "";
     }
 
     try {
@@ -63,10 +73,7 @@ export async function deleteOne(SubSubjectId: string) {
     try {
         const response = await fetch(API_URL, {
             method: "DELETE",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
+            headers: MY_HEADER,
             body: JSON.stringify({ SubSubjectId: SubSubjectId }),
         });
         if (!response.ok) {
@@ -82,10 +89,7 @@ export async function updateOne(data: SubSubject) {
     try {
         const response = await fetch(API_URL, {
             method: "PUT",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
+            headers: MY_HEADER,
             body: JSON.stringify(data),
         });
         if (!response.ok) {
@@ -103,10 +107,7 @@ export async function createOne(
     try {
         const response = await fetch(API_URL, {
             method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
+            headers: MY_HEADER,
             body: JSON.stringify(data),
         });
         if (!response.ok) {

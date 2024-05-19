@@ -11,31 +11,32 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { createOne } from "./UtilApi";
+import { Switch } from "@/components/ui/switch";
 
 interface AddModalProps {
-    fetchData: () => Promise<void>
+    fetchData: () => Promise<void>;
 }
 
 const inital_data = {
-    Name: "",
-    Description: "",
+    Value: 10,
+    IsPenalty: false,
 }
 
 export function AddModal(props: AddModalProps) {
-    const { fetchData } = props
+    const { fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [data, setData] = useState(inital_data);
 
     const handleAddClick = async () => {
-        if (data.Name == "") return
-        await createOne(data)
-        await fetchData()
-        setData(inital_data)
-        setIsOpen(false)
+        if (data.Value == null) return;
+        await createOne(data);
+        await fetchData();
+        setData(inital_data);
+        setIsOpen(false);
     };
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}> 
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button>Thêm</Button>
             </DialogTrigger>
@@ -45,24 +46,25 @@ export function AddModal(props: AddModalProps) {
                 </DialogHeader>
                 <div>
                     <div>
-                        <Label>Tên</Label>
+                        <Label>Giá trị điểm</Label>
                         <Input
-                            value={data.Name}
-                            onChange={(e) =>
-                                setData({ ...data, Name: e.target.value })
-                            }
-                        />
-                    </div>
-                    <div>
-                        <Label>Mô tả</Label>
-                        <Input
-                            value={data.Description}
+                            value={data.Value}
                             onChange={(e) =>
                                 setData({
                                     ...data,
-                                    Description: e.target.value,
+                                    Value: Number(e.target.value),
                                 })
                             }
+                        />
+                    </div>
+                    <div className="flex items-center gap-3 mt-5">
+                        <Label>Là điểm phạt</Label>
+                        <Switch
+                            checked={data.IsPenalty}
+                            onCheckedChange={() =>
+                                setData({ ...data, IsPenalty: !data.IsPenalty })
+                            }
+                            className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-slate-200"
                         />
                     </div>
                 </div>

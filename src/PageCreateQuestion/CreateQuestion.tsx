@@ -4,58 +4,29 @@ import {
     CardFooter,
     CardHeader,
 } from "@/components/ui/card";
-import { useEffect, useState } from "react";
-import { CardParentClass, initialAnswer } from "@/Utils";
-import { Answer, CreateQuestionData } from "@/Interfaces";
+import { useReducer } from "react";
+import { CardParentClass } from "@/Utils";
 import { Content } from "./Content/Content";
 import { Footer } from "./Footer/Footer";
 import { Header } from "./Header/Header";
-import { AnswersStateController } from "./Content/AnswersManipulate";
+import { inital_state } from "./Utils";
+import { reducer } from "./Reducer";
 
 export function CreateQuestion() {
-    const [answers, setAnswers] = useState<Answer[]>([
-        initialAnswer(),
-        initialAnswer(),
-        initialAnswer(),
-        initialAnswer(),
-    ]);
 
-    const [question, setQuestion] = useState<string>("");
-
-    useEffect(
-        function () {
-            console.log(answers);
-            console.log(question);
-        },
-        [answers, question]
-    );
-
-    const asc = new AnswersStateController(answers, setAnswers);
-
-    const data: CreateQuestionData = {
-        answers: answers,
-        setAnswers: setAnswers,
-
-        question: question,
-        setQuestion: setQuestion,
-
-        addAnswer: asc.addAnswer,
-        deleteAnswer: asc.deleteAnswer,
-        updateAnswerContent: asc.updateAnswerContent,
-        updateAnswerCorrect: asc.updateAnswerCorrect,
-    };
+    const [state, dispatch] = useReducer(reducer, inital_state);
 
     return (
         <div className={CardParentClass}>
             <Card>
                 <CardHeader>
-                    <Header {...data} />
+                    <Header state={state} dispatch={dispatch} />
                 </CardHeader>
                 <CardContent>
-                    <Content {...data} />
+                    <Content state={state} dispatch={dispatch} />
                 </CardContent>
                 <CardFooter>
-                    <Footer {...data} />
+                    <Footer state={state} dispatch={dispatch} />
                 </CardFooter>
             </Card>
         </div>

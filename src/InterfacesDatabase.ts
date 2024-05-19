@@ -32,6 +32,8 @@ export interface Question {
     EducationLevelId: string;
     DifficultLevelId: string;
     LanguageId: string;
+    PointId: string;
+    PenaltyPointId: string;
 }
 
 export interface QuestionInformation {
@@ -41,8 +43,6 @@ export interface QuestionInformation {
     AudioUrl: string;
     Explaination: string;
     Time: number;
-    Point: number;
-    PenaltyPoint: number;
     CorrectUserCount: number;
     IncorrectUserCount: number;
     IsDeleted: boolean;
@@ -287,6 +287,14 @@ export interface ReportReason {
     ReportReasonId: string;
     Name: string;
     Description: string;
+    CreatedAt: string;
+    UpdateAt: string;
+}
+
+export interface Point {
+    PointId: string;
+    Value: number;
+    IsPenalty: boolean;
     CreatedAt: string;
     UpdateAt: string;
 }

@@ -7,9 +7,14 @@ import {
     SelectItem,
 } from "@/components/ui/select";
 
-interface SettingSelectProps {
+export interface SettingSelectOption {
+    value: string;
+    label: string;
+}
+
+export interface SettingSelectProps {
     placeholder: string;
-    options: { value: string; label: string }[];
+    options: SettingSelectOption[];
     defaultValue: string;
 }
 
@@ -20,7 +25,7 @@ export function SettingSelect(props: SettingSelectProps) {
             <Label>{placeholder}</Label>
             <Select defaultValue={defaultValue}>
                 <SelectTrigger>
-                    <SelectValue placeholder={placeholder} />
+                    <SelectValue placeholder={options[0]?.label} />
                 </SelectTrigger>
                 <SelectContent>
                     {options.map((option) => (

@@ -12,8 +12,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload } from "lucide-react";
+import { ActionType, CreateQuestionProps } from "../Utils";
 
-export function ModalMedia() {
+export function ModalMedia(props: CreateQuestionProps) {
+    const { state, dispatch } = props;
+
+    function handleUploadImage(file: File | undefined) {
+        dispatch({ type: ActionType.UploadImage, payload: file });
+    }
+    function handleUrlImageChange(url: string) {
+        dispatch({ type: ActionType.UrlImageChange, payload: url });
+    }
+    function handleUploadAudio(file: File | undefined) {
+        dispatch({ type: ActionType.UploadAudio, payload: file });
+    }
+    function handleUrlAudioChange(url: string) {
+        dispatch({ type: ActionType.UrlAudioChange, payload: url });
+    }
+
     return (
         <div>
             <Dialog>
@@ -38,11 +54,37 @@ export function ModalMedia() {
                         </div>
 
                         <div className="w-1/3 flex flex-col gap-3">
-                            <Label htmlFor="picture">Ảnh</Label>
-                            <Input id="picture" type="file" />
+                            <Label>Ảnh</Label>
+                            <Input
+                                type="file"
+                                onChange={(e) =>
+                                    handleUploadImage(
+                                        e.currentTarget.files?.[0]
+                                    )
+                                }
+                            />
+                            <Input
+                                placeholder="Đường dẫn ảnh..."
+                                onChange={(e) =>
+                                    handleUrlImageChange(e.currentTarget.value)
+                                }
+                            />
 
-                            <Label htmlFor="audio">Âm thanh</Label>
-                            <Input id="audio" type="file" />
+                            <Label>Âm thanh</Label>
+                            <Input
+                                type="file"
+                                onChange={(e) =>
+                                    handleUploadAudio(
+                                        e.currentTarget.files?.[0]
+                                    )
+                                }
+                            />
+                            <Input
+                                placeholder="Đường dẫn âm thanh..."
+                                onChange={(e) =>
+                                    handleUrlAudioChange(e.currentTarget.value)
+                                }
+                            />
 
                             <audio className="w-full" controls>
                                 <source

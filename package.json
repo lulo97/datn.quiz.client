@@ -30,6 +30,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
+    "katex": "^0.16.10",
     "lodash": "^4.17.21",
     "lucide-react": "^0.376.0",
     "react": "^18.2.0",
@@ -39,10 +40,12 @@
     "react-router-dom": "^6.23.0",
     "react-stately": "^3.31.0",
     "react-webcam": "^7.2.0",
+    "suneditor-react": "^3.6.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/katex": "^0.16.7",
     "@types/lodash": "^4.17.1",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",

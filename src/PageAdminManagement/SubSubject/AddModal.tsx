@@ -25,6 +25,12 @@ interface AddModalProps {
     fetchData: () => Promise<void>;
 }
 
+const inital_data = {
+    SubjectId: "",
+    Name: "",
+    Description: "",
+}
+
 export function AddModal(props: AddModalProps) {
     const { fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
@@ -38,16 +44,13 @@ export function AddModal(props: AddModalProps) {
         fetchSubjects();
     }, []);
 
-    const [data, setData] = useState({
-        SubjectId: "",
-        Name: "",
-        Description: "",
-    });
+    const [data, setData] = useState(inital_data);
 
     const handleAddClick = async () => {
         if (data.Name == "" || data.SubjectId == "") return;
         await createOne(data);
         await fetchData();
+        setData(inital_data);
         setIsOpen(false);
     };
 

@@ -1,8 +1,8 @@
 import { Type } from "@/InterfacesDatabase";
-import { BACKEND_URL } from "@/Utils";
+import { MY_HEADER, BACKEND_URL } from "@/Utils";
 
-const BACKEND_PAGE = "Type"
-const API_URL = BACKEND_URL + BACKEND_PAGE
+const BACKEND_PAGE = "Type";
+const API_URL = BACKEND_URL + BACKEND_PAGE;
 
 export async function getAll() {
     try {
@@ -20,10 +20,7 @@ export async function deleteOne(TypeId: string) {
     try {
         const response = await fetch(API_URL, {
             method: "DELETE",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
+            headers: MY_HEADER,
             body: JSON.stringify({ TypeId: TypeId }),
         });
         if (!response.ok) {
@@ -39,10 +36,7 @@ export async function updateOne(data: Type) {
     try {
         const response = await fetch(API_URL, {
             method: "PUT",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
+            headers: MY_HEADER,
             body: JSON.stringify(data),
         });
         if (!response.ok) {
@@ -60,10 +54,7 @@ export async function createOne(
     try {
         const response = await fetch(API_URL, {
             method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
+            headers: MY_HEADER,
             body: JSON.stringify(data),
         });
         if (!response.ok) {

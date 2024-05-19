@@ -84,3 +84,8 @@ export function toDDMMYYY(date_str: string) {
     const formattedMonth = String(month).padStart(2, "0");
     return `${formattedDay}/${formattedMonth}/${year}`;
 }
+
+export const MY_HEADER = {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+}

@@ -1,15 +1,31 @@
-import { SettingSelect } from "./SettingSelect";
-
-const education_level = {
-    placeholder: "Trình độ học vấn",
-    options: [
-        { value: "lop1", label: "Lớp 1" },
-        { value: "lop2", label: "Lớp 2" },
-        { value: "lop3", label: "Lớp 3" },
-    ],
-    defaultValue: "lop3",
-};
+import { EducationLevel } from "@/InterfacesDatabase";
+import { SettingSelect, SettingSelectProps } from "./SettingSelect";
+import { getAll } from "@/PageAdminManagement/EducationLevel/UtilApi";
+import { useState, useEffect } from "react";
 
 export function SelectEducationLevel() {
-    return <SettingSelect {...education_level} />;
+    const [data, setData] = useState<SettingSelectProps>({
+        placeholder: "",
+        options: [],
+        defaultValue: ""
+    })
+
+    async function fetchData() {
+        const data: EducationLevel[] = await getAll()
+        const select_data: SettingSelectProps = {
+            placeholder: "Trình độ học vấn",
+            options: data.map(ele => ({
+                value: ele.EducationLevelId,
+                label: ele.Name
+            })),
+            defaultValue: data[0].EducationLevelId,
+        }
+        setData(select_data)
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    return <SettingSelect {...data} />;
 }
