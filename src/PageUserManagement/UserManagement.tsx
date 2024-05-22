@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
 import { Navbar } from "@/components/navbar/Navbar";
 import { CreatedQuiz } from "./CreatedQuiz/CreatedQuiz";
@@ -51,13 +51,6 @@ export function UserManagement() {
             setCurMenuItem(found_menu_name);
         }
     }
-
-    useEffect(
-        function () {
-            console.log(curMenuItem);
-        },
-        [curMenuItem]
-    );
 
     return (
         <div className="flex bg-gray-200 h-fit min-h-screen">

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "../../components/ui/label";
-import { useState } from "react";
 import { ModalAI } from "@/PageCreateQuestion/ModalAI/ModalAI";
 import { ModalSetting } from "@/PageCreateQuestion/ModalSetting/ModalSetting";
 import { ModalMedia } from "@/PageCreateQuestion/ModalMedia/ModalMedia";
@@ -10,6 +9,7 @@ import "suneditor/dist/css/suneditor.min.css";
 import katex from "katex";
 import "katex/dist/katex.min.css";
 import { ActionType, CreateQuestionProps } from "../Utils";
+import { CreateButton } from "./CreateButton";
 
 const editorOptions = {
     buttonList: [
@@ -28,24 +28,22 @@ export function Footer(props: CreateQuestionProps) {
     const { state, dispatch } = props;
 
     function handleChangeExplain(content: string) {
-        dispatch({type: ActionType.ChangeExplain, payload: content})
+        dispatch({ type: ActionType.ChangeExplain, payload: content });
     }
 
     function handleToggleExplain() {
-        dispatch({type: ActionType.ToggleExplain, payload: null})
+        dispatch({ type: ActionType.ToggleExplain, payload: null });
     }
 
     function handleAddAnswer() {
-        dispatch({type: ActionType.AddAnswer, payload: null})
+        dispatch({ type: ActionType.AddAnswer, payload: null });
     }
 
-    function handlePostCreate() {
-        dispatch({type: ActionType.PostCreate, payload: null})
-    }
+
 
     return (
         <div className="flex flex-col justify-between w-full gap-5">
-            {state.Explain.IsVisible && (
+            {state.ExplainAllow && (
                 <div>
                     <Label>Giải thích</Label>
                     <SunEditor
@@ -64,13 +62,13 @@ export function Footer(props: CreateQuestionProps) {
                     <div className="flex items-center gap-1">
                         <Label>Giải thích</Label>
                         <Switch
-                            checked={state.Explain.IsVisible}
+                            checked={state.ExplainAllow}
                             onCheckedChange={handleToggleExplain}
                             className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-slate-200"
                         />
                     </div>
                 </div>
-                <Button onClick={handlePostCreate}>Xác nhận tạo</Button>
+                <CreateButton state={state} dispatch={dispatch} />
             </div>
         </div>
     );

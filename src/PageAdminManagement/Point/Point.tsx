@@ -1,4 +1,4 @@
-import { strToDate, toDDMMYYY } from "@/Utils";
+import { toDDMMYYY } from "@/Utils";
 import { TableColumnsType } from "antd";
 import { BaseScreen } from "../../components/base_screen/BaseScreen";
 import { useState, useEffect, useMemo } from "react";

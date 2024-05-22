@@ -16,6 +16,18 @@ export async function getAll() {
     }
 }
 
+export async function getOne(TypeId: string) {
+    try {
+        const response = await fetch(API_URL + `/${TypeId}`);
+        if (!response.ok) {
+            console.error("Failed to fetch data:", response.statusText);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
 export async function deleteOne(TypeId: string) {
     try {
         const response = await fetch(API_URL, {

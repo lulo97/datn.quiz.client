@@ -12,7 +12,7 @@ const columns: TableColumnsType<DataType> = [
         sorter: true,
     },
     {
-        title: "Loại câu hỏi",
+        title: "Loại trắc nghiệm",
         dataIndex: "Type",
         sorter: true,
     },

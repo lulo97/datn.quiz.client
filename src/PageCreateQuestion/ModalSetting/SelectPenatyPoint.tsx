@@ -1,15 +1,60 @@
-import { SettingSelect } from "./SettingSelect";
+import { useEffect, useState } from "react";
+import { Point } from "@/InterfacesDatabase";
+import { getAll } from "@/PageAdminManagement/Point/UtilApi";
+import { ActionType, CreateQuestionProps } from "../Utils";
+import { Label } from "@/components/ui/label";
+import {
+    Select,
+    SelectTrigger,
+    SelectValue,
+    SelectContent,
+    SelectItem,
+} from "@/components/ui/select";
+import { getObjectId } from "@/Utils";
+export function SelectPenaltyPoint(props: CreateQuestionProps) {
+    const { state, dispatch } = props;
+    const [options, setOptions] = useState<Point[]>();
 
-const penaty_point = {
-    placeholder: "Điểm phạt",
-    options: [
-        { value: "10", label: "10" },
-        { value: "50", label: "50" },
-        { value: "100", label: "100" },
-    ],
-    defaultValue: "10",
-};
+    async function fetchData() {
+        const records: Point[] = await getAll();
+        setOptions(records.filter(ele => ele.IsPenalty == true));
+    }
 
-export function SelectPenaltyPoint() {
-    return <SettingSelect {...penaty_point} />;
+    function handleChange(value: string) {
+        dispatch({
+            type: ActionType.PenaltyPointChange,
+            payload: JSON.parse(value),
+        });
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    if (!state.PenaltyAllow) {
+        return <div></div>
+    }
+
+    return (
+        <div>
+            <Label>Điểm phạt</Label>
+            <Select onValueChange={handleChange}>
+                <SelectTrigger>
+                    <SelectValue placeholder={state.PenaltyPoint?.Value || "Điểm phạt..."}  />
+                </SelectTrigger>
+                <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
+                    {options &&
+                        options.map((option) => (
+                            <SelectItem
+                                className="break-words"
+                                key={getObjectId()}
+                                value={JSON.stringify(option)}
+                            >
+                                {option.Value}
+                            </SelectItem>
+                        ))}
+                </SelectContent>
+            </Select>
+        </div>
+    );
 }

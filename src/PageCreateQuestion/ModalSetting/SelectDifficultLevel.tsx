@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { SubSubject } from "@/InterfacesDatabase";
-import { getBySubject } from "@/PageAdminManagement/SubSubject/UtilApi";
+import { DifficultLevel } from "@/InterfacesDatabase";
+import { getAll } from "@/PageAdminManagement/DifficultLevel/UtilApi";
 import { ActionType, CreateQuestionProps } from "../Utils";
 import { Label } from "@/components/ui/label";
 import {
@@ -10,45 +10,40 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
-export function SelectSubSubject(props: CreateQuestionProps) {
+
+export function SelectDifficultLevel(props: CreateQuestionProps) {
     const { state, dispatch } = props;
-    const [options, setOptions] = useState<SubSubject[]>();
+    const [options, setOptions] = useState<DifficultLevel[]>();
 
     async function fetchData() {
-        if (state.Subject) {
-            const records: SubSubject[] = await getBySubject(
-                state.Subject.SubjectId
-            );
-            setOptions(records);
-        }
+        const records: DifficultLevel[] = await getAll();
+        setOptions(records);
     }
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.SubSubjectChange,
+            type: ActionType.DifficultLevelChange,
             payload: JSON.parse(value),
         });
     }
 
     useEffect(() => {
         fetchData();
-    }, [state.Subject]);
+    }, []);
 
     return (
         <div>
-            <Label>Chủ đề phụ</Label>
+            <Label>Độ khó</Label>
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
-                    <SelectValue
-                        placeholder={state.SubSubject?.Name || "Chủ đề phụ..."}
-                    />
+                    <SelectValue placeholder={state.DifficultLevel?.Name || "Độ khó..."}  />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
                     {options &&
                         options.map((option) => (
                             <SelectItem
                                 className="break-words"
-                                key={option.SubSubjectId}
+                                key={option.DifficultLevelId}
                                 value={JSON.stringify(option)}
                             >
                                 {option.Name}

@@ -69,6 +69,18 @@ export async function getAll(options?: GetAllOptions) {
     }
 }
 
+export async function getBySubject(SubjectId: string) {
+    try {
+        const response = await fetch(API_URL + `/GetBySubject/${SubjectId}`);
+        if (!response.ok) {
+            console.error("Failed to fetch data:", response.statusText);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
 export async function deleteOne(SubSubjectId: string) {
     try {
         const response = await fetch(API_URL, {

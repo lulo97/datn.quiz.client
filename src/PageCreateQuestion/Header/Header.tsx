@@ -19,7 +19,7 @@ const editorOptions = {
 };
 
 export function Header(props: CreateQuestionProps) {
-    const { state, dispatch } = props;
+    const { dispatch } = props;
     function handleChangeQuestion(content: string) {
         dispatch({ type: ActionType.ChangeQuestion, payload: content });
     }

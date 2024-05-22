@@ -10,8 +10,8 @@ import {
 import { Settings } from "lucide-react";
 
 import { ModalSizeClass } from "@/Utils";
-import { SelectDifficult } from "./SelectDifficult";
-import { SelectEducationLevel } from "./SelectEducation";
+import { SelectDifficultLevel } from "./SelectDifficultLevel";
+import { SelectEducationLevel } from "./SelectEducationLevel";
 import { SelectLanguage } from "./SelectLanguge";
 import { SelectPenaltyPoint } from "./SelectPenatyPoint";
 import { SelectPoint } from "./SelectPoint";
@@ -22,7 +22,7 @@ import { SwitchPenaltyAllow } from "./SwitchPenaltyAllow";
 import { CreateQuestionProps } from "../Utils";
 
 export function ModalSetting(props: CreateQuestionProps) {
-    //const { state, dispatch } = props;
+    const { state, dispatch } = props;
     return (
         <div>
             <Dialog>
@@ -37,19 +37,28 @@ export function ModalSetting(props: CreateQuestionProps) {
                     </DialogHeader>
 
                     <div className="grid grid-cols-2 gap-2">
-                        <SelectType />
-                        <SelectDifficult />
-                        <SelectLanguage />
-                        <SelectEducationLevel />
-                        <SelectSubject />
-                        <SelectSubSubject />
-                        <SelectPenaltyPoint />
-                        <SelectPoint />
-                        <SwitchPenaltyAllow />
+                        <SelectType state={state} dispatch={dispatch} />
+                        <SelectDifficultLevel
+                            state={state}
+                            dispatch={dispatch}
+                        />
+                        <SelectLanguage state={state} dispatch={dispatch} />
+                        <SelectEducationLevel
+                            state={state}
+                            dispatch={dispatch}
+                        />
+                        <SelectSubject state={state} dispatch={dispatch} />
+                        <SelectSubSubject state={state} dispatch={dispatch} />
+                        <SelectPoint state={state} dispatch={dispatch} />
+                        <SelectPenaltyPoint state={state} dispatch={dispatch} />
                     </div>
 
                     <DialogFooter>
-                        <div className="w-full flex justify-end">
+                        <div className="flex justify-between w-full">
+                            <SwitchPenaltyAllow
+                                state={state}
+                                dispatch={dispatch}
+                            />
                             <Button>Đóng</Button>
                         </div>
                     </DialogFooter>

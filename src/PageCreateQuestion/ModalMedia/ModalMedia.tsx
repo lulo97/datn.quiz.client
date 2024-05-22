@@ -1,4 +1,4 @@
-import { ModalSizeClass, getRandomWallpaper } from "@/Utils";
+import { ModalSizeClass } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -9,26 +9,15 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Upload } from "lucide-react";
-import { ActionType, CreateQuestionProps } from "../Utils";
+import { CreateQuestionProps } from "../Utils";
+import { MyAudio } from "./MyAudio";
+import { MyImage } from "./MyImage";
+import { InputAudio } from "./InputAudio";
+import { InputImage } from "./InputImage";
 
 export function ModalMedia(props: CreateQuestionProps) {
     const { state, dispatch } = props;
-
-    function handleUploadImage(file: File | undefined) {
-        dispatch({ type: ActionType.UploadImage, payload: file });
-    }
-    function handleUrlImageChange(url: string) {
-        dispatch({ type: ActionType.UrlImageChange, payload: url });
-    }
-    function handleUploadAudio(file: File | undefined) {
-        dispatch({ type: ActionType.UploadAudio, payload: file });
-    }
-    function handleUrlAudioChange(url: string) {
-        dispatch({ type: ActionType.UrlAudioChange, payload: url });
-    }
 
     return (
         <div>
@@ -46,52 +35,11 @@ export function ModalMedia(props: CreateQuestionProps) {
                         </DialogDescription>
                     </DialogHeader>
                     <div className="flex gap-2">
-                        <div className="border rounded-lg w-2/3 flex justify-center">
-                            <img
-                                className="object-contain h-[350px]"
-                                src={getRandomWallpaper()}
-                            ></img>
-                        </div>
-
-                        <div className="w-1/3 flex flex-col gap-3">
-                            <Label>Ảnh</Label>
-                            <Input
-                                type="file"
-                                onChange={(e) =>
-                                    handleUploadImage(
-                                        e.currentTarget.files?.[0]
-                                    )
-                                }
-                            />
-                            <Input
-                                placeholder="Đường dẫn ảnh..."
-                                onChange={(e) =>
-                                    handleUrlImageChange(e.currentTarget.value)
-                                }
-                            />
-
-                            <Label>Âm thanh</Label>
-                            <Input
-                                type="file"
-                                onChange={(e) =>
-                                    handleUploadAudio(
-                                        e.currentTarget.files?.[0]
-                                    )
-                                }
-                            />
-                            <Input
-                                placeholder="Đường dẫn âm thanh..."
-                                onChange={(e) =>
-                                    handleUrlAudioChange(e.currentTarget.value)
-                                }
-                            />
-
-                            <audio className="w-full" controls>
-                                <source
-                                    src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg"
-                                    type="audio/ogg"
-                                ></source>
-                            </audio>
+                        <MyImage state={state} dispatch={dispatch} />
+                        <div className="w-1/3 flex flex-col justify-between">
+                            <InputImage state={state} dispatch={dispatch} />
+                            <InputAudio state={state} dispatch={dispatch} />
+                            <MyAudio state={state} dispatch={dispatch} />
                         </div>
                     </div>
                     <DialogFooter>

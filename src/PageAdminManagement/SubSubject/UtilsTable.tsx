@@ -77,7 +77,8 @@ export function getOnChange(
         sorter
     ) => {
         if (Array.isArray(sorter)) return;
-        const { column, field, order, columnKey } = sorter;
+        //column, field, order, columnKey
+        const { field, order } = sorter;
         const options: GetAllOptions = {}
         if (field && order) {
             const _order = order == "ascend" ? "asc" : "desc";

@@ -11,9 +11,9 @@ export const columns = [
         header: "Câu hỏi",
     }),
     columnHelper.accessor("Type", {
-        header: "Loại câu hỏi",
+        header: "Loại trắc nghiệm",
     }),
-    columnHelper.accessor("Difficult", {
+    columnHelper.accessor("DifficultLevel", {
         header: "Độ khó",
     }),
     columnHelper.accessor("Subject", {

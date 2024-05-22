@@ -41,13 +41,12 @@ export interface QuestionInformation {
     Content: string;
     ImageUrl: string;
     AudioUrl: string;
-    Explaination: string;
-    Time: number;
+    Explanation: string;
     CorrectUserCount: number;
     IncorrectUserCount: number;
     IsDeleted: boolean;
     IsAllowPenalty: boolean;
-    CreateAt: string;
+    CreatedAt: string;
     UpdateAt: string;
 }
 
@@ -66,6 +65,7 @@ export interface QuizInformation {
     Attempts: number;
     IsPublic: boolean;
     IsDeleted: boolean;
+    Time: number;
     IsVerified: boolean;
     UserVerify: string;
     VerifiedAt: string;

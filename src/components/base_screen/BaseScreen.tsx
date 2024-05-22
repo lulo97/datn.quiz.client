@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TableColumnsType } from "antd";
 import { getObjectId } from "@/Utils";
 import { Pagination, Table } from "antd";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { OnChangeAntd } from "@/Interfaces";
 
 interface BaseScreen {
@@ -10,7 +10,7 @@ interface BaseScreen {
     data: any[];
     defaultPageSize: number;
     screen_title: string;
-    addModal: JSX.Element;
+    addModal?: JSX.Element;
     onChange?: OnChangeAntd;
     filter?: JSX.Element;
 }

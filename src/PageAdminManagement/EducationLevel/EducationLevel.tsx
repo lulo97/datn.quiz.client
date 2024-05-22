@@ -65,7 +65,7 @@ export function EducationLevel() {
     );
     return (
         <BaseScreen
-            screen_title="Trình độ câu hỏi"
+            screen_title="Trình độ học vấn"
             columns={columns}
             data={data}
             defaultPageSize={5}

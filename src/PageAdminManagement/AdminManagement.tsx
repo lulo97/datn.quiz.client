@@ -1,5 +1,5 @@
 import { General } from "./General/General";
-import {  useState } from "react";
+import { useState } from "react";
 import { Achievement } from "./Achivement/Achivement";
 import { Permission } from "./Permission/Permission";
 import { DifficultLevel } from "./DifficultLevel/DifficultLevel";
@@ -21,13 +21,13 @@ export const menu_names: MenuItem[] = [
     {
         name: "Câu hỏi",
         child: [
-            { name: "Trình độ", element: <EducationLevel /> },
+            { name: "Trình độ học vấn", element: <EducationLevel /> },
             { name: "Chủ đề", element: <Subject /> },
             { name: "Chủ đề phụ", element: <SubSubject /> },
-            { name: "Loại câu hỏi", element: <Type /> },
+            { name: "Loại trắc nghiệm", element: <Type /> },
             { name: "Ngôn ngữ", element: <Language /> },
             { name: "Độ khó", element: <DifficultLevel /> },
-            { name: "Điểm", element: <Point /> },
+            { name: "Điểm số", element: <Point /> },
         ],
     },
     { name: "Thành tựu", element: <Achievement /> },

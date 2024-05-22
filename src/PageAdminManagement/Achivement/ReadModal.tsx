@@ -18,7 +18,7 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { ModalSizeClass } from "@/Utils";
+import { ModalSizeClass, getImgPath } from "@/Utils";
 
 interface ReadModalProps {
     record: Achievement;
@@ -49,7 +49,7 @@ export function ReadModal(props: ReadModalProps) {
                                 <TableCell>
                                     <img
                                         className="object-contain w-24"
-                                        src={`image/${record.ImageUrl}`}
+                                        src={getImgPath(record.ImageUrl)}
                                     ></img>
                                 </TableCell>
                             </TableRow>

@@ -2,7 +2,7 @@ export type QuestionTableDataType = {
     STT: number;
     Content: string;
     Type: string;
-    Difficult: string;
+    DifficultLevel: string;
     Subject: string;
     SubSubject: string;
     EducationLevel: string;
@@ -10,7 +10,11 @@ export type QuestionTableDataType = {
 
 import { ColumnDef, Table as TanstackTable } from "@tanstack/react-table";
 import { TablePaginationConfig } from "antd";
-import { FilterValue, SorterResult, TableCurrentDataSource } from "antd/es/table/interface";
+import {
+    FilterValue,
+    SorterResult,
+    TableCurrentDataSource,
+} from "antd/es/table/interface";
 
 export type QuestionTableProps = TanstackTable<QuestionTableDataType>;
 
@@ -46,11 +50,18 @@ export interface MenuItem {
     child?: MenuItem[];
 }
 
-export type MenuClickTarget = React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<HTMLButtonElement, MouseEvent>
+export type MenuClickTarget =
+    | React.MouseEvent<HTMLDivElement, MouseEvent>
+    | React.MouseEvent<HTMLButtonElement, MouseEvent>;
 
 export interface NavbarProps {
-    handleMenubarClick: (event: MenuClickTarget) => void,
-    menu_names: MenuItem[]
+    handleMenubarClick: (event: MenuClickTarget) => void;
+    menu_names: MenuItem[];
 }
 
-export type OnChangeAntd = (pagination: TablePaginationConfig, filters: Record<string, FilterValue | null>, sorter: SorterResult<any> | SorterResult<any>[], extra: TableCurrentDataSource<any>) => void
+export type OnChangeAntd = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<any> | SorterResult<any>[],
+    extra: TableCurrentDataSource<any>
+) => void;

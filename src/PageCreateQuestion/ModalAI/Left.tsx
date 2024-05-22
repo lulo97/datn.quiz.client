@@ -2,7 +2,7 @@ import { Card, CardHeader } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { SelectQuestionNumber } from "./SelectQuestionNumber";
-import { SelectDifficult } from "../ModalSetting/SelectDifficult";
+import { SelectDifficultLevel } from "../ModalSetting/SelectDifficultLevel";
 import { SelectLanguage } from "../ModalSetting/SelectLanguge";
 
 export function Left() {
@@ -22,7 +22,7 @@ export function Left() {
                             <SelectQuestionNumber />
                         </div>
                         <div className="flex-grow">
-                            <SelectDifficult />
+                            <SelectDifficultLevel />
                         </div>
                         <div className="flex-grow">
                             <SelectLanguage />

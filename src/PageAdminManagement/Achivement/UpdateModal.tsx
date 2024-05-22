@@ -23,13 +23,16 @@ export function UpdateModal(props: DeleteModalProps) {
     const { record, fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [_file, setFile] = useState<File | null>(null);
-    const [data, setData] = useState(record);
+    const [data, setData] = useState({
+        ...record,
+        Description: record.Description || "",
+    });
 
     const handleAddClick = async () => {
-        if (data.Name == "") return
-        await updateOne(data)
-        await fetchData()
-        setIsOpen(false)
+        if (data.Name == "") return;
+        await updateOne(data);
+        await fetchData();
+        setIsOpen(false);
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +54,8 @@ export function UpdateModal(props: DeleteModalProps) {
                 </DialogHeader>
                 <div>
                     <div>
-                        <Label>Id: </Label>{record.AchievementId}
+                        <Label>Id: </Label>
+                        {record.AchievementId}
                     </div>
                     <div>
                         <Label>Tên</Label>

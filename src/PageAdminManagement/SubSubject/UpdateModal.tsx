@@ -20,16 +20,19 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-interface DeleteModalProps {
+interface UpdateModalProps {
     record: SubSubjectDetail;
     fetchData: () => Promise<void>;
 }
 import { getAll as getAllSubjectApi } from "../Subject/UtilApi";
 
-export function UpdateModal(props: DeleteModalProps) {
+export function UpdateModal(props: UpdateModalProps) {
     const { record, fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState(toSubSubject(record));
+    const [data, setData] = useState({
+        ...toSubSubject(record),
+        Description: record.Description || "",
+    });
     const [subjects, setSubjects] = useState<Subject[]>([]);
 
     async function fetchSubjects() {

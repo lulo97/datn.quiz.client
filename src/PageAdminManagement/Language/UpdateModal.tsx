@@ -22,7 +22,10 @@ interface DeleteModalProps {
 export function UpdateModal(props: DeleteModalProps) {
     const { record, fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState(record);
+    const [data, setData] = useState({
+        ...record,
+        Description: record.Description || "",
+    });
 
     const handleAddClick = async () => {
         if (data.Name == "") return;

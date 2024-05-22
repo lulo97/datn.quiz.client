@@ -22,13 +22,16 @@ interface DeleteModalProps {
 export function UpdateModal(props: DeleteModalProps) {
     const { record, fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState(record);
+    const [data, setData] = useState({
+        ...record,
+        Description: record.Description || "",
+    });
 
     const handleAddClick = async () => {
-        if (data.Name == "") return
-        await updateOne(data)
-        await fetchData()
-        setIsOpen(false)
+        if (data.Name == "") return;
+        await updateOne(data);
+        await fetchData();
+        setIsOpen(false);
     };
 
     return (
@@ -42,7 +45,8 @@ export function UpdateModal(props: DeleteModalProps) {
                 </DialogHeader>
                 <div>
                     <div>
-                        <Label>Id: </Label>{record.RoleId}
+                        <Label>Id: </Label>
+                        {record.RoleId}
                     </div>
                     <div>
                         <Label>Tên</Label>

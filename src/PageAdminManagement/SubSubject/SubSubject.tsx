@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { BaseScreen } from "../../components/base_screen/BaseScreen";
 import { AddModal } from "./AddModal";
 import { SubSubjectDetail, getAll } from "./UtilApi";

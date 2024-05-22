@@ -7,7 +7,12 @@ export function Content(props: CreateQuestionProps) {
     return (
         <div className="flex flex-col gap-1">
             {state.Answers.map((ele) => (
-                <Answer key={ele.Id} answer={ele} state={state} dispatch={dispatch} />
+                <Answer
+                    key={ele.AnswerId}
+                    answer={ele}
+                    state={state}
+                    dispatch={dispatch}
+                />
             ))}
         </div>
     );

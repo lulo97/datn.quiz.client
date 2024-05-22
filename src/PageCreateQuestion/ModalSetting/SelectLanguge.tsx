@@ -1,31 +1,55 @@
+import { useEffect, useState } from "react";
 import { Language } from "@/InterfacesDatabase";
-import { SettingSelect, SettingSelectProps } from "./SettingSelect";
 import { getAll } from "@/PageAdminManagement/Language/UtilApi";
-import { useState, useEffect } from "react";
-
-export function SelectLanguage() {
-    const [data, setData] = useState<SettingSelectProps>({
-        placeholder: "",
-        options: [],
-        defaultValue: ""
-    })
+import { ActionType, CreateQuestionProps } from "../Utils";
+import { Label } from "@/components/ui/label";
+import {
+    Select,
+    SelectTrigger,
+    SelectValue,
+    SelectContent,
+    SelectItem,
+} from "@/components/ui/select";
+export function SelectLanguage(props: CreateQuestionProps) {
+    const { state, dispatch } = props;
+    const [options, setOptions] = useState<Language[]>();
 
     async function fetchData() {
-        const data: Language[] = await getAll()
-        const select_data: SettingSelectProps = {
-            placeholder: "Ngôn ngữ",
-            options: data.map(ele => ({
-                value: ele.LanguageId,
-                label: ele.Name
-            })),
-            defaultValue: data[0].LanguageId,
-        }
-        setData(select_data)
+        const records: Language[] = await getAll();
+        setOptions(records);
+    }
+
+    function handleChange(value: string) {
+        dispatch({
+            type: ActionType.LanguageChange,
+            payload: JSON.parse(value),
+        });
     }
 
     useEffect(() => {
-        fetchData()
-    }, [])
+        fetchData();
+    }, []);
 
-    return <SettingSelect {...data} />;
+    return (
+        <div>
+            <Label>Ngôn ngữ</Label>
+            <Select onValueChange={handleChange}>
+                <SelectTrigger>
+                    <SelectValue placeholder={state.Language?.Name || "Ngôn ngữ..."}  />
+                </SelectTrigger>
+                <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
+                    {options &&
+                        options.map((option) => (
+                            <SelectItem
+                                className="break-words"
+                                key={option.LanguageId}
+                                value={JSON.stringify(option)}
+                            >
+                                {option.Name}
+                            </SelectItem>
+                        ))}
+                </SelectContent>
+            </Select>
+        </div>
+    );
 }

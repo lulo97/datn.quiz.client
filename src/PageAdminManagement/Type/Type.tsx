@@ -1,7 +1,6 @@
-import { strToDate, toDDMMYYY } from "@/Utils";
+import { toDDMMYYY } from "@/Utils";
 import { TableColumnsType } from "antd";
 import { BaseScreen } from "../../components/base_screen/BaseScreen";
-import { ActionColumn } from "@/components/action_column/ActionColumn";
 import { useState, useEffect, useMemo } from "react";
 import { AddModal } from "./AddModal";
 import { DeleteModal } from "./DeleteModal";
@@ -66,12 +65,11 @@ export function Type() {
     );
     return (
         <BaseScreen
-            screen_title="Thể loại câu hỏi"
+            screen_title="Thể Loại trắc nghiệm"
             columns={columns}
             data={data}
             defaultPageSize={5}
             addModal={<AddModal fetchData={fetchData} />}
-
         />
     );
 }

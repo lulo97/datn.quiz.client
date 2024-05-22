@@ -1,7 +1,7 @@
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
 import { findMenuItemByName } from "@/Utils";
 import { Navbar } from "@/components/navbar/Navbar";
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import { General } from "./General/General";
 import { ProcessedReport } from "./ProcessedReport/ProcessedReport";
 import { NeedProcessReport } from "./NeedProcessReport/NeedProcessReport";
@@ -27,13 +27,6 @@ export function ModeratorManagement() {
             setCurMenuItem(found_menu_name);
         }
     }
-
-    useEffect(
-        function () {
-            console.log(curMenuItem);
-        },
-        [curMenuItem]
-    );
 
     return (
         <div className="flex bg-gray-200 h-fit min-h-screen">

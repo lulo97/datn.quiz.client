@@ -7,7 +7,7 @@ import { getAll } from "./UtilApi";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
 import { UpdateModal } from "./UpdateModal";
-import { toDDMMYYY } from "@/Utils";
+import { getImgPath, toDDMMYYY } from "@/Utils";
 
 export function Achievement() {
     const [data, setData] = useState<IAchievement[]>([]);
@@ -33,7 +33,7 @@ export function Achievement() {
                 render: (_item, record, _index) => (
                     <img
                         className="object-contain w-8"
-                        src={`image/${record.ImageUrl}`}
+                        src={getImgPath(record.ImageUrl)}
                     ></img>
                 ),
             },
