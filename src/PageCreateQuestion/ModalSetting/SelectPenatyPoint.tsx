@@ -17,12 +17,12 @@ export function SelectPenaltyPoint(props: CreateQuestionProps) {
 
     async function fetchData() {
         const records: Point[] = await getAll();
-        setOptions(records.filter(ele => ele.IsPenalty == true));
+        setOptions(records.filter((ele) => ele.IsPenalty == true));
     }
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.PenaltyPointChange,
+            type: ActionType.ChangePenaltyPoint,
             payload: JSON.parse(value),
         });
     }
@@ -32,7 +32,7 @@ export function SelectPenaltyPoint(props: CreateQuestionProps) {
     }, []);
 
     if (!state.PenaltyAllow) {
-        return <div></div>
+        return <div></div>;
     }
 
     return (
@@ -40,7 +40,11 @@ export function SelectPenaltyPoint(props: CreateQuestionProps) {
             <Label>Điểm phạt</Label>
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
-                    <SelectValue placeholder={state.PenaltyPoint?.Value || "Điểm phạt..."}  />
+                    <SelectValue
+                        placeholder={
+                            state.PenaltyPoint?.Value || "Điểm phạt..."
+                        }
+                    />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
                     {options &&

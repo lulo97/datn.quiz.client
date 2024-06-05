@@ -7,7 +7,7 @@ import { Answer as IAnswer } from "@/InterfacesDatabase";
 interface AnswerProps extends CreateQuestionProps {
     answer: IAnswer;
 }
-import { ToastContainer, toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -15,31 +15,10 @@ export function Answer(props: AnswerProps) {
     const { answer, state, dispatch } = props;
 
     function handleToggleAnswer(id: string) {
-        const correctAnswersCount = state.Answers.filter(
-            (ele) => ele.IsCorrect
-        ).length;
-
-        if (
-            correctAnswersCount === 1 &&
-            state.Answers.find((ele) => ele.AnswerId === id)?.IsCorrect
-        ) {
-            // If there is only one correct answer and it is the one being toggled, do not allow the toggle
-            toast.warning("Cần ít nhất một lựa chọn đúng", {delay: 100});
-            return;
-        }
         dispatch({ type: ActionType.ToggleAnswer, payload: id });
     }
 
     function handleChangeAnswer(AnswerId: string, NewContent: string) {
-        const isContentUnique = state.Answers.every((ele) => {
-            if (ele.Content == "" && NewContent == "") return true;
-            return ele.AnswerId === AnswerId || ele.Content !== NewContent;
-        });
-
-        if (!isContentUnique) {
-            toast.warning("Hai lựa chọn giống nhau", {delay: 100});
-            return;
-        }
         dispatch({
             type: ActionType.ChangeAnswer,
             payload: {
@@ -53,22 +32,22 @@ export function Answer(props: AnswerProps) {
         dispatch({ type: ActionType.DeleteAnswer, payload: id });
     }
 
+    const MCQCheckBoxClass =
+        "data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500";
+    const SCQCheckBoxClass =
+        "rounded-full data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500";
+    const CheckBoxClass =
+        state.Type?.Name == "Nhiều đáp án"
+            ? MCQCheckBoxClass
+            : SCQCheckBoxClass;
+
     return (
         <div className="flex gap-5 justify-between items-center">
-            {state.Type?.Name == "Nhiều đáp án" && (
-                <Checkbox
-                    checked={answer.IsCorrect}
-                    onClick={() => handleToggleAnswer(answer.AnswerId)}
-                    className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
-                />
-            )}
-            {state.Type?.Name == "Một đáp án" && (
-                <Checkbox
-                    checked={answer.IsCorrect}
-                    onClick={() => handleToggleAnswer(answer.AnswerId)}
-                    className="rounded-full data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500"
-                />
-            )}
+            <Checkbox
+                checked={answer.IsCorrect}
+                onClick={() => handleToggleAnswer(answer.AnswerId)}
+                className={CheckBoxClass}
+            />
 
             <Input
                 type="text"
@@ -92,18 +71,6 @@ export function Answer(props: AnswerProps) {
             >
                 <X />
             </Button>
-            <ToastContainer
-                position="top-right"
-                autoClose={1500}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable={false}
-                pauseOnHover
-                theme="light"
-            />
         </div>
     );
 }

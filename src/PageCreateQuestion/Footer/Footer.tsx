@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "../../components/ui/label";
-import { ModalAI } from "@/PageCreateQuestion/ModalAI/ModalAI";
 import { ModalSetting } from "@/PageCreateQuestion/ModalSetting/ModalSetting";
 import { ModalMedia } from "@/PageCreateQuestion/ModalMedia/ModalMedia";
 import SunEditor from "suneditor-react";
@@ -18,14 +17,17 @@ const editorOptions = {
         ["bold", "underline", "italic", "fontSize"],
         ["fontColor", "hiliteColor"],
         ["align", "horizontalRule", "list"],
-        ["showBlocks", "codeView"],
         ["math"],
     ],
     katex: katex,
 };
 
-export function Footer(props: CreateQuestionProps) {
-    const { state, dispatch } = props;
+interface FooterProps extends CreateQuestionProps {
+    is_in_quiz?: boolean
+}
+
+export function Footer(props: FooterProps) {
+    const { state, dispatch, is_in_quiz } = props;
 
     function handleChangeExplain(content: string) {
         dispatch({ type: ActionType.ChangeExplain, payload: content });
@@ -39,14 +41,13 @@ export function Footer(props: CreateQuestionProps) {
         dispatch({ type: ActionType.AddAnswer, payload: null });
     }
 
-
-
     return (
         <div className="flex flex-col justify-between w-full gap-5">
             {state.ExplainAllow && (
                 <div>
                     <Label>Giải thích</Label>
                     <SunEditor
+                        setContents={state.ExplainContent || ""}
                         setOptions={editorOptions}
                         onChange={(content) => handleChangeExplain(content)}
                     />
@@ -58,7 +59,6 @@ export function Footer(props: CreateQuestionProps) {
                     <Button onClick={handleAddAnswer}>Thêm</Button>
                     <ModalMedia state={state} dispatch={dispatch} />
                     <ModalSetting state={state} dispatch={dispatch} />
-                    <ModalAI />
                     <div className="flex items-center gap-1">
                         <Label>Giải thích</Label>
                         <Switch
@@ -68,7 +68,8 @@ export function Footer(props: CreateQuestionProps) {
                         />
                     </div>
                 </div>
-                <CreateButton state={state} dispatch={dispatch} />
+                {!is_in_quiz && <CreateButton state={state} dispatch={dispatch} />}
+                {is_in_quiz && <Button>Thêm vào đề</Button>}
             </div>
         </div>
     );

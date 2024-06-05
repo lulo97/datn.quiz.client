@@ -15,7 +15,7 @@ import { ModalSettingContent } from "./ModalSettingContent";
 export function ModalSetting() {
     return (
         <div>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button>
                         <Settings />
@@ -30,7 +30,7 @@ export function ModalSetting() {
 
                     <DialogFooter>
                         <div className="w-full flex justify-end">
-                            <Button>Đóng</Button>
+                            <Button onClick={() => setOpen(false)}>Đóng</Button>
                         </div>
                     </DialogFooter>
                 </DialogContent>

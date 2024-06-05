@@ -12,14 +12,13 @@ const editorOptions = {
         ["bold", "underline", "italic", "fontSize"],
         ["fontColor", "hiliteColor"],
         ["align", "horizontalRule", "list"],
-        ["showBlocks", "codeView"],
         ["math"],
     ],
     katex: katex,
 };
 
 export function Header(props: CreateQuestionProps) {
-    const { dispatch } = props;
+    const { state, dispatch } = props;
     function handleChangeQuestion(content: string) {
         dispatch({ type: ActionType.ChangeQuestion, payload: content });
     }
@@ -27,6 +26,7 @@ export function Header(props: CreateQuestionProps) {
         <div>
             <Label htmlFor="content">Câu hỏi</Label>
             <SunEditor
+                setContents={state.Content || ""}
                 setOptions={editorOptions}
                 onChange={(content) => handleChangeQuestion(content)}
             />

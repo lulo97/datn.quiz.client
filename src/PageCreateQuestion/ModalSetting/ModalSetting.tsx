@@ -20,12 +20,14 @@ import { SelectSubject } from "./SelectSubject";
 import { SelectType } from "./SelectType";
 import { SwitchPenaltyAllow } from "./SwitchPenaltyAllow";
 import { CreateQuestionProps } from "../Utils";
+import { useState } from "react";
 
 export function ModalSetting(props: CreateQuestionProps) {
     const { state, dispatch } = props;
+    const [open, setOpen] = useState(false)
     return (
         <div>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button>
                         <Settings />
@@ -59,7 +61,7 @@ export function ModalSetting(props: CreateQuestionProps) {
                                 state={state}
                                 dispatch={dispatch}
                             />
-                            <Button>Đóng</Button>
+                            <Button onClick={() => setOpen(false)}>Đóng</Button>
                         </div>
                     </DialogFooter>
                 </DialogContent>

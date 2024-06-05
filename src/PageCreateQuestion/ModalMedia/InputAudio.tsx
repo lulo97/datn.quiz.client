@@ -8,10 +8,10 @@ export function InputAudio(props: CreateQuestionProps) {
     const { state, dispatch } = props;
     const InputRef = useRef<HTMLInputElement>(null);
     function handleAudioChange(file: File | undefined) {
-        dispatch({ type: ActionType.UploadAudio, payload: file });
+        dispatch({ type: ActionType.ChangeAudioFile, payload: file });
     }
     function handleUrlAudioChange(url: string) {
-        dispatch({ type: ActionType.UrlAudioChange, payload: url });
+        dispatch({ type: ActionType.ChangeAudioUrl, payload: url });
     }
     return (
         <div className="flex flex-col gap-1">

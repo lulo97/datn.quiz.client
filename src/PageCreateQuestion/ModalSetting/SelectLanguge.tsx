@@ -21,7 +21,7 @@ export function SelectLanguage(props: CreateQuestionProps) {
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.LanguageChange,
+            type: ActionType.ChangeLanguage,
             payload: JSON.parse(value),
         });
     }
@@ -35,7 +35,9 @@ export function SelectLanguage(props: CreateQuestionProps) {
             <Label>Ngôn ngữ</Label>
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
-                    <SelectValue placeholder={state.Language?.Name || "Ngôn ngữ..."}  />
+                    <SelectValue
+                        placeholder={state.Language?.Name || "Ngôn ngữ..."}
+                    />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
                     {options &&

@@ -4,7 +4,6 @@ import { BACKEND_URL, MY_HEADER } from "@/Utils";
 const BACKEND_PAGE = "Answer";
 const API_URL = BACKEND_URL + BACKEND_PAGE;
 
-
 export async function createOne(
     data: Answer
 ) {

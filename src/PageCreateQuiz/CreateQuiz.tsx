@@ -8,21 +8,43 @@ import { CardParentClass } from "@/Utils";
 import { Header } from "./Header/Header";
 import { Content } from "./Content/Content";
 import { Footer } from "./Footer/Footer";
+import { useEffect, useReducer } from "react";
+import { reducer } from "./Reducer";
+import { ActionType, getInitalState } from "./Utils";
+import { useUser } from "@clerk/clerk-react";
+import { User } from "@/InterfacesDatabase";
+import { getOneByClerkId } from "@/api/User";
 
 export function CreateQuiz() {
+    const [state, dispatch] = useReducer(reducer, getInitalState());
+
+    useEffect(() => {
+        async function initalUserId() {
+            const { user } = useUser();
+            const ClerkId = user?.id || "";
+            const currentUser: User = await getOneByClerkId(ClerkId)
+            dispatch({
+                type: ActionType.ChangeUserId,
+                payload: currentUser.UserId,
+            });
+        }
+        initalUserId();
+    }, []);
+
     return (
         <div className={CardParentClass}>
-            <Card>
+            <Card className="mb-16">
                 <CardHeader>
-                    <Header />
+                    <Header state={state} dispatch={dispatch} />
                 </CardHeader>
                 <CardContent>
-                    <Content />
+                    <Content state={state} dispatch={dispatch} />
                 </CardContent>
-                <CardFooter>
-                    <Footer />
-                </CardFooter>
+                <CardFooter></CardFooter>
             </Card>
+            <div className="shadow-inner fixed p-2 left-0 right-0 bottom-0 bg-white">
+                <Footer state={state} dispatch={dispatch} />
+            </div>
         </div>
     );
 }

@@ -62,7 +62,7 @@ export function AdminManagement() {
                 menu_names={menu_names}
                 handleMenubarClick={handleMenubarClick}
             />
-            <div className="bg-gray-200 py-2 pr-2 w-full">
+            <div className="bg-gray-200 pl-1 w-full">
                 {curMenuItem.element}
             </div>
         </div>

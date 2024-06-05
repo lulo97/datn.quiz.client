@@ -49,7 +49,7 @@ export async function updateOne(data: EducationLevel) {
 }
 
 export async function createOne(
-    data: Omit<EducationLevel, "EducationLevelId" | "CreatedAt" | "UpdateAt">
+    data: Omit<EducationLevel, "EducationLevelId" | "CreatedAt" | "UpdatedAt">
 ) {
     try {
         const response = await fetch(API_URL, {

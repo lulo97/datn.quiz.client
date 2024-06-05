@@ -21,7 +21,7 @@ export function SelectEducationLevel(props: CreateQuestionProps) {
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.EducationLevelChange,
+            type: ActionType.ChangeEducationLevel,
             payload: JSON.parse(value),
         });
     }
@@ -35,7 +35,11 @@ export function SelectEducationLevel(props: CreateQuestionProps) {
             <Label>Trình độ câu hỏi</Label>
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
-                    <SelectValue placeholder={state.EducationLevel?.Name || "Trình độ..."}  />
+                    <SelectValue
+                        placeholder={
+                            state.EducationLevel?.Name || "Trình độ..."
+                        }
+                    />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
                     {options &&

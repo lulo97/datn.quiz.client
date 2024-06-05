@@ -7,10 +7,24 @@ import {
     Type,
     Language,
 } from "@/InterfacesDatabase";
-import { ICreateQuestion, Action, ActionType, spawnAnswer } from "./Utils";
+import {
+    QuestionDetail,
+    Action,
+    ActionType,
+    getNewAnswer,
+    getInitalState,
+} from "./Utils";
+import { toast } from "react-toastify";
 
-export function reducer(state: ICreateQuestion, action: Action) {
+export function reducer(state: QuestionDetail, action: Action) {
     switch (action.type) {
+        case ActionType.Reset: {
+            return getInitalState();
+        }
+        case ActionType.ChangeUserId: {
+            const UserId = action.payload;
+            return { ...state, UserId: UserId };
+        }
         case ActionType.ChangeQuestion: {
             const QuestionContent = action.payload;
             return { ...state, Content: QuestionContent };
@@ -18,7 +32,7 @@ export function reducer(state: ICreateQuestion, action: Action) {
         case ActionType.AddAnswer: {
             const _Answers = [
                 ...state.Answers,
-                spawnAnswer(state.QuestionId, false),
+                getNewAnswer(state.QuestionId, false),
             ];
             return {
                 ...state,
@@ -27,9 +41,20 @@ export function reducer(state: ICreateQuestion, action: Action) {
         }
         case ActionType.ChangeAnswer: {
             const { AnswerId, Content } = action.payload;
-            const _Answers = state.Answers.map((ele) =>
-                ele.AnswerId === AnswerId ? { ...ele, Content: Content } : ele
-            );
+            const is_content_unique = state.Answers.every((ele) => {
+                if (Content == "") return true;
+                if (ele.AnswerId == AnswerId) return true;
+                return ele.Content != Content;
+            });
+
+            if (!is_content_unique) {
+                toast.warning("Hai lựa chọn giống nhau", { delay: 100 });
+                return state;
+            }
+            const _Answers = state.Answers.map((ele) => {
+                if (ele.AnswerId != AnswerId) return ele;
+                return { ...ele, Content: Content };
+            });
             return { ...state, Answers: _Answers };
         }
         case ActionType.DeleteAnswer: {
@@ -42,22 +67,32 @@ export function reducer(state: ICreateQuestion, action: Action) {
         }
         case ActionType.ToggleAnswer: {
             const AnswerId = action.payload;
-            let updatedAnswers;
+            const correct_answers = state.Answers.filter(
+                (ele) => ele.IsCorrect
+            );
+            const current_answer = state.Answers.find(
+                (ele) => ele.AnswerId === AnswerId
+            );
+            if (correct_answers.length == 1 && current_answer?.IsCorrect) {
+                // Don't allow toggle last correct answer
+                toast.warning("Cần ít nhất một lựa chọn đúng", { delay: 100 });
+                return state;
+            }
+            let _Answers;
             if (state.Type?.Name === "Nhiều đáp án") {
-                updatedAnswers = state.Answers.map((ele) =>
-                    ele.AnswerId === AnswerId
-                        ? { ...ele, IsCorrect: !ele.IsCorrect }
-                        : ele
-                );
+                _Answers = state.Answers.map((ele) => {
+                    if (ele.AnswerId != AnswerId) return ele;
+                    return { ...ele, IsCorrect: !ele.IsCorrect };
+                });
             } else {
                 // Only allow one correct answer
-                updatedAnswers = state.Answers.map((ele) =>
-                    ele.AnswerId === AnswerId
-                        ? { ...ele, IsCorrect: !ele.IsCorrect }
-                        : { ...ele, IsCorrect: false }
-                );
+                _Answers = state.Answers.map((ele) => {
+                    let _IsCorrect = !ele.IsCorrect;
+                    if (ele.AnswerId != AnswerId) _IsCorrect = false;
+                    return { ...ele, IsCorrect: _IsCorrect };
+                });
             }
-            return { ...state, Answers: updatedAnswers };
+            return { ...state, Answers: _Answers };
         }
         case ActionType.ToggleExplain: {
             const ExplainAllow: boolean = !state.ExplainAllow;
@@ -67,67 +102,68 @@ export function reducer(state: ICreateQuestion, action: Action) {
             const ExplainContent: string = action.payload;
             return { ...state, ExplainContent: ExplainContent };
         }
-        case ActionType.UploadImage: {
+        case ActionType.ChangeImageFile: {
             const ImageFile: File | null = action.payload;
             return { ...state, ImageFile: ImageFile };
         }
-        case ActionType.UrlImageChange: {
+        case ActionType.ChangeImageUrl: {
             const ImageUrl: string = action.payload;
             return { ...state, ImageUrl: ImageUrl };
         }
-        case ActionType.UploadAudio: {
+        case ActionType.ChangeAudioFile: {
             const AudioFile: File | null = action.payload;
             return { ...state, AudioFile: AudioFile };
         }
-        case ActionType.UrlAudioChange: {
+        case ActionType.ChangeAudioUrl: {
             const AudioUrl: string = action.payload;
             return { ...state, AudioUrl: AudioUrl };
         }
-        case ActionType.TypeChange: {
+        case ActionType.ChangeType: {
             const Type: Type = action.payload;
             if (Type.Name == "Một đáp án") {
-                const updatedAnswers = state.Answers.map((answer) => ({
-                    ...answer,
-                    IsCorrect:
-                        answer.AnswerId ===
-                        state.Answers.find((ans) => ans.IsCorrect)?.AnswerId,
-                }));
+                //Only keep first answer in correct answers
+                const updatedAnswers = state.Answers.map((answer) => {
+                    const first_correct_answer = state.Answers.find(
+                        (ans) => ans.IsCorrect
+                    );
+                    const FCA_Id = first_correct_answer?.AnswerId;
+                    //If this answer is first corect answer
+                    const _IsCorrect = answer.AnswerId == FCA_Id;
+                    return { ...answer, IsCorrect: _IsCorrect };
+                });
                 return { ...state, Type: Type, Answers: updatedAnswers };
-            }
-            if (Type.Name == "Nhiều đáp án") {
-                //console.log(state)
             }
             return { ...state, Type: Type };
         }
-        case ActionType.SubjectChange: {
+        case ActionType.ChangeSubject: {
             const Subject: Subject = action.payload;
             return { ...state, Subject: Subject };
         }
-        case ActionType.SubSubjectChange: {
+        case ActionType.ChangeSubSubject: {
             const SubSubject: SubSubject = action.payload;
             return { ...state, SubSubject: SubSubject };
         }
-        case ActionType.PenaltyPointChange: {
+        case ActionType.ChangePenaltyPoint: {
             const PenaltyPoint: Point = action.payload;
             return { ...state, PenaltyPoint: PenaltyPoint };
         }
-        case ActionType.TogglePenaltyPoint: {
+        case ActionType.ToggleAllowPenalty: {
             const PenaltyAllow = !state.PenaltyAllow;
             return { ...state, PenaltyAllow: PenaltyAllow };
         }
-        case ActionType.PointChange: {
+        case ActionType.ChangePoint: {
             const Point: Point = action.payload;
             return { ...state, Point: Point };
         }
-        case ActionType.DifficultLevelChange: {
+        case ActionType.ChangeDifficultLevel: {
             const DifficultLevel: DifficultLevel = action.payload;
             return { ...state, DifficultLevel: DifficultLevel };
         }
-        case ActionType.EducationLevelChange: {
+        case ActionType.ChangeEducationLevel: {
             const EducationLevel: EducationLevel = action.payload;
             return { ...state, EducationLevel: EducationLevel };
         }
-        case ActionType.LanguageChange: {
+        case ActionType.ChangeLanguage: {
             const Language: Language = action.payload;
             return { ...state, Language: Language };
         }

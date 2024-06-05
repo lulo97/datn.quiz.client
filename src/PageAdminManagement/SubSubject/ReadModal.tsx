@@ -61,7 +61,7 @@ export function ReadModal(props: ReadModalProps) {
                             <TableRow>
                                 <TableHead>Ngày sửa:</TableHead>
                                 <TableCell>
-                                    {record.UpdateAt.toString()}
+                                    {record.UpdatedAt.toString()}
                                 </TableCell>
                             </TableRow>
                         </TableBody>

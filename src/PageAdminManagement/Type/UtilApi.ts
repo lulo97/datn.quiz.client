@@ -61,7 +61,7 @@ export async function updateOne(data: Type) {
 }
 
 export async function createOne(
-    data: Omit<Type, "TypeId" | "CreatedAt" | "UpdateAt">
+    data: Omit<Type, "TypeId" | "CreatedAt" | "UpdatedAt">
 ) {
     try {
         const response = await fetch(API_URL, {

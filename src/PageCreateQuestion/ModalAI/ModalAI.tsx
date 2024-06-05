@@ -12,11 +12,13 @@ import { Left } from "./Left";
 import { Right } from "./Right";
 import { Plus } from "lucide-react";
 import { ModalSizeClass } from "@/Utils";
+import { useState } from "react";
 
 export function ModalAI() {
+    const [open, setOpen] = useState(false);
     return (
         <div>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button className="bg-green-400">
                         <ChatGPT_SVG />
@@ -39,7 +41,7 @@ export function ModalAI() {
                             <Button className="bg-green-500">
                                 <Plus />
                             </Button>
-                            <Button>Đóng</Button>
+                            <Button onClick={() => setOpen(false)}>Đóng</Button>
                         </div>
                     </DialogFooter>
                 </DialogContent>

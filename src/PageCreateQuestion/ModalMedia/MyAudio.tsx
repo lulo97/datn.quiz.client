@@ -23,7 +23,6 @@ export function MyAudio(props: CreateQuestionProps) {
         <div>
             <audio className="w-full" key={audioSrc} controls>
                 <source src={audioSrc} />
-                Your browser does not support the audio element.
             </audio>
         </div>
     );

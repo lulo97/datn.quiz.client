@@ -21,7 +21,7 @@ export function SelectPoint(props: CreateQuestionProps) {
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.PointChange,
+            type: ActionType.ChangePoint,
             payload: JSON.parse(value),
         });
     }

@@ -13,7 +13,7 @@ import { ModalReportContent } from "./ModalReportContent";
 export function ModalReport() {
     return (
         <div className="w-1/3">
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button className="w-full">Báo cáo</Button>
                 </DialogTrigger>

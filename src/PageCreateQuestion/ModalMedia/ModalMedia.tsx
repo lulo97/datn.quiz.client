@@ -15,13 +15,14 @@ import { MyAudio } from "./MyAudio";
 import { MyImage } from "./MyImage";
 import { InputAudio } from "./InputAudio";
 import { InputImage } from "./InputImage";
+import { useState } from "react";
 
 export function ModalMedia(props: CreateQuestionProps) {
     const { state, dispatch } = props;
-
+    const [open, setOpen] = useState(false);
     return (
         <div>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button className="bg-blue-400">
                         <Upload />
@@ -43,7 +44,7 @@ export function ModalMedia(props: CreateQuestionProps) {
                         </div>
                     </div>
                     <DialogFooter>
-                        <Button>Đóng</Button>
+                        <Button onClick={() => setOpen(false)}>Đóng</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

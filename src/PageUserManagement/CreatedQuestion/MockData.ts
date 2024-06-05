@@ -1,4 +1,4 @@
-export interface QuestionData {
+export interface QuestionDetail {
     QuestionId: string;
     QuestionInformationId: string; //Fetch when click view details
     UserId: string; //Fetch when click view details
@@ -10,7 +10,7 @@ export interface QuestionData {
     Language: string;
 }
 
-export const data: QuestionData[] = [
+export const data: QuestionDetail[] = [
     {
         QuestionId: "663b17ca2cbd264017e3f1d3",
         QuestionInformationId: "663b17ca6d8c4604ae9b0c23",

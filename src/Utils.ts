@@ -47,15 +47,20 @@ export function getRandomWallpaper() {
     return "https://random.imagecdn.app/1920/1080";
 }
 
+export function getDummyImage() {
+    return "dummy.jpg"
+}
+
 export function initialAnswer() {
     return { id: getObjectId(), content: "", correct: false };
 }
 
 //Tailwind don't allow for dynamic className change
 //export const ModalSizeClass = `min-h-[calc(100vh*${ModalWidthScale})] min-w-[calc(100vw*${ModalWidthHeight})]`
+export const ModelWidthClass = `min-w-[95%]`
 export const ModalSizeClass = `min-w-[95%] min-h-[90%]`;
 
-export const CardParentClass = `p-2 bg-gray-200`;
+export const CardParentClass = `bg-gray-200`;
 
 export function getRandomDate(): string {
     const start = new Date(2023, 0, 1);

@@ -21,7 +21,7 @@ export async function deleteOne(DifficultLevelId: string) {
         const response = await fetch(API_URL, {
             method: "DELETE",
             headers: MY_HEADER,
-            body: JSON.stringify({ DifficultLevelId : DifficultLevelId }),
+            body: JSON.stringify({ DifficultLevelId: DifficultLevelId }),
         });
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
@@ -49,7 +49,7 @@ export async function updateOne(data: DifficultLevel) {
 }
 
 export async function createOne(
-    data: Omit<EducationLevel, "EducationLevelId" | "CreatedAt" | "UpdateAt">
+    data: Omit<EducationLevel, "EducationLevelId" | "CreatedAt" | "UpdatedAt">
 ) {
     try {
         const response = await fetch(API_URL, {

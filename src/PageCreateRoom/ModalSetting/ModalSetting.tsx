@@ -11,11 +11,13 @@ import { Settings } from "lucide-react";
 
 import { ModalSizeClass } from "@/Utils";
 import { ModalSettingContent } from "./ModalSettingContent";
+import { useState } from "react";
 
 export function ModalSetting() {
+    const [open, setOpen] = useState(false)
     return (
         <div>
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button>
                         <Settings />
@@ -30,7 +32,7 @@ export function ModalSetting() {
 
                     <DialogFooter>
                         <div className="w-full flex justify-end">
-                            <Button>Đóng</Button>
+                            <Button onClick={() => setOpen(false)}>Đóng</Button>
                         </div>
                     </DialogFooter>
                 </DialogContent>

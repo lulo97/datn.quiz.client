@@ -1,15 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { ModalAddQuestion } from "../ModalAddQuestion/ModalAddQuestion";
+import { ModalSetting } from "../ModalSetting/ModalSetting";
+import { ModalCreateQuestion } from "../ModalCreateQuestion/ModalCreateQuestion";
+import { CreateQuizProps } from "../Utils";
+import { CreateButton } from "./CreateButton";
 
-export function Footer() {
+export function Footer(props: CreateQuizProps) {
+    const { state, dispatch } = props;
+
     return (
         <div className="w-full flex justify-between">
             <div className="flex gap-5">
-                <Button>Tạo câu hỏi</Button>
-                <ModalAddQuestion />
+                <ModalAddQuestion state={state} dispatch={dispatch} />
+                <ModalSetting state={state} dispatch={dispatch} />
             </div>
 
-            <Button>Tạo đề</Button>
+            <div className="flex gap-5">
+                <ModalCreateQuestion />
+                <CreateButton state={state} dispatch={dispatch} />
+            </div>
         </div>
     );
 }

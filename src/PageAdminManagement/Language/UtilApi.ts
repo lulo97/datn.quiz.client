@@ -49,7 +49,7 @@ export async function updateOne(data: Language) {
 }
 
 export async function createOne(
-    data: Omit<Language, "LanguageId" | "CreatedAt" | "UpdateAt">
+    data: Omit<Language, "LanguageId" | "CreatedAt" | "UpdatedAt">
 ) {
     try {
         const response = await fetch(API_URL, {

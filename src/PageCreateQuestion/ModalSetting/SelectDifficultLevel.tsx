@@ -22,7 +22,7 @@ export function SelectDifficultLevel(props: CreateQuestionProps) {
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.DifficultLevelChange,
+            type: ActionType.ChangeDifficultLevel,
             payload: JSON.parse(value),
         });
     }
@@ -36,7 +36,9 @@ export function SelectDifficultLevel(props: CreateQuestionProps) {
             <Label>Độ khó</Label>
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
-                    <SelectValue placeholder={state.DifficultLevel?.Name || "Độ khó..."}  />
+                    <SelectValue
+                        placeholder={state.DifficultLevel?.Name || "Độ khó..."}
+                    />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
                     {options &&

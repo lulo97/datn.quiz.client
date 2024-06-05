@@ -15,51 +15,18 @@ import {
     QuestionInformation as IQI,
 } from "@/InterfacesDatabase";
 
-export interface CreateQuestionProps {
-    state: ICreateQuestion;
-    dispatch: React.Dispatch<Action>;
-}
-
-export enum ActionType {
-    ChangeQuestion,
-    AddAnswer,
-    ChangeAnswer,
-    DeleteAnswer,
-    ToggleAnswer,
-    ToggleExplain,
-    ChangeExplain,
-    UploadImage,
-    UrlImageChange,
-    UploadAudio,
-    UrlAudioChange,
-    TypeChange,
-    SubjectChange,
-    SubSubjectChange,
-    TogglePenaltyPoint,
-    PointChange,
-    PenaltyPointChange,
-    LanguageChange,
-    DifficultLevelChange,
-    EducationLevelChange,
-    PostCreate,
-    Create,
-    AssignQuestionIdToAnswer,
-}
-
-export interface Action {
-    type: ActionType;
-    payload: any;
-}
-
-export interface ICreateQuestion {
-    Content: string | null;
+export interface QuestionDetail {
+    QuestionId: string;
+    QuestionInformationId: string;
+    UserId: string;
     Answers: Answer[];
-    ExplainContent: string | null;
-    ExplainAllow: boolean;
+    Content: string | null;
     ImageFile: File | null;
     ImageUrl: string | null;
     AudioFile: File | null;
     AudioUrl: string | null;
+    ExplainContent: string | null;
+    ExplainAllow: boolean;
     Type: Type | null;
     DifficultLevel: DifficultLevel | null;
     EducationLevel: EducationLevel | null;
@@ -69,15 +36,44 @@ export interface ICreateQuestion {
     PenaltyPoint: Point | null;
     PenaltyAllow: boolean;
     Point: Point | null;
-    QuestionId: string;
-    QuestionInformationId: string;
-    UserId: string;
 }
 
-export function spawnAnswer(
-    QuestionId: string,
-    IsCorrect: boolean
-): Answer {
+export interface CreateQuestionProps {
+    state: QuestionDetail;
+    dispatch: React.Dispatch<Action>;
+}
+
+export enum ActionType {
+    Reset,
+    ChangeUserId,
+    ChangeQuestion,
+    AddAnswer,
+    ChangeAnswer,
+    DeleteAnswer,
+    ToggleAnswer,
+    ToggleExplain,
+    ChangeExplain,
+    ChangeImageFile,
+    ChangeImageUrl,
+    ChangeAudioFile,
+    ChangeAudioUrl,
+    ChangeType,
+    ChangeSubject,
+    ChangeSubSubject,
+    ToggleAllowPenalty,
+    ChangePoint,
+    ChangePenaltyPoint,
+    ChangeLanguage,
+    ChangeDifficultLevel,
+    ChangeEducationLevel,
+}
+
+export interface Action {
+    type: ActionType;
+    payload: any;
+}
+
+export function getNewAnswer(QuestionId: string, IsCorrect: boolean): Answer {
     return {
         AnswerId: getUUID(),
         QuestionId: QuestionId,
@@ -86,17 +82,17 @@ export function spawnAnswer(
     };
 }
 
-export function getInitalState(): ICreateQuestion {
+export function getInitalState(): QuestionDetail {
     const QuestionId = getUUID();
     const QuestionInformationId = getUUID();
-    const UserId = getUUID();
+    const UserId = "";
     return {
         Content: null,
         Answers: [
-            spawnAnswer(QuestionId, true),
-            spawnAnswer(QuestionId, false),
-            spawnAnswer(QuestionId, false),
-            spawnAnswer(QuestionId, false),
+            getNewAnswer(QuestionId, true),
+            getNewAnswer(QuestionId, false),
+            getNewAnswer(QuestionId, false),
+            getNewAnswer(QuestionId, false),
         ],
         ExplainContent: null,
         ExplainAllow: true,
@@ -119,7 +115,7 @@ export function getInitalState(): ICreateQuestion {
     };
 }
 
-export function getErrors(state: ICreateQuestion): string[] {
+export function getErrors(state: QuestionDetail): string[] {
     const errors = [];
     if (!state.Content) errors.push("Thiếu trường câu hỏi!");
     if (!state.Answers) errors.push("Thiếu trường đáp án!");
@@ -140,8 +136,8 @@ export function getErrors(state: ICreateQuestion): string[] {
     return errors;
 }
 
-export function getRecords(state: ICreateQuestion) {
-    const qr: IQuestion = {
+function createQuestionRecord(state: QuestionDetail): IQuestion {
+    return {
         QuestionId: state.QuestionId,
         QuestionInformationId: state.QuestionInformationId,
         UserId: state.UserId,
@@ -153,7 +149,12 @@ export function getRecords(state: ICreateQuestion) {
         PointId: state.Point?.PointId || "",
         PenaltyPointId: state.PenaltyPoint?.PointId || "",
     };
-    const qir: Omit<IQI, "CreatedAt" | "UpdateAt"> = {
+}
+
+function createQuestionInformationRecord(
+    state: QuestionDetail
+): Omit<IQI, "CreatedAt" | "UpdatedAt"> {
+    return {
         QuestionInformationId: state.QuestionInformationId,
         Content: state.Content || "",
         ImageUrl: state.ImageUrl || "",
@@ -164,6 +165,11 @@ export function getRecords(state: ICreateQuestion) {
         IsDeleted: false,
         IsAllowPenalty: state.PenaltyAllow,
     };
+}
+
+export function getRecords(state: QuestionDetail) {
+    const qr = createQuestionRecord(state);
+    const qir = createQuestionInformationRecord(state);
     const ars = state.Answers;
     return { qr, qir, ars };
 }

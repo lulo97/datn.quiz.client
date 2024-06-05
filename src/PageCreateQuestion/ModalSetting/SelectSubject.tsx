@@ -21,7 +21,7 @@ export function SelectSubject(props: CreateQuestionProps) {
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.SubjectChange,
+            type: ActionType.ChangeSubject,
             payload: JSON.parse(value),
         });
     }
@@ -35,7 +35,9 @@ export function SelectSubject(props: CreateQuestionProps) {
             <Label>Chủ đề</Label>
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
-                    <SelectValue placeholder={state.Subject?.Name || "Chủ đề..."}  />
+                    <SelectValue
+                        placeholder={state.Subject?.Name || "Chủ đề..."}
+                    />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
                     {options &&

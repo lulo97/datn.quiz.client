@@ -6,7 +6,7 @@ export function SwitchPenaltyAllow(props: CreateQuestionProps) {
     const { state, dispatch } = props;
 
     function handleTogglePenaltyPoint() {
-        dispatch({ type: ActionType.TogglePenaltyPoint, payload: null });
+        dispatch({ type: ActionType.ToggleAllowPenalty, payload: null });
     }
 
     return (

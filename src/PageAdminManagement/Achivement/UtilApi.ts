@@ -49,7 +49,7 @@ export async function updateOne(data: Achievement) {
 }
 
 export async function createOne(
-    data: Omit<Achievement, "AchievementId" | "CreatedAt" | "UpdateAt">
+    data: Omit<Achievement, "AchievementId" | "CreatedAt" | "UpdatedAt">
 ) {
     try {
         const response = await fetch(API_URL, {

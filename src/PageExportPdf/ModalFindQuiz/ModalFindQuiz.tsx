@@ -7,12 +7,14 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ModalFindQuizContent } from "./ModalFindQuizContent";
+import { useState } from "react";
 
 export function ModalFindQuiz() {
+    const [open, setOpen] = useState(false)
     return (
         <div>
             <div>
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button>Tìm đề</Button>
                     </DialogTrigger>

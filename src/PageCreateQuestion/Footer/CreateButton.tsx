@@ -1,89 +1,61 @@
 import { Button } from "@/components/ui/button";
 import { CreateQuestionProps, ActionType, getErrors, getRecords } from "../Utils";
-import {
-    Question as IQuestion,
-    Answer as IAnswer,
-    QuestionInformation as IQI,
-} from "@/InterfacesDatabase";
-import { ToastContainer, toast } from "react-toastify";
+import { Question as IQuestion, Answer as IAnswer, QuestionInformation as IQI } from "@/InterfacesDatabase";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createOne as createOneQuestion } from "../Api/Question";
 import { createOne as createOneAnswer } from "../Api/Answer";
 import { createOne as createOneQuestionInformation } from "../Api/QuestionInformation";
-import { uploadFile } from "../Api/Upload";
+import { uploadFile } from "../../api/Upload";
 
-export function CreateButton(props: CreateQuestionProps) {
-    const { state, dispatch } = props;
+export function CreateButton({ state, dispatch }: CreateQuestionProps) {
 
-    async function handleCreate(
-        qr: IQuestion,
-        qir: Omit<IQI, "CreatedAt" | "UpdateAt">,
-        ars: IAnswer[]
-    ) {
-        await createOneQuestion(qr);
-        await createOneQuestionInformation(qir);
-
-        for (const ele of ars) {
-            await createOneAnswer(ele);
+    const handleCreate = async (qr: IQuestion, qir: Omit<IQI, "CreatedAt" | "UpdatedAt">, ars: IAnswer[]) => {
+        try {
+            await createOneQuestion(qr);
+            await createOneQuestionInformation(qir);
+            for (const answer of ars) {
+                await createOneAnswer(answer);
+            }
+            toast.success("Tạo câu hỏi thành công!");
+            dispatch({ type: ActionType.Reset, payload: null });
+        } catch (error) {
+            toast.error("Có lỗi xảy ra khi tạo câu hỏi!");
         }
-    }
+    };
 
-    async function handleUploadFile() {
-        if (state.ImageUrl == null || state.ImageUrl == "") {
-            if (state.ImageFile != null) {
-                const image_path = await uploadFile(state.ImageFile);
-                dispatch({
-                    type: ActionType.UrlImageChange,
-                    payload: image_path,
-                });
+    const handleUploadFile = async (file: File | null, url: string | null, actionType: ActionType) => {
+        if (file && !url) {
+            try {
+                const path = await uploadFile(file);
+                dispatch({ type: actionType, payload: path });
+            } catch (error) {
+                toast.error("Có lỗi xảy ra khi tải lên tệp!");
             }
         }
-        if (state.AudioUrl == null || state.AudioUrl == "") {
-            if (state.AudioFile != null) {
-                const audio_path = await uploadFile(state.AudioFile);
-                dispatch({
-                    type: ActionType.UrlAudioChange,
-                    payload: audio_path,
-                });
-            }
-        }
-    }
+    };
 
-    function validationData() {
+    const validationData = (): boolean => {
         const errors = getErrors(state);
         if (errors.length > 0) {
-            errors.forEach((err) => toast.error(err, { delay: 500 }));
+            errors.forEach(err => toast.error(err, { delay: 500 }));
             return false;
-        } else {
-            return true;
         }
-    }
+        return true;
+    };
 
-    async function handlePostCreate() {
-        let isContinue = false;
-        isContinue = validationData();
-        if (isContinue) {
-            await handleUploadFile();
+    const handlePostCreate = async () => {
+        if (validationData()) {
+            await handleUploadFile(state.ImageFile, state.ImageUrl, ActionType.ChangeImageUrl);
+            await handleUploadFile(state.AudioFile, state.AudioUrl, ActionType.ChangeAudioUrl);
             const { qr, qir, ars } = getRecords(state);
             await handleCreate(qr, qir, ars);
         }
-    }
+    };
 
     return (
         <div>
             <Button onClick={handlePostCreate}>Xác nhận tạo</Button>
-            <ToastContainer
-                position="top-right"
-                autoClose={1500}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable={false}
-                pauseOnHover
-                theme="light"
-            />
         </div>
     );
 }

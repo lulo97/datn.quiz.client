@@ -3,6 +3,13 @@ import ReactDOM from "react-dom/client";
 import { App } from "./PageApp/App";
 import "./index.css";
 
+// Import your publishable key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLISHABLE_KEY) {
+    throw new Error("Missing Publishable Key");
+}
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { CreateQuestion } from "./PageCreateQuestion/CreateQuestion";
@@ -26,6 +33,10 @@ import { RoomMonitor } from "./PageRoomMonitor/RoomMonitor";
 import { RoomJoin } from "./PageRoomJoin/RoomJoin";
 import { RoomView } from "./PageRoomView/RoomView";
 import { RoomRanking } from "./PageRoomRanking/RoomRanking";
+import { RootLayout } from "./layouts/RootLayout";
+import { DashboardLayout } from "./layouts/DashboardLayout";
+import { SignInPage } from "./PageSignIn/PageSignIn";
+import { SignUpPage } from "./PageSignUp/PageSignUp";
 
 export const components = [
     CreateQuestion,
@@ -66,7 +77,20 @@ smi.forEach((ele) => {
     });
 });
 
-const router = createBrowserRouter(browser_routes);
+const router = createBrowserRouter([
+    {
+        element: <RootLayout />,
+        children: [
+            { path: "/sign-in/*", element: <SignInPage /> },
+            { path: "/sign-up/*", element: <SignUpPage /> },
+            {
+                element: <DashboardLayout />,
+                path: "/",
+                children: browser_routes,
+            },
+        ],
+    },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

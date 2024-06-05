@@ -12,28 +12,41 @@ import { Header } from "./Header/Header";
 import { ActionType, getInitalState } from "./Utils";
 import { reducer } from "./Reducer";
 import { getAll } from "@/PageAdminManagement/Type/UtilApi";
-import { Type } from "@/InterfacesDatabase";
+import { Type, User } from "@/InterfacesDatabase";
+import { useUser } from "@clerk/clerk-react";
+import { getOneByClerkId } from "@/api/User";
 
-export function CreateQuestion() {
+interface CreateQuestionProps {
+    is_in_quiz?: boolean;
+}
+
+export function CreateQuestion(props: CreateQuestionProps) {
+    const { is_in_quiz } = props;
+
     const [state, dispatch] = useReducer(reducer, getInitalState());
 
     useEffect(() => {
         async function initalType() {
             const types: Type[] = await getAll();
             dispatch({
-                type: ActionType.TypeChange,
+                type: ActionType.ChangeType,
                 payload: types[0],
             });
         }
-        initalType();
-    }, []);
 
-    useEffect(
-        function () {
-            //console.log(state)
-        },
-        [state]
-    );
+        async function initalUserId() {
+            const { user } = useUser();
+            const ClerkId = user?.id || "";
+            const currentUser: User = await getOneByClerkId(ClerkId)
+            dispatch({
+                type: ActionType.ChangeUserId,
+                payload: currentUser.UserId,
+            });
+        }
+        
+        initalType();
+        initalUserId();
+    }, []);
 
     return (
         <div className={CardParentClass}>
@@ -45,7 +58,11 @@ export function CreateQuestion() {
                     <Content state={state} dispatch={dispatch} />
                 </CardContent>
                 <CardFooter>
-                    <Footer state={state} dispatch={dispatch} />
+                    <Footer
+                        state={state}
+                        dispatch={dispatch}
+                        is_in_quiz={is_in_quiz}
+                    />
                 </CardFooter>
             </Card>
         </div>

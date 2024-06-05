@@ -13,9 +13,9 @@ export interface SubSubjectDetail extends SubSubject {
 }
 
 export function toSubSubject(detail: SubSubjectDetail): SubSubject {
-    const { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdateAt } =
+    const { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdatedAt } =
         detail;
-    return { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdateAt };
+    return { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdatedAt };
 }
 
 export interface GetAllOptions {
@@ -114,7 +114,7 @@ export async function updateOne(data: SubSubject) {
 }
 
 export async function createOne(
-    data: Omit<SubSubject, "SubSubjectId" | "CreatedAt" | "UpdateAt">
+    data: Omit<SubSubject, "SubSubjectId" | "CreatedAt" | "UpdatedAt">
 ) {
     try {
         const response = await fetch(API_URL, {

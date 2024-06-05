@@ -20,7 +20,7 @@ export const WebcamCapture = () => {
     }, [webcamRef]);
 
     return (
-        <>
+        <div className="flex flex-col justify-between h-full">
             {isCaptureEnable && (
                 <>
                     <Button
@@ -29,8 +29,8 @@ export const WebcamCapture = () => {
                     >
                         Kết thúc
                     </Button>
-                    <div>
-                        <Webcam
+                    <div >
+                        <Webcam className="rounded-lg"
                             audio={false}
                             width="full"
                             height={360}
@@ -69,6 +69,6 @@ export const WebcamCapture = () => {
                     </div>
                 </>
             )}
-        </>
+        </div>
     );
 };

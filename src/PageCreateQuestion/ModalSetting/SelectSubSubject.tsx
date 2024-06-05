@@ -25,7 +25,7 @@ export function SelectSubSubject(props: CreateQuestionProps) {
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.SubSubjectChange,
+            type: ActionType.ChangeSubSubject,
             payload: JSON.parse(value),
         });
     }

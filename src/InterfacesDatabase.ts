@@ -1,11 +1,12 @@
 export interface User {
     UserId: string;
+    ClerkId: string;
     Fullname: string;
     Username: string;
     Email: string;
     Biography: string;
     ImageUrl: string;
-    CreateAt: string;
+    CreatedAt: string;
 }
 
 export interface Achievement {
@@ -47,7 +48,7 @@ export interface QuestionInformation {
     IsDeleted: boolean;
     IsAllowPenalty: boolean;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface Answer {
@@ -65,12 +66,11 @@ export interface QuizInformation {
     Attempts: number;
     IsPublic: boolean;
     IsDeleted: boolean;
-    Time: number;
     IsVerified: boolean;
     UserVerify: string;
     VerifiedAt: string;
     CreatedAt: string;
-    UpstringdAt: string;
+    UpdatedAt: string;
 }
 
 export interface Quiz {
@@ -79,6 +79,8 @@ export interface Quiz {
     QuizInformationId: string;
     EducationLevelId: string;
     SubjectId: string;
+    QuizTimeId: string;
+    QuestionTimeId: string;
 }
 
 export interface SubSubject {
@@ -87,7 +89,7 @@ export interface SubSubject {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface QuizQuestion {
@@ -101,7 +103,7 @@ export interface Subject {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface EducationLevel {
@@ -109,7 +111,7 @@ export interface EducationLevel {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface Language {
@@ -117,7 +119,7 @@ export interface Language {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface Type {
@@ -125,7 +127,7 @@ export interface Type {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface DifficultLevel {
@@ -133,7 +135,7 @@ export interface DifficultLevel {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface Play {
@@ -165,7 +167,7 @@ export interface Comment {
     ParentId: string;
     CreateUserId: string;
     CreatedAt: string;
-    UpstringdAt: string;
+    UpdatedAt: string;
     Content: string;
     UpvoteCount: number;
     DownvoteCount: number;
@@ -230,7 +232,7 @@ export interface Role {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface UserRole {
@@ -244,7 +246,7 @@ export interface Permission {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface RolePermission {
@@ -260,7 +262,7 @@ export interface Rating {
     Score: number;
     Content: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface Report {
@@ -280,7 +282,7 @@ export interface ReportTarget {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface ReportReason {
@@ -288,7 +290,7 @@ export interface ReportReason {
     Name: string;
     Description: string;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
 }
 
 export interface Point {
@@ -296,5 +298,12 @@ export interface Point {
     Value: number;
     IsPenalty: boolean;
     CreatedAt: string;
-    UpdateAt: string;
+    UpdatedAt: string;
+}
+
+export interface Time {
+    TimeId: string;
+    Value: number;
+    CreatedAt: string;
+    UpdatedAt: string;
 }

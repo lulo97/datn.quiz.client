@@ -14,7 +14,7 @@ import { ModalModeContent } from "./ModalModeContent";
 export function ModalMode() {
     return (
         <div className="w-2/3">
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button className="w-full">Làm đề</Button>
                 </DialogTrigger>
@@ -24,7 +24,7 @@ export function ModalMode() {
                     </DialogHeader>
                     <ModalModeContent />
                     <DialogFooter>
-                        <Button>Đóng</Button>
+                        <Button onClick={() => setOpen(false)}>Đóng</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

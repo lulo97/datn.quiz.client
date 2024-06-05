@@ -8,14 +8,14 @@ export function InputImage(props: CreateQuestionProps) {
     const { state, dispatch } = props;
     const InputRef = useRef<HTMLInputElement>(null);
     function handleImageChange(file: File | undefined) {
-        dispatch({ type: ActionType.UploadImage, payload: file });
+        dispatch({ type: ActionType.ChangeImageFile, payload: file });
     }
-    function handleUrlImageChange(url: string) {
-        dispatch({ type: ActionType.UrlImageChange, payload: url });
+    function handleChangeImageUrl(url: string) {
+        dispatch({ type: ActionType.ChangeImageUrl, payload: url });
     }
     return (
         <div className="flex flex-col gap-1">
-            <Label>Âm thanh</Label>
+            <Label>Hình ảnh</Label>
             <div
                 className={`${
                     state.ImageUrl ? "pointer-events-none opacity-30" : ""
@@ -44,7 +44,7 @@ export function InputImage(props: CreateQuestionProps) {
             <Input
                 value={state.ImageUrl ? state.ImageUrl : ""}
                 placeholder="Đường dẫn file"
-                onChange={(e) => handleUrlImageChange(e.currentTarget.value)}
+                onChange={(e) => handleChangeImageUrl(e.currentTarget.value)}
             />
         </div>
     );

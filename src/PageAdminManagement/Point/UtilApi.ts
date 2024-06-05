@@ -49,9 +49,8 @@ export async function updateOne(data: Point) {
 }
 
 export async function createOne(
-    data: Omit<Point, "PointId" | "CreatedAt" | "UpdateAt">
+    data: Omit<Point, "PointId" | "CreatedAt" | "UpdatedAt">
 ) {
-    console.log(data);
     try {
         const response = await fetch(API_URL, {
             method: "POST",

@@ -1,39 +1,91 @@
-import {
-    useReactTable,
-    getCoreRowModel,
-    getPaginationRowModel,
-} from "@tanstack/react-table";
+import { useEffect, useMemo, useState } from "react";
+import { QuestionDetail } from "@/PageCreateQuestion/Utils";
+import { TableColumnsType } from "antd";
 
-import { Table } from "@/components/ui/table";
-import { data } from "./MockData";
-import { QuestionTableHeader } from "./QuestionTableHeader";
-import { QuestionTableBody } from "./QuestionTableBody";
-import { columns } from "./MockColumns";
-import { QuestionTablePagination } from "./QuestionTablePagination";
+import { Plus } from "lucide-react";
+import { getAllBySubject } from "@/api/QuestionDetail";
+import { ActionType, CreateQuizProps } from "../Utils";
+import { QuestionDetailList } from "./QuestionDetailList";
+import { toast } from "react-toastify";
 
-export function QuestionTable() {
-    const table = useReactTable({
-        data,
-        columns,
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        initialState: {
-            pagination: {
-                pageIndex: 0, //custom initial page index
-                pageSize: 4, //custom default page size
+export function QuestionTable(props: CreateQuizProps) {
+    const { state, dispatch } = props;
+    const [data, setData] = useState<QuestionDetail[]>([]);
+
+    function handleAddQuestion(question: QuestionDetail) {
+        dispatch({ type: ActionType.AddQuestion, payload: question });
+        toast.success("Thêm thành công!");
+        console.log(state)
+    }
+
+    async function fetchData() {
+        if (state.Subject?.SubjectId) {
+            const data_fetched = await getAllBySubject(state.Subject.SubjectId);
+            setData(data_fetched);
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [state.Subject]);
+
+    useEffect(() => {
+        console.log(data.length, 123);
+    }, [data]);
+
+    const columns: TableColumnsType<QuestionDetail> = useMemo(
+        () => [
+            {
+                title: "Câu hỏi",
+                dataIndex: "Content",
+                render: (_item, record, _index) => (
+                    <div className="line-clamp-1">{record.Content}</div>
+                ),
+                width: "30%",
             },
-        },
-    });
+            {
+                title: "Trắc nghiệm",
+                sorter: true,
+                width: "15%",
+                render: (_item, record, _index) => record.Type?.Name,
+            },
+            {
+                title: "Độ khó",
+                render: (_item, record, _index) => record.DifficultLevel?.Name,
+                sorter: true,
+                width: "15%",
+            },
+            {
+                title: "Trình độ",
+                render: (_item, record, _index) => record.EducationLevel?.Name,
+                sorter: true,
+                width: "15%",
+            },
+            {
+                title: "Chủ đề",
+                render: (_item, record, _index) => record.SubSubject?.Name,
+                sorter: true,
+                width: "15%",
+            },
+            {
+                title: "Hành động",
+                key: "action",
+                render: (_item, record, _index) => (
+                    <div className="flex justify-center">
+                        <Plus
+                            onClick={() => handleAddQuestion(record)}
+                            className="text-green-500 hover:text-green-600"
+                        />
+                    </div>
+                ),
+                width: "10%",
+            },
+        ],
+        [fetchData]
+    );
 
+    if (data.length === 0) return <div>Hãy chọn chủ đề</div>;
     return (
-        <div>
-            <Table>
-                <QuestionTableHeader {...table} />
-                <QuestionTableBody {...table} />
-            </Table>
-            <div>
-                <QuestionTablePagination {...table} />
-            </div>
-        </div>
+        <QuestionDetailList columns={columns} data={data} defaultPageSize={5} />
     );
 }
