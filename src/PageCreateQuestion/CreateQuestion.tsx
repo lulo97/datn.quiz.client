@@ -22,8 +22,8 @@ interface CreateQuestionProps {
 
 export function CreateQuestion(props: CreateQuestionProps) {
     const { is_in_quiz } = props;
-
     const [state, dispatch] = useReducer(reducer, getInitalState());
+    const { user } = useUser();
 
     useEffect(() => {
         async function initalType() {
@@ -35,7 +35,6 @@ export function CreateQuestion(props: CreateQuestionProps) {
         }
 
         async function initalUserId() {
-            const { user } = useUser();
             const ClerkId = user?.id || "";
             const currentUser: User = await getOneByClerkId(ClerkId)
             dispatch({

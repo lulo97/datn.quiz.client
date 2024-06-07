@@ -1,4 +1,4 @@
-import { getObjectId } from "@/Utils";
+import { getAnswerStyle, getObjectId } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { Label } from "@radix-ui/react-label";
@@ -54,7 +54,7 @@ function Question(props: QuestionProps) {
                     {answers.map((ele) => {
                         return (
                             <Label
-                                className={`${ele.correct ? "text-green-500" : ""}`}
+                                className={getAnswerStyle(ele.correct)}
                             >
                                 {ele.content}
                             </Label>

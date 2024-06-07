@@ -5,8 +5,7 @@ import { Switch } from "@/components/ui/switch";
 import { ActionType, CreateQuizProps } from "../Utils";
 import { SelectSubject } from "./SelectSubject";
 import { SelectEducationLevel } from "./SelectEducationLevel";
-import { SelectQuestionTime } from "./SelectQuestionTime";
-import { SelectQuizTime } from "./SelectQuizTime";
+import { SelectTime } from "./SelectTime";
 
 export function ModalSettingContentLeft(props: CreateQuizProps) {
     const { state, dispatch } = props;
@@ -41,8 +40,7 @@ export function ModalSettingContentLeft(props: CreateQuizProps) {
                 <SelectEducationLevel state={state} dispatch={dispatch} />
             </div>
             <div >
-                <SelectQuestionTime state={state} dispatch={dispatch} />
-                {/* <SelectQuizTime state={state} dispatch={dispatch} /> */}
+                <SelectTime state={state} dispatch={dispatch} />
             </div>
             <div className="flex items-center justify-between mt-1">
                 <div className="flex gap-2 items-center">

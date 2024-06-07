@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { ModalAddQuestion } from "../ModalAddQuestion/ModalAddQuestion";
 import { ModalSetting } from "../ModalSetting/ModalSetting";
-import { ModalCreateQuestion } from "../ModalCreateQuestion/ModalCreateQuestion";
 import { CreateQuizProps } from "../Utils";
 import { CreateButton } from "./CreateButton";
+import { ModalCreateQuestion } from "@/components/modal_create_question/ModalCreateQuestion";
 
 export function Footer(props: CreateQuizProps) {
     const { state, dispatch } = props;

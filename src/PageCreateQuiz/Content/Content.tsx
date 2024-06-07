@@ -5,6 +5,7 @@ import { QC } from "./QC";
 
 export function Content(props: CreateQuizProps) {
     const { state, dispatch } = props;
+
     return (
         <div>
             <Label>Danh sách câu hỏi</Label>
@@ -14,7 +15,13 @@ export function Content(props: CreateQuizProps) {
                         <div>Hãy thêm các câu hỏi</div>
                     )}
                     {state.Questions.map((question, idx) => (
-                        <QC key={question.QuestionId + "_" + idx} idx={idx + 1} question={question} />
+                        <QC
+                            key={question.QuestionId + "_" + idx}
+                            idx={idx + 1}
+                            question={question}
+                            state={state}
+                            dispatch={dispatch}
+                        />
                     ))}
                 </div>
             </Card>

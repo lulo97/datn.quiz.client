@@ -1,16 +1,14 @@
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
-import { Input } from "@/components/ui/input";
+import { getAnswerStyle } from "@/Utils";
 
 export function QCLeftOptions(question: QuestionDetail) {
     return (
-        <div className="flex flex-col overflow-x-auto overflow-y-auto w-full h-[150px]">
+        <div className="flex flex-col overflow-x-auto overflow-y-auto w-full h-[150px] px-1 gap-1">
             {question.Answers.map((ans) => {
-                const className =
-                    ans.IsCorrect == true ? "bg-green-200" : "bg-red-200";
                 return (
                     <div
                         key={ans.AnswerId}
-                        className={`${className} px-1 rounded-lg mt-1`}
+                        className={getAnswerStyle(ans.IsCorrect)}
                         defaultValue={ans.Content}
                     >
                         {ans.Content}

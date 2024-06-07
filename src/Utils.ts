@@ -1,6 +1,7 @@
 //Pure function: Not change input or state of system and always return output
 
 import { MenuItem } from "./Interfaces";
+import { Answer } from "./InterfacesDatabase";
 
 export function getObjectId() {
     var timestamp = ((new Date().getTime() / 1000) | 0).toString(16);
@@ -122,4 +123,8 @@ export const MY_HEADER = {
 
 export function getImgPath(file_name: string) {
     return `/image/${file_name}`;
+}
+
+export function getAnswerStyle(IsCorrect: boolean) {
+    return IsCorrect == true ? "text-green-500" : "text-red-500"
 }

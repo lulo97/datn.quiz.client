@@ -14,8 +14,7 @@ export interface ICreateQuiz {
     Description: string | null;
     ImageUrl: string | null;
     ImageFile: File | null;
-    QuizTime: Time | null;
-    QuestionTime: Time | null;
+    Time: Time | null;
     IsPublic: boolean;
     EducationLevel: EducationLevel | null;
     Subject: Subject | null;
@@ -27,9 +26,9 @@ export interface ICreateQuiz {
 
 export function getErrors(state: ICreateQuiz) {
     const errors = [];
+    if (!state.UserId) errors.push("Thiếu người dùng!");
     if (!state.Name) errors.push("Thiếu tên đề!");
-    if (!state.QuestionTime && !state.QuizTime)
-        errors.push("Thiếu thời gian làm đề!");
+    if (!state.Time) errors.push("Thiếu thời gian làm đề!");
     if (!state.EducationLevel) errors.push("Thiếu trình độ học vấn!");
     if (!state.Subject) errors.push("Thiếu chủ đề môn học!");
     if (state.Questions.length == 0) errors.push("Hãy thêm câu hỏi!");
@@ -46,8 +45,7 @@ export function getRecords(state: ICreateQuiz) {
         QuizInformationId: state.QuizInformationId,
         EducationLevelId: state.EducationLevel?.EducationLevelId || "",
         SubjectId: state.Subject?.SubjectId || "",
-        QuizTimeId: state.QuizTime?.TimeId || "",
-        QuestionTimeId: state.QuestionTime?.TimeId || "",
+        TimeId: state.Time?.TimeId || "",
     };
 
     const qir: QIForInsert = {
@@ -83,7 +81,7 @@ export enum ActionType {
     ChangeDescription,
     ChangeImageUrl,
     ChangeImageFile,
-    ChangeQuizTime,
+    ChangeTime,
     ChangeQuestionTime,
     ToggleIsPublic,
     ChangeEducationLevel,
@@ -224,8 +222,7 @@ export function getInitalState(): ICreateQuiz {
         Description: null,
         ImageUrl: null,
         ImageFile: null,
-        QuizTime: null,
-        QuestionTime: null,
+        Time: null,
         IsPublic: false,
         EducationLevel: null,
         Subject: null,

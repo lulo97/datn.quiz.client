@@ -11,18 +11,18 @@ import {
 } from "@/components/ui/select";
 import { getAll } from "@/PageAdminManagement/Time/UtilApi";
 
-export function SelectQuizTime(props: CreateQuizProps) {
+export function SelectTime(props: CreateQuizProps) {
     const { state, dispatch } = props;
     const [options, setOptions] = useState<Time[]>();
 
     async function fetchData() {
         const records: Time[] = await getAll();
-        setOptions(records);
+        setOptions(records.sort((a, b) => a.Value - b.Value));
     }
 
     function handleChange(value: string) {
         dispatch({
-            type: ActionType.ChangeQuizTime,
+            type: ActionType.ChangeTime,
             payload: JSON.parse(value),
         });
     }
@@ -33,11 +33,11 @@ export function SelectQuizTime(props: CreateQuizProps) {
 
     return (
         <div>
-            <Label>Thời gian đề</Label>
+            <Label>Thời gian làm đề</Label>
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
                     <SelectValue
-                        placeholder={state.QuizTime?.Value || "Thời gian..."}
+                        placeholder={state.Time?.Value || "Thời gian..."}
                     />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
@@ -48,7 +48,7 @@ export function SelectQuizTime(props: CreateQuizProps) {
                                 key={option.TimeId}
                                 value={JSON.stringify(option)}
                             >
-                                {option.Value}
+                                {option.Value} phút
                             </SelectItem>
                         ))}
                 </SelectContent>

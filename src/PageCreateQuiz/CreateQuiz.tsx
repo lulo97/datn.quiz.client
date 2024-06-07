@@ -17,10 +17,10 @@ import { getOneByClerkId } from "@/api/User";
 
 export function CreateQuiz() {
     const [state, dispatch] = useReducer(reducer, getInitalState());
+    const { user } = useUser();
 
     useEffect(() => {
         async function initalUserId() {
-            const { user } = useUser();
             const ClerkId = user?.id || "";
             const currentUser: User = await getOneByClerkId(ClerkId)
             dispatch({
@@ -29,6 +29,7 @@ export function CreateQuiz() {
             });
         }
         initalUserId();
+        console.log(state)
     }, []);
 
     return (

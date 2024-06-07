@@ -79,8 +79,7 @@ export interface Quiz {
     QuizInformationId: string;
     EducationLevelId: string;
     SubjectId: string;
-    QuizTimeId: string;
-    QuestionTimeId: string;
+    TimeId: string;
 }
 
 export interface SubSubject {

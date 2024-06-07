@@ -26,9 +26,9 @@ export function reducer(state: ICreateQuiz, action: Action) {
             const ImageFile = action.payload;
             return { ...state, ImageFile: ImageFile };
         }
-        case ActionType.ChangeQuizTime: {
-            const QuizTime = action.payload;
-            return { ...state, QuizTime: QuizTime };
+        case ActionType.ChangeTime: {
+            const Time = action.payload;
+            return { ...state, Time: Time };
         }
         case ActionType.ChangeQuestionTime: {
             const QuestionTime = action.payload;
