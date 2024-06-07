@@ -63,6 +63,7 @@ export function ReadModal(props: ReadModalProps) {
                                         {record.Answers.map((ele) => {
                                             return (
                                                 <li
+                                                    key={ele.AnswerId}
                                                     className={getAnswerStyle(
                                                         ele.IsCorrect
                                                     )}
@@ -89,7 +90,7 @@ export function ReadModal(props: ReadModalProps) {
                             <TableRow>
                                 <TableHead>Giải thích:</TableHead>
                                 <TableCell>
-                                    {record.ExplainContent || "NULL"}
+                                    {record.Explanation || "NULL"}
                                 </TableCell>
                             </TableRow>
                             <TableRow>

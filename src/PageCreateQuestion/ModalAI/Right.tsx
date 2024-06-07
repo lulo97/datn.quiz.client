@@ -54,6 +54,7 @@ function Question(props: QuestionProps) {
                     {answers.map((ele) => {
                         return (
                             <Label
+                                key={ele.id}
                                 className={getAnswerStyle(ele.correct)}
                             >
                                 {ele.content}
@@ -76,7 +77,7 @@ export function Right() {
             <Card>
                 <CardHeader className="overflow-y-scroll max-h-[350px]">
                     {data.map((ele) => (
-                        <Question {...ele} />
+                        <Question key={ele.answers.toString()} {...ele} />
                     ))}
                 </CardHeader>
             </Card>

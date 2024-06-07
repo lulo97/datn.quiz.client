@@ -48,7 +48,9 @@ export function Achievement() {
                 dataIndex: "Description",
                 sorter: true,
                 render: (_item, record, _index) => (
-                    <div className="line-clamp-1">{record.Description}</div>
+                    <div className="line-clamp-1">
+                        {record.Description || "NULL"}
+                    </div>
                 ),
             },
             {

@@ -13,7 +13,7 @@ export function ModalSettingContentLeft(props: CreateQuizProps) {
         dispatch({ type: ActionType.ChangeName, payload: Name });
     }
     function handleChangeDescription(Description: string) {
-        dispatch({ type: ActionType.ChangeName, payload: Description });
+        dispatch({ type: ActionType.ChangeDescription, payload: Description });
     }
     function hanleToggleIsPublic() {
         dispatch({ type: ActionType.ToggleIsPublic, payload: null });

@@ -21,7 +21,6 @@ export function CreatedQuiz() {
         const currentUser: User = await getOneByClerkId(ClerkId);
         const data_fetched = await getAllByUser(currentUser.UserId);
         setData(data_fetched);
-        console.log(data);
     }
 
     useEffect(() => {

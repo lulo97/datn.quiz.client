@@ -21,7 +21,7 @@ export async function uploadFile(file: File): Promise<string> {
     }
 }
 
-export function uploadFileXHR(file: File, setProcess: React.Dispatch<React.SetStateAction<number>>): Promise<string> {
+export function uploadFileXHR(file: File, setProcess?: React.Dispatch<React.SetStateAction<number>>): Promise<string> {
     return new Promise((resolve, reject) => {
         const formData = new FormData();
         formData.append("file", file);
@@ -31,7 +31,7 @@ export function uploadFileXHR(file: File, setProcess: React.Dispatch<React.SetSt
         xhr.upload.addEventListener('progress', (event) => {
             if (event.lengthComputable) {
                 const percentComplete = (event.loaded / event.total) * 100;
-                setProcess(parseInt(percentComplete.toString()));
+                //setProcess(parseInt(percentComplete.toString));
             }
         });
 

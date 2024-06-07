@@ -1,8 +1,12 @@
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Heart, Star } from "lucide-react";
 
-export function HeaderRightRating() {
+export function HeaderRightRating(quiz: QuizDetail) {
+    //Todo: Get rating by UserId, QuizId
+    //One Quiz can be Rate one time by one User 
+    //Quiz -1- Rate -1- User
     return (
         <Card>
             <CardHeader>

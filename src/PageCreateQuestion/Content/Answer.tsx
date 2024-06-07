@@ -11,6 +11,7 @@ interface AnswerProps extends CreateQuestionProps {
 import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "react-toastify";
+import { MCQ, getCheckBoxClass } from "@/Utils";
 
 export function Answer(props: AnswerProps) {
     const { answer, state, dispatch } = props;
@@ -45,21 +46,12 @@ export function Answer(props: AnswerProps) {
         dispatch({ type: ActionType.DeleteAnswer, payload: id });
     }
 
-    const MCQCheckBoxClass =
-        "data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500";
-    const SCQCheckBoxClass =
-        "rounded-full data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500";
-    const CheckBoxClass =
-        state.Type?.Name == "Nhiều đáp án"
-            ? MCQCheckBoxClass
-            : SCQCheckBoxClass;
-
     return (
         <div className="flex gap-5 justify-between items-center">
             <Checkbox
                 checked={answer.IsCorrect}
                 onClick={() => handleToggleAnswer(answer.AnswerId)}
-                className={CheckBoxClass}
+                className={getCheckBoxClass(state.Type?.Name)}
             />
 
             <Input

@@ -42,9 +42,7 @@ export const components = [
     CreateQuestion,
     Homepage,
     CreateQuiz,
-    QuizDetail,
     QuizPlayTime,
-    QuizPlayRevise,
     QuizResultRevise,
     QuizResultTime,
     AdminManagement,
@@ -68,6 +66,16 @@ const browser_routes = components.map((Component) => ({
 browser_routes.push({
     path: "/",
     element: <App />,
+});
+
+browser_routes.push({
+    path: "/QuizDetail/:QuizId",
+    element: <QuizDetail />,
+});
+
+browser_routes.push({
+    path: "/QuizPlayRevise/:QuizId/:QuestionNum/:Sort",
+    element: <QuizPlayRevise />,
 });
 
 smi.forEach((ele) => {

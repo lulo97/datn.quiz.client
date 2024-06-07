@@ -29,7 +29,6 @@ export function CreateQuiz() {
             });
         }
         initalUserId();
-        console.log(state)
     }, []);
 
     return (

@@ -15,6 +15,7 @@ import {
     getInitalState,
 } from "./Utils";
 import { toast } from "react-toastify";
+import { MCQ, SCQ } from "@/Utils";
 
 export function reducer(state: QuestionDetail, action: Action) {
     switch (action.type) {
@@ -69,7 +70,7 @@ export function reducer(state: QuestionDetail, action: Action) {
                 return state;
             }
             let _Answers;
-            if (state.Type?.Name === "Nhiều đáp án") {
+            if (state.Type?.Name === MCQ) {
                 _Answers = state.Answers.map((ele) => {
                     if (ele.AnswerId != AnswerId) return ele;
                     return { ...ele, IsCorrect: !ele.IsCorrect };
@@ -89,8 +90,8 @@ export function reducer(state: QuestionDetail, action: Action) {
             return { ...state, ExplainAllow: ExplainAllow };
         }
         case ActionType.ChangeExplain: {
-            const ExplainContent: string = action.payload;
-            return { ...state, ExplainContent: ExplainContent };
+            const Explanation: string = action.payload;
+            return { ...state, Explanation: Explanation };
         }
         case ActionType.ChangeImageFile: {
             const ImageFile: File | null = action.payload;
@@ -98,7 +99,7 @@ export function reducer(state: QuestionDetail, action: Action) {
         }
         case ActionType.ChangeImageUrl: {
             const ImageUrl: string = action.payload;
-            console.log(ImageUrl)
+            console.log(ImageUrl);
             return { ...state, ImageUrl: ImageUrl };
         }
         case ActionType.ChangeAudioFile: {
@@ -111,7 +112,7 @@ export function reducer(state: QuestionDetail, action: Action) {
         }
         case ActionType.ChangeType: {
             const Type: Type = action.payload;
-            if (Type.Name == "Một đáp án") {
+            if (Type.Name == SCQ) {
                 //Only keep first answer in correct answers
                 const updatedAnswers = state.Answers.map((answer) => {
                     const first_correct_answer = state.Answers.find(

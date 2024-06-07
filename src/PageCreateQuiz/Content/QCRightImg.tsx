@@ -9,8 +9,6 @@ export function QCRightImg(question: QuestionDetail) {
     useEffect(() => {
         if (question.ImageUrl) {
             setImageSrc(VITE_SERVER_PATH + question.ImageUrl);
-        } else {
-            setImageSrc(API_URL);
         }
     }, [question.ImageUrl]);
 

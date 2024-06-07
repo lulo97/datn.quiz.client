@@ -9,8 +9,10 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { ModalReportContent } from "./ModalReportContent";
+import { useState } from "react";
 
 export function ModalReport() {
+    const [open, setOpen] = useState(false)
     return (
         <div className="w-1/3">
             <Dialog open={open} onOpenChange={setOpen}>

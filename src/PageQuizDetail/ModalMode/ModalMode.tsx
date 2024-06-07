@@ -10,8 +10,11 @@ import {
 } from "@/components/ui/dialog";
 
 import { ModalModeContent } from "./ModalModeContent";
+import { useState } from "react";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
-export function ModalMode() {
+export function ModalMode(quiz: QuizDetail) {
+    const [open, setOpen] = useState(false)
     return (
         <div className="w-2/3">
             <Dialog open={open} onOpenChange={setOpen}>
@@ -22,7 +25,7 @@ export function ModalMode() {
                     <DialogHeader>
                         <DialogTitle>Chọn chế độ làm đề</DialogTitle>
                     </DialogHeader>
-                    <ModalModeContent />
+                    <ModalModeContent {...quiz} />
                     <DialogFooter>
                         <Button onClick={() => setOpen(false)}>Đóng</Button>
                     </DialogFooter>

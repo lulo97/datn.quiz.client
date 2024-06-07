@@ -25,7 +25,7 @@ export interface QuestionDetail {
     ImageUrl: string | null;
     AudioFile: File | null;
     AudioUrl: string | null;
-    ExplainContent: string | null;
+    Explanation: string | null;
     ExplainAllow: boolean;
     Type: Type | null;
     DifficultLevel: DifficultLevel | null;
@@ -36,6 +36,12 @@ export interface QuestionDetail {
     PenaltyPoint: Point | null;
     PenaltyAllow: boolean;
     Point: Point | null;
+    //
+    CorrectUserCount: number;
+    IncorrectUserCount: number;
+    IsDeleted: boolean;
+    CreatedAt: string | null;
+    UpdatedAt: string | null;
 }
 
 export interface CreateQuestionProps {
@@ -94,7 +100,7 @@ export function getInitalState(): QuestionDetail {
             getNewAnswer(QuestionId, false),
             getNewAnswer(QuestionId, false),
         ],
-        ExplainContent: null,
+        Explanation: null,
         ExplainAllow: false,
         ImageFile: null,
         ImageUrl: null,
@@ -112,24 +118,24 @@ export function getInitalState(): QuestionDetail {
         QuestionId: QuestionId,
         QuestionInformationId: QuestionInformationId,
         UserId: UserId,
+        //
+        CorrectUserCount: 0,
+        IncorrectUserCount: 0,
+        IsDeleted: false,
+        CreatedAt: null,
+        UpdatedAt: null,
     };
-}
-
-export function getErrorAfterUploadFile(state: QuestionDetail) {
-    const errors = []
-    if (!state.ImageUrl && state.ImageFile) errors.push("Lỗi tải ảnh!");
-    if (!state.AudioUrl && state.AudioFile) errors.push("Lỗi tải âm thanh!");
-    return errors
 }
 
 export function getErrors(state: QuestionDetail) {
     const errors = [];
+    if (!state.UserId) errors.push("Thiếu người tạo!");
     if (!state.Content) errors.push("Thiếu trường câu hỏi!");
     if (!state.Answers) errors.push("Thiếu trường đáp án!");
     if (state.Answers.length < 2) errors.push("Cần ít nhất 2 lựa chọn!");
     if (!state.Answers.some((answer) => answer.IsCorrect))
         errors.push("Cần ít nhất 1 đáp án!");
-    if (state.ExplainAllow && !state.ExplainContent)
+    if (state.ExplainAllow && !state.Explanation)
         errors.push("Thiếu trường giải thích!");
     if (!state.Type) errors.push("Thiếu trường kiểu trắc nghiệm!");
     if (!state.DifficultLevel) errors.push("Thiếu trường độ khó!");
@@ -166,7 +172,7 @@ function createQuestionInformationRecord(
         Content: state.Content || "",
         ImageUrl: state.ImageUrl || "",
         AudioUrl: state.AudioUrl || "",
-        Explanation: state.ExplainContent || "",
+        Explanation: state.Explanation || "",
         CorrectUserCount: 0,
         IncorrectUserCount: 0,
         IsDeleted: false,

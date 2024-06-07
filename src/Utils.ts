@@ -49,7 +49,7 @@ export function getRandomWallpaper() {
 }
 
 export function getDummyImage() {
-    return "dummy.jpg"
+    return "dummy.jpg";
 }
 
 export function initialAnswer() {
@@ -58,7 +58,7 @@ export function initialAnswer() {
 
 //Tailwind don't allow for dynamic className change
 //export const ModalSizeClass = `min-h-[calc(100vh*${ModalWidthScale})] min-w-[calc(100vw*${ModalWidthHeight})]`
-export const ModelWidthClass = `min-w-[95%]`
+export const ModelWidthClass = `min-w-[95%]`;
 export const ModalSizeClass = `min-w-[95%] min-h-[90%]`;
 
 export const CardParentClass = `bg-gray-200`;
@@ -126,11 +126,23 @@ export function getImgPath(file_name: string) {
 }
 
 export function getAnswerStyle(IsCorrect: boolean) {
-    return IsCorrect == true ? "text-green-500" : "text-red-500"
+    return IsCorrect == true ? "text-green-500" : "text-red-500";
 }
 
 export const VITE_SERVER_PATH = import.meta.env.VITE_SERVER_PATH;
 
 if (!VITE_SERVER_PATH) {
     throw new Error("Missing VITE_SERVER_PATH");
+}
+
+export const SCQ = "Một đáp án";
+export const MCQ = "Nhiều đáp án";
+
+const MCQCheckBoxClass =
+    "data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500";
+const SCQCheckBoxClass =
+    "rounded-full data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-red-500";
+
+export function getCheckBoxClass(TypeName: string | undefined) {
+    return TypeName == MCQ ? MCQCheckBoxClass : SCQCheckBoxClass;
 }

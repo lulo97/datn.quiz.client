@@ -1,3 +1,4 @@
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -16,8 +17,10 @@ import {
     SelectGroup,
     SelectItem,
 } from "@/components/ui/select";
+import { redirect, useNavigate } from "react-router-dom";
 
-export function ModalModeContentRight() {
+export function ModalModeContentRight(quiz: QuizDetail) {
+    const navigate = useNavigate();
     return (
         <Card className="w-1/2">
             <CardHeader>
@@ -69,7 +72,14 @@ export function ModalModeContentRight() {
                 </div>
             </CardContent>
             <CardFooter>
-                <Button className="w-full">Ôn tập</Button>
+                <Button
+                    onClick={() =>
+                        navigate(`/QuizPlayRevise/${quiz.QuizId}/${quiz.Questions.length}/easy`)
+                    }
+                    className="w-full"
+                >
+                    Ôn tập
+                </Button>
             </CardFooter>
         </Card>
     );

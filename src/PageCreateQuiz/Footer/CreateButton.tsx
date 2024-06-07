@@ -3,7 +3,6 @@ import {
     ActionType,
     CreateQuizProps,
     QIForInsert,
-    getErrorAfterUploadFile,
     getRecords,
 } from "../Utils";
 import { toast } from "react-toastify";
@@ -19,15 +18,15 @@ import { useState } from "react";
 export function CreateButton(props: CreateQuizProps) {
     const { state, dispatch } = props;
     const [progress, setProgress] = useState<number>(0);
-
     const handleCreate = async (
         qr: Quiz,
         qir: QIForInsert,
-        qq: QuizQuestion[]
+        qq: QuizQuestion[], 
+        ImageUrl: string
     ) => {
         try {
             await createOneQuiz(qr);
-            await createOneQuizInformation(qir);
+            await createOneQuizInformation(qir, ImageUrl);
             for (const quizquest of qq) {
                 await createOneQuizQuestion(quizquest);
             }
@@ -41,16 +40,16 @@ export function CreateButton(props: CreateQuizProps) {
     const handleUploadFile = async (
         file: File | null,
         url: string | null,
-        actionType: ActionType
     ) => {
         if (file && !url) {
             try {
-                const path = await uploadFileXHR(file, setProgress)
-                dispatch({ type: actionType, payload: path });
+                const ImageUrl = await uploadFileXHR(file, setProgress)
+                return ImageUrl
             } catch (error) {
                 console.log(error)
             }
         }
+        return null;
     };
 
     function isDataValid(errors: string[]) {
@@ -61,29 +60,22 @@ export function CreateButton(props: CreateQuizProps) {
         return true;
     }
 
-    const handlePostCreate = async (progress: number) => {
+    const handlePostCreate = async () => {
         const errors = getErrors(state);
         if (isDataValid(errors)) {
-            await handleUploadFile(
+            const ImageUrl = await handleUploadFile(
                 state.ImageFile,
                 state.ImageUrl,
-                ActionType.ChangeImageUrl
             );
-
-            // Loop until progress reaches 100
-            while (progress < 100) {
-                console.log(progress)
-                await new Promise(resolve => setTimeout(resolve, 100)); // Wait for 100 milliseconds
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            if (!ImageUrl) {
+                toast.warning("Lỗi tải file!")
+                return;
             }
-
-            toast.success("Tải file thành công");
-            const error_file = getErrorAfterUploadFile(state);
-            if (isDataValid(error_file)) {
-                const { qr, qir, qq } = getRecords(state);
-                await handleCreate(qr, qir, qq);
-            }
+            const { qr, qir, qq } = getRecords(state);
+            await handleCreate(qr, qir, qq, ImageUrl);
         }
     };
 
-    return <Button onClick={() => handlePostCreate(progress)}>{progress}Tạo đề</Button>;
+    return <Button onClick={handlePostCreate}>Tạo đề</Button>;
 }

@@ -6,9 +6,7 @@ export function QCLeftExplain(question: QuestionDetail) {
             <div>Giải thích:</div>
             <div
                 dangerouslySetInnerHTML={{
-                    __html: question.ExplainContent
-                        ? question.ExplainContent
-                        : "",
+                    __html: question.Explanation ? question.Explanation : "",
                 }}
             ></div>
         </div>

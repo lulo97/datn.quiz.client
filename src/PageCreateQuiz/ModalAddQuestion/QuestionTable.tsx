@@ -39,7 +39,12 @@ export function QuestionTable(props: CreateQuizProps) {
                 title: "Câu hỏi",
                 dataIndex: "Content",
                 render: (_item, record, _index) => (
-                    <div className="line-clamp-1">{record.Content}</div>
+                    <div
+                        className="line-clamp-1"
+                        dangerouslySetInnerHTML={{
+                            __html: record.Content || "",
+                        }}
+                    ></div>
                 ),
                 width: "30%",
             },

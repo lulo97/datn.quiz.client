@@ -23,7 +23,7 @@ const editorOptions = {
 };
 
 interface FooterProps extends CreateQuestionProps {
-    is_in_quiz?: boolean
+    is_in_quiz?: boolean;
 }
 
 export function Footer(props: FooterProps) {
@@ -47,7 +47,7 @@ export function Footer(props: FooterProps) {
                 <div>
                     <Label>Giải thích</Label>
                     <SunEditor
-                        setContents={state.ExplainContent || ""}
+                        setContents={state.Explanation || ""}
                         setOptions={editorOptions}
                         onChange={(content) => handleChangeExplain(content)}
                     />
@@ -68,7 +68,9 @@ export function Footer(props: FooterProps) {
                         />
                     </div>
                 </div>
-                {!is_in_quiz && <CreateButton state={state} dispatch={dispatch} />}
+                {!is_in_quiz && (
+                    <CreateButton state={state} dispatch={dispatch} />
+                )}
                 {is_in_quiz && <Button>Thêm vào đề</Button>}
             </div>
         </div>

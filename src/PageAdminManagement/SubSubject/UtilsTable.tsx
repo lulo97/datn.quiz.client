@@ -1,11 +1,7 @@
 import { useMemo } from "react";
 import { TableColumnsType, TableProps } from "antd";
 import { toDDMMYYY } from "@/Utils";
-import {
-    GetAllOptions,
-    SubSubjectDetail,
-    getAll,
-} from "./UtilApi";
+import { GetAllOptions, SubSubjectDetail, getAll } from "./UtilApi";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
 import { UpdateModal } from "./UpdateModal";
@@ -40,7 +36,9 @@ export function getColumns(fetchData: () => Promise<void>) {
                 dataIndex: "Description",
                 sorter: true,
                 render: (_, record) => (
-                    <div className="line-clamp-1">{record.Description}</div>
+                    <div className="line-clamp-1">
+                        {record.Description || "NULL"}
+                    </div>
                 ),
             },
             {
@@ -79,14 +77,14 @@ export function getOnChange(
         if (Array.isArray(sorter)) return;
         //column, field, order, columnKey
         const { field, order } = sorter;
-        const options: GetAllOptions = {}
+        const options: GetAllOptions = {};
         if (field && order) {
             const _order = order == "ascend" ? "asc" : "desc";
-            options.sortField = field.toString()
-            options.sortDirection = _order
+            options.sortField = field.toString();
+            options.sortDirection = _order;
         }
         if (filters.SubjectName) {
-            options.filterFields = filters.SubjectName
+            options.filterFields = filters.SubjectName;
         }
         setData(await getAll(options));
     };

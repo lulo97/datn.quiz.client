@@ -4,29 +4,35 @@ import {
     ActionType,
     getErrors,
     getRecords,
-    getErrorAfterUploadFile,
 } from "../Utils";
 import {
     Question as IQuestion,
     Answer as IAnswer,
     QuestionInformation as IQI,
+    User,
 } from "@/InterfacesDatabase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createOne as createOneQuestion } from "../Api/Question";
 import { createOne as createOneAnswer } from "../Api/Answer";
 import { createOne as createOneQuestionInformation } from "../Api/QuestionInformation";
-import { uploadFile } from "../../api/Upload";
+import { uploadFileXHR } from "../../api/Upload";
+import { useUser } from "@clerk/clerk-react";
+import { getOneByClerkId } from "@/api/User";
 
 export function CreateButton({ state, dispatch }: CreateQuestionProps) {
+    const { user } = useUser()
+    
     const handleCreate = async (
         qr: IQuestion,
         qir: Omit<IQI, "CreatedAt" | "UpdatedAt">,
-        ars: IAnswer[]
+        ars: IAnswer[],
+        ImageUrl: string = "",
+        AudioUrl: string = ""
     ) => {
         try {
             await createOneQuestion(qr);
-            await createOneQuestionInformation(qir);
+            await createOneQuestionInformation(qir, ImageUrl, AudioUrl);
             for (const answer of ars) {
                 await createOneAnswer(answer);
             }
@@ -40,12 +46,11 @@ export function CreateButton({ state, dispatch }: CreateQuestionProps) {
     const handleUploadFile = async (
         file: File | null,
         url: string | null,
-        actionType: ActionType
     ) => {
         if (file && !url) {
             try {
-                const path = await uploadFile(file);
-                dispatch({ type: actionType, payload: path });
+                const path = await uploadFileXHR(file);
+                return path
             } catch (error) {
                 toast.error("Có lỗi xảy ra khi tải lên tệp!");
             }
@@ -63,21 +68,25 @@ export function CreateButton({ state, dispatch }: CreateQuestionProps) {
     const handlePostCreate = async () => {
         const errors = getErrors(state);
         if (isDataValid(errors)) {
-            await handleUploadFile(
+            const ImageUrl = await handleUploadFile(
                 state.ImageFile,
                 state.ImageUrl,
-                ActionType.ChangeImageUrl
             );
-            await handleUploadFile(
+            const AudioUrl = await handleUploadFile(
                 state.AudioFile,
                 state.AudioUrl,
-                ActionType.ChangeAudioUrl
             );
-            const errors_file = getErrorAfterUploadFile(state);
-            if (isDataValid(errors_file)) {
-                const { qr, qir, ars } = getRecords(state);
-                await handleCreate(qr, qir, ars);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            if (state.ImageFile && !ImageUrl) {
+                toast.warning("Lỗi tải ImageUrl!")
+                return;
             }
+            if (state.AudioFile && !AudioUrl) {
+                toast.warning("Lỗi tải AudioUrl!")
+                return;
+            }
+            const { qr, qir, ars } = getRecords(state);
+            await handleCreate(qr, qir, ars, ImageUrl, AudioUrl);
         }
     };
 

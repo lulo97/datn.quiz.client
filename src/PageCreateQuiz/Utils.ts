@@ -22,12 +22,14 @@ export interface QuizDetail {
     QuizInformationId: string;
     QuizId: string;
     Questions: QuestionDetail[];
-}
-
-export function getErrorAfterUploadFile(state: QuizDetail) {
-    const errors = []
-    if (!state.ImageUrl && state.ImageFile) errors.push("Lõi tải ảnh hoặc chưa tải xong!");
-    return errors
+    //Above is need for create, below fields is need for view
+    Attempts: number;
+    IsDeleted: boolean;
+    IsVerified: boolean;
+    UserVerify: string | null;
+    VerifiedAt: string | null;
+    CreatedAt: string | null;
+    UpdatedAt: string | null;
 }
 
 export function getErrors(state: QuizDetail) {
@@ -108,7 +110,7 @@ export function getInitalState(): QuizDetail {
     //     "Questions": [
     //         {
     //             "Type": {
-    //                 "Name": "Một đáp án",
+    //                 "Name": SCQ,
     //                 "TypeId": "41d51bb6-12cd-11ef-9b8a-02509c489bec",
     //                 "CreatedAt": "2024-05-15 22:10:25.000000",
     //                 "UpdatedAt": "2024-05-15 22:10:25.000000",
@@ -198,7 +200,7 @@ export function getInitalState(): QuizDetail {
     //                 "Description": "",
     //                 "EducationLevelId": "88a72dba-12cd-11ef-9b8a-02509c489bec"
     //             },
-    //             "ExplainContent": "<p>1+1=2</p>",
+    //             "Explanation": "<p>1+1=2</p>",
     //             "QuestionInformationId": "d4cd9e4f-cb81-488f-b49f-b8ae60bb3216",
     //             "PenaltyAllow": false
     //         }
@@ -235,5 +237,12 @@ export function getInitalState(): QuizDetail {
         UserId: "",
         QuizInformationId: QuizInformationId,
         QuizId: QuizId,
+        Attempts: 0,
+        IsDeleted: false,
+        IsVerified: false,
+        UserVerify: null,
+        VerifiedAt: null,
+        CreatedAt: null,
+        UpdatedAt: null,
     };
 }

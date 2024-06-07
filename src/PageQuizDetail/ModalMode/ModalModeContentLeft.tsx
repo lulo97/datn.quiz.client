@@ -1,3 +1,4 @@
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -17,7 +18,7 @@ import {
     SelectItem,
 } from "@/components/ui/select";
 
-export function ModalModeContentLeft() {
+export function ModalModeContentLeft(quiz: QuizDetail) {
     return (
         <Card className="w-1/2">
             <CardHeader>
