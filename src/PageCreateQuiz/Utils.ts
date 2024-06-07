@@ -9,7 +9,7 @@ import {
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 import { getUUID } from "@/Utils";
 
-export interface ICreateQuiz {
+export interface QuizDetail {
     Name: string | null;
     Description: string | null;
     ImageUrl: string | null;
@@ -24,7 +24,13 @@ export interface ICreateQuiz {
     Questions: QuestionDetail[];
 }
 
-export function getErrors(state: ICreateQuiz) {
+export function getErrorAfterUploadFile(state: QuizDetail) {
+    const errors = []
+    if (!state.ImageUrl && state.ImageFile) errors.push("Lõi tải ảnh hoặc chưa tải xong!");
+    return errors
+}
+
+export function getErrors(state: QuizDetail) {
     const errors = [];
     if (!state.UserId) errors.push("Thiếu người dùng!");
     if (!state.Name) errors.push("Thiếu tên đề!");
@@ -38,7 +44,7 @@ export function getErrors(state: ICreateQuiz) {
 
 export type QIForInsert = Omit<QuizInformation, "CreatedAt" | "UpdatedAt">;
 
-export function getRecords(state: ICreateQuiz) {
+export function getRecords(state: QuizDetail) {
     const qr: Quiz = {
         QuizId: state.QuizId,
         UserId: state.UserId,
@@ -71,7 +77,7 @@ export function getRecords(state: ICreateQuiz) {
 }
 
 export interface CreateQuizProps {
-    state: ICreateQuiz;
+    state: QuizDetail;
     dispatch: React.Dispatch<Action>;
 }
 
@@ -97,7 +103,7 @@ export interface Action {
     payload: any;
 }
 
-export function getInitalState(): ICreateQuiz {
+export function getInitalState(): QuizDetail {
     // return {
     //     "Questions": [
     //         {

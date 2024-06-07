@@ -1,16 +1,25 @@
 import { Button } from "@/components/ui/button";
-import { ActionType, CreateQuizProps, QIForInsert, getRecords } from "../Utils";
+import {
+    ActionType,
+    CreateQuizProps,
+    QIForInsert,
+    getErrorAfterUploadFile,
+    getRecords,
+} from "../Utils";
 import { toast } from "react-toastify";
 import { getErrors } from "@/PageCreateQuiz/Utils";
-import { Quiz, QuizInformation, QuizQuestion } from "@/InterfacesDatabase";
-import { uploadFile } from "@/api/Upload";
+import { Quiz, QuizQuestion } from "@/InterfacesDatabase";
+import { uploadFileXHR } from "@/api/Upload";
 
 import { createOne as createOneQuiz } from "../Api/Quiz";
 import { createOne as createOneQuizInformation } from "../Api/QuizInformation";
 import { createOne as createOneQuizQuestion } from "../Api/QuizQuestion";
+import { useState } from "react";
 
 export function CreateButton(props: CreateQuizProps) {
     const { state, dispatch } = props;
+    const [progress, setProgress] = useState<number>(0);
+
     const handleCreate = async (
         qr: Quiz,
         qir: QIForInsert,
@@ -36,34 +45,45 @@ export function CreateButton(props: CreateQuizProps) {
     ) => {
         if (file && !url) {
             try {
-                const path = await uploadFile(file);
+                const path = await uploadFileXHR(file, setProgress)
                 dispatch({ type: actionType, payload: path });
             } catch (error) {
-                toast.error("Có lỗi xảy ra khi tải lên tệp!");
+                console.log(error)
             }
         }
     };
 
-    const validationData = (): boolean => {
-        const errors = getErrors(state);
+    function isDataValid(errors: string[]) {
         if (errors.length > 0) {
-            errors.forEach((err: any) => toast.error(err, { delay: 500 }));
+            errors.forEach((err) => toast.error(err, { delay: 500 }));
             return false;
         }
         return true;
-    };
+    }
 
-    const handlePostCreate = async () => {
-        if (validationData()) {
+    const handlePostCreate = async (progress: number) => {
+        const errors = getErrors(state);
+        if (isDataValid(errors)) {
             await handleUploadFile(
                 state.ImageFile,
                 state.ImageUrl,
                 ActionType.ChangeImageUrl
             );
-            const { qr, qir, qq } = getRecords(state);
-            await handleCreate(qr, qir, qq);
+
+            // Loop until progress reaches 100
+            while (progress < 100) {
+                console.log(progress)
+                await new Promise(resolve => setTimeout(resolve, 100)); // Wait for 100 milliseconds
+            }
+
+            toast.success("Tải file thành công");
+            const error_file = getErrorAfterUploadFile(state);
+            if (isDataValid(error_file)) {
+                const { qr, qir, qq } = getRecords(state);
+                await handleCreate(qr, qir, qq);
+            }
         }
     };
 
-    return <Button onClick={handlePostCreate}>Tạo đề</Button>;
+    return <Button onClick={() => handlePostCreate(progress)}>{progress}Tạo đề</Button>;
 }

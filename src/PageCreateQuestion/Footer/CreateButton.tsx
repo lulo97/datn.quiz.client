@@ -1,6 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { CreateQuestionProps, ActionType, getErrors, getRecords } from "../Utils";
-import { Question as IQuestion, Answer as IAnswer, QuestionInformation as IQI } from "@/InterfacesDatabase";
+import {
+    CreateQuestionProps,
+    ActionType,
+    getErrors,
+    getRecords,
+    getErrorAfterUploadFile,
+} from "../Utils";
+import {
+    Question as IQuestion,
+    Answer as IAnswer,
+    QuestionInformation as IQI,
+} from "@/InterfacesDatabase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createOne as createOneQuestion } from "../Api/Question";
@@ -9,8 +19,11 @@ import { createOne as createOneQuestionInformation } from "../Api/QuestionInform
 import { uploadFile } from "../../api/Upload";
 
 export function CreateButton({ state, dispatch }: CreateQuestionProps) {
-
-    const handleCreate = async (qr: IQuestion, qir: Omit<IQI, "CreatedAt" | "UpdatedAt">, ars: IAnswer[]) => {
+    const handleCreate = async (
+        qr: IQuestion,
+        qir: Omit<IQI, "CreatedAt" | "UpdatedAt">,
+        ars: IAnswer[]
+    ) => {
         try {
             await createOneQuestion(qr);
             await createOneQuestionInformation(qir);
@@ -24,7 +37,11 @@ export function CreateButton({ state, dispatch }: CreateQuestionProps) {
         }
     };
 
-    const handleUploadFile = async (file: File | null, url: string | null, actionType: ActionType) => {
+    const handleUploadFile = async (
+        file: File | null,
+        url: string | null,
+        actionType: ActionType
+    ) => {
         if (file && !url) {
             try {
                 const path = await uploadFile(file);
@@ -35,21 +52,32 @@ export function CreateButton({ state, dispatch }: CreateQuestionProps) {
         }
     };
 
-    const validationData = (): boolean => {
-        const errors = getErrors(state);
+    function isDataValid(errors: string[]) {
         if (errors.length > 0) {
-            errors.forEach(err => toast.error(err, { delay: 500 }));
+            errors.forEach((err) => toast.error(err, { delay: 500 }));
             return false;
         }
         return true;
-    };
+    }
 
     const handlePostCreate = async () => {
-        if (validationData()) {
-            await handleUploadFile(state.ImageFile, state.ImageUrl, ActionType.ChangeImageUrl);
-            await handleUploadFile(state.AudioFile, state.AudioUrl, ActionType.ChangeAudioUrl);
-            const { qr, qir, ars } = getRecords(state);
-            await handleCreate(qr, qir, ars);
+        const errors = getErrors(state);
+        if (isDataValid(errors)) {
+            await handleUploadFile(
+                state.ImageFile,
+                state.ImageUrl,
+                ActionType.ChangeImageUrl
+            );
+            await handleUploadFile(
+                state.AudioFile,
+                state.AudioUrl,
+                ActionType.ChangeAudioUrl
+            );
+            const errors_file = getErrorAfterUploadFile(state);
+            if (isDataValid(errors_file)) {
+                const { qr, qir, ars } = getRecords(state);
+                await handleCreate(qr, qir, ars);
+            }
         }
     };
 

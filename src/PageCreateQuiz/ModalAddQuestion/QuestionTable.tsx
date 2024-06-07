@@ -15,7 +15,7 @@ export function QuestionTable(props: CreateQuizProps) {
     function handleAddQuestion(question: QuestionDetail) {
         dispatch({ type: ActionType.AddQuestion, payload: question });
         toast.success("Thêm thành công!");
-        console.log(state)
+        console.log(state);
     }
 
     async function fetchData() {
@@ -86,6 +86,6 @@ export function QuestionTable(props: CreateQuizProps) {
 
     if (data.length === 0) return <div>Hãy chọn chủ đề</div>;
     return (
-        <QuestionDetailList columns={columns} data={data} defaultPageSize={5} />
+        <QuestionDetailList columns={columns} data={data} defaultPageSize={4} />
     );
 }

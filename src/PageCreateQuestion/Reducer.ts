@@ -41,16 +41,6 @@ export function reducer(state: QuestionDetail, action: Action) {
         }
         case ActionType.ChangeAnswer: {
             const { AnswerId, Content } = action.payload;
-            const is_content_unique = state.Answers.every((ele) => {
-                if (Content == "") return true;
-                if (ele.AnswerId == AnswerId) return true;
-                return ele.Content != Content;
-            });
-
-            if (!is_content_unique) {
-                toast.warning("Hai lựa chọn giống nhau", { delay: 100 });
-                return state;
-            }
             const _Answers = state.Answers.map((ele) => {
                 if (ele.AnswerId != AnswerId) return ele;
                 return { ...ele, Content: Content };
@@ -108,6 +98,7 @@ export function reducer(state: QuestionDetail, action: Action) {
         }
         case ActionType.ChangeImageUrl: {
             const ImageUrl: string = action.payload;
+            console.log(ImageUrl)
             return { ...state, ImageUrl: ImageUrl };
         }
         case ActionType.ChangeAudioFile: {

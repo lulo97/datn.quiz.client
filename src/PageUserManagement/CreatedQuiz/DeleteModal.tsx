@@ -10,11 +10,11 @@ import {
 import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { deleteOne } from "@/api/QuestionDetail";
-import { QuestionDetail } from "@/PageCreateQuestion/Utils";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { deleteOne } from "@/api/QuizDetail";
 
 interface DeleteModalProps {
-    record: QuestionDetail;
+    record: QuizDetail;
     fetchData: () => Promise<void>
 }
 
@@ -23,8 +23,8 @@ export function DeleteModal(props: DeleteModalProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     async function handleClick() {
-        if (record.QuestionId == "") return
-        await deleteOne(record.QuestionId)
+        if (record.QuizId == "") return
+        await deleteOne(record.QuizId)
         await fetchData()
         setIsOpen(false)
     }
@@ -40,10 +40,10 @@ export function DeleteModal(props: DeleteModalProps) {
                 </DialogHeader>
                 <div>
                     <div>
-                        <Label>Id: </Label> {record.QuestionId}
+                        <Label>Id: </Label> {record.QuizId}
                     </div>
                     <div>
-                        <Label>Câu hỏi: </Label> {record.Content}
+                        <Label>Tên đề: </Label> {record.Name}
                     </div>
                 </div>
                 <DialogFooter>

@@ -128,3 +128,9 @@ export function getImgPath(file_name: string) {
 export function getAnswerStyle(IsCorrect: boolean) {
     return IsCorrect == true ? "text-green-500" : "text-red-500"
 }
+
+export const VITE_SERVER_PATH = import.meta.env.VITE_SERVER_PATH;
+
+if (!VITE_SERVER_PATH) {
+    throw new Error("Missing VITE_SERVER_PATH");
+}

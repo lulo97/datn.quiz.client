@@ -1,7 +1,7 @@
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
-import { Action, ActionType, ICreateQuiz, getInitalState } from "./Utils";
+import { Action, ActionType, QuizDetail, getInitalState } from "./Utils";
 
-export function reducer(state: ICreateQuiz, action: Action) {
+export function reducer(state: QuizDetail, action: Action) {
     switch (action.type) {
         case ActionType.Reset: {
             return getInitalState();

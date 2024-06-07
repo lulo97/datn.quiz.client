@@ -1,24 +1,27 @@
 import { TableColumnsType } from "antd";
 import { BaseScreen } from "@/components/base_screen/BaseScreen";
 import { useEffect, useMemo, useState } from "react";
-import { QuestionDetail } from "@/PageCreateQuestion/Utils";
-import { getAllByUser } from "@/api/QuestionDetail";
 import { getOneByClerkId } from "@/api/User";
 import { User } from "@/InterfacesDatabase";
 import { useUser } from "@clerk/clerk-react";
-import { ModalCreateQuestion } from "@/components/modal_create_question/ModalCreateQuestion";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { useNavigate } from "react-router-dom";
+import { getAllByUser } from "@/api/QuizDetail";
+import { Button } from "@/components/ui/button";
 
 export function CreatedQuiz() {
-    const [data, setData] = useState<QuestionDetail[]>([]);
+    const [data, setData] = useState<QuizDetail[]>([]);
+    const navigate = useNavigate();
     const { user } = useUser();
 
     async function fetchData() {
         const ClerkId = user?.id || "";
-        const currentUser: User = await getOneByClerkId(ClerkId)
+        const currentUser: User = await getOneByClerkId(ClerkId);
         const data_fetched = await getAllByUser(currentUser.UserId);
         setData(data_fetched);
+        console.log(data);
     }
 
     useEffect(() => {
@@ -29,47 +32,49 @@ export function CreatedQuiz() {
         console.log(data.length);
     }, [data]);
 
-    const columns: TableColumnsType<QuestionDetail> = useMemo(
+    const columns: TableColumnsType<QuizDetail> = useMemo(
         () => [
             {
-                title: "Nội dung",
-                dataIndex: "Content",
+                title: "Tên",
                 sorter: true,
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.Content}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">{record.Name}</p>
+                ),
             },
             {
-                title: "Trắc nghiệm",
-                dataIndex: "Type",
+                title: "Mô tả",
                 sorter: true,
                 width: "13%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.Type?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">
+                        {record.Description || "NULL"}
+                    </p>
+                ),
             },
             {
                 title: "Chủ đề",
-                dataIndex: "SubSubject",
                 sorter: true,
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.SubSubject?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">{record.Subject?.Name}</p>
+                ),
             },
             {
                 title: "Trình độ",
-                dataIndex: "EducationLevel",
                 sorter: true,
                 width: "11%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.EducationLevel?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">
+                        {record.EducationLevel?.Name}
+                    </p>
+                ),
             },
             {
-                title: "Độ khó",
-                dataIndex: "DifficultLevel",
+                title: "Thời gian (phút)",
                 sorter: true,
-                width: "12%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.DifficultLevel?.Name}</p>)
-            },
-            {
-                title: "Ngôn ngữ",
-                dataIndex: "Language",
-                sorter: true,
-                width: "12%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.Language?.Name}</p>)
+                width: "16%",
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">{record.Time?.Value}</p>
+                ),
             },
             {
                 title: "Hành động",
@@ -93,7 +98,11 @@ export function CreatedQuiz() {
             columns={columns}
             data={data}
             defaultPageSize={6}
-            addModal={<ModalCreateQuestion />}
+            addModal={
+                <Button onClick={() => navigate("/CreateQuiz")}>
+                    Tạo đề
+                </Button>
+            }
         />
     );
 }

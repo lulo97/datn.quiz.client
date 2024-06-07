@@ -17,11 +17,11 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { ModelWidthClass, getAnswerStyle } from "@/Utils";
-import { QuestionDetail } from "@/PageCreateQuestion/Utils";
+import { ModelWidthClass } from "@/Utils";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
 interface ReadModalProps {
-    record: QuestionDetail;
+    record: QuizDetail;
     fetchData: () => Promise<void>;
 }
 
@@ -44,34 +44,18 @@ export function ReadModal(props: ReadModalProps) {
                         <TableBody>
                             <TableRow>
                                 <TableHead>Mã:</TableHead>
-                                <TableCell>{record.QuestionId}</TableCell>
+                                <TableCell>{record.QuizId}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableHead>Câu hỏi:</TableHead>
+                                <TableHead>Tên đề:</TableHead>
                                 <TableCell>
-                                    <div
-                                        dangerouslySetInnerHTML={{
-                                            __html: record.Content || "",
-                                        }}
-                                    ></div>
+                                    {record.Name}
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableHead>Lựa chọn:</TableHead>
+                                <TableHead>Mô tả:</TableHead>
                                 <TableCell>
-                                    <ul>
-                                        {record.Answers.map((ele) => {
-                                            return (
-                                                <li
-                                                    className={getAnswerStyle(
-                                                        ele.IsCorrect
-                                                    )}
-                                                >
-                                                    {ele.Content}
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
+                                    {record.Description || "NULL"}
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -81,31 +65,9 @@ export function ReadModal(props: ReadModalProps) {
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableHead>Âm thanh:</TableHead>
-                                <TableCell>
-                                    {record.AudioUrl || "NULL"}
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableHead>Giải thích:</TableHead>
-                                <TableCell>
-                                    {record.ExplainContent || "NULL"}
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableHead>Trắc nghiệm:</TableHead>
-                                <TableCell>{record.Type?.Name}</TableCell>
-                            </TableRow>
-                            <TableRow>
                                 <TableHead>Trình độ:</TableHead>
                                 <TableCell>
                                     {record.EducationLevel?.Name}
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableHead>Độ khó:</TableHead>
-                                <TableCell>
-                                    {record.DifficultLevel?.Name}
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -113,22 +75,12 @@ export function ReadModal(props: ReadModalProps) {
                                 <TableCell>{record.Subject?.Name}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableHead>Chủ đề phụ:</TableHead>
-                                <TableCell>{record.SubSubject?.Name}</TableCell>
+                                <TableHead>Thời gian:</TableHead>
+                                <TableCell>{record.Time?.Value}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableHead>Ngôn ngữ:</TableHead>
-                                <TableCell>{record.Language?.Name}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableHead>Điểm:</TableHead>
-                                <TableCell>{record.Point?.Value}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableHead>Điểm phạt:</TableHead>
-                                <TableCell>
-                                    {record.PenaltyPoint?.Value || "NULL"}
-                                </TableCell>
+                                <TableHead>Số câu:</TableHead>
+                                <TableCell>{record.Questions.length}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

@@ -12,7 +12,7 @@ export function Content(props: CreateQuizProps) {
             <Card className="p-1 bg-gray-100">
                 <div className="flex flex-col gap-10 py-5">
                     {state.Questions.length == 0 && (
-                        <div>Hãy thêm các câu hỏi</div>
+                        <div>Hãy thêm câu hỏi</div>
                     )}
                     {state.Questions.map((question, idx) => (
                         <QC

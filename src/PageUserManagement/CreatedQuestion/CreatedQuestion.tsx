@@ -16,7 +16,7 @@ export function CreatedQuestion() {
 
     async function fetchData() {
         const ClerkId = user?.id || "";
-        const currentUser: User = await getOneByClerkId(ClerkId)
+        const currentUser: User = await getOneByClerkId(ClerkId);
         const data_fetched = await getAllByUser(currentUser.UserId);
         setData(data_fetched);
     }
@@ -33,43 +33,57 @@ export function CreatedQuestion() {
         () => [
             {
                 title: "Nội dung",
-                dataIndex: "Content",
                 sorter: true,
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.Content}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">
+                        <div
+                            dangerouslySetInnerHTML={{ __html: record.Content || "" }}
+                        ></div>
+                    </p>
+                ),
             },
             {
                 title: "Trắc nghiệm",
-                dataIndex: "Type",
                 sorter: true,
                 width: "13%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.Type?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">{record.Type?.Name}</p>
+                ),
             },
             {
                 title: "Chủ đề",
-                dataIndex: "SubSubject",
                 sorter: true,
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.SubSubject?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">{record.SubSubject?.Name}</p>
+                ),
             },
             {
                 title: "Trình độ",
-                dataIndex: "EducationLevel",
                 sorter: true,
                 width: "11%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.EducationLevel?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">
+                        {record.EducationLevel?.Name}
+                    </p>
+                ),
             },
             {
                 title: "Độ khó",
-                dataIndex: "DifficultLevel",
                 sorter: true,
                 width: "12%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.DifficultLevel?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">
+                        {record.DifficultLevel?.Name}
+                    </p>
+                ),
             },
             {
                 title: "Ngôn ngữ",
-                dataIndex: "Language",
                 sorter: true,
                 width: "12%",
-                render: (_item, record, _index) => (<p className="line-clamp-1">{record.Language?.Name}</p>)
+                render: (_item, record, _index) => (
+                    <p className="line-clamp-1">{record.Language?.Name}</p>
+                ),
             },
             {
                 title: "Hành động",

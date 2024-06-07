@@ -95,7 +95,7 @@ export function getInitalState(): QuestionDetail {
             getNewAnswer(QuestionId, false),
         ],
         ExplainContent: null,
-        ExplainAllow: true,
+        ExplainAllow: false,
         ImageFile: null,
         ImageUrl: null,
         AudioFile: null,
@@ -115,7 +115,14 @@ export function getInitalState(): QuestionDetail {
     };
 }
 
-export function getErrors(state: QuestionDetail): string[] {
+export function getErrorAfterUploadFile(state: QuestionDetail) {
+    const errors = []
+    if (!state.ImageUrl && state.ImageFile) errors.push("Lỗi tải ảnh!");
+    if (!state.AudioUrl && state.AudioFile) errors.push("Lỗi tải âm thanh!");
+    return errors
+}
+
+export function getErrors(state: QuestionDetail) {
     const errors = [];
     if (!state.Content) errors.push("Thiếu trường câu hỏi!");
     if (!state.Answers) errors.push("Thiếu trường đáp án!");

@@ -10,6 +10,7 @@ interface AnswerProps extends CreateQuestionProps {
 
 import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "react-toastify";
 
 export function Answer(props: AnswerProps) {
     const { answer, state, dispatch } = props;
@@ -19,6 +20,18 @@ export function Answer(props: AnswerProps) {
     }
 
     function handleChangeAnswer(AnswerId: string, NewContent: string) {
+
+        const is_content_unique = state.Answers.every((ele) => {
+            if (NewContent == "") return true;
+            if (ele.AnswerId == AnswerId) return true;
+            return ele.Content != NewContent;
+        });
+
+        if (!is_content_unique) {
+            toast.warning("Hai lựa chọn giống nhau", { delay: 100 });
+            return;
+        }
+
         dispatch({
             type: ActionType.ChangeAnswer,
             payload: {
