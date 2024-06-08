@@ -5,53 +5,53 @@ export const data = [
     {
         Name: "Tạo 100 đề",
         Description: "Người dùng tạo 100 đề",
-        CreateAt: "07/05/2024",
+        CreatedAt: "07/05/2024",
     },
     {
         Name: "Làm 100 đề",
         Description: "Người dùng làm 100 đề",
-        CreateAt: "02/03/2023",
+        CreatedAt: "02/03/2023",
     },
     {
         Name: "Đạt 90 điểm",
         Description: "Người dùng đạt 90 điểm trong bài kiểm tra",
-        CreateAt: "10/10/2023",
+        CreatedAt: "10/10/2023",
     },
     {
         Name: "Thành tích top 10",
         Description: "Người dùng đạt top 10 trong cuộc thi",
-        CreateAt: "15/11/2023",
+        CreatedAt: "15/11/2023",
     },
     {
         Name: "Hoàn thành 50 câu hỏi",
         Description: "Người dùng đã hoàn thành 50 câu hỏi trong 1 giờ",
-        CreateAt: "20/12/2023",
+        CreatedAt: "20/12/2023",
     },
     // Add more achievements here
     {
         Name: "Thành tích hàng tháng",
         Description: "Người dùng đạt thành tích hàng tháng",
-        CreateAt: "01/01/2024",
+        CreatedAt: "01/01/2024",
     },
     {
         Name: "Hoàn thành mục tiêu năm",
         Description: "Người dùng hoàn thành mục tiêu năm trong bài kiểm tra",
-        CreateAt: "05/02/2024",
+        CreatedAt: "05/02/2024",
     },
     {
         Name: "Vượt qua 10 bài kiểm tra",
         Description: "Người dùng vượt qua 10 bài kiểm tra khó",
-        CreateAt: "10/03/2024",
+        CreatedAt: "10/03/2024",
     },
     {
         Name: "Thành tích hàng tuần",
         Description: "Người dùng đạt thành tích hàng tuần",
-        CreateAt: "15/04/2024",
+        CreatedAt: "15/04/2024",
     },
     {
         Name: "Hoàn thành khóa học",
         Description: "Người dùng hoàn thành khóa học trên nền tảng",
-        CreateAt: "20/05/2024",
+        CreatedAt: "20/05/2024",
     },
 ];
 
@@ -70,7 +70,7 @@ export const columns: TableColumnsType<DataType> = [
     },
     {
         title: "Ngày tạo",
-        dataIndex: "CreateAt",
+        dataIndex: "CreatedAt",
         sorter: true,
     },
 ];

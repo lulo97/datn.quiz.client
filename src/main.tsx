@@ -42,9 +42,6 @@ export const components = [
     CreateQuestion,
     Homepage,
     CreateQuiz,
-    QuizPlayTime,
-    QuizResultRevise,
-    QuizResultTime,
     AdminManagement,
     UserManagement,
     ExportPdf,
@@ -78,6 +75,21 @@ browser_routes.push({
     element: <QuizPlayRevise />,
 });
 
+browser_routes.push({
+    path: "/QuizResultRevise/:QuizId",
+    element: <QuizResultRevise />,
+});
+
+browser_routes.push({
+    path: "/QuizPlayTime/:QuizId/:Sort",
+    element: <QuizPlayTime />,
+});
+
+browser_routes.push({
+    path: "/QuizResultTime/:PlayId",
+    element: <QuizResultTime />,
+});
+
 smi.forEach((ele) => {
     browser_routes.push({
         path: `/subject/${ele.UrlName}`,
@@ -100,8 +112,10 @@ const router = createBrowserRouter([
     },
 ]);
 
+//Because of localStorage in QuizPlayTime, it has to disable StrictMode to make it work
+//Detail is in reducer action change answers
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <React.StrictMode>
+    //<React.StrictMode>
         <RouterProvider router={router} />
-    </React.StrictMode>
+    //</React.StrictMode>
 );

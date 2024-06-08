@@ -146,3 +146,24 @@ const SCQCheckBoxClass =
 export function getCheckBoxClass(TypeName: string | undefined) {
     return TypeName == MCQ ? MCQCheckBoxClass : SCQCheckBoxClass;
 }
+
+export const SORT = {
+    REVISE_DEFAULT: "REVISE_DEFAULT",
+    REVISE_EASY: "REVISE_EASY",
+    REVISE_HARD: "REVISE_HARD",
+    TIME_DEFAULT: "TIME_DEFAULT",
+    TIME_QUESTION: "TIME_QUESTION",
+    TIME_QA: "TIME_QA",
+};
+
+export function shuffle<T>(array: T[]): T[] {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+export function nowSecond() {
+    return Math.floor(Date.now() / 1000);
+}

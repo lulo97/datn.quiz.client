@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getRandomWallpaper } from "@/Utils";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
 function QuizResultCard() {
     return (
@@ -58,7 +59,7 @@ function QuizResultCard() {
     );
 }
 
-export function Content() {
+export function Content(Quiz: QuizDetail) {
     return (
         <div>
             <Card className="bg-gray-200">

@@ -1,16 +1,13 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
-
-export enum Sort {
-    EASY,
-    HARD,
-}
+import { QuizDetail, getInitalState } from "@/PageCreateQuiz/Utils";
 
 export enum ActionType {
     ChangeQuiz,
+    Sort,
+    QuestionNumber,
     ChangeQuestionIdx,
     ChangeSelectedAnswer,
     ChangeExplain,
-    ChangeResponse
+    InitialResponse,
 }
 
 export interface Action {
@@ -18,16 +15,14 @@ export interface Action {
     payload: any;
 }
 
-
-
 export interface Revise {
-    Quiz: QuizDetail | null;
+    Quiz: QuizDetail;
     QuestionIdx: 0;
     Response: {
-        QuestionId: string,
-        SelectedAnswers: string[],
-        ShowExplaination: boolean
-    }[]
+        QuestionId: string;
+        SelectedAnswers: string[];
+        ShowExplaination: boolean;
+    }[];
 }
 
 export interface ReviseProps {
@@ -37,8 +32,8 @@ export interface ReviseProps {
 
 export function getInitialState(): Revise {
     return {
-        Quiz: null,
+        Quiz: getInitalState(),
         QuestionIdx: 0,
-        Response: []
-    }
+        Response: [],
+    };
 }

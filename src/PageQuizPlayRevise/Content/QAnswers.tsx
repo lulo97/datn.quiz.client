@@ -25,10 +25,12 @@ export function QAnswers({ state, dispatch }: ReviseProps) {
                     CorrectClass = "bg-green-200";
                 }
 
+                let IsShow = Response.ShowExplaination ? CorrectClass : ""
+
                 return (
                     <div
                         key={answer.AnswerId}
-                        className={`${CorrectClass} pl-2 rounded-lg flex gap-5 justify-start items-center`}
+                        className={`${IsShow} pl-2 rounded-lg flex gap-5 justify-start items-center`}
                     >
                         <Checkbox
                             onClick={() => handleCheckboxClick(answer.AnswerId)}

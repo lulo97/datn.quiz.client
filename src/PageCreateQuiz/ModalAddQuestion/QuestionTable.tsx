@@ -15,7 +15,6 @@ export function QuestionTable(props: CreateQuizProps) {
     function handleAddQuestion(question: QuestionDetail) {
         dispatch({ type: ActionType.AddQuestion, payload: question });
         toast.success("Thêm thành công!");
-        console.log(state);
     }
 
     async function fetchData() {
@@ -30,7 +29,7 @@ export function QuestionTable(props: CreateQuizProps) {
     }, [state.Subject]);
 
     useEffect(() => {
-        console.log(data.length, 123);
+        console.log(data.length);
     }, [data]);
 
     const columns: TableColumnsType<QuestionDetail> = useMemo(

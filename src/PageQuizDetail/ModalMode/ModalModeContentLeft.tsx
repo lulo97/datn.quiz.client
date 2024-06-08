@@ -1,4 +1,5 @@
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { SORT } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -17,8 +18,12 @@ import {
     SelectGroup,
     SelectItem,
 } from "@/components/ui/select";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function ModalModeContentLeft(quiz: QuizDetail) {
+    const navigate = useNavigate()
+    const [sort, setSort] = useState(SORT.TIME_DEFAULT);
     return (
         <Card className="w-1/2">
             <CardHeader>
@@ -30,19 +35,19 @@ export function ModalModeContentLeft(quiz: QuizDetail) {
             </CardHeader>
             <CardContent>
                 <Label>Chế độ trộn</Label>
-                <Select>
+                <Select onValueChange={(value) => setSort(value)}>
                     <SelectTrigger>
                         <SelectValue placeholder="Mặc định" />
                     </SelectTrigger>
                     <SelectContent>
                         <SelectGroup>
-                            <SelectItem value="sort-default">
+                            <SelectItem value={SORT.TIME_DEFAULT}>
                                 Mặc định
                             </SelectItem>
-                            <SelectItem value="sort-question">
+                            <SelectItem value={SORT.TIME_QUESTION}>
                                 Trộn câu hỏi
                             </SelectItem>
-                            <SelectItem value="sort-question-answer">
+                            <SelectItem value={SORT.TIME_QA}>
                                 Trộn câu hỏi và phương án
                             </SelectItem>
                         </SelectGroup>
@@ -50,7 +55,16 @@ export function ModalModeContentLeft(quiz: QuizDetail) {
                 </Select>
             </CardContent>
             <CardFooter>
-                <Button className="w-full">Tính giờ</Button>
+                <Button
+                    onClick={() =>
+                        navigate(
+                            `/QuizPlayTime/${quiz.QuizId}/${sort}`
+                        )
+                    }
+                    className="w-full"
+                >
+                    Tính giờ
+                </Button>
             </CardFooter>
         </Card>
     );

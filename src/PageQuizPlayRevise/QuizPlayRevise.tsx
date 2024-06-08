@@ -16,19 +16,23 @@ import { ActionType, getInitialState } from "./Utils";
 
 export function QuizPlayRevise() {
     const { QuizId, QuestionNum, Sort } = useParams();
-
     const [state, dispatch] = useReducer(reducer, getInitialState());
 
     useEffect(() => {
         async function fetchData() {
             const data = await getOne(QuizId || "");
             dispatch({ type: ActionType.ChangeQuiz, payload: data });
-            dispatch({ type: ActionType.ChangeResponse, payload: data });
+            dispatch({ type: ActionType.Sort, payload: Sort });
+            dispatch({
+                type: ActionType.QuestionNumber,
+                payload: QuestionNum,
+            });
+            dispatch({ type: ActionType.InitialResponse, payload: null });
         }
         fetchData();
     }, []);
 
-    if (!state.Quiz) return "Đang tải";
+    if (!state.Quiz) return <div>Đang tải</div>;
 
     return (
         <div className={CardParentClass}>

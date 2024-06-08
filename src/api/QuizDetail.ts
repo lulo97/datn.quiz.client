@@ -22,7 +22,6 @@ export async function deleteOne(QuizId: string) {
             headers: MY_HEADER,
             body: JSON.stringify({ QuizId: QuizId }),
         });
-        console.log(response)
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
         }

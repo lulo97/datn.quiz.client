@@ -12,8 +12,9 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/Utils";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
-export function HeaderRight() {
+export function HeaderRight(Quiz: QuizDetail) {
     return (
         <div className="w-1/3 flex flex-col gap-3">
             <Card>

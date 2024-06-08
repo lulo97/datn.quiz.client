@@ -99,7 +99,6 @@ export function reducer(state: QuestionDetail, action: Action) {
         }
         case ActionType.ChangeImageUrl: {
             const ImageUrl: string = action.payload;
-            console.log(ImageUrl);
             return { ...state, ImageUrl: ImageUrl };
         }
         case ActionType.ChangeAudioFile: {

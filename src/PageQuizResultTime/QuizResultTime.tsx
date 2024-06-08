@@ -8,8 +8,10 @@ import {
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 import { Content } from "./Content/Content";
+import { useParams } from "react-router-dom";
 
 export function QuizResultTime() {
+    const { PlayId } = useParams();
     return (
         <div className={CardParentClass}>
             <Card>

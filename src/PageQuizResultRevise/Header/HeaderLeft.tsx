@@ -1,4 +1,5 @@
-import { getRandomWallpaper } from "@/Utils";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { BACKEND_URL, VITE_SERVER_PATH, getRandomWallpaper } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -8,21 +9,33 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { useState, useEffect } from "react";
 
-export function HeaderLeft() {
+export function HeaderLeft(Quiz: QuizDetail) {
+    const API_URL = BACKEND_URL + "public/Image/DummyImage.png";
+    const [imageSrc, setImageSrc] = useState<string>(API_URL);
+
+    useEffect(() => {
+        if (Quiz.ImageUrl) {
+            setImageSrc(VITE_SERVER_PATH + Quiz.ImageUrl);
+        } else {
+            setImageSrc(API_URL);
+        }
+    }, [Quiz.ImageUrl]);
+
     return (
         <div className="w-2/3">
             <Card className="min-h-full">
                 <CardHeader>
-                    <CardTitle>Đề toán lớp 12 chương Hàm Số</CardTitle>
-                    <CardDescription>
-                        Khảo sát sự biến thiên và vẽ đồ thị hàm số lớp 12
+                    <CardTitle>{Quiz.Name}</CardTitle>
+                    <CardDescription> 
+                        {Quiz.Description? Quiz.Description : Quiz.Name}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <img
                         className="object-contain rounded-lg"
-                        src={getRandomWallpaper()}
+                        src={imageSrc}
                     ></img>
                 </CardContent>
                 <CardFooter className="flex gap-5 justify-between">

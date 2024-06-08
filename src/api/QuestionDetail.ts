@@ -22,7 +22,6 @@ export async function deleteOne(QuestionId: string) {
             headers: MY_HEADER,
             body: JSON.stringify({ QuestionId: QuestionId }),
         });
-        console.log(response)
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
         }

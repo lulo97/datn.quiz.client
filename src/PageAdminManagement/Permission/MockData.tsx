@@ -5,12 +5,12 @@ export const data = [
     {
         Name: "Xóa người dùng",
         Description: "Người dùng có thể xóa người dùng khác",
-        CreateAt: "07/05/2024",
+        CreatedAt: "07/05/2024",
     },
     {
         Name: "Xem báo cáo",
         Description: "Người dùng có thể xem các báo cáo được gửi về",
-        CreateAt: "02/03/2023",
+        CreatedAt: "02/03/2023",
     },
 ];
 
@@ -29,7 +29,7 @@ export const columns: TableColumnsType<DataType> = [
     },
     {
         title: "Ngày tạo",
-        dataIndex: "CreateAt",
+        dataIndex: "CreatedAt",
         sorter: true,
     },
 ];

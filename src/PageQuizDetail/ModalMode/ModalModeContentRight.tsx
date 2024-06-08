@@ -8,19 +8,16 @@ import {
     CardContent,
     CardFooter,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import {
-    Select,
-    SelectTrigger,
-    SelectValue,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-} from "@/components/ui/select";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { SelectQuestionNumber } from "./SelectQuestionNumber";
+import { SortEasyHard } from "./SortEasyHard";
+import { useState } from "react";
+import { SORT } from "@/Utils";
 
 export function ModalModeContentRight(quiz: QuizDetail) {
     const navigate = useNavigate();
+    const [QuestionNumber, setQuestionNumber] = useState(quiz.Questions.length);
+    const [Sort, setSort] = useState(SORT.REVISE_EASY);
     return (
         <Card className="w-1/2">
             <CardHeader>
@@ -32,49 +29,19 @@ export function ModalModeContentRight(quiz: QuizDetail) {
             </CardHeader>
             <CardContent>
                 <div className="flex w-full gap-3">
-                    <div className="w-full">
-                        <Label>Số câu</Label>
-                        <Select>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Số câu" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value="5">5</SelectItem>
-                                    <SelectItem value="10">10</SelectItem>
-                                    <SelectItem value="20">20</SelectItem>
-                                    <SelectItem value="40">40</SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <div className="w-full">
-                        <Label>Lọc độ khó</Label>
-                        <Select>
-                            <SelectTrigger>
-                                <SelectValue placeholder="Mặc định" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectGroup>
-                                    <SelectItem value="default">
-                                        Mặc định
-                                    </SelectItem>
-                                    <SelectItem value="easy_first">
-                                        Dễ nhất trước
-                                    </SelectItem>
-                                    <SelectItem value="hard_first">
-                                        Khó nhất trước
-                                    </SelectItem>
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
+                    <SelectQuestionNumber
+                        setQuestionNumber={setQuestionNumber}
+                        TotalQuestionNumber={quiz.Questions.length}
+                    />
+                    <SortEasyHard setSort={setSort} />
                 </div>
             </CardContent>
             <CardFooter>
                 <Button
                     onClick={() =>
-                        navigate(`/QuizPlayRevise/${quiz.QuizId}/${quiz.Questions.length}/easy`)
+                        navigate(
+                            `/QuizPlayRevise/${quiz.QuizId}/${QuestionNumber}/${Sort}`
+                        )
                     }
                     className="w-full"
                 >

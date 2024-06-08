@@ -4,7 +4,7 @@ export function QExplain(props: ReviseProps) {
     const { state, dispatch } = props;
     const question = state.Quiz?.Questions[state.QuestionIdx];
 
-    if (!state.Response[state.QuestionIdx].ShowExplaination) return;
+    //if (!state.Response[state.QuestionIdx].ShowExplaination) return;
 
     return (
         <div className="flex items-center">

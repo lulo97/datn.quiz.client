@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import { ModelWidthClass } from "@/Utils";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { useNavigate } from "react-router-dom";
 
 interface ReadModalProps {
     record: QuizDetail;
@@ -26,6 +27,7 @@ interface ReadModalProps {
 }
 
 export function ReadModal(props: ReadModalProps) {
+    const navigate = useNavigate();
     const { record } = props;
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -43,14 +45,28 @@ export function ReadModal(props: ReadModalProps) {
                     <Table>
                         <TableBody>
                             <TableRow>
+                                <TableHead>URL:</TableHead>
+                                <TableCell>
+                                    <Button
+                                        className="p-0 m-0 h-fit"
+                                        onClick={() =>
+                                            navigate(
+                                                `/QuizDetail/${record.QuizId}`
+                                            )
+                                        }
+                                        variant="link"
+                                    >
+                                        Link
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
                                 <TableHead>Mã:</TableHead>
                                 <TableCell>{record.QuizId}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableHead>Tên đề:</TableHead>
-                                <TableCell>
-                                    {record.Name}
-                                </TableCell>
+                                <TableCell>{record.Name}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableHead>Mô tả:</TableHead>

@@ -19,7 +19,6 @@ export function QuizDetail() {
     async function fetchData() {
         const data = await getOne(QuizId || "");
         setQuiz(data);
-        console.log(data)
     }
     useEffect(() => {
         fetchData();

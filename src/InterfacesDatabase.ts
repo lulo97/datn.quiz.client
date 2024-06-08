@@ -141,15 +141,15 @@ export interface Play {
     PlayId: string;
     UserId: string;
     QuizId: string;
-    RoomId: string;
-    StartTime: string;
-    EndTime: string;
+    RoomId: string | null;
+    StartTime: number;
+    SubmitTime: number;
     Score: number;
-    CreateAt: string;
+    CreatedAt: string;
 }
 
 export interface SelectedAnswer {
-    SelectedAnswersId: string;
+    SelectedAnswerId: string;
     PlayId: string;
     AnswerId: string;
 }
@@ -212,7 +212,7 @@ export interface Room {
     StartTime: string;
     EndTime: string;
     Capacity: number;
-    CreateAt: string;
+    CreatedAt: string;
 }
 
 export interface UserInRoom {

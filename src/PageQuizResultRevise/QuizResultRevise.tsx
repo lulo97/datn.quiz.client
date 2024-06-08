@@ -8,19 +8,35 @@ import {
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 import { Content } from "./Content/Content";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getOne } from "@/api/QuizDetail";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
 export function QuizResultRevise() {
+    const { QuizId } = useParams();
+    const [Quiz, setQuiz] = useState<QuizDetail>();
+    useEffect(() => {
+        async function fetchData() {
+            const data = await getOne(QuizId || "");
+            setQuiz(data);
+        }
+        fetchData();
+    }, []);
+
+    if (!Quiz) return <div>Đang tải</div>;
+
     return (
         <div className={CardParentClass}>
             <Card>
                 <CardHeader>
-                    <Header />
+                    <Header {...Quiz} />
                 </CardHeader>
                 <CardContent>
-                    <Content />
+                    <Content {...Quiz} />
                 </CardContent>
                 <CardFooter>
-                    <Footer />
+                    <Footer {...Quiz} />
                 </CardFooter>
             </Card>
         </div>
