@@ -25,7 +25,7 @@ export function QAnswers({ state, dispatch }: ReviseProps) {
                     CorrectClass = "bg-green-200";
                 }
 
-                let IsShow = Response.ShowExplaination ? CorrectClass : ""
+                let IsShow = Response.ShowExplanation ? CorrectClass : "";
 
                 return (
                     <div

@@ -21,7 +21,7 @@ export interface Revise {
     Response: {
         QuestionId: string;
         SelectedAnswers: string[];
-        ShowExplaination: boolean;
+        ShowExplanation: boolean;
     }[];
 }
 

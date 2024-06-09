@@ -37,6 +37,7 @@ import { RootLayout } from "./layouts/RootLayout";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { SignInPage } from "./PageSignIn/PageSignIn";
 import { SignUpPage } from "./PageSignUp/PageSignUp";
+import { AI } from "./PageAI/AI";
 
 export const components = [
     CreateQuestion,
@@ -53,6 +54,7 @@ export const components = [
     RoomJoin,
     RoomView,
     RoomRanking,
+    AI
 ];
 
 const browser_routes = components.map((Component) => ({

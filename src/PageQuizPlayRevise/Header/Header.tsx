@@ -3,17 +3,17 @@ import { Label } from "@/components/ui/label";
 import { ActionType, ReviseProps } from "../Utils";
 export function Header(props: ReviseProps) {
     const { state, dispatch } = props;
-    let ShowExplaination = false;
+    let ShowExplanation = false;
     let Correct = 0;
     let Incorrect = 0;
     if (state.Response.length > 0 || state.Quiz.Questions.length > 0) {
         const question = state.Response[state.QuestionIdx];
-        ShowExplaination = question.ShowExplaination;
+        ShowExplanation = question.ShowExplanation;
         Correct = state.Quiz.Questions[state.QuestionIdx].CorrectUserCount;
         Incorrect = state.Quiz.Questions[state.QuestionIdx].IncorrectUserCount;
     }
 
-    function handleShowExplaination() {
+    function handleShowExplanation() {
         dispatch({ type: ActionType.ChangeExplain, payload: null });
     }
 
@@ -23,7 +23,7 @@ export function Header(props: ReviseProps) {
                 Câu số: {state.QuestionIdx + 1}/{state.Quiz?.Questions.length}
             </Label>
             <div className="flex justify-between items-center gap-5">
-                {ShowExplaination && (
+                {ShowExplanation && (
                     <div className="flex gap-3">
                         <Label>Số người trả lời: {Correct + Incorrect}</Label>
                         <Label>
@@ -35,7 +35,7 @@ export function Header(props: ReviseProps) {
                         </Label>
                     </div>
                 )}
-                <Button onClick={handleShowExplaination}>Hiện đáp án</Button>
+                <Button onClick={handleShowExplanation}>Hiện đáp án</Button>
             </div>
         </div>
     );

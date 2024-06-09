@@ -140,6 +140,13 @@ if (!VITE_SERVER_PATH) {
     throw new Error("Missing VITE_SERVER_PATH");
 }
 
+export const VITE_OPENAI_KEY = import.meta.env.VITE_OPENAI_KEY;
+
+if (!VITE_OPENAI_KEY) {
+    throw new Error("Missing VITE_OPENAI_KEY");
+}
+
+
 export const SCQ = "Một đáp án";
 export const MCQ = "Nhiều đáp án";
 

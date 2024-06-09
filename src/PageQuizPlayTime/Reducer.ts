@@ -4,7 +4,7 @@ import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 
 // Function to update local storage
 function updateLocalStorage(data: PlayTime) {
-    localStorage.clear()
+    localStorage.clear();
     localStorage.removeItem(LocalPlaying);
     localStorage.setItem(LocalPlaying, JSON.stringify(data));
     window.dispatchEvent(new Event("storage"));
@@ -42,7 +42,7 @@ export function reducer(state: PlayTime, action: Action): PlayTime {
                         (question) => ({
                             QuestionId: question.QuestionId,
                             SelectedAnswers: [],
-                            ShowExplaination: false,
+                            ShowExplanation: false,
                         })
                     );
 

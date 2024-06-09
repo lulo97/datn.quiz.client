@@ -46,7 +46,7 @@ export function reducer(state: Revise, action: Action): Revise {
             const Response = state.Quiz?.Questions.map((ele) => ({
                 QuestionId: ele.QuestionId,
                 SelectedAnswers: [],
-                ShowExplaination: false,
+                ShowExplanation: false,
             }));
             return { ...state, Response: Response };
         }
@@ -86,7 +86,7 @@ export function reducer(state: Revise, action: Action): Revise {
             if (!Question) return state;
             let Response = state.Response.map((ele) => {
                 if (ele.QuestionId == Question.QuestionId) {
-                    return { ...ele, ShowExplaination: !ele.ShowExplaination };
+                    return { ...ele, ShowExplanation: !ele.ShowExplanation };
                 }
                 return ele;
             });
