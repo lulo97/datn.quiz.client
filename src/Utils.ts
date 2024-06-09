@@ -45,7 +45,8 @@ export function getRandomAvatar() {
 }
 
 export function getRandomWallpaper() {
-    return "https://random.imagecdn.app/1920/1080";
+    const API_URL = BACKEND_URL + "public/Image/DummyImage.png";
+    return API_URL;
 }
 
 export function getDummyImage() {
@@ -129,6 +130,10 @@ export function getAnswerStyle(IsCorrect: boolean) {
     return IsCorrect == true ? "text-green-500" : "text-red-500";
 }
 
+export function getAnswerStyleBG(IsCorrect: boolean) {
+    return IsCorrect == true ? "bg-green-200" : "bg-red-200";
+}
+
 export const VITE_SERVER_PATH = import.meta.env.VITE_SERVER_PATH;
 
 if (!VITE_SERVER_PATH) {
@@ -167,3 +172,20 @@ export function shuffle<T>(array: T[]): T[] {
 export function nowSecond() {
     return Math.floor(Date.now() / 1000);
 }
+
+export function MySQLDatetimeFormat(dateStr: string) {
+    const date = new Date(dateStr);
+    return new Intl.DateTimeFormat("vi-VI", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+    })
+        .format(date)
+        .replace("lúc", "");
+}
+
+export const GREEN500_HEX = "#16a34a"
+export const RED500_HEX = "#dc2626"

@@ -163,13 +163,12 @@ export interface Like {
 
 export interface Comment {
     CommentId: string;
-    ParentId: string;
+    ParentCommentId: string;
+    QuizId: string;
     CreateUserId: string;
     CreatedAt: string;
     UpdatedAt: string;
     Content: string;
-    UpvoteCount: number;
-    DownvoteCount: number;
 }
 
 export interface UpvoteComment {

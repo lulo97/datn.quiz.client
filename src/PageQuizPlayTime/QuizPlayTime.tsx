@@ -30,7 +30,7 @@ export function QuizPlayTime() {
     const { QuizId, Sort } = useParams();
     const { user } = useUser();
     const navigate = useNavigate();
-    const SubmitPath = `/QuizResultTime/TodoAddPlayIdToThis`;
+
     const [temp_state, dispatch] = useReducer(reducer, getInitialState());
     //LocalStorage does change but using useState to render that change
     const [state, setState] = useState<PlayTime>();
@@ -86,12 +86,12 @@ export function QuizPlayTime() {
                 await createOnePlay(pr);
                 for (const answer of sa) {
                     await createOneSelectedAnswer(answer);
+                    const SubmitPath = `/QuizResultTime/${pr.PlayId}`;
+                    localStorage.clear();
+                    toast.success("Hết giờ!");
+                    navigate(SubmitPath);
                 }
             }
-
-            localStorage.clear();
-            toast.success("Hết giờ!");
-            navigate(SubmitPath);
         } catch (error) {
             console.error(error);
             toast.warning("Nộp bài thất bại!");

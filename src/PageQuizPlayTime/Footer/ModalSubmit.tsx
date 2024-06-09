@@ -22,7 +22,7 @@ import { toast } from "react-toastify";
 export function ModalSubmit(props: PlayTimeProps) {
     const { state, dispatch } = props;
     const navigate = useNavigate();
-    const SubmitPath = `/QuizResultTime/TodoAddPlayIdToThis`;
+
     const { user } = useUser();
 
     async function CreatePlay() {
@@ -36,12 +36,12 @@ export function ModalSubmit(props: PlayTimeProps) {
                 await createOnePlay(pr);
                 for (const answer of sa) {
                     await createOneSelectedAnswer(answer);
+                    const SubmitPath = `/QuizResultTime/${pr}`;
+                    localStorage.clear();
+                    toast.success("Nộp bài thành công!");
+                    navigate(SubmitPath);
                 }
             }
-
-            localStorage.clear();
-            toast.success("Nộp bài thành công!");
-            navigate(SubmitPath);
         } catch (error) {
             console.error(error);
             toast.warning("Nộp bài thất bại!");

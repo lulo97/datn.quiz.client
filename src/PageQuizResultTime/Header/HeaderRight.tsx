@@ -12,8 +12,13 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/Utils";
+import { PlayDetail, getTotalCorrectCount } from "../Utils";
 
-export function HeaderRight() {
+export function HeaderRight(data: PlayDetail) {
+    const count = getTotalCorrectCount(data);
+    const StartT = new Date(data.StartTime)
+    const SubmitT = new Date(data.SubmitTime)
+    const TimeTaken = SubmitT.getTime() - StartT.getTime()
     return (
         <div className="w-1/3 flex flex-col gap-3">
             <Card>
@@ -23,13 +28,18 @@ export function HeaderRight() {
                 <CardContent>
                     <ul>
                         <li>
-                            <Label>Số câu đúng: </Label>8/10
+                            <Label>Số câu đúng: </Label>
+                            {count}/{data.Quiz.Questions.length}
                         </li>
                         <li>
-                            <Label>Số điểm: </Label>1200
+                            <Label>Số điểm: </Label>
+                            {data.Score}
                         </li>
                         <li>
-                            <Label>Thời gian: </Label>270/300s
+                            <Label>Thời gian: </Label>{TimeTaken/1000}/300s
+                        </li>
+                        <li>
+                            <Label>Hạng 111 trên 120 người thi </Label>
                         </li>
                     </ul>
                 </CardContent>
