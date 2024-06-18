@@ -32,7 +32,7 @@ export function CommentInput(props: CommentSectionProps) {
     }
 
     return (
-        <div className="mt-1 border p-2 rounded-lg">
+        <div className="mt-1 border p-2 rounded-lg w-full">
             <div className="flex items-center justify-between gap-1">
                 <Avatar className="border">
                     <AvatarImage src={currentUser.ImageUrl || API_URL} />

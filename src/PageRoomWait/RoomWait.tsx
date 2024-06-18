@@ -7,12 +7,10 @@ import { Header } from "./Header/Header";
 
 export function RoomWait() {
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header />
                 </CardHeader>
             </Card>
-        </div>
     );
 }

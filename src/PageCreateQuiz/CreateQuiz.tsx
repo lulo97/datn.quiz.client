@@ -32,8 +32,8 @@ export function CreateQuiz() {
     }, []);
 
     return (
-        <div className={CardParentClass}>
-            <Card className="mb-16">
+        <div className="flex flex-1 mb-16">
+            <Card className="flex-1">
                 <CardHeader>
                     <Header state={state} dispatch={dispatch} />
                 </CardHeader>

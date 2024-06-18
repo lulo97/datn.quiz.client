@@ -21,7 +21,6 @@ export function AI() {
         Output: null
     });
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header />
@@ -33,6 +32,5 @@ export function AI() {
                     <Footer state={state} setState={setState} />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

@@ -15,7 +15,6 @@ interface SubjectProps {
 export function QuizSubject(props: SubjectProps) {
     const { SubjectId } = props;
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <CardTitle>{SubjectId}</CardTitle>
@@ -32,6 +31,5 @@ export function QuizSubject(props: SubjectProps) {
                 </CardContent>
                 <CardFooter>Footer</CardFooter>
             </Card>
-        </div>
     );
 }

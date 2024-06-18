@@ -4,8 +4,7 @@ import { Card } from "@/components/ui/card";
 
 export function App() {
     return (
-        <div>
-            <Card className="p-2">
+            <Card className="flex-1">
                 <ul>
                     {components.map((ele) => (
                         <li key={ele.name}>
@@ -14,6 +13,5 @@ export function App() {
                     ))}
                 </ul>
             </Card>
-        </div>
     );
 }

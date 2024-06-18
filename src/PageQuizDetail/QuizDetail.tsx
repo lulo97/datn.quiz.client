@@ -27,7 +27,6 @@ export function QuizDetail() {
     if (quiz == undefined) return "Đang tải";
 
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header {...quiz} />
@@ -39,6 +38,5 @@ export function QuizDetail() {
                     <Footer {...quiz} />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

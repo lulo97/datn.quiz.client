@@ -11,7 +11,6 @@ import { Content } from "./Content/Content";
 
 export function RoomRanking() {
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header />
@@ -23,6 +22,5 @@ export function RoomRanking() {
                     <Footer />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

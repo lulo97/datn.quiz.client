@@ -23,11 +23,11 @@ const editorOptions = {
 };
 
 interface FooterProps extends CreateQuestionProps {
-    is_in_quiz?: boolean;
+    IsInModal?: boolean;
 }
 
 export function Footer(props: FooterProps) {
-    const { state, dispatch, is_in_quiz } = props;
+    const { state, dispatch, IsInModal } = props;
 
     function handleChangeExplain(content: string) {
         dispatch({ type: ActionType.ChangeExplain, payload: content });
@@ -68,10 +68,10 @@ export function Footer(props: FooterProps) {
                         />
                     </div>
                 </div>
-                {!is_in_quiz && (
+                {!IsInModal && (
                     <CreateButton state={state} dispatch={dispatch} />
                 )}
-                {is_in_quiz && <Button>Thêm vào đề</Button>}
+                {IsInModal && <Button>Thêm vào đề</Button>}
             </div>
         </div>
     );

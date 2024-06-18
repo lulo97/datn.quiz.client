@@ -93,14 +93,12 @@ export function CreatedQuiz() {
 
     return (
         <BaseScreen
-            screen_title="Câu hỏi"
+            screen_title="Đề thi đã tạo"
             columns={columns}
             data={data}
             defaultPageSize={6}
             addModal={
-                <Button onClick={() => navigate("/CreateQuiz")}>
-                    Tạo đề
-                </Button>
+                <Button onClick={() => navigate("/CreateQuiz")}>Tạo đề</Button>
             }
         />
     );

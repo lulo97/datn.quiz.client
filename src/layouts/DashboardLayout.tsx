@@ -34,7 +34,7 @@ export function DashboardLayout() {
                         Username: Username,
                         Email: Email,
                         ImageUrl: ImageUrl,
-                    }
+                    };
                     await createOne(new_user);
                 }
             }
@@ -47,11 +47,13 @@ export function DashboardLayout() {
     if (!isLoaded) return "Đang tải...";
 
     return (
-        <div className="bg-gray-200 px-2 pt-1 pb-3">
-            <header className="mb-1">
+        <div className="bg-gray-200 gap-2 min-h-screen px-2 py-1 flex flex-col justify-between">
+            <header>
                 <Header />
             </header>
-            <Outlet />
+
+                <Outlet />
+
             <ToastContainer
                 position="top-right"
                 autoClose={1500}

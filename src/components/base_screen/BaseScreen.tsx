@@ -13,6 +13,7 @@ interface BaseScreen {
     addModal?: JSX.Element;
     onChange?: OnChangeAntd;
     filter?: JSX.Element;
+    IsInModal?: boolean;
 }
 
 export function BaseScreen(props: BaseScreen) {

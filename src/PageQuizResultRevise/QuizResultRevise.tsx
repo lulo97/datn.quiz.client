@@ -27,7 +27,6 @@ export function QuizResultRevise() {
     if (!Quiz) return <div>Đang tải</div>;
 
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header {...Quiz} />
@@ -39,6 +38,5 @@ export function QuizResultRevise() {
                     <Footer {...Quiz} />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

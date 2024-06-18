@@ -17,11 +17,11 @@ import { useUser } from "@clerk/clerk-react";
 import { getOneByClerkId } from "@/api/User";
 
 interface CreateQuestionProps {
-    is_in_quiz?: boolean;
+    IsInModal?: boolean;
 }
 
 export function CreateQuestion(props: CreateQuestionProps) {
-    const { is_in_quiz } = props;
+    const { IsInModal } = props;
     const [state, dispatch] = useReducer(reducer, getInitalState());
     const { user } = useUser();
 
@@ -36,19 +36,18 @@ export function CreateQuestion(props: CreateQuestionProps) {
 
         async function initalUserId() {
             const ClerkId = user?.id || "";
-            const currentUser: User = await getOneByClerkId(ClerkId)
+            const currentUser: User = await getOneByClerkId(ClerkId);
             dispatch({
                 type: ActionType.ChangeUserId,
                 payload: currentUser.UserId,
             });
         }
-        
+
         initalType();
         initalUserId();
     }, []);
 
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header state={state} dispatch={dispatch} />
@@ -60,10 +59,9 @@ export function CreateQuestion(props: CreateQuestionProps) {
                     <Footer
                         state={state}
                         dispatch={dispatch}
-                        is_in_quiz={is_in_quiz}
+                        IsInModal={IsInModal}
                     />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

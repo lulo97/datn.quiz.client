@@ -26,7 +26,6 @@ export function QuizResultTime() {
     if (data == undefined) return <div>Đang tải</div>
 
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header {...data} />
@@ -38,6 +37,5 @@ export function QuizResultTime() {
                     <Footer {...data} />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

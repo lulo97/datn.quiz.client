@@ -36,7 +36,7 @@ export function ModalSubmit(props: PlayTimeProps) {
                 await createOnePlay(pr);
                 for (const answer of sa) {
                     await createOneSelectedAnswer(answer);
-                    const SubmitPath = `/QuizResultTime/${pr}`;
+                    const SubmitPath = `/QuizResultTime/${pr.PlayId}`;
                     localStorage.clear();
                     toast.success("Nộp bài thành công!");
                     navigate(SubmitPath);

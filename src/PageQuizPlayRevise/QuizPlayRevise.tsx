@@ -35,7 +35,6 @@ export function QuizPlayRevise() {
     if (!state.Quiz) return <div>Đang tải</div>;
 
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header state={state} dispatch={dispatch} />
@@ -47,6 +46,5 @@ export function QuizPlayRevise() {
                     <Footer state={state} dispatch={dispatch} />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

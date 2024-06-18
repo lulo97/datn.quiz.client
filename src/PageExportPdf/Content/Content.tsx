@@ -1,13 +1,12 @@
-import { Label } from "@/components/ui/label";
-import { Pdf } from "./Pdf";
+import { ExamPdf } from "../ExamPdf/ExamPdf";
+import { ExamPdfProps } from "../Utils";
 
-export function Content() {
+export function Content(props: ExamPdfProps) {
     return (
-        <div className="border p-4">
-            <div>
-                <Label className="text-xl">Đề đã chọn</Label>
+        <div className="border p-4 bg-gray-100 rounded-lg">
+            <div className="flex justify-center">
+                <ExamPdf {...props} />
             </div>
-            <Pdf />
         </div>
     );
 }

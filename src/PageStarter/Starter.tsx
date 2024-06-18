@@ -11,7 +11,6 @@ import { Content } from "./Content/Content";
 
 export function Starter() {
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header />
@@ -23,6 +22,5 @@ export function Starter() {
                     <Footer />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

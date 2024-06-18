@@ -7,12 +7,10 @@ import { Header } from "./Header/Header";
 
 export function RoomJoin() {
     return (
-        <div className={CardParentClass}>
             <Card className="h-96 flex justify-center items-center">
                 <CardHeader className="w-1/2">
                     <Header />
                 </CardHeader>
             </Card>
-        </div>
     );
 }

@@ -1,28 +1,33 @@
-import { ModalSizeClass } from "@/Utils";
+import { ModalSizeClass, ModelWidthClass } from "@/Utils";
 import {
     Dialog,
-    DialogTrigger,
     DialogContent,
-    DialogTitle,
-} from "@/components/ui/dialog";
+    DialogTrigger,
+} from "@/components/mydialog/mydialog";
 import { Button } from "@/components/ui/button";
-import { ModalFindQuizContent } from "./ModalFindQuizContent";
 import { useState } from "react";
+import { CreatedQuiz } from "./CreatedQuiz";
+import { ExamPdfProps } from "../Utils";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
-export function ModalFindQuiz() {
-    const [open, setOpen] = useState(false)
+export function ModalFindQuiz(props: ExamPdfProps) {
+    const { fetchData } = props;
+    const [open, setOpen] = useState(false);
+    function handleFetchData(Quiz: QuizDetail) {
+        setOpen(false);
+        fetchData(Quiz);
+    }
     return (
         <div>
             <div>
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
-                        <Button>Tìm đề</Button>
+                        <Button>Tìm đề thi</Button>
                     </DialogTrigger>
-                    <DialogContent className={ModalSizeClass}>
-                        <div>
-                            <DialogTitle className="mb-2">Thêm đề</DialogTitle>
-                            <ModalFindQuizContent />
-                        </div>
+                    <DialogContent
+                        className={`${ModelWidthClass} bg-gray-200 overflow-y-scroll h-[95%]`}
+                    >
+                        <CreatedQuiz handleFetchData={handleFetchData} />
                     </DialogContent>
                 </Dialog>
             </div>

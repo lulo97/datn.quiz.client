@@ -61,6 +61,7 @@ export function initialAnswer() {
 //export const ModalSizeClass = `min-h-[calc(100vh*${ModalWidthScale})] min-w-[calc(100vw*${ModalWidthHeight})]`
 export const ModelWidthClass = `min-w-[95%]`;
 export const ModalSizeClass = `min-w-[95%] min-h-[90%]`;
+export const ModalScreenClass = `min-w-[100%] min-h-[100%]`;
 
 export const CardParentClass = `bg-gray-200`;
 

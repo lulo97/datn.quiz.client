@@ -115,7 +115,6 @@ export function QuizPlayTime() {
     if (!state) return <div>Đang tải</div>;
 
     return (
-        <div className={CardParentClass}>
             <Card>
                 <CardHeader>
                     <Header state={state} dispatch={dispatch} />
@@ -127,6 +126,5 @@ export function QuizPlayTime() {
                     <Footer state={state} dispatch={dispatch} />
                 </CardFooter>
             </Card>
-        </div>
     );
 }

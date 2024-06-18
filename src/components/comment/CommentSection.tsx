@@ -38,7 +38,7 @@ export function CommentSection(props: Props) {
         return <div>Đang tải</div>;
 
     return (
-        <div>
+        <div className="w-full">
             <Label>Bình luận</Label>
             <CommentInput
                 fetchData={fetchData}

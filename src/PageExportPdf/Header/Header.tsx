@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { ExamPdfProps } from "../Utils";
 import { ModalFindQuiz } from "../ModalFindQuiz/ModalFindQuiz";
 
-export function Header() {
+export function Header(props: ExamPdfProps) {
+    const { handleDownload } = props;
     return (
         <div>
-            <div className="flex gap-1">
-                <Input placeholder="Tìm kiếm..."></Input>
-                <Button>
-                    <ModalFindQuiz />
-                </Button>
+            <div className="flex justify-between gap-1">
+                <ModalFindQuiz {...props} />
+                <Button onClick={handleDownload}>Tải file</Button>
             </div>
         </div>
     );
