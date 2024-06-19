@@ -6,7 +6,7 @@ import { HeaderRight } from "./HeaderRight";
 export function Header(Quiz: QuizDetail) {
     return (
         <div>
-            <div className="flex justify-evenly mb-5">
+            <div className="flex justify-between px-4 mb-5">
                 <HeaderLeft {...Quiz} />
                 <HeaderRight {...Quiz} />
             </div>

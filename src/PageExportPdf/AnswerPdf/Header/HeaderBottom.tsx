@@ -40,8 +40,8 @@ export function HeaderBottom(Quiz: QuizDetail) {
     }, []);
 
     return (
-        <div className="flex justify-evenly">
-            <div className="flex gap-3 items-center">
+        <div className="flex justify-between px-2">
+            <div className="flex flex-col items-center">
                 <div className="text-sm">Mã đề:</div>
                 {qrCodeImage && <img className="w-24" src={qrCodeImage} alt="QR Code" />}
             </div>

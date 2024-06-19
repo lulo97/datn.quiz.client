@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ModalProcessPicture } from "../ModalProcessPicture/ModalProcessPicture";
+import { PropsMPP } from "../Utils/Utils";
 
-export function Header() {
+export function Header(props: PropsMPP) {
     return (
         <div className="w-full flex justify-between">
             <div className="flex justify-between gap-5">
-                <ModalProcessPicture />
+                <ModalProcessPicture {...props} />
                 <Button>Tải tệp</Button>
             </div>
             <Button>Xuất dữ liệu</Button>

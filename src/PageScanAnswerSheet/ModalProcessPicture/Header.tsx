@@ -1,66 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { PropsMPP } from "./ModalProcessPicture";
 import { wrapImageByPoints } from "../Utils/wrapImageByPoints";
-import { Point } from "../Utils/Utils";
-
-export const inverseCalculateScaledPoints = (
-    points: Point[],
-    image: HTMLImageElement,
-    parentCurrent: HTMLImageElement
-) => {
-    const { offsetWidth: width, offsetHeight: height } = parentCurrent;
-
-    const scaleX = image.width / width;
-    //console.log("Scale X:", scaleX);
-
-    const scaleY = image.height / height;
-    //console.log("Scale Y:", scaleY);
-
-    const scaledPoints = points.map((point) => {
-        //console.log("Original point:", point);
-        const scaledPoint = {
-            x: Math.round(point.x / scaleX),
-            y: Math.round(point.y / scaleY),
-        };
-        return scaledPoint;
-    });
-    return [scaledPoints[0], scaledPoints[1], scaledPoints[3], scaledPoints[2]];
-};
-
-export const calculateScaledPoints = (
-    points: Point[],
-    image: HTMLImageElement,
-    parentCurrent: HTMLImageElement
-) => {
-    const { offsetWidth: width, offsetHeight: height } = parentCurrent;
-
-    const scaleX = image.width / width;
-    //console.log("Scale X:", scaleX);
-
-    const scaleY = image.height / height;
-    //console.log("Scale Y:", scaleY);
-
-    const scaledPoints = points.map((point) => {
-        //console.log("Original point:", point);
-        const scaledPoint = {
-            x: point.x * scaleX,
-            y: point.y * scaleY,
-        };
-        //console.log("Scaled point:", scaledPoint);
-        return scaledPoint;
-    });
-    return scaledPoints;
-};
+import {
+    PropsMPP,
+    calculateScaledPoints,
+    getUserResponseDetail,
+} from "../Utils/Utils";
+import { getAnswerSheetResponse } from "../Utils/getAnswerSheetResponse";
+import { useEffect } from "react";
+import _ from "lodash";
+import QrScanner from "qr-scanner";
+import { getAllByQuizId as getAllQuestionDetailByQuizId } from "@/api/QuestionDetail";
+import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 
 export function Header(props: PropsMPP) {
     const {
-        file,
         setFile,
         parentRef,
         positions,
         setCroppedImg,
         imageRefFromFile,
+        setUserResponseDetail,
+        userResponseDetail,
+        croppedImg,
+        setQuizId,
+        QuizId,
     } = props;
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -89,6 +53,34 @@ export function Header(props: PropsMPP) {
             setCroppedImg(dataUrl);
         });
     }
+
+    useEffect(() => {
+        if (croppedImg && QuizId) {
+            getAnswerSheetResponse(croppedImg).then((userResponse) => {
+                async function fetchData() {
+                    const Questions: QuestionDetail[] =
+                        await getAllQuestionDetailByQuizId(QuizId);
+                    const userResponseDetail = getUserResponseDetail(
+                        Questions,
+                        userResponse
+                    );
+                    setUserResponseDetail(userResponseDetail);
+                }
+
+                fetchData();
+            });
+        }
+    }, [croppedImg, QuizId]);
+
+    useEffect(() => {
+        if (croppedImg) {
+            QrScanner.scanImage(croppedImg, {
+                returnDetailedScanResult: true,
+            }).then((result) => {
+                setQuizId(result.data);
+            });
+        }
+    }, [croppedImg]);
 
     return (
         <div className="flex justify-between h-fit">
