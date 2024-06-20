@@ -6,14 +6,10 @@ interface Props {
     userResponseDetail: UserResponseDetail;
 }
 
-function toBool(input: any) {
-    return input.toString() == "1" || input.toString() == true;
-}
-
 export function QuestionCards(props: Props) {
     const { userResponseDetail } = props;
     return (
-        <div className="overflow-y-scroll w-full ml-10 my-1 flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
             {userResponseDetail.Response.map((ele, Idx) => {
                 return (
                     <div key={Idx} className="">

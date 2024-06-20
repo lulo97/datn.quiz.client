@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ModalProcessPicture } from "../ModalProcessPicture/ModalProcessPicture";
-import { PropsMPP } from "../Utils/Utils";
+import { PropsScanAnswerSheet } from "../Utils/Utils";
 
-export function Header(props: PropsMPP) {
+export function Header(props: PropsScanAnswerSheet) {
     return (
         <div className="w-full flex justify-between">
             <div className="flex justify-between gap-5">

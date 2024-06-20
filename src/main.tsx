@@ -46,15 +46,15 @@ export const components = [
     AdminManagement,
     UserManagement,
     ExportPdf,
-    ScanAnswerSheet,
     ModeratorManagement,
+    ScanAnswerSheet,
     CreateRoom,
     RoomWait,
     RoomMonitor,
     RoomJoin,
     RoomView,
     RoomRanking,
-    AI
+    AI,
 ];
 
 const browser_routes = components.map((Component) => ({
@@ -118,6 +118,6 @@ const router = createBrowserRouter([
 //Detail is in reducer action change answers
 ReactDOM.createRoot(document.getElementById("root")!).render(
     //<React.StrictMode>
-        <RouterProvider router={router} />
+    <RouterProvider router={router} />
     //</React.StrictMode>
 );

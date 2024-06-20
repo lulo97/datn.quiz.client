@@ -3,10 +3,9 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Header } from "./Header";
 import { Body } from "./Body";
-import { PropsMPP, drawPolygonByPositions } from "../Utils/Utils";
-import { useEffect, useRef } from "react";
+import { PropsScanAnswerSheet } from "../Utils/Utils";
 
-export function ModalProcessPicture(props: PropsMPP) {
+export function ModalProcessPicture(props: PropsScanAnswerSheet) {
     //const { parentRef, canvasPolygonRef, setPositions, positions } = props;
 
     return (

@@ -71,11 +71,11 @@ export const handleDrag =
     (
         idx: number,
         setPositions: SetPositionsFunction,
-        parentRef: React.MutableRefObject<HTMLImageElement | null>
+        parentRef: HTMLImageElement | null
     ) =>
     (e: any, data: DraggableData) => {
-        if (parentRef.current) {
-            const { width, height } = parentRef.current.getBoundingClientRect();
+        if (parentRef) {
+            const { width, height } = parentRef.getBoundingClientRect();
 
             let newX = data.x;
             let newY = data.y;
@@ -122,7 +122,7 @@ export interface AnswerWithUserChoice extends Answer {
 
 export interface UserResponse {
     STT: string;
-    Response: number[][];
+    Answers: boolean[][];
 }
 
 export interface UserResponseDetail {
@@ -142,16 +142,13 @@ export function getUserResponseDetail(
         Response: [],
     };
     Questions.forEach((q, q_idx) => {
-        const newAnswers: AnswerWithUserChoice[] = q.Answers.map((ele) => ({
-            ...ele,
-            UserChoice: false,
-        }));
-
-        q.Answers.forEach((a, a_idx) => {
-            if (userResponse.Response[q_idx].includes(a_idx)) {
-                newAnswers[a_idx].UserChoice = true;
-            }
-        });
+        const newAnswers: AnswerWithUserChoice[] = q.Answers.map(
+            (ele, a_idx) => ({
+                ...ele,
+                IsCorrect: ele.IsCorrect.toString() == "1" ? true : false,
+                UserChoice: userResponse.Answers[q_idx][a_idx],
+            })
+        );
 
         userResponseDetail.Response.push({
             Content: q.Content || "",
@@ -162,10 +159,11 @@ export function getUserResponseDetail(
     return userResponseDetail;
 }
 
-export interface PropsMPP {
+export interface PropsScanAnswerSheet {
     file: File | null;
     setFile: React.Dispatch<React.SetStateAction<File | null>>;
-    parentRef: React.MutableRefObject<HTMLImageElement | null>;
+    parentRef: HTMLImageElement | null;
+    setParentRef: React.Dispatch<React.SetStateAction<HTMLImageElement | null>>;
     positions: Point[];
     setPositions: React.Dispatch<React.SetStateAction<Point[]>>;
     croppedImg: string;
@@ -176,8 +174,8 @@ export interface PropsMPP {
         React.SetStateAction<UserResponseDetail | null>
     >;
     canvasPolygonRef: React.MutableRefObject<HTMLCanvasElement | null>;
-    QuizId: string;
-    setQuizId: React.Dispatch<React.SetStateAction<string>>;
+    dataASR: UserResponseDetail[];
+    setDataASR: React.Dispatch<React.SetStateAction<UserResponseDetail[]>>;
 }
 
 export function drawPolygonByPositions(
@@ -195,4 +193,20 @@ export function drawPolygonByPositions(
             );
         }
     }
+}
+
+export function getScore(userResponseDetail: UserResponseDetail) {
+    let score = 0;
+    userResponseDetail.Response.forEach((q, q_idx) => {
+        let isCurrentCorrect = true;
+        q.Answers.map((ans, ans_idx) => {
+            if (ans.IsCorrect != ans.UserChoice) {
+                isCurrentCorrect = false;
+            }
+        });
+        if (isCurrentCorrect) {
+            score += 1;
+        }
+    });
+    return score;
 }

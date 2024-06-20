@@ -15,19 +15,20 @@ export function ExportPdf() {
 
     async function fetchData(Quiz: QuizDetail) {
         //2bdc18c9-279a-4532-b2a4-7edc8be6a7a5
-        const Quizs = createSubQuizzes(
-            {
-                ...Quiz,
-                Questions: [].concat(...Array(6).fill(Quiz.Questions)),
-            },
-            6
-        );
+        // const Quizs = createSubQuizzes(
+        //     {
+        //         ...Quiz,
+        //         Questions: [].concat(...Array(6).fill(Quiz.Questions)),
+        //     },
+        //     6
+        // );
+        const Quizs = [Quiz];
         setQuizs(Quizs);
     }
 
     const handleDownload = async () => {
         if (!componentRefs.current.length) {
-            toast.warning("Hãy thêm file!")
+            toast.warning("Hãy thêm file!");
             return;
         }
 
@@ -55,10 +56,28 @@ export function ExportPdf() {
                     const pdfHeight = imgHeight * ratio;
 
                     if (i === 0) {
-                        pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight, undefined, "FAST");
+                        pdf.addImage(
+                            dataUrl,
+                            "PNG",
+                            0,
+                            0,
+                            pdfWidth,
+                            pdfHeight,
+                            undefined,
+                            "FAST"
+                        );
                     } else {
                         pdf.addPage();
-                        pdf.addImage(dataUrl, "PNG", 0, 0, pdfWidth, pdfHeight, undefined, "FAST");
+                        pdf.addImage(
+                            dataUrl,
+                            "PNG",
+                            0,
+                            0,
+                            pdfWidth,
+                            pdfHeight,
+                            undefined,
+                            "FAST"
+                        );
                     }
                     resolve();
                 };
@@ -68,26 +87,26 @@ export function ExportPdf() {
     };
 
     return (
-            <Card className="flex-1">
-                <CardHeader>
-                    <Header
-                        fetchData={fetchData}
+        <Card className="flex-1">
+            <CardHeader>
+                <Header
+                    fetchData={fetchData}
+                    handleDownload={handleDownload}
+                    Quizs={Quizs}
+                    componentRefs={componentRefs}
+                />
+            </CardHeader>
+            <CardContent className="min-h-60">
+                {!Quizs && <div>Hãy thêm đề</div>}
+                {Quizs && (
+                    <Content
                         handleDownload={handleDownload}
                         Quizs={Quizs}
                         componentRefs={componentRefs}
+                        fetchData={fetchData}
                     />
-                </CardHeader>
-                <CardContent className="min-h-60">
-                    {!Quizs && <div>Hãy thêm đề</div>}
-                    {Quizs && (
-                        <Content
-                            handleDownload={handleDownload}
-                            Quizs={Quizs}
-                            componentRefs={componentRefs}
-                            fetchData={fetchData}
-                        />
-                    )}
-                </CardContent>
-            </Card>
+                )}
+            </CardContent>
+        </Card>
     );
 }

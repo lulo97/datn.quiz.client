@@ -1,7 +1,7 @@
 import Draggable from "react-draggable";
 import { useRef, createRef, useEffect, useState } from "react";
 import {
-    PropsMPP,
+    PropsScanAnswerSheet,
     drawPolygonByPositions,
     handleDrag,
     inverseCalculateScaledPoints,
@@ -9,14 +9,14 @@ import {
 import { detectPoint } from "../Utils/detectPoint";
 import { QuestionCards } from "./QuestionCard";
 
-export function Body(props: PropsMPP) {
+export function Body(props: PropsScanAnswerSheet) {
     const {
         file,
         parentRef,
         positions,
         setPositions,
-        croppedImg,
         imageRefFromFile,
+        setParentRef,
         userResponseDetail,
         canvasPolygonRef,
     } = props;
@@ -27,13 +27,13 @@ export function Body(props: PropsMPP) {
     }, [positions]);
 
     function initalPointByParent() {
-        if (parentRef.current) {
+        if (parentRef) {
             detectPoint(imageRefFromFile.current).then((points) => {
-                if (!parentRef.current) return;
+                if (!parentRef) return;
                 const detected_point = inverseCalculateScaledPoints(
                     points,
                     imageRefFromFile.current,
-                    parentRef.current
+                    parentRef
                 );
                 setPositions(detected_point);
             });
@@ -42,13 +42,9 @@ export function Body(props: PropsMPP) {
 
     useEffect(() => {
         initalPointByParent();
-    }, [parentRef.current, file]);
+    }, [parentRef, file]);
 
-    useEffect(() => {
-        console.log(parentRef.current?.getBoundingClientRect());
-    }, [parentRef]);
-
-    if (!file) return <div>Đang tải</div>;
+    if (!file) return <div className="mt-5">Hãy thêm ảnh!</div>;
 
     return (
         <div className="flex h-80 w-full border mt-2 border-black">
@@ -67,23 +63,29 @@ export function Body(props: PropsMPP) {
                     ></div>
                 </Draggable>
             ))}
-            {JSON.stringify(parentRef.current?.getBoundingClientRect().width)}
+
             <canvas
                 ref={canvasPolygonRef}
-                width={parentRef.current ? parentRef.current.offsetWidth : 0}
-                height={parentRef.current ? parentRef.current.offsetHeight : 0}
+                width={parentRef?.width}
+                height={parentRef?.height}
                 className="absolute opacity-30"
             />
+
             <img
-                ref={(ele) => {
-                    parentRef.current = ele;
-                }}
+                ref={setParentRef}
                 src={URL.createObjectURL(file)}
                 className="h-full border border-black"
                 alt="Ảnh"
             />
+
             {userResponseDetail && (
-                <QuestionCards userResponseDetail={userResponseDetail} />
+                <div className="w-full ml-10 my-1 overflow-y-scroll">
+                    <div className="flex gap-1 mb-3">
+                        <div className="font-semibold">Số thứ tự:</div>
+                        <div>{userResponseDetail.STT}</div>
+                    </div>
+                    <QuestionCards userResponseDetail={userResponseDetail} />
+                </div>
             )}
         </div>
     );

@@ -27,7 +27,7 @@ export function AnswerBubble(props: { isAlpha: boolean; num: number }) {
     const isFill = Math.round(Math.random()) ? true : false;
     const randomGray =
         ColorRange[Math.floor(Math.random() * ColorRange.length)];
-    const fillColor = isFill ? randomGray : "";
+    const fillColor = false && isFill ? randomGray : "";
 
     return (
         <div
