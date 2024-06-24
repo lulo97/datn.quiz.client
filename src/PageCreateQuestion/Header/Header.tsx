@@ -26,6 +26,7 @@ export function Header(props: CreateQuestionProps) {
         <div>
             <Label htmlFor="content">Câu hỏi</Label>
             <SunEditor
+                height="100px"
                 setContents={state.Content || ""}
                 setOptions={editorOptions}
                 onChange={(content) => handleChangeQuestion(content)}

@@ -10,8 +10,8 @@ import { CreateQuestion } from "@/PageCreateQuestion/CreateQuestion";
 
 export function ModalCreateQuestion() {
     const [open, setOpen] = useState(false);
+
     return (
-        <div>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                     <Button>Tạo câu hỏi</Button>
@@ -22,6 +22,5 @@ export function ModalCreateQuestion() {
                     <CreateQuestion IsInModal={true} />
                 </DialogContent>
             </Dialog>
-        </div>
     );
 }

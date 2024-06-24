@@ -2,13 +2,12 @@ import { User } from "@/InterfacesDatabase";
 import { getOneByClerkId } from "@/api/User";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useClerk, useUser } from "@clerk/clerk-react";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { MyMenubarItem } from "@/components/menubar_item/MyMenubarItem";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -50,6 +49,9 @@ export function HeaderUserButton() {
             </Button>
         );
 
+    const isAdmin =
+        currentUser && currentUser.Username.toLowerCase() == "admin";
+
     return (
         <div>
             <Popover open={openPopover} onOpenChange={setOpenPopover}>
@@ -59,21 +61,27 @@ export function HeaderUserButton() {
                         <AvatarFallback>...</AvatarFallback>
                     </Avatar>
                 </PopoverTrigger>
-                <PopoverContent>
-                    <MyMenubarItem>
+                <PopoverContent className="mr-5 w-fit flex flex-col gap-2 text-sm font-semibold">
+                    {" "}
+                    {isAdmin && (
                         <Link
                             className="w-full"
-                            to="/UserManagement"
+                            to="/AdminManagement"
                             onClick={() => setOpenPopover(false)}
                         >
-                            Trang cá nhân
+                            Trang quản trị
                         </Link>
-                    </MyMenubarItem>
-                    <MyMenubarItem>
-                        <Link className="w-full" to="" onClick={handleLogOut}>
-                            Đăng xuất
-                        </Link>
-                    </MyMenubarItem>
+                    )}
+                    <Link
+                        className="w-full"
+                        to="/UserManagement"
+                        onClick={() => setOpenPopover(false)}
+                    >
+                        Trang cá nhân
+                    </Link>
+                    <Link className="w-full" to="" onClick={handleLogOut}>
+                        Đăng xuất
+                    </Link>
                 </PopoverContent>
             </Popover>
         </div>

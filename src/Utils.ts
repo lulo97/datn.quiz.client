@@ -1,5 +1,6 @@
 //Pure function: Not change input or state of system and always return output
 
+import { CSSProperties } from "react";
 import { MenuItem } from "./Interfaces";
 import { Answer } from "./InterfacesDatabase";
 
@@ -44,13 +45,9 @@ export function getRandomAvatar() {
     return `https://robohash.org/${getObjectId()}`;
 }
 
-export function getRandomWallpaper() {
+export function getDummyImage() {
     const API_URL = BACKEND_URL + "public/Image/DummyImage.png";
     return API_URL;
-}
-
-export function getDummyImage() {
-    return "dummy.jpg";
 }
 
 export function initialAnswer() {
@@ -147,7 +144,6 @@ if (!VITE_OPENAI_KEY) {
     throw new Error("Missing VITE_OPENAI_KEY");
 }
 
-
 export const SCQ = "Một đáp án";
 export const MCQ = "Nhiều đáp án";
 
@@ -195,5 +191,9 @@ export function MySQLDatetimeFormat(dateStr: string) {
         .replace("lúc", "");
 }
 
-export const GREEN500_HEX = "#16a34a"
-export const RED500_HEX = "#dc2626"
+export const GREEN500_HEX = "#16a34a";
+export const RED500_HEX = "#dc2626";
+
+export interface CustomCSSProperties extends CSSProperties {
+    WebkitTextSecurity?: string;
+}

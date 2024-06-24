@@ -10,7 +10,7 @@ export function Right(props: AIProps) {
                 state.Output.map((ele, idx) => (
                     <RightQuestion
                         key={idx}
-                        question={ele}
+                        state={state}
                         question_idx={idx}
                     />
                 ))}

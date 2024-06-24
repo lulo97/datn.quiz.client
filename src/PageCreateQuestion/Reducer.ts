@@ -19,8 +19,14 @@ import { MCQ, SCQ } from "@/Utils";
 
 export function reducer(state: QuestionDetail, action: Action) {
     switch (action.type) {
+        case ActionType.ReorderAnswers: {
+            const reorderedAnswers = action.payload;
+            return { ...state, Answers: reorderedAnswers };
+        }
         case ActionType.Reset: {
-            return getInitalState();
+            const _State = getInitalState();
+            _State.UserId = state.UserId;
+            return { ..._State };
         }
         case ActionType.ChangeUserId: {
             const UserId = action.payload;

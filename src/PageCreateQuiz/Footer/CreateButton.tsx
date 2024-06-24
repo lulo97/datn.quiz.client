@@ -1,80 +1,86 @@
 import { Button } from "@/components/ui/button";
-import {
-    ActionType,
-    CreateQuizProps,
-    QIForInsert,
-    getRecords,
-} from "../Utils";
+import { CreateQuizProps, getRecords } from "../Utils";
 import { toast } from "react-toastify";
 import { getErrors } from "@/PageCreateQuiz/Utils";
-import { Quiz, QuizQuestion } from "@/InterfacesDatabase";
-import { uploadFileXHR } from "@/api/Upload";
-
-import { createOne as createOneQuiz } from "../Api/Quiz";
-import { createOne as createOneQuizInformation } from "../Api/QuizInformation";
-import { createOne as createOneQuizQuestion } from "../Api/QuizQuestion";
-import { useState } from "react";
+import { uploadFile } from "@/api/Upload";
+import { ActionType } from "../Action";
+import { InterfaceAPI, createOne } from "../API";
 
 export function CreateButton(props: CreateQuizProps) {
     const { state, dispatch } = props;
-    const [progress, setProgress] = useState<number>(0);
-    const handleCreate = async (
-        qr: Quiz,
-        qir: QIForInsert,
-        qq: QuizQuestion[], 
-        ImageUrl: string
-    ) => {
+    const handleCreate = async (data: InterfaceAPI) => {
+        const id = toast.loading("Đang tạo đề...");
         try {
-            await createOneQuiz(qr);
-            await createOneQuizInformation(qir, ImageUrl);
-            for (const quizquest of qq) {
-                await createOneQuizQuestion(quizquest);
+            const result = await createOne(data);
+            if ("error" in result) {
+                toast.update(id, {
+                    render: "Tạo thất bại!",
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 1000,
+                });
+                console.log(result);
+                return;
+            } else {
+                toast.update(id, {
+                    render: "Tạo thành công!",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 1000,
+                });
+                dispatch({ type: ActionType.Reset, payload: null });
             }
-            toast.success("Tạo đề thi thành công!");
-            dispatch({ type: ActionType.Reset, payload: null });
         } catch (error) {
-            toast.error("Có lỗi xảy ra khi tạo đề thi!");
+            toast.update(id, {
+                render: "Tạo thất bại!",
+                type: "error",
+                isLoading: false,
+                autoClose: 1000,
+            });
+            console.log(error);
         }
     };
 
-    const handleUploadFile = async (
-        file: File | null,
-        url: string | null,
-    ) => {
+    const handleUploadFile = async (file: File | null, url: string | null) => {
         if (file && !url) {
             try {
-                const ImageUrl = await uploadFileXHR(file, setProgress)
-                return ImageUrl
+                const ImageUrl = await uploadFile(file);
+                return ImageUrl;
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
         return null;
     };
 
-    function isDataValid(errors: string[]) {
-        if (errors.length > 0) {
-            errors.forEach((err) => toast.error(err, { delay: 500 }));
-            return false;
-        }
-        return true;
-    }
-
     const handlePostCreate = async () => {
         const errors = getErrors(state);
-        if (isDataValid(errors)) {
-            const ImageUrl = await handleUploadFile(
-                state.ImageFile,
-                state.ImageUrl,
-            );
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            if (!ImageUrl) {
-                toast.warning("Lỗi tải file!")
-                return;
-            }
-            const { qr, qir, qq } = getRecords(state);
-            await handleCreate(qr, qir, qq, ImageUrl);
+        for (let i = 0; i < errors.length; i++) {
+            await new Promise<void>((resolve) => {
+                setTimeout(() => {
+                    toast.warning(errors[i]);
+                    resolve();
+                }, 100 * i);
+            });
         }
+        if (errors.length > 0) return;
+        const ImageUrl = await handleUploadFile(
+            state.ImageFile,
+            state.ImageUrl
+        );
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        if (!ImageUrl) {
+            toast.warning("Lỗi tải file!");
+            return;
+        }
+        const { QuizRecord, QuizInfoRecord, QuizQuestionRecords } =
+            getRecords(state);
+        await handleCreate({
+            QuizRecord,
+            QuizInfoRecord,
+            QuizQuestionRecords,
+            ImageUrl,
+        });
     };
 
     return <Button onClick={handlePostCreate}>Tạo đề</Button>;

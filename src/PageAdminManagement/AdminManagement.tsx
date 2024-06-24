@@ -22,8 +22,6 @@ export const menu_names: MenuItem[] = [
     {
         name: "Câu hỏi",
         child: [
-            { name: "Trình độ học vấn", element: <EducationLevel /> },
-            { name: "Chủ đề", element: <Subject /> },
             { name: "Chủ đề phụ", element: <SubSubject /> },
             { name: "Loại trắc nghiệm", element: <Type /> },
             { name: "Ngôn ngữ", element: <Language /> },
@@ -34,8 +32,10 @@ export const menu_names: MenuItem[] = [
     {
         name: "Đề thi",
         child: [
-            {name: "Thời gian", element: <Time />}
-        ]
+            { name: "Trình độ học vấn", element: <EducationLevel /> },
+            { name: "Chủ đề", element: <Subject /> },
+            { name: "Thời gian", element: <Time /> },
+        ],
     },
     { name: "Thành tựu", element: <Achievement /> },
     {
@@ -69,9 +69,7 @@ export function AdminManagement() {
                 menu_names={menu_names}
                 handleMenubarClick={handleMenubarClick}
             />
-            <div className="bg-gray-200 pl-1 w-full">
-                {curMenuItem.element}
-            </div>
+            <div className="bg-gray-200 pl-1 w-full">{curMenuItem.element}</div>
         </div>
     );
 }

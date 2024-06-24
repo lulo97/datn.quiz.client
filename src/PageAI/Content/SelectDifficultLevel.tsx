@@ -10,6 +10,7 @@ import {
     SelectItem,
 } from "@/components/ui/select";
 import { AIProps } from "../Utils";
+import { toast } from "react-toastify";
 
 export function SelectDifficultLevel(props: AIProps) {
     const { state, setState } = props;
@@ -17,12 +18,21 @@ export function SelectDifficultLevel(props: AIProps) {
     const [options, setOptions] = useState<DifficultLevel[]>();
 
     async function fetchData() {
-        const records: DifficultLevel[] = await getAll();
-        setOptions(records);
+        try {
+            const result = await getAll();
+            if ("error" in result) {
+                toast.error("Lỗi hệ thống!");
+                console.log(result);
+            } else {
+                setOptions(result);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    function handleChange(value: string) {
-        setState({ ...state, DifficultLevel: value });
+    function handleChange(record: string) {
+        setState({ ...state, DifficultLevel: JSON.parse(record) });
     }
 
     useEffect(() => {
@@ -35,7 +45,7 @@ export function SelectDifficultLevel(props: AIProps) {
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
                     <SelectValue
-                        placeholder={state.DifficultLevel || "Độ khó..."}
+                        placeholder={state.DifficultLevel?.Name || "Độ khó..."}
                     />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
@@ -43,8 +53,8 @@ export function SelectDifficultLevel(props: AIProps) {
                         options.map((option) => (
                             <SelectItem
                                 className="break-words"
-                                key={option.Name}
-                                value={option.Name}
+                                key={option.DifficultLevelId}
+                                value={JSON.stringify(option)}
                             >
                                 {option.Name}
                             </SelectItem>

@@ -2,40 +2,97 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ModalSetting } from "../ModalSetting/ModalSetting";
-import { ModalFindQuiz } from "@/PageExportPdf/ModalFindQuiz/ModalFindQuiz";
-import { QuizCardDetail } from "@/components/quiz_card/QuizCardDetailed";
+import { ModalFindQuiz } from "./ModalFindQuiz";
+import { CreateRoomProps, getErrors, getRecords, numberToDateStringHSM, numberToDateStringYMD } from "../Utils";
+import { QuizCardDetail } from "./QuizCardDetailed";
+import { ActionType } from "../Action";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import { createOne } from "../../api/Room";
+import { useNavigate } from "react-router-dom";
 
-export function Header() {
+export function Header(props: CreateRoomProps) {
+    const navigate = useNavigate();
+    const { state, dispatch } = props;
+    function handleChangeName(Name: string) {
+        dispatch({ type: ActionType.ChangeName, payload: Name });
+    }
+
+    async function handleCreate() {
+        const errors = getErrors(state);
+        for (let i = 0; i < errors.length; i++) {
+            await new Promise<void>((resolve) => {
+                setTimeout(() => {
+                    toast.warning(errors[i]);
+                    resolve();
+                }, 100 * i);
+            });
+        }
+        if (errors.length == 0) {
+            try {
+                const record = getRecords(state);
+                await createOne(record);
+                toast.success("Tạo phòng thành công!");
+                navigate(`/RoomMonitor/${record.RoomId}`);
+            } catch (error) {
+                toast.success("Tạo phòng thất bại!");
+                console.log(error);
+            }
+        }
+    }
+
     return (
-        <div className="flex flex-col gap-5">
-            <div className="flex justify-between items-start">
-                <div className="w-2/3 flex flex-col justify-between gap-3">
+        <div className="flex flex-col justify-between gap-5 min-h-fit h-[80vh]">
+            <div className="flex justify-between items-start gap-2">
+                <div className="h-full w-full flex flex-col justify-end gap-3 border rounded-lg py-1 px-3">
                     <Label>Tên phòng</Label>
-                    <Input placeholder="Phòng ABC..." />
+                    <Input
+                        placeholder="Phòng thi..."
+                        value={state.Name ? state.Name : ""}
+                        onChange={(event) =>
+                            handleChangeName(event.currentTarget.value)
+                        }
+                    />
+                    <div className="flex w-full justify-between">
+                        <div className="flex items-center justify-between gap-2 text-nowrap">
+                            <Label>Thời gian mở làm bài: </Label>
+                            <div>
+                                {numberToDateStringHSM(state.StartQuizTime)}
+                            </div>
+                        </div>
+                        <div className="flex items-center justify-between gap-2 text-nowrap">
+                            <Label>Số người tối đa: </Label>
+                            <div>{state.Capacity || ""}</div>
+                        </div>
+                    </div>
                 </div>
-                <div className="border rounded-lg p-1">
-                    <div>
-                        <Label>Thời gian bắt đầu: </Label>12:00:00 11/05/2024
+
+                <div className="border rounded-lg py-1 px-3 h-full flex flex-col justify-between">
+                    <div className="flex items-center justify-between gap-2 text-nowrap">
+                        <Label>Ngày mở phòng:</Label>
+                        <div>{numberToDateStringYMD(state.StartTime)}</div>
                     </div>
-                    <div>
-                        <Label>Thời gian kết thúc: </Label>13:00:00 11/05/2024
+                    <div className="flex items-center justify-between gap-2 text-nowrap">
+                        <Label>Thời gian bắt đầu phòng:</Label>
+                        <div>{numberToDateStringHSM(state.StartTime)}</div>
                     </div>
-                    <div>
-                        <Label>Số người tối đa: </Label>10
+
+                    <div className="flex items-center justify-between gap-2 text-nowrap">
+                        <Label>Thời gian kết thúc phòng: </Label>
+                        <div> {numberToDateStringHSM(state.EndTime)}</div>
                     </div>
                 </div>
             </div>
-            <div>
-                <Label>Đề thi</Label>
-                <QuizCardDetail />
+            <div className="h-full border rounded-xl bg-gray-200 p-1">
+                <QuizCardDetail state={state} dispatch={dispatch} />
             </div>
             <div className="flex justify-between items-center">
                 <div className="flex justify-between items-center gap-5">
-                    <ModalSetting />
-                    <ModalFindQuiz />
+                    <ModalSetting state={state} dispatch={dispatch} />
+                    <ModalFindQuiz state={state} dispatch={dispatch} />
                 </div>
 
-                <Button>Tạo phòng</Button>
+                <Button onClick={handleCreate}>Tạo phòng</Button>
             </div>
         </div>
     );

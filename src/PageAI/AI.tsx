@@ -14,23 +14,23 @@ import { InputAI } from "./Utils";
 export function AI() {
     const [state, setState] = useState<InputAI>({
         Text: "",
-        DifficultLevel: "",
-        Type: "",
-        Language: "",
+        DifficultLevel: null,
+        Type: null,
+        Language: null,
         NumberOfQuestion: 0,
-        Output: null
+        Output: [],
     });
     return (
-            <Card>
-                <CardHeader>
-                    <Header />
-                </CardHeader>
-                <CardContent>
-                    <Content state={state} setState={setState} />
-                </CardContent>
-                <CardFooter>
-                    <Footer state={state} setState={setState} />
-                </CardFooter>
-            </Card>
+        <Card>
+            <CardHeader>
+                <Header />
+            </CardHeader>
+            <CardContent>
+                <Content state={state} setState={setState} />
+            </CardContent>
+            <CardFooter>
+                <Footer state={state} setState={setState} />
+            </CardFooter>
+        </Card>
     );
 }

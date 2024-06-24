@@ -3,8 +3,9 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { getRandomAvatar } from "@/Utils";
+import { User } from "@/InterfacesDatabase";
 
-export function UserInformation() {
+export function UserInformation(currentUser: User) {
     return (
         <Card>
             <CardHeader>
@@ -16,30 +17,26 @@ export function UserInformation() {
             <CardContent>
                 <div className="flex gap-5 mb-3">
                     <Avatar className="w-20 h-20">
-                        <AvatarImage src={getRandomAvatar()} />
+                        <AvatarImage src={currentUser.ImageUrl} />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div>
                         <ul>
                             <li>
-                                <Label>Họ tên: </Label>Hoàng Lê Lương
+                                <Label>Họ tên: </Label>{currentUser.Fullname}
                             </li>
                             <li>
-                                <Label>Tên tài khoản: </Label>luongpysl
+                                <Label>Tên tài khoản: </Label>{currentUser.Username}
                             </li>
                             <li>
                                 <Label>Email: </Label>
-                                luongpysl@gmail.com
+                                {currentUser.Email}
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div>
-                    <Label>Giới thiệu:</Label> Lorem ipsum, dolor sit amet
-                    consectetur adipisicing elit. Autem quo consectetur mollitia
-                    magni? Odit tenetur numquam porro tempore ipsum adipisci
-                    praesentium, aspernatur sequi, error labore eaque?
-                    Temporibus quisquam ad veritatis.
+                    <Label>Giới thiệu:</Label> {currentUser.Biography? currentUser.Biography : "Hãy thêm giới thiệu!"}
                 </div>
             </CardContent>
         </Card>

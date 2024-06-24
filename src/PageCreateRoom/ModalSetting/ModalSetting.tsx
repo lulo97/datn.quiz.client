@@ -12,9 +12,11 @@ import { Settings } from "lucide-react";
 import { ModalSizeClass } from "@/Utils";
 import { ModalSettingContent } from "./ModalSettingContent";
 import { useState } from "react";
+import { CreateRoomProps } from "../Utils";
 
-export function ModalSetting() {
-    const [open, setOpen] = useState(false)
+export function ModalSetting(props: CreateRoomProps) {
+    const { state, dispatch } = props;
+    const [open, setOpen] = useState(false);
     return (
         <div>
             <Dialog open={open} onOpenChange={setOpen}>
@@ -28,7 +30,7 @@ export function ModalSetting() {
                         <DialogTitle>Cài đặt</DialogTitle>
                     </DialogHeader>
 
-                    <ModalSettingContent />
+                    <ModalSettingContent state={state} dispatch={dispatch} />
 
                     <DialogFooter>
                         <div className="w-full flex justify-end">

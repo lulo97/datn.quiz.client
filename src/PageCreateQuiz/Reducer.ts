@@ -1,14 +1,15 @@
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
-import { Action, ActionType, QuizDetail, getInitalState } from "./Utils";
+import { QuizDetail, getInitalState } from "./Utils";
+import { Action, ActionType } from "./Action";
 
-export function reducer(state: QuizDetail, action: Action) {
+export function reducer(state: QuizDetail, action: Action): QuizDetail {
     switch (action.type) {
+        case ActionType.SetCurrentUser: {
+            const currentUser = action.payload;
+            return { ...state, CurrentUser: currentUser };
+        }
         case ActionType.Reset: {
             return getInitalState();
-        }
-        case ActionType.ChangeUserId: {
-            const UserId = action.payload;
-            return { ...state, UserId: UserId };
         }
         case ActionType.ChangeName: {
             const Name = action.payload;
@@ -29,10 +30,6 @@ export function reducer(state: QuizDetail, action: Action) {
         case ActionType.ChangeTime: {
             const Time = action.payload;
             return { ...state, Time: Time };
-        }
-        case ActionType.ChangeQuestionTime: {
-            const QuestionTime = action.payload;
-            return { ...state, QuestionTime: QuestionTime };
         }
         case ActionType.ToggleIsPublic: {
             return { ...state, IsPublic: !state.IsPublic };

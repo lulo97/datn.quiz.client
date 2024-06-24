@@ -1,26 +1,18 @@
 import {
-    LocalPlaying,
-    PlayTime,
+    LocalPlayingKey,
+    LocalPlayData,
     PlayTimeProps,
     caculateScore,
     getSelectedQuestions,
 } from "../Utils";
 
 export function ModalSubmitAnswers(props: PlayTimeProps) {
-    const { state, dispatch } = props;
+    const { state, localPlay, dispatchLS } = props;
 
-    let localPlaying: PlayTime = state;
-
-    const storedData = localStorage.getItem(LocalPlaying);
-    if (storedData != null) {
-        localPlaying = JSON.parse(storedData);
-    }
-    const Response = localPlaying.Response;
-
-    const UserResponseDetail = getSelectedQuestions(Response);
+    const UserResponseDetail = getSelectedQuestions(state, localPlay.Response);
     if (!UserResponseDetail) return <div>Đang tải</div>;
 
-    const Score = caculateScore(UserResponseDetail)
+    const Score = caculateScore(state, UserResponseDetail);
 
     return (
         <div className="p-4 bg-gray-50 rounded-lg shadow-md">

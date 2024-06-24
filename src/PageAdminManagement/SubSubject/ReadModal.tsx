@@ -42,7 +42,11 @@ export function ReadModal(props: ReadModalProps) {
                         <TableBody>
                             <TableRow>
                                 <TableHead>Chủ đề:</TableHead>
-                                <TableCell>{record.SubjectName}</TableCell>
+                                <TableCell>{record.Subject?.Name}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableHead>Trình độ học vấn:</TableHead>
+                                <TableCell>{record.EducationLevel?.Name}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableHead>Chủ đề phụ:</TableHead>

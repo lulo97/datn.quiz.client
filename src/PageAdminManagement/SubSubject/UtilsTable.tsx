@@ -5,10 +5,6 @@ import { GetAllOptions, SubSubjectDetail, getAll } from "./UtilApi";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
 import { UpdateModal } from "./UpdateModal";
-import { getAll as getAllSubjectApi } from "../Subject/UtilApi";
-import { Subject } from "@/InterfacesDatabase";
-
-const subjects: Subject[] = await getAllSubjectApi();
 
 export function getColumns(fetchData: () => Promise<void>) {
     const columns: TableColumnsType<SubSubjectDetail> = useMemo(
@@ -17,18 +13,27 @@ export function getColumns(fetchData: () => Promise<void>) {
                 title: "Chủ đề phụ",
                 dataIndex: "Name",
                 sorter: true,
-                width: "30%",
+                width: "25%",
                 render: (_, record) => (
                     <div className="line-clamp-1">{record.Name}</div>
                 ),
             },
             {
                 title: "Chủ đề",
-                dataIndex: "SubjectName",
                 sorter: true,
-                filters: subjects.map((ele) => {
-                    return { text: ele.Name, value: ele.Name };
-                }),
+                render: (_item, record, _index) => (
+                    <div className="line-clamp-1">{record.Subject?.Name}</div>
+                ),
+                width: "20%",
+            },
+            {
+                title: "Trình độ học vấn",
+                sorter: true,
+                render: (_item, record, _index) => (
+                    <div className="line-clamp-1">
+                        {record.EducationLevel?.Name}
+                    </div>
+                ),
                 width: "20%",
             },
             {
@@ -40,13 +45,6 @@ export function getColumns(fetchData: () => Promise<void>) {
                         {record.Description || "NULL"}
                     </div>
                 ),
-            },
-            {
-                title: "Ngày tạo",
-                dataIndex: "CreatedAt",
-                sorter: true,
-                render: (_, record) => toDDMMYYY(record.CreatedAt),
-                width: "15%",
             },
             {
                 title: "Hành động",

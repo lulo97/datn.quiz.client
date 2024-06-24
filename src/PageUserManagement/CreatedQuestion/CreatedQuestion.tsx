@@ -9,16 +9,19 @@ import { useUser } from "@clerk/clerk-react";
 import { ModalCreateQuestion } from "@/components/modal_create_question/ModalCreateQuestion";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
+import { UpdateModal } from "./UpdateModal";
 
 export function CreatedQuestion() {
     const [data, setData] = useState<QuestionDetail[]>([]);
     const { user } = useUser();
 
     async function fetchData() {
-        const ClerkId = user?.id || "";
-        const currentUser: User = await getOneByClerkId(ClerkId);
-        const data_fetched = await getAllByUser(currentUser.UserId);
-        setData(data_fetched);
+        const ClerkId = user?.id;
+        if (ClerkId) {
+            const currentUser: User = await getOneByClerkId(ClerkId);
+            const data_fetched = await getAllByUser(currentUser.UserId);
+            setData(data_fetched);
+        }
     }
 
     useEffect(() => {
@@ -35,11 +38,13 @@ export function CreatedQuestion() {
                 title: "Nội dung",
                 sorter: true,
                 render: (_item, record, _index) => (
-                    <p className="line-clamp-1">
+                    <div className="line-clamp-1">
                         <div
-                            dangerouslySetInnerHTML={{ __html: record.Content || "" }}
+                            dangerouslySetInnerHTML={{
+                                __html: record.Content || "",
+                            }}
                         ></div>
-                    </p>
+                    </div>
                 ),
             },
             {
@@ -91,8 +96,8 @@ export function CreatedQuestion() {
                 render: (_item, _record, _index) => (
                     <div className="flex gap-2 justify-end">
                         <DeleteModal record={_record} fetchData={fetchData} />
-                        <ReadModal record={_record} fetchData={fetchData} />
-                        {/* <UpdateModal record={_record} fetchData={fetchData} /> */}
+                        <ReadModal record={_record} />
+                        <UpdateModal record={_record} fetchData={fetchData} />
                     </div>
                 ),
                 width: "10%",

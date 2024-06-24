@@ -12,7 +12,7 @@ interface QCProps extends CreateQuizProps {
 export function QC(props: QCProps) {
     const { state, dispatch, question, idx } = props;
     return (
-        <div className="bg-white rounded-lg py-1 px-2">
+        <div className="bg-white rounded-lg py-1 px-2 text-sm">
             <QCHeader
                 idx={idx}
                 question={question}

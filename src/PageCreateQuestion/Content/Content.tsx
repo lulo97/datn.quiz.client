@@ -1,19 +1,33 @@
-import { CreateQuestionProps } from "../Utils";
+import { ActionType, CreateQuestionProps } from "../Utils";
 import { Answer } from "./Answer";
+import { Reorder } from "framer-motion";
+import { Answer as IAnswer } from "@/InterfacesDatabase";
 
 export function Content(props: CreateQuestionProps) {
     const { state, dispatch } = props;
-
+    function handleDragDrop(Answers: IAnswer[]) {
+        dispatch({type: ActionType.ReorderAnswers, payload: Answers})
+    }
     return (
-        <div className="flex flex-col gap-1">
+        <Reorder.Group
+            className="flex flex-col gap-1"
+            axis="y"
+            values={state.Answers}
+            onReorder={(values) => handleDragDrop(values)}
+        >
             {state.Answers.map((ele) => (
-                <Answer
+                <Reorder.Item
                     key={ele.AnswerId}
-                    answer={ele}
-                    state={state}
-                    dispatch={dispatch}
-                />
+                    value={ele}
+                >
+                    <Answer
+                        key={ele.AnswerId}
+                        answer={ele}
+                        state={state}
+                        dispatch={dispatch}
+                    />
+                </Reorder.Item>
             ))}
-        </div>
+        </Reorder.Group>
     );
 }

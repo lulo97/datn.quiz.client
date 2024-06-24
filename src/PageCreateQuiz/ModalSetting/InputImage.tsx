@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ActionType, CreateQuizProps } from "../Utils";
+import { CreateQuizProps } from "../Utils";
 import { useRef } from "react";
+import { ActionType } from "../Action";
 
 export function InputImage(props: CreateQuizProps) {
     const { state, dispatch } = props;

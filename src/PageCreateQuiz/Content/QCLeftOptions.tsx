@@ -5,7 +5,7 @@ const prefixs = ["A) ", "B) ", "C) ", "D) ", "E) ", "G) ", "H) ", "I) "];
 
 export function QCLeftOptions(question: QuestionDetail) {
     return (
-        <div className="flex flex-col overflow-x-auto overflow-y-auto w-full h-[150px] gap-1">
+        <div className="flex flex-col overflow-x-auto overflow-y-auto w-full h-[130px] gap-1">
             {question.Answers.map((ans, idx) => {
                 return (
                     <div

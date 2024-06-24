@@ -1,12 +1,19 @@
-import { Quiz } from "@/InterfacesDatabase";
 import { BACKEND_URL, MY_HEADER } from "@/Utils";
 
-const BACKEND_PAGE = "Quiz";
+import { Quiz, QuizQuestion } from "@/InterfacesDatabase";
+import { QIForInsert } from "./Utils";
+
+const BACKEND_PAGE = "CreateQuiz";
 const API_URL = BACKEND_URL + BACKEND_PAGE;
 
-export async function createOne(
-    data: Quiz
-) {
+export interface InterfaceAPI {
+    QuizRecord: Quiz;
+    QuizInfoRecord: QIForInsert;
+    QuizQuestionRecords: QuizQuestion[];
+    ImageUrl: string;
+}
+
+export async function createOne(data: InterfaceAPI) {
     try {
         const response = await fetch(API_URL, {
             method: "POST",

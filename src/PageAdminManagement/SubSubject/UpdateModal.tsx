@@ -1,4 +1,4 @@
-import { Subject } from "@/InterfacesDatabase";
+import { EducationLevel, SubSubject, Subject } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PenBox } from "lucide-react";
 import { useEffect, useState } from "react";
-import { SubSubjectDetail, toSubSubject, updateOne } from "./UtilApi";
+import { SubSubjectDetail, updateOne } from "./UtilApi";
 import {
     Select,
     SelectContent,
@@ -24,30 +24,65 @@ interface UpdateModalProps {
     record: SubSubjectDetail;
     fetchData: () => Promise<void>;
 }
-import { getAll as getAllSubjectApi } from "../Subject/UtilApi";
+import { getAll as getAllSubject } from "../Subject/UtilApi";
+import { getAll as getAllEducationLevel } from "../EducationLevel/UtilApi";
+import { toast } from "react-toastify";
+
+export interface SubSubjectDetailForUpdate {
+    SubSubjectId: string;
+    SubjectId: string | undefined;
+    EducationLevelId: string | undefined;
+    Name: string;
+    Description: string;
+}
 
 export function UpdateModal(props: UpdateModalProps) {
     const { record, fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState({
-        ...toSubSubject(record),
-        Description: record.Description || "",
-    });
+    const [data, setData] = useState<SubSubjectDetail>(record);
     const [subjects, setSubjects] = useState<Subject[]>([]);
-
-    async function fetchSubjects() {
-        setSubjects(await getAllSubjectApi());
-    }
+    const [educationLevels, setEducationLevels] = useState<EducationLevel[]>(
+        []
+    );
 
     useEffect(() => {
+        async function fetchSubjects() {
+            setSubjects(await getAllSubject());
+        }
+
+        async function fetchEducationLevels() {
+            setEducationLevels(await getAllEducationLevel());
+        }
         fetchSubjects();
+        fetchEducationLevels();
     }, []);
 
     const handleAddClick = async () => {
-        if (data.Name == "") return;
-        await updateOne(data);
-        await fetchData();
-        setIsOpen(false);
+        try {
+            const record: SubSubjectDetailForUpdate = {
+                SubSubjectId: data.SubSubjectId,
+                SubjectId: data.Subject?.SubjectId,
+                EducationLevelId: data.EducationLevel?.EducationLevelId,
+                Name: data.Name,
+                Description: data.Description
+            }
+            if (record.Name == "") return;
+            if (!record.SubjectId) return;
+            if (!record.EducationLevelId) return;
+            const result = await updateOne(record);
+            if ("error" in result) {
+                toast.error("Cập nhật thất bại!")
+                console.log(result)
+            } else {
+                toast.success("Cập nhật thành công!")
+                await fetchData();
+                setIsOpen(false);
+            }
+        } catch (error) {
+            toast.error("Cập nhật thất bại!")
+            console.log(error)
+        }
+
     };
 
     return (
@@ -64,25 +99,58 @@ export function UpdateModal(props: UpdateModalProps) {
                         <Label>Id: </Label>
                         {data.SubSubjectId}
                     </div>
-                    <Select
+                    <div>
+                        <Label>Chủ đề</Label>{" "}
+                        <Select
+                            onValueChange={(value) =>
+                                setData({ ...data, Subject: JSON.parse(value) })
+                            }
+                        >
+                            <SelectTrigger>
+                                <SelectValue
+                                    placeholder={record.Subject?.Name}
+                                />
+                            </SelectTrigger>
+                            <SelectContent className="h-60">
+                                {subjects.map((ele) => (
+                                    <SelectItem
+                                        key={ele.SubjectId}
+                                        value={JSON.stringify(ele)}
+                                    >
+                                        {ele.Name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                            <div>
+                            <Label>Trình độ học vấn</Label>{" "}
+                            <Select
                         onValueChange={(value) =>
-                            setData({ ...data, SubjectId: value })
+                            setData({
+                                ...data,
+                                EducationLevel: JSON.parse(value),
+                            })
                         }
                     >
                         <SelectTrigger>
-                            <SelectValue placeholder={record.SubjectName} />
+                            <SelectValue
+                                placeholder={record.EducationLevel?.Name}
+                            />
                         </SelectTrigger>
-                        <SelectContent>
-                            {subjects.map((ele) => (
+                        <SelectContent className="h-52">
+                            {educationLevels.map((ele) => (
                                 <SelectItem
-                                    key={ele.SubjectId}
-                                    value={ele.SubjectId}
+                                    key={ele.EducationLevelId}
+                                    value={JSON.stringify(ele)}
                                 >
                                     {ele.Name}
                                 </SelectItem>
                             ))}
                         </SelectContent>
                     </Select>
+                            </div>
+
                     <div>
                         <Label>Chủ đề phụ</Label>
                         <Input

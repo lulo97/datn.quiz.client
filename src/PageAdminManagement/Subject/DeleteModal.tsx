@@ -12,6 +12,7 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { Subject } from "@/InterfacesDatabase";
 import { deleteOne } from "./UtilApi";
+import { toast } from "react-toastify";
 
 interface DeleteModalProps {
     record: Subject;
@@ -23,10 +24,21 @@ export function DeleteModal(props: DeleteModalProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     async function handleClick() {
-        if (record.SubjectId == "") return
-        await deleteOne(record.SubjectId)
-        await fetchData()
-        setIsOpen(false)
+        try {
+            if (record.SubjectId == "") return
+            const result = await deleteOne(record.SubjectId)
+            if ("error" in result) {
+                toast.error("Xóa thất bại!");
+                console.log(result);
+            } else {
+                toast.success("Xóa thành công!");
+                await fetchData()
+                setIsOpen(false)
+            }
+        } catch (error) {
+            toast.error("Xóa thất bại!");
+            console.error(error);
+        }
     }
 
     return (

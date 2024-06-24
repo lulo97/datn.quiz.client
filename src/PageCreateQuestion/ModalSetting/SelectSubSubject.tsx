@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { SubSubject } from "@/InterfacesDatabase";
-import { getBySubject } from "@/PageAdminManagement/SubSubject/UtilApi";
+import {
+    getBySubject,
+    getBySubjectAndEducationLevel,
+} from "@/PageAdminManagement/SubSubject/UtilApi";
 import { ActionType, CreateQuestionProps } from "../Utils";
 import { Label } from "@/components/ui/label";
 import {
@@ -15,7 +18,14 @@ export function SelectSubSubject(props: CreateQuestionProps) {
     const [options, setOptions] = useState<SubSubject[]>();
 
     async function fetchData() {
-        if (state.Subject) {
+        if (!state.Subject || !state.EducationLevel) return;
+        if (state.EducationLevel.Name != "Tổng hợp") {
+            const records: SubSubject[] = await getBySubjectAndEducationLevel(
+                state.Subject.SubjectId,
+                state.EducationLevel?.EducationLevelId
+            );
+            setOptions(records);
+        } else {
             const records: SubSubject[] = await getBySubject(
                 state.Subject.SubjectId
             );
@@ -32,7 +42,7 @@ export function SelectSubSubject(props: CreateQuestionProps) {
 
     useEffect(() => {
         fetchData();
-    }, [state.Subject]);
+    }, [state.Subject, state.EducationLevel]);
 
     return (
         <div>
@@ -44,7 +54,16 @@ export function SelectSubSubject(props: CreateQuestionProps) {
                     />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
+                    {(!options || options.length == 0) && (
+                        <SelectItem
+                            className="pointer-events-none"
+                            value="null"
+                        >
+                            Không có bản ghi
+                        </SelectItem>
+                    )}
                     {options &&
+                        options.length > 0 &&
                         options.map((option) => (
                             <SelectItem
                                 className="break-words"

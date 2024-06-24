@@ -1,5 +1,5 @@
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
-import { BACKEND_URL, VITE_SERVER_PATH, getRandomWallpaper } from "@/Utils";
+import { BACKEND_URL, VITE_SERVER_PATH, getDummyImage } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -28,8 +28,8 @@ export function HeaderLeft(Quiz: QuizDetail) {
             <Card className="min-h-full">
                 <CardHeader>
                     <CardTitle>{Quiz.Name}</CardTitle>
-                    <CardDescription> 
-                        {Quiz.Description? Quiz.Description : Quiz.Name}
+                    <CardDescription>
+                        {Quiz.Description ? Quiz.Description : Quiz.Name}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

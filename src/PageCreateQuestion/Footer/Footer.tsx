@@ -19,15 +19,24 @@ const editorOptions = {
         ["align", "horizontalRule", "list"],
         ["math"],
     ],
-    katex: katex,
+    katex: {
+        src: katex,
+        options: {
+            strict: "ignore",
+        },
+    },
 };
 
-interface FooterProps extends CreateQuestionProps {
-    IsInModal?: boolean;
-}
-
-export function Footer(props: FooterProps) {
-    const { state, dispatch, IsInModal } = props;
+export function Footer(props: CreateQuestionProps) {
+    const {
+        state, 
+        dispatch,
+        IsUpdate,
+        DataFromUpdate,
+        IsInModal,
+        QuestionFromAI,
+        FetchDataAfterUpdate,
+    } = props;
 
     function handleChangeExplain(content: string) {
         dispatch({ type: ActionType.ChangeExplain, payload: content });
@@ -47,6 +56,7 @@ export function Footer(props: FooterProps) {
                 <div>
                     <Label>Giải thích</Label>
                     <SunEditor
+                        height="200px"
                         setContents={state.Explanation || ""}
                         setOptions={editorOptions}
                         onChange={(content) => handleChangeExplain(content)}
@@ -68,10 +78,7 @@ export function Footer(props: FooterProps) {
                         />
                     </div>
                 </div>
-                {!IsInModal && (
-                    <CreateButton state={state} dispatch={dispatch} />
-                )}
-                {IsInModal && <Button>Thêm vào đề</Button>}
+                <CreateButton {...props} />
             </div>
         </div>
     );

@@ -5,54 +5,67 @@ import {
     getErrors,
     getRecords,
 } from "../Utils";
-import {
-    Question as IQuestion,
-    Answer as IAnswer,
-    QuestionInformation as IQI,
-    User,
-} from "@/InterfacesDatabase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { createOne as createOneQuestion } from "../Api/Question";
-import { createOne as createOneAnswer } from "../Api/Answer";
-import { createOne as createOneQuestionInformation } from "../Api/QuestionInformation";
-import { uploadFileXHR } from "../../api/Upload";
-import { useUser } from "@clerk/clerk-react";
-import { getOneByClerkId } from "@/api/User";
+import { InterfaceAPI, createOne, updateOne } from "../API";
+import { uploadFile } from "@/api/Upload";
 
-export function CreateButton({ state, dispatch }: CreateQuestionProps) {
-    const { user } = useUser()
-    
-    const handleCreate = async (
-        qr: IQuestion,
-        qir: Omit<IQI, "CreatedAt" | "UpdatedAt">,
-        ars: IAnswer[],
-        ImageUrl: string = "",
-        AudioUrl: string = ""
-    ) => {
+export function CreateButton(props: CreateQuestionProps) {
+    const {
+        state,
+        dispatch,
+        IsUpdate,
+        DataFromUpdate,
+        IsInModal,
+        QuestionFromAI,
+        FetchDataAfterUpdate,
+    } = props;
+
+    const handleCreateOrUpdate = async (data: InterfaceAPI) => {
+        const id = toast.loading(
+            IsUpdate ? "Đang sửa đề..." : "Đang tạo đề..."
+        );
         try {
-            await createOneQuestion(qr);
-            await createOneQuestionInformation(qir, ImageUrl, AudioUrl);
-            for (const answer of ars) {
-                await createOneAnswer(answer);
+            const result = IsUpdate
+                ? await updateOne(data)
+                : await createOne(data);
+
+            const isError = "error" in result;
+            toast.update(id, {
+                render: isError
+                    ? IsUpdate
+                        ? "Sửa thất bại!"
+                        : "Tạo thất bại!"
+                    : IsUpdate
+                    ? "Sửa thành công!"
+                    : "Tạo thành công!",
+                type: isError ? "error" : "success",
+                isLoading: false,
+                autoClose: 1000,
+            });
+            if (IsUpdate && FetchDataAfterUpdate) {
+                FetchDataAfterUpdate();
             }
-            toast.success("Tạo câu hỏi thành công!");
-            dispatch({ type: ActionType.Reset, payload: null });
+            if (!isError && !IsUpdate) {
+                dispatch({ type: ActionType.Reset, payload: null });
+            }
         } catch (error) {
-            toast.error("Có lỗi xảy ra khi tạo câu hỏi!");
+            toast.update(id, {
+                render: IsUpdate ? "Sửa thất bại!" : "Tạo thất bại!",
+                type: "error",
+                isLoading: false,
+                autoClose: 1000,
+            });
         }
     };
 
-    const handleUploadFile = async (
-        file: File | null,
-        url: string | null,
-    ) => {
+    const handleUploadFile = async (file: File | null, url: string | null) => {
         if (file && !url) {
             try {
-                const path = await uploadFileXHR(file);
-                return path
+                const path = await uploadFile(file);
+                return path;
             } catch (error) {
-                toast.error("Có lỗi xảy ra khi tải lên tệp!");
+                toast.error("Lỗi tải lên tệp!");
             }
         }
     };
@@ -68,31 +81,42 @@ export function CreateButton({ state, dispatch }: CreateQuestionProps) {
     const handlePostCreate = async () => {
         const errors = getErrors(state);
         if (isDataValid(errors)) {
-            const ImageUrl = await handleUploadFile(
+            let ImageUrl = await handleUploadFile(
                 state.ImageFile,
-                state.ImageUrl,
+                state.ImageUrl
             );
-            const AudioUrl = await handleUploadFile(
+            let AudioUrl = await handleUploadFile(
                 state.AudioFile,
-                state.AudioUrl,
+                state.AudioUrl
             );
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
             if (state.ImageFile && !ImageUrl) {
-                toast.warning("Lỗi tải ImageUrl!")
+                toast.warning("Lỗi tải ImageUrl!");
                 return;
             }
             if (state.AudioFile && !AudioUrl) {
-                toast.warning("Lỗi tải AudioUrl!")
+                toast.warning("Lỗi tải AudioUrl!");
                 return;
             }
-            const { qr, qir, ars } = getRecords(state);
-            await handleCreate(qr, qir, ars, ImageUrl, AudioUrl);
+            const { QuestionRecord, QuestionInfoRecord, AnswerRecords } =
+                getRecords(state);
+            if (ImageUrl == undefined) ImageUrl = "";
+            if (AudioUrl == undefined) AudioUrl = "";
+            await handleCreateOrUpdate({
+                QuestionRecord,
+                QuestionInfoRecord,
+                AnswerRecords,
+                ImageUrl,
+                AudioUrl,
+            });
         }
     };
 
     return (
         <div>
-            <Button onClick={handlePostCreate}>Xác nhận tạo</Button>
+            <Button onClick={handlePostCreate}>
+                {IsUpdate ? "Xác nhận sửa" : "Xác nhận tạo"}
+            </Button>
         </div>
     );
 }

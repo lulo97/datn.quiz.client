@@ -1,95 +1,79 @@
-import { Play } from "@/InterfacesDatabase";
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
-import {
-    QuizDetail,
-    getInitalState as getInitalQuiz,
-} from "@/PageCreateQuiz/Utils";
+import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { getUUID } from "@/Utils";
 import { isEqual } from "lodash";
-
-export enum ActionType {
-    ChangeQuiz,
-    InitialResponse,
-    Sort,
-    ChangeQuestionIdx,
-    ChangeSelectedAnswer,
-    ChangeCurrentTime,
-}
-
-export interface Action {
-    type: ActionType;
-    payload: any;
-}
+import { ActionLS, getDataFromStorage } from "./ReducerLocalStorage";
+import { User } from "@/InterfacesDatabase";
 
 export interface UserResponse {
     QuestionId: string;
     SelectedAnswers: string[];
 }
 
-export interface PlayTime {
-    Quiz: QuizDetail;
+export interface LocalPlayData {
     QuestionIdx: 0;
     Response: UserResponse[];
     StartTime: number;
     EndTime: number;
     CurrentTime: number;
+    RoomId: null;
+    User: User | null;
 }
 
 export interface PlayTimeProps {
-    state: PlayTime;
-    dispatch: React.Dispatch<Action>;
+    state: QuizDetail;
+    localPlay: LocalPlayData;
+    dispatchLS: (state: QuizDetail, action: ActionLS) => void;
 }
 
-export function getInitialState(): PlayTime {
+export function getInitialState(): LocalPlayData {
     return {
-        Quiz: getInitalQuiz(),
         QuestionIdx: 0,
         Response: [],
         StartTime: 0,
         EndTime: 0,
         CurrentTime: 0,
+        RoomId: null,
+        User: null,
     };
 }
 
-export const LocalPlaying = "LocalPlaying";
-export const LocalAfterPlay = "LocalAfterPlay";
+export const LocalPlayingKey = "LocalPlaying";
+export const LocalAfterPlayKey = "LocalAfterPlayKey";
 
-export function getSelectedQuestions(Response: UserResponse[]) {
-    const storedData = localStorage.getItem(LocalPlaying);
-    if (storedData != null) {
-        const localPlaying: PlayTime = JSON.parse(storedData);
-        const Questions = localPlaying.Quiz.Questions;
-        const _Question = Questions.map((q, i) => {
-            const _Answers = q.Answers.filter((a) => {
-                if (Response[i].SelectedAnswers.includes(a.AnswerId))
-                    return true;
-                return false;
-            });
-            return { ...q, Answers: _Answers };
+export function getSelectedQuestions(
+    Quiz: QuizDetail,
+    Response: UserResponse[]
+) {
+    const Questions = Quiz.Questions;
+    const _Question = Questions.map((q, i) => {
+        const _Answers = q.Answers.filter((a) => {
+            if (Response[i].SelectedAnswers.includes(a.AnswerId)) return true;
+            return false;
         });
-        return _Question;
-    }
+        return { ...q, Answers: _Answers };
+    });
+    return _Question;
 }
 
-function getCorrectAnswersQuestions() {
-    const storedData = localStorage.getItem(LocalPlaying);
-    if (storedData != null) {
-        const localPlaying: PlayTime = JSON.parse(storedData);
-        const Questions = localPlaying.Quiz.Questions;
-        const _Question = Questions.map((q, i) => {
-            const _Answers = q.Answers.filter((a) => {
-                if (a.IsCorrect) return true;
-                return false;
-            });
-            return { ...q, Answers: _Answers };
+function getCorrectAnswersQuestions(Quiz: QuizDetail) {
+    const Questions = Quiz.Questions;
+    const _Question = Questions.map((q, i) => {
+        const _Answers = q.Answers.filter((a) => {
+            if (a.IsCorrect) return true;
+            return false;
         });
-        return _Question;
-    }
+        return { ...q, Answers: _Answers };
+    });
+    return _Question;
 }
 
-export function caculateScore(UserResponse: QuestionDetail[]) {
+export function caculateScore(
+    Quiz: QuizDetail,
+    UserResponse: QuestionDetail[]
+) {
     //CorrectAnswersQuestions = CAQ
-    const CAQ = getCorrectAnswersQuestions();
+    const CAQ = getCorrectAnswersQuestions(Quiz);
     if (!CAQ) return -1;
     let Score = 0;
     for (let i = 0; i < UserResponse.length; i++) {
@@ -105,30 +89,30 @@ export function caculateScore(UserResponse: QuestionDetail[]) {
     return Score;
 }
 
-export function getRecords(UserId: string) {
-    const storedData = localStorage.getItem(LocalPlaying);
+export function getRecords(Quiz: QuizDetail, UserId: string) {
+    const localPlay = getDataFromStorage();
+    if (!localPlay) return;
     const PlayId = getUUID();
-    if (storedData != null) {
-        const localPlaying: PlayTime = JSON.parse(storedData);
-        const Response = localPlaying.Response;
-        const UserResponseDetail = getSelectedQuestions(Response);
-        if (!UserResponseDetail) return;
-        const Score = caculateScore(UserResponseDetail);
-        const pr = {
+    const Response = localPlay.Response;
+    const UserResponseDetail = getSelectedQuestions(Quiz, Response);
+    const Score = caculateScore(Quiz, UserResponseDetail);
+    const PlayRecordInsert = {
+        PlayId: PlayId,
+        UserId: UserId,
+        QuizId: Quiz.QuizId,
+        RoomId: null,
+        StartTime: localPlay.StartTime,
+        SubmitTime: localPlay.CurrentTime,
+        Score: Score,
+    };
+    const SelectedAnswersInsert = Response.map((ele) => ele.SelectedAnswers)
+        .flat()
+        .map((ele) => ({
+            AnswerId: ele,
             PlayId: PlayId,
-            UserId: UserId,
-            QuizId: localPlaying.Quiz.QuizId,
-            RoomId: null,
-            StartTime: localPlaying.StartTime,
-            SubmitTime: localPlaying.CurrentTime,
-            Score: Score,
-        };
-        const sa = Response.map((ele) => ele.SelectedAnswers)
-            .flat()
-            .map((ele) => ({
-                AnswerId: ele,
-                PlayId: PlayId,
-            }));
-        return { pr, sa };
-    }
+        }));
+    return {
+        PlayRecordInsert: PlayRecordInsert,
+        SelectedAnswersInsert: SelectedAnswersInsert,
+    };
 }

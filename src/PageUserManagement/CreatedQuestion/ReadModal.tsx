@@ -17,12 +17,11 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { ModelWidthClass, getAnswerStyle } from "@/Utils";
+import { ModelWidthClass, VITE_SERVER_PATH, getAnswerStyle } from "@/Utils";
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 
 interface ReadModalProps {
     record: QuestionDetail;
-    fetchData: () => Promise<void>;
 }
 
 export function ReadModal(props: ReadModalProps) {
@@ -60,25 +59,36 @@ export function ReadModal(props: ReadModalProps) {
                                 <TableHead>Lựa chọn:</TableHead>
                                 <TableCell>
                                     <ul>
-                                        {record.Answers.map((ele) => {
-                                            return (
-                                                <li
-                                                    key={ele.AnswerId}
-                                                    className={getAnswerStyle(
-                                                        ele.IsCorrect
-                                                    )}
-                                                >
-                                                    {ele.Content}
-                                                </li>
-                                            );
-                                        })}
+                                        {record.Answers &&
+                                            record.Answers.map((ele) => {
+                                                return (
+                                                    <li
+                                                        key={ele.AnswerId}
+                                                        className={getAnswerStyle(
+                                                            ele.IsCorrect
+                                                        )}
+                                                    >
+                                                        {ele.Content}
+                                                    </li>
+                                                );
+                                            })}
                                     </ul>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableHead>Ảnh:</TableHead>
                                 <TableCell>
-                                    {record.ImageUrl || "NULL"}
+                                    {record.ImageUrl ? (
+                                        <img
+                                            className="object-contain h-40"
+                                            src={
+                                                VITE_SERVER_PATH +
+                                                record.ImageUrl
+                                            }
+                                        ></img>
+                                    ) : (
+                                        "NULL"
+                                    )}
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -90,7 +100,15 @@ export function ReadModal(props: ReadModalProps) {
                             <TableRow>
                                 <TableHead>Giải thích:</TableHead>
                                 <TableCell>
-                                    {record.Explanation || "NULL"}
+                                    {record.Explanation ? (
+                                        <div
+                                            dangerouslySetInnerHTML={{
+                                                __html: record.Explanation,
+                                            }}
+                                        ></div>
+                                    ) : (
+                                        "NULL"
+                                    )}
                                 </TableCell>
                             </TableRow>
                             <TableRow>

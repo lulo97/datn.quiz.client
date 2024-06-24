@@ -11,25 +11,37 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { createOne } from "./UtilApi";
+import { toast } from "react-toastify";
 
 interface AddModalProps {
     fetchData: () => Promise<void>;
 }
-const inital_data = {
+const initial_data = {
     Name: "",
     Description: "",
 };
 export function AddModal(props: AddModalProps) {
     const { fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState(inital_data);
+    const [data, setData] = useState(initial_data);
 
     const handleAddClick = async () => {
-        if (data.Name == "") return;
-        await createOne(data);
-        await fetchData();
-        setData(inital_data);
-        setIsOpen(false);
+        try {
+            if (data.Name == "") return;
+            const result = await createOne(data);
+            if ("error" in result) {
+                toast.error("Thêm thất bại!");
+                console.log(result);
+            } else {
+                toast.success("Thêm thành công!");
+                await fetchData();
+                setData(initial_data);
+                setIsOpen(false);
+            }
+        } catch (error) {
+            toast.error("Thêm thất bại!");
+            console.log(error);
+        }
     };
 
     return (

@@ -50,9 +50,7 @@ export const components = [
     ScanAnswerSheet,
     CreateRoom,
     RoomWait,
-    RoomMonitor,
     RoomJoin,
-    RoomView,
     RoomRanking,
     AI,
 ];
@@ -83,6 +81,11 @@ browser_routes.push({
 });
 
 browser_routes.push({
+    path: "/QuizPlayTime/:QuizId/:Sort/:RoomId",
+    element: <QuizPlayTime />,
+});
+
+browser_routes.push({
     path: "/QuizPlayTime/:QuizId/:Sort",
     element: <QuizPlayTime />,
 });
@@ -90,6 +93,16 @@ browser_routes.push({
 browser_routes.push({
     path: "/QuizResultTime/:PlayId",
     element: <QuizResultTime />,
+});
+
+browser_routes.push({
+    path: "/RoomMonitor/:RoomId",
+    element: <RoomMonitor />,
+});
+
+browser_routes.push({
+    path: "/RoomView/:RoomId",
+    element: <RoomView />,
 });
 
 smi.forEach((ele) => {

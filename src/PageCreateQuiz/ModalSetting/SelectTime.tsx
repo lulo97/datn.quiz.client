@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Time } from "@/InterfacesDatabase";
-import { ActionType, CreateQuizProps } from "../Utils";
+import { CreateQuizProps } from "../Utils";
 import { Label } from "@/components/ui/label";
 import {
     Select,
@@ -10,6 +10,7 @@ import {
     SelectItem,
 } from "@/components/ui/select";
 import { getAll } from "@/PageAdminManagement/Time/UtilApi";
+import { ActionType } from "../Action";
 
 export function SelectTime(props: CreateQuizProps) {
     const { state, dispatch } = props;

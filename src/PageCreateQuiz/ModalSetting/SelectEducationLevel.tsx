@@ -9,7 +9,8 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
-import { ActionType, CreateQuizProps } from "../Utils";
+import { CreateQuizProps } from "../Utils";
+import { ActionType } from "../Action";
 
 export function SelectEducationLevel(props: CreateQuizProps) {
     const { state, dispatch } = props;

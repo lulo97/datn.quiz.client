@@ -31,7 +31,6 @@ export async function deleteOne(QuestionId: string) {
     }
 }
 
-
 export async function getAllByUser(UserId: string) {
     try {
         const response = await fetch(API_URL + `/ReadAllByUser/${UserId}`);
@@ -46,7 +45,42 @@ export async function getAllByUser(UserId: string) {
 
 export async function getAllBySubject(SubjectId: string) {
     try {
-        const response = await fetch(API_URL + `/ReadAllBySubject/${SubjectId}`);
+        const response = await fetch(
+            API_URL + `/ReadAllBySubject/${SubjectId}`
+        );
+        if (!response.ok) {
+            console.error("Failed to fetch data:", response.statusText);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+export async function getAllByEducationLevel(EducationLevelId: string) {
+    try {
+        const response = await fetch(
+            API_URL + `/ReadAllByEducationLevel/${EducationLevelId}`
+        );
+        console.log(API_URL + `/ReadAllByEducationLevel/${EducationLevelId}`)
+        if (!response.ok) {
+            console.error("Failed to fetch data:", response.statusText);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+export async function getAllBySubjectAndEducationLevel(
+    SubjectId: string,
+    EducationLevelId: string
+) {
+    try {
+        const response = await fetch(
+            API_URL +
+                `/ReadAllBySubjectAndEducationLevel/${SubjectId}/${EducationLevelId}`
+        );
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
         }

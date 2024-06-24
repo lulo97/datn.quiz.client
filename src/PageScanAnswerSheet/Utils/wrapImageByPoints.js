@@ -60,11 +60,10 @@ export function wrapImageByPoints(img, points) {
             // Create canvas placeholder for warped image
             const canvas = document.createElement("canvas");
             cv.imshow(canvas, warpedImage);
+
             //console.log("Warped image displayed on canvas.");
-
-            // Get base64 data image
             const dataUrl = canvas.toDataURL();
-
+            
             // Clean up allocated memory
             srcPoints.delete();
             dstPoints.delete();

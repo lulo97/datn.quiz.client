@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ActionType, CreateQuizProps } from "../Utils";
+import { CreateQuizProps } from "../Utils";
+import { ActionType } from "../Action";
 
 export function Header(props: CreateQuizProps) {
     const { state, dispatch } = props;

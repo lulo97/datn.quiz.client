@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { getRandomWallpaper } from "@/Utils";
+import { getDummyImage } from "@/Utils";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
 function QuizResultCard() {
@@ -34,7 +34,7 @@ function QuizResultCard() {
                     <div className="w-1/2">
                         <img
                             className="object-contain rounded-lg"
-                            src={getRandomWallpaper()}
+                            src={getDummyImage()}
                         ></img>
                         <audio controls className="w-full mt-5">
                             <source

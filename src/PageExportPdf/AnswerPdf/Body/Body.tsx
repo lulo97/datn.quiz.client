@@ -17,7 +17,7 @@ function AnswerBubbleRow(props: { QIdx: number }) {
 export function Body(Quiz: QuizDetail) {
     return (
         <div className="grid grid-cols-3 gap-2 mt-10">
-            {[...Array(Quiz.Questions.length).keys()].map((QIdx) => (
+            {[...Array(50).keys()].map((QIdx) => (
                 <div key={QIdx}  className="w-full flex items-center justify-center">
                     <AnswerBubbleRow QIdx={QIdx + 1} />
                 </div>

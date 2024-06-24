@@ -1,6 +1,7 @@
 import { PenBox, X } from "lucide-react";
-import { ActionType, CreateQuizProps } from "../Utils";
+import { CreateQuizProps } from "../Utils";
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
+import { ActionType } from "../Action";
 
 interface QCHeaderProps extends CreateQuizProps {
     question: QuestionDetail;

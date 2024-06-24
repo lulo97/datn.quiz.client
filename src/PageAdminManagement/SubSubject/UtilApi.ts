@@ -1,22 +1,21 @@
-import { SubSubject } from "@/InterfacesDatabase";
+import { EducationLevel, SubSubject, Subject } from "@/InterfacesDatabase";
 import { MY_HEADER, BACKEND_URL } from "@/Utils";
 import { FilterValue } from "antd/es/table/interface";
+import { SubSubjectDetailForUpdate } from "./UpdateModal";
 
 const BACKEND_PAGE = "SubSubject";
 const API_URL = BACKEND_URL + BACKEND_PAGE;
 
-export interface SubSubjectDetail extends SubSubject {
-    SubjectName: string;
-    SubjectDescription: string | null;
-    SubjectCreatedAt: string;
-    SubjectUpdatedAt: string;
+export interface SubSubjectDetail
+    extends Omit<SubSubject, "SubjectId" | "EducationLevelId"> {
+    Subject: Subject | null;
+    EducationLevel: EducationLevel | null;
 }
 
-export function toSubSubject(detail: SubSubjectDetail): SubSubject {
-    const { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdatedAt } =
-        detail;
-    return { SubSubjectId, SubjectId, Name, Description, CreatedAt, UpdatedAt };
-}
+export type SubSubjectDetailForInsert = Omit<
+    SubSubjectDetail,
+    "CreatedAt" | "UpdatedAt"
+>;
 
 export interface GetAllOptions {
     filterFields?: FilterValue | string[]; // Array of filter fields
@@ -69,9 +68,29 @@ export async function getAll(options?: GetAllOptions) {
     }
 }
 
+export async function getBySubjectAndEducationLevel(
+    SubjectId: string,
+    EducationLevelId: string
+) {
+    try {
+        const response = await fetch(
+            API_URL +
+                `/GetBySubjectAndEducationLevel/${SubjectId}/${EducationLevelId}`
+        );
+        if (!response.ok) {
+            console.error("Failed to fetch data:", response.statusText);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
 export async function getBySubject(SubjectId: string) {
     try {
-        const response = await fetch(API_URL + `/GetBySubject/${SubjectId}`);
+        const response = await fetch(
+            API_URL + `/GetBySubject/${SubjectId}`
+        );
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
         }
@@ -97,7 +116,7 @@ export async function deleteOne(SubSubjectId: string) {
     }
 }
 
-export async function updateOne(data: SubSubject) {
+export async function updateOne(data: SubSubjectDetailForUpdate) {
     try {
         const response = await fetch(API_URL, {
             method: "PUT",

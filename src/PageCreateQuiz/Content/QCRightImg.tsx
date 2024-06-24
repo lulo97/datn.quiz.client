@@ -12,6 +12,8 @@ export function QCRightImg(question: QuestionDetail) {
         }
     }, [question.ImageUrl]);
 
+    if (!question.ImageUrl) return;
+
     return (
         <img
             className="object-contain w-full rounded-lg max-h-[200px]"

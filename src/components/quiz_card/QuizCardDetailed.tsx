@@ -1,4 +1,4 @@
-import { getRandomAvatar, getRandomWallpaper } from "@/Utils";
+import { getRandomAvatar, getDummyImage } from "@/Utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { Star } from "lucide-react";
@@ -12,7 +12,7 @@ const data = {
         Biography: "Hello world",
         AvatarUrl: getRandomAvatar(),
     },
-    ImageUrl: getRandomWallpaper(),
+    ImageUrl: getDummyImage(),
     Rating: 4.5,
     TotalPlayTime: 1000,
     IsVerified: true,
@@ -79,7 +79,9 @@ export function QuizCardDetail() {
                     <div>
                         <div>{data.TotalPlayTime}</div>
                         <div>{data.IsVerified == true ? "Rồi" : "Chưa"}</div>
-                        <div><Label>Ngày sửa: </Label>12/5/2024</div>
+                        <div>
+                            <Label>Ngày sửa: </Label>12/5/2024
+                        </div>
                         <div>
                             <div className="flex">
                                 <Star fill="yellow" />

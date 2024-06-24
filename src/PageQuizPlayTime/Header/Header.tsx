@@ -2,13 +2,13 @@ import { Label } from "@/components/ui/label";
 import {  PlayTimeProps } from "../Utils";
 
 export function Header(props: PlayTimeProps) {
-    const { state, dispatch } = props;
-    const PassedTime = state.CurrentTime - state.StartTime;
-    const TotalTime = state.EndTime - state.StartTime;
+    const { state, localPlay, dispatchLS } = props;
+    const PassedTime = localPlay.CurrentTime - localPlay.StartTime;
+    const TotalTime = localPlay.EndTime - localPlay.StartTime;
     return (
         <div className="flex justify-between items-center">
             <Label>
-                Câu số: {state.QuestionIdx + 1}/{state.Quiz.Questions.length}
+                Câu số: {localPlay.QuestionIdx + 1}/{state.Questions.length}
             </Label>
             <Label>
                 Thời gian: {PassedTime}/{TotalTime}

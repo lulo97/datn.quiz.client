@@ -1,4 +1,4 @@
-import { getRandomWallpaper } from "@/Utils";
+import { getDummyImage } from "@/Utils";
 import { Label } from "@/components/ui/label";
 
 export function QuizCardCompact() {
@@ -6,7 +6,7 @@ export function QuizCardCompact() {
         <div className="flex">
             <img
                 className="w-1/2 p-1 object-contain rounded-lg"
-                src={getRandomWallpaper()}
+                src={getDummyImage()}
             ></img>
             <div className="flex flex-col justify-between">
                 <div className="font-bold text-sm">

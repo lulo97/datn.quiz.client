@@ -1,34 +1,36 @@
 import { Button } from "@/components/ui/button";
-import { AIProps } from "../Utils";
+import { AIProps, getErrors } from "../Utils";
 import { toast } from "react-toastify";
 import { generateQuestion } from "../Api.ts";
 
 export function Footer(props: AIProps) {
     const { state, setState } = props;
     async function handleCreate() {
-        if (state.Text.length < 30) {
-            toast.warning("Độ dài đoạn văn phải hơn 30 chữ!");
-            return;
-        }
-        if (!state.NumberOfQuestion) {
-            toast.warning("Hãy số lượng câu hỏi!");
-            return;
-        }
-        if (!state.DifficultLevel) {
-            toast.warning("Hãy chọn độ khó câu hỏi!");
-            return;
-        }
-        if (!state.Language) {
-            toast.warning("Hãy chọn ngôn ngữ!");
-            return;
-        }
-        if (!state.Type) {
-            toast.warning("Hãy chọn loại trắc nghiệm!");
-            return;
-        }
-        const Output = await generateQuestion(state);
-        if (Output) {
-            setState({ ...state, Output: Output });
+        try {
+            const id = toast.loading("Đang tạo câu hỏi...");
+            const errors = getErrors(state);
+            for (let i = 0; i < errors.length; i++) {
+                await new Promise<void>((resolve) => {
+                    setTimeout(() => {
+                        toast.warning(errors[i]);
+                        resolve();
+                    }, 100 * i);
+                });
+            }
+            if (errors.length > 0) return;
+            const Output = await generateQuestion(state);
+            if (Output) {
+                setState({ ...state, Output: Output });
+                toast.update(id, {
+                    render: "Tạo thành công!",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 1000,
+                });
+            }
+        } catch (error) {
+            toast.error("Lỗi tạo câu hỏi?");
+            console.log(error);
         }
     }
     return (

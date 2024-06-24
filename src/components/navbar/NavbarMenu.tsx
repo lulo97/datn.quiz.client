@@ -10,7 +10,7 @@ import {
 export function NavbarMenu(props: NavbarProps) {
     const { handleMenubarClick, menu_names } = props;
     return (
-        <Menubar className="w-fit h-full flex flex-col justify-start shadow">
+        <Menubar className="w-fit h-full flex flex-col justify-start gap-4 shadow">
             {menu_names.map((ele) => (
                 <MenubarMenu key={ele.name}>
                     <MenubarTrigger

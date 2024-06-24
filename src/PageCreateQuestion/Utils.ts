@@ -14,6 +14,7 @@ import {
     Question as IQuestion,
     QuestionInformation as IQI,
 } from "@/InterfacesDatabase";
+import { IQuestionFromAI } from "@/PageAI/Content/RightQuestion";
 
 export interface QuestionDetail {
     QuestionId: string;
@@ -44,7 +45,15 @@ export interface QuestionDetail {
     UpdatedAt: string | null;
 }
 
-export interface CreateQuestionProps {
+export interface InterfaceFromOutside {
+    IsInModal?: boolean;
+    QuestionFromAI?: IQuestionFromAI;
+    IsUpdate?: boolean;
+    DataFromUpdate?: QuestionDetail;
+    FetchDataAfterUpdate?: () => Promise<void>;
+}
+
+export interface CreateQuestionProps extends InterfaceFromOutside {
     state: QuestionDetail;
     dispatch: React.Dispatch<Action>;
 }
@@ -55,6 +64,7 @@ export enum ActionType {
     ChangeQuestion,
     AddAnswer,
     ChangeAnswer,
+    ReorderAnswers,
     DeleteAnswer,
     ToggleAnswer,
     ToggleExplain,
@@ -91,7 +101,6 @@ export function getNewAnswer(QuestionId: string, IsCorrect: boolean): Answer {
 export function getInitalState(): QuestionDetail {
     const QuestionId = getUUID();
     const QuestionInformationId = getUUID();
-    const UserId = "";
     return {
         Content: null,
         Answers: [
@@ -117,7 +126,7 @@ export function getInitalState(): QuestionDetail {
         Point: null,
         QuestionId: QuestionId,
         QuestionInformationId: QuestionInformationId,
-        UserId: UserId,
+        UserId: "",
         //
         CorrectUserCount: 0,
         IncorrectUserCount: 0,
@@ -129,6 +138,15 @@ export function getInitalState(): QuestionDetail {
 
 export function getErrors(state: QuestionDetail) {
     const errors = [];
+
+    //Check if have duplicate answer
+    const AnswerContents: string[] = state.Answers.map((ele) => ele.Content);
+    const IsAnswerContentsDuplicate =
+        new Set(AnswerContents).size !== AnswerContents.length;
+    if (IsAnswerContentsDuplicate) {
+        errors.push("Hai lựa chọn giống nhau");
+    }
+
     if (!state.UserId) errors.push("Thiếu người tạo!");
     if (!state.Content) errors.push("Thiếu trường câu hỏi!");
     if (!state.Answers) errors.push("Thiếu trường đáp án!");
@@ -176,13 +194,13 @@ function createQuestionInformationRecord(
         CorrectUserCount: 0,
         IncorrectUserCount: 0,
         IsDeleted: false,
-        IsAllowPenalty: state.PenaltyAllow,
+        AllowPenalty: state.PenaltyAllow,
     };
 }
 
 export function getRecords(state: QuestionDetail) {
-    const qr = createQuestionRecord(state);
-    const qir = createQuestionInformationRecord(state);
-    const ars = state.Answers;
-    return { qr, qir, ars };
+    const QuestionRecord = createQuestionRecord(state);
+    const QuestionInfoRecord = createQuestionInformationRecord(state);
+    const AnswerRecords = state.Answers;
+    return { QuestionRecord, QuestionInfoRecord, AnswerRecords };
 }

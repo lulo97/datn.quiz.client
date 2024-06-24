@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ActionType, CreateQuestionProps } from "../Utils";
 import { Answer as IAnswer } from "@/InterfacesDatabase";
 
@@ -10,8 +10,7 @@ interface AnswerProps extends CreateQuestionProps {
 
 import "react-toastify/dist/ReactToastify.css";
 import { Checkbox } from "@/components/ui/checkbox";
-import { toast } from "react-toastify";
-import { MCQ, getCheckBoxClass } from "@/Utils";
+import { getCheckBoxClass } from "@/Utils";
 
 export function Answer(props: AnswerProps) {
     const { answer, state, dispatch } = props;
@@ -21,18 +20,6 @@ export function Answer(props: AnswerProps) {
     }
 
     function handleChangeAnswer(AnswerId: string, NewContent: string) {
-
-        const is_content_unique = state.Answers.every((ele) => {
-            if (NewContent == "") return true;
-            if (ele.AnswerId == AnswerId) return true;
-            return ele.Content != NewContent;
-        });
-
-        if (!is_content_unique) {
-            toast.warning("Hai lựa chọn giống nhau", { delay: 100 });
-            return;
-        }
-
         dispatch({
             type: ActionType.ChangeAnswer,
             payload: {
@@ -42,18 +29,20 @@ export function Answer(props: AnswerProps) {
         });
     }
 
-    function handleDeleteAnswer(id: string) {
-        dispatch({ type: ActionType.DeleteAnswer, payload: id });
+    function handleDeleteAnswer(AnswerId: string) {
+        dispatch({ type: ActionType.DeleteAnswer, payload: AnswerId });
     }
 
     return (
         <div className="flex gap-5 justify-between items-center">
+            <Menu
+                
+            />
             <Checkbox
                 checked={answer.IsCorrect}
                 onClick={() => handleToggleAnswer(answer.AnswerId)}
                 className={getCheckBoxClass(state.Type?.Name)}
             />
-
             <Input
                 type="text"
                 id="option"

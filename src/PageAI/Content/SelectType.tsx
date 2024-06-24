@@ -20,8 +20,8 @@ export function SelectType(props: AIProps) {
         setOptions(records);
     }
 
-    function handleChange(value: string) {
-        setState({...state, Type: value})
+    function handleChange(record: string) {
+        setState({ ...state, Type: JSON.parse(record) });
     }
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export function SelectType(props: AIProps) {
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
                     <SelectValue
-                        placeholder={state.Type || "Loại trắc nghiệm..."}
+                        placeholder={state.Type?.Name || "Loại trắc nghiệm..."}
                     />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
@@ -42,8 +42,8 @@ export function SelectType(props: AIProps) {
                         options.map((option) => (
                             <SelectItem
                                 className="break-words"
-                                key={option.Name}
-                                value={option.Name}
+                                key={option.TypeId}
+                                value={JSON.stringify(option)}
                             >
                                 {option.Name}
                             </SelectItem>

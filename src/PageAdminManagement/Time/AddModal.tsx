@@ -16,20 +16,20 @@ interface AddModalProps {
     fetchData: () => Promise<void>;
 }
 
-const inital_data = {
-    Value: 0
-}
+const initial_data = {
+    Value: 0,
+};
 
 export function AddModal(props: AddModalProps) {
     const { fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState(inital_data);
+    const [data, setData] = useState(initial_data);
 
     const handleAddClick = async () => {
         if (data.Value == null) return;
         await createOne(data);
         await fetchData();
-        setData(inital_data);
+        setData(initial_data);
         setIsOpen(false);
     };
 

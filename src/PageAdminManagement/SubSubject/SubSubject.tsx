@@ -11,10 +11,6 @@ export function SubSubject() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     async function fetchData() {
         setData(await getAll());
     }

@@ -2,10 +2,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { ActionType, CreateQuizProps } from "../Utils";
+import { CreateQuizProps } from "../Utils";
 import { SelectSubject } from "./SelectSubject";
 import { SelectEducationLevel } from "./SelectEducationLevel";
 import { SelectTime } from "./SelectTime";
+import { ActionType } from "../Action";
 
 export function ModalSettingContentLeft(props: CreateQuizProps) {
     const { state, dispatch } = props;

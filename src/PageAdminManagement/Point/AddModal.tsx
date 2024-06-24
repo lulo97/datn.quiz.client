@@ -12,26 +12,27 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { createOne } from "./UtilApi";
 import { Switch } from "@/components/ui/switch";
+import { toast } from "react-toastify";
 
 interface AddModalProps {
     fetchData: () => Promise<void>;
 }
 
-const inital_data = {
+const initial_data = {
     Value: 10,
     IsPenalty: false,
-}
+};
 
 export function AddModal(props: AddModalProps) {
     const { fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState(inital_data);
+    const [data, setData] = useState(initial_data);
 
     const handleAddClick = async () => {
         if (data.Value == null) return;
         await createOne(data);
         await fetchData();
-        setData(inital_data);
+        setData(initial_data);
         setIsOpen(false);
     };
 

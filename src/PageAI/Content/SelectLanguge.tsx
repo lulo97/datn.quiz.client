@@ -20,8 +20,8 @@ export function SelectLanguage(props: AIProps) {
         setOptions(records);
     }
 
-    function handleChange(value: string) {
-        setState({ ...state, Language: value });
+    function handleChange(record: string) {
+        setState({ ...state, Language: JSON.parse(record) });
     }
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export function SelectLanguage(props: AIProps) {
             <Select onValueChange={handleChange}>
                 <SelectTrigger>
                     <SelectValue
-                        placeholder={state.Language || "Ngôn ngữ..."}
+                        placeholder={state.Language?.Name || "Ngôn ngữ..."}
                     />
                 </SelectTrigger>
                 <SelectContent className="h-fit w-fit max-h-52 max-w-[600px]">
@@ -42,8 +42,8 @@ export function SelectLanguage(props: AIProps) {
                         options.map((option) => (
                             <SelectItem
                                 className="break-words"
-                                key={option.Name}
-                                value={option.Name}
+                                key={option.LanguageId}
+                                value={JSON.stringify(option)}
                             >
                                 {option.Name}
                             </SelectItem>
