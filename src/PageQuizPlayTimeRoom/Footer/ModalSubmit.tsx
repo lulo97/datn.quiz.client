@@ -8,42 +8,22 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { PlayTimeProps, getRecords } from "../Utils";
+import { QuizPlayTimeRoomProps } from "../Utils";
 import { Button } from "@/components/ui/button";
-import { ModelWidthClass, getObjectId } from "@/Utils";
+import { ModelWidthClass } from "@/Utils";
 import { useNavigate } from "react-router-dom";
 import { ModalSubmitAnswers } from "./ModalSubmitAnswers";
 import { useUser } from "@clerk/clerk-react";
-import { getOneByClerkId } from "@/api/User";
-import { toast } from "react-toastify";
-import { createOne } from "../API";
 
-export function ModalSubmit(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
-    const navigate = useNavigate();
-
+export function ModalSubmit(props: QuizPlayTimeRoomProps) {
+    const { state, setState, quiz } = props;
     const { user } = useUser();
 
     async function CreatePlayByButton() {
-        try {
-            const ClerkId = user?.id || "";
-            const currentUser = await getOneByClerkId(ClerkId);
-            const data = getRecords(state, currentUser.UserId);
-            if (!data) return;
-            const result = await createOne(data);
-            if ("error" in result) {
-                toast.warning("Nộp bài thất bại!");
-                console.log(result);
-            } else {
-                toast.success("Nộp bài thành công!");
-                const SubmitPath = `/QuizResultTime/${data.PlayRecordInsert.PlayId}`;
-                localStorage.clear();
-                navigate(SubmitPath);
-            }
-        } catch (error) {
-            console.error(error);
-            toast.warning("Nộp bài thất bại!");
-        }
+        setState({
+            ...state,
+            EndTimePlay: Date.now(),
+        });
     }
 
     return (

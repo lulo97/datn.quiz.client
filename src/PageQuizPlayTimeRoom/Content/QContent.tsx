@@ -1,9 +1,9 @@
-import { PlayTimeProps } from "../Utils";
+import { QuizPlayTimeRoomProps } from "../Utils";
 
-export function QContent(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
-    const QuestionIdx = localPlay.QuestionIdx;
-    const Question = state.Questions[QuestionIdx];
+export function QContent(props: QuizPlayTimeRoomProps) {
+    const { state, setState, quiz } = props;
+    const QuestionIdx = state.QuestionIdx;
+    const Question = quiz.Questions[QuestionIdx];
     return (
         <div className="flex flex-col">
             <div className="font-semibold">Câu {QuestionIdx + 1}:</div>

@@ -11,7 +11,7 @@ export interface UserResponse {
 }
 
 export interface LocalPlayData {
-    QuestionIdx: 0;
+    QuestionIdx: number;
     Response: UserResponse[];
     StartTime: number;
     EndTime: number;

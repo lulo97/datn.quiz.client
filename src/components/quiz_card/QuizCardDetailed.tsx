@@ -10,7 +10,7 @@ const data = {
         Username: "luongpysl",
         Email: "luongpysl@gmail.com",
         Biography: "Hello world",
-        AvatarUrl: getRandomAvatar(),
+        ImageUrl: getRandomAvatar(),
     },
     ImageUrl: getDummyImage(),
     Rating: 4.5,

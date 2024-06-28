@@ -6,7 +6,7 @@ import { getInitalState as getInitalQuiz } from "@/PageCreateQuiz/Utils";
 import dayjs, { Dayjs } from "dayjs";
 import { minutesToMilliseconds } from "date-fns";
 
-export interface RoomDetail extends Omit<Room, "CreatedAt" | "QuizId"> {
+export interface CreateRoomDetail extends Omit<Room, "CreatedAt" | "QuizId"> {
     Quiz: QuizDetail;
     PasswordAllow: boolean;
     PasswordConfirm: string;
@@ -15,7 +15,7 @@ export interface RoomDetail extends Omit<Room, "CreatedAt" | "QuizId"> {
     StartQuizTimeHMS: number;
 }
 
-export function getInitalState(): RoomDetail {
+export function getInitalState(): CreateRoomDetail {
     return {
         RoomId: getUUID(),
         Quiz: getInitalQuiz(),
@@ -24,22 +24,22 @@ export function getInitalState(): RoomDetail {
         PasswordConfirm: "",
         PasswordAllow: false,
         Name: "",
-        StartTime: 0,
-        StartQuizTime: 0,
-        EndTime: 0,
-        TimeDMY: 0,
-        StartTimeHMS: 0,
-        StartQuizTimeHMS: 0,
+        StartTime: -1,
+        StartQuizTime: -1,
+        EndTime: -1,
+        TimeDMY: -1,
+        StartTimeHMS: -1,
+        StartQuizTimeHMS: -1,
         Capacity: 10,
     };
 }
 
 export interface CreateRoomProps {
-    state: RoomDetail;
+    state: CreateRoomDetail;
     dispatch: React.Dispatch<Action>;
 }
 
-export function getErrors(state: RoomDetail): string[] {
+export function getErrors(state: CreateRoomDetail): string[] {
     const errors: string[] = [];
     if (!state.RoomId) {
         errors.push("Mã phòng trống!");
@@ -50,13 +50,13 @@ export function getErrors(state: RoomDetail): string[] {
     if (!state.Name) {
         errors.push("Tên phòng trống!");
     }
-    if (!state.StartTime) {
+    if (!state.StartTime || state.StartTime == -1) {
         errors.push("Giờ bắt đầu vào phòng trống!");
     }
-    if (!state.StartQuizTime) {
+    if (!state.StartQuizTime || state.StartQuizTime == -1) {
         errors.push("Giờ bắt đầu làm bài trống!");
     }
-    if (!state.EndTime) {
+    if (!state.EndTime || state.EndTime == -1) {
         errors.push("Giờ kết thúc phòng trống!");
     }
     if (state.StartTime + minutesToMilliseconds(1) >= state.StartQuizTime) {
@@ -100,7 +100,7 @@ export function convertNumberToDayjs(timeNumber: number): Dayjs {
     return dayjs(timeNumber);
 }
 
-export function getRecords(state: RoomDetail): Omit<Room, "CreatedAt"> {
+export function getRecords(state: CreateRoomDetail): Omit<Room, "CreatedAt"> {
     const record = {
         RoomId: state.RoomId,
         QuizId: state.Quiz.QuizId,
@@ -116,9 +116,11 @@ export function getRecords(state: RoomDetail): Omit<Room, "CreatedAt"> {
 }
 
 export function numberToDateStringHSM(timeNumber: number): string {
+    if (timeNumber == -1) return "NULL";
     return dayjs(timeNumber).format("HH:mm:ss");
 }
 
 export function numberToDateStringYMD(timeNumber: number): string {
+    if (timeNumber == -1) return "NULL";
     return dayjs(timeNumber).format("YYYY/MM/DD");
 }

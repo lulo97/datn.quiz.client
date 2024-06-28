@@ -6,15 +6,6 @@ import { io } from "socket.io-client";
 // Function to update local storage
 function updateDataLocalStorage(data: LocalPlayData) {
     localStorage.setItem(LocalPlayingKey, JSON.stringify(data));
-    if (data.RoomId) {
-        const socket = io(VITE_SERVER_PATH);
-        socket.on("connect", async () => {
-            if (data.User) {
-                // Emit play data to server
-                socket.emit("SetPlayData", data);
-            }
-        });
-    }
     window.dispatchEvent(new Event("storage"));
 }
 

@@ -1,17 +1,31 @@
 import { Label } from "@/components/ui/label";
-import { RoomDetail } from "../Utils";
 import { QuizCardDetail } from "./QuizCardDetailed";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { SORT } from "@/Utils";
+import { SORT, VITE_SERVER_PATH_SOCKET } from "@/Utils";
+import { RoomDetail } from "@/PageRoomMonitor/Utils";
+import { toast } from "react-toastify";
+import { canStartPlayQuiz } from "../Utils";
+import { useUser } from "@clerk/clerk-react";
+import { getOneByClerkId } from "@/api/User";
+import { io } from "socket.io-client";
 
 export function Header(room: RoomDetail) {
     const navigate = useNavigate();
+
     function handlePlayQuiz() {
-        navigate(
-            `/QuizPlayTime/${room.Quiz.QuizId}/${SORT.TIME_DEFAULT}/${room.RoomId}`
-        );
+        if (room) {
+            if (canStartPlayQuiz(room.StartQuizTime.toString())) {
+                navigate(`/QuizPlayTimeRoom/${room.RoomId}`);
+                toast.success("Vào thi thành công!");
+            } else {
+                toast.warning("Chưa đến giờ vào thi!");
+            }
+        } else {
+            toast.warning("Phòng không tồn tại!");
+        }
     }
+
     return (
         <div className="flex flex-col justify-between gap-5 min-h-fit h-[80vh]">
             <div className="flex justify-between items-start gap-2">
@@ -21,11 +35,11 @@ export function Header(room: RoomDetail) {
                         <div>{room.Name}</div>
                     </div>
                     <div className="flex items-center gap-2 text-nowrap">
-                        <Label>Thời gian làm bài: </Label>
+                        <Label>Thời gian làm bài:</Label>
                         <div>{room.Quiz.Time?.Value} phút</div>
                     </div>
                     <div className="flex items-center gap-2 text-nowrap">
-                        <Label>Số lượng người chơi: </Label>
+                        <Label>Số lượng người chơi:</Label>
                         <div>{room.Capacity}</div>
                     </div>
                 </div>
@@ -45,13 +59,11 @@ export function Header(room: RoomDetail) {
                             }
                         </div>
                     </div>
-
                     <div className="flex items-center justify-between gap-2 text-nowrap">
-                        <Label>Thời gian kết thúc phòng: </Label>
+                        <Label>Thời gian bắt đầu làm bài:</Label>
                         <div>
-                            {" "}
                             {
-                                room.EndTime.toString()
+                                room.StartQuizTime.toString()
                                     .split(" ")[1]
                                     .split(".")[0]
                             }

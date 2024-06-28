@@ -1,6 +1,4 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./PageApp/App";
 import "./index.css";
 
 // Import your publishable key
@@ -12,57 +10,88 @@ if (!PUBLISHABLE_KEY) {
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import { CreateQuestion } from "./PageCreateQuestion/CreateQuestion";
 import { Homepage } from "./PageHomepage/Homepage";
-import { CreateQuiz } from "./PageCreateQuiz/CreateQuiz";
 import { QuizDetail } from "./PageQuizDetail/QuizDetail";
 import { QuizPlayTime } from "./PageQuizPlayTime/QuizPlayTime";
 import { QuizPlayRevise } from "./PageQuizPlayRevise/QuizPlayRevise";
 import { QuizResultRevise } from "./PageQuizResultRevise/QuizResultRevise";
 import { QuizResultTime } from "./PageQuizResultTime/QuizResultTime";
-import { AdminManagement } from "./PageAdminManagement/AdminManagement";
-import { UserManagement } from "./PageUserManagement/UserManagement";
 import { smi } from "./PageHomepage/Header/Header";
 import { QuizSubject } from "./PageQuizSubject/QuizSubject";
-import { ExportPdf } from "./PageExportPdf/ExportPdf";
-import { ScanAnswerSheet } from "./PageScanAnswerSheet/ScanAnswerSheet";
 import { ModeratorManagement } from "./PageModeratorManagement/ModeratorManagement";
-import { CreateRoom } from "./PageCreateRoom/CreateRoom";
-import { RoomWait } from "./PageRoomWait/RoomWait";
 import { RoomMonitor } from "./PageRoomMonitor/RoomMonitor";
-import { RoomJoin } from "./PageRoomJoin/RoomJoin";
 import { RoomView } from "./PageRoomView/RoomView";
 import { RoomRanking } from "./PageRoomRanking/RoomRanking";
 import { RootLayout } from "./layouts/RootLayout";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { SignInPage } from "./PageSignIn/PageSignIn";
 import { SignUpPage } from "./PageSignUp/PageSignUp";
+import { QuizPlayTimeRoom } from "./PageQuizPlayTimeRoom/QuizPlayTimeRoom";
+import { AdminManagement } from "./PageAdminManagement/AdminManagement";
+import { UserManagement } from "./PageUserManagement/UserManagement";
+import { CreateRoom } from "./PageCreateRoom/CreateRoom";
+import { CreateQuestion } from "./PageCreateQuestion/CreateQuestion";
 import { AI } from "./PageAI/AI";
+import { CreateQuiz } from "./PageCreateQuiz/CreateQuiz";
+import { ExportPdf } from "./PageExportPdf/ExportPdf";
+import { ScanAnswerSheet } from "./PageScanAnswerSheet/ScanAnswerSheet";
+import { RoomJoin } from "./PageRoomJoin/RoomJoin";
 
-export const components = [
-    CreateQuestion,
-    Homepage,
-    CreateQuiz,
-    AdminManagement,
-    UserManagement,
-    ExportPdf,
-    ModeratorManagement,
-    ScanAnswerSheet,
-    CreateRoom,
-    RoomWait,
-    RoomJoin,
-    RoomRanking,
-    AI,
-];
-
-const browser_routes = components.map((Component) => ({
-    path: `/${Component.name.toLowerCase()}`, // Ensure path is lowercase
-    element: <Component />, // Render component element
-}));
+const browser_routes = [];
 
 browser_routes.push({
     path: "/",
-    element: <App />,
+    element: <Homepage />,
+});
+
+browser_routes.push({
+    path: "/ModeratorManagement",
+    element: <ModeratorManagement />,
+});
+
+browser_routes.push({
+    path: "/AdminManagement",
+    element: <AdminManagement />,
+});
+
+browser_routes.push({
+    path: "/UserManagement",
+    element: <UserManagement />,
+});
+
+browser_routes.push({
+    path: "/CreateQuestion",
+    element: <CreateQuestion />,
+});
+
+browser_routes.push({
+    path: "/AI",
+    element: <AI />,
+});
+
+browser_routes.push({
+    path: "/CreateQuiz",
+    element: <CreateQuiz />,
+});
+
+browser_routes.push({
+    path: "/CreateRoom",
+    element: <CreateRoom />,
+});
+
+browser_routes.push({
+    path: "/ExportPdf",
+    element: <ExportPdf />,
+});
+
+browser_routes.push({
+    path: "/ScanAnswerSheet",
+    element: <ScanAnswerSheet />,
+});
+
+browser_routes.push({
+    path: "/RoomJoin",
+    element: <RoomJoin />,
 });
 
 browser_routes.push({
@@ -103,6 +132,16 @@ browser_routes.push({
 browser_routes.push({
     path: "/RoomView/:RoomId",
     element: <RoomView />,
+});
+
+browser_routes.push({
+    path: "/QuizPlayTimeRoom/:RoomId",
+    element: <QuizPlayTimeRoom />,
+});
+
+browser_routes.push({
+    path: "/RoomRanking/:RoomId",
+    element: <RoomRanking />,
 });
 
 smi.forEach((ele) => {

@@ -12,36 +12,10 @@ import { smi } from "./Header";
 export function HeaderMenubar() {
     return (
         <Menubar>
-            {/* <MenubarMenuCreate /> */}
-            <MenubarMenu>
-                <MenubarTrigger>Tạo</MenubarTrigger>
-                <MenubarContent>
-                    <MenubarItem>
-                        <Link className="w-full" to="/CreateQuestion">
-                            Tạo câu hỏi
-                        </Link>
-                    </MenubarItem>
-                    <MenubarItem>
-                        <Link className="w-full" to="/AI">
-                            Tạo câu hỏi bằng AI
-                        </Link>
-                    </MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem>
-                        <Link className="w-full" to="/CreateQuiz">
-                            Tạo đề
-                        </Link>
-                    </MenubarItem>
-                    <MenubarSeparator />
-                    <MenubarItem>
-                        <Link className="w-full" to="/CreateRoom">
-                            Tạo phòng
-                        </Link>
-                    </MenubarItem>
-                </MenubarContent>
-            </MenubarMenu>
+            <MenubarMenuCreate />
             <MenubarMenuSubject />
             <MenubarMenuExamSheet />
+            <MenubarMenuRoom />
         </Menubar>
     );
 }
@@ -108,6 +82,26 @@ function MenubarMenuExamSheet() {
                 <MenubarItem>
                     <Link className="w-full" to="/ScanAnswerSheet">
                         Chấm đề
+                    </Link>
+                </MenubarItem>
+            </MenubarContent>
+        </MenubarMenu>
+    );
+}
+
+function MenubarMenuRoom() {
+    return (
+        <MenubarMenu>
+            <MenubarTrigger>Phòng thi</MenubarTrigger>
+            <MenubarContent>
+                <MenubarItem>
+                    <Link className="w-full" to="/CreateRoom">
+                        Tạo phòng
+                    </Link>
+                </MenubarItem>
+                <MenubarItem>
+                    <Link className="w-full" to="/RoomJoin">
+                        Vào phòng
                     </Link>
                 </MenubarItem>
             </MenubarContent>

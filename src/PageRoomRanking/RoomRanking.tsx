@@ -1,4 +1,3 @@
-import { CardParentClass } from "@/Utils";
 import {
     Card,
     CardHeader,
@@ -8,19 +7,43 @@ import {
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 import { Content } from "./Content/Content";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Ranking, getDataForContent } from "./Utils";
+import { getOne } from "./API";
+import { toast } from "react-toastify";
 
 export function RoomRanking() {
+    const { RoomId } = useParams();
+    const [rankData, setRankData] = useState<Ranking>()
+
+    useEffect(() => {
+        async function fetchData() {
+            if (!RoomId) return;
+            const result = await getOne(RoomId)
+            if ("error" in result) {
+                toast.error("Lỗi lấy dữ liệu!")
+                console.log(result)
+            } else {
+                setRankData(result)
+            }
+        }
+        fetchData()
+    }, [])
+
+    if (!rankData) return <div>Đang tải!</div>
+
     return (
-            <Card>
-                <CardHeader>
-                    <Header />
-                </CardHeader>
-                <CardContent>
-                    <Content />
-                </CardContent>
-                <CardFooter>
-                    <Footer />
-                </CardFooter>
-            </Card>
+        <Card>
+            <CardHeader>
+                <Header {...rankData} />
+            </CardHeader>
+            <CardContent>
+                <Content {...rankData} />
+            </CardContent>
+            <CardFooter>
+                <Footer />
+            </CardFooter>
+        </Card>
     );
 }

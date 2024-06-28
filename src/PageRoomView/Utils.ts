@@ -1,7 +1,9 @@
-import { Room, User } from "@/InterfacesDatabase";
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import dayjs from "dayjs";
 
-export interface RoomDetail extends Omit<Room, "QuizId" | "UserId"> {
-    Quiz: QuizDetail;
-    User: User;
+export function canStartPlayQuiz(StartQuizTime: string) {
+    const StartQuizTimeObject = dayjs(StartQuizTime);
+    const currentTime = dayjs();
+    const diffMilliseconds = StartQuizTimeObject.diff(currentTime);
+    if (diffMilliseconds >= 0) return false
+    return true
 }

@@ -1,22 +1,21 @@
-import { PlayTimeProps } from "../Utils";
 import { BACKEND_URL, VITE_SERVER_PATH } from "@/Utils";
 import { useState, useEffect } from "react";
+import { QuizPlayTimeRoomProps } from "../Utils";
 
-export function QMedia(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
-    const QuestionIdx = localPlay.QuestionIdx;
-    const Question = state.Questions[QuestionIdx];
+export function QMedia(props: QuizPlayTimeRoomProps) {
+    const { state, setState, quiz } = props;
+    const QuestionIdx = state.QuestionIdx;
+    const Question = quiz.Questions[QuestionIdx];
     const API_URL = BACKEND_URL + "public/Image/DummyImage.png";
-
     const [imageSrc, setImageSrc] = useState<string>();
 
     useEffect(() => {
         if (Question.ImageUrl) {
             setImageSrc(VITE_SERVER_PATH + Question.ImageUrl);
         } else {
-            setImageSrc("");
+            setImageSrc("")
         }
-    }, [Question.ImageUrl]);
+    }, [Question.ImageUrl, QuestionIdx]);
 
     return (
         <div className="flex flex-col gap-3">

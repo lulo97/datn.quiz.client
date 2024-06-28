@@ -1,10 +1,16 @@
-import { Play } from "@/InterfacesDatabase";
-import { MY_HEADER, BACKEND_URL } from "@/Utils";
+import { BACKEND_URL, MY_HEADER } from "@/Utils";
 
-const BACKEND_PAGE = "Play";
+import { Play, SelectedAnswer } from "@/InterfacesDatabase";
+
+const BACKEND_PAGE = "CreatePlay";
 const API_URL = BACKEND_URL + BACKEND_PAGE;
 
-export async function createOne(data: Omit<Play, "CreatedAt">) {
+export interface InterfaceAPI {
+    PlayRecordInsert: Omit<Play, "CreatedAt">;
+    SelectedAnswersInsert: Omit<SelectedAnswer, "SelectedAnswerId">[];
+}
+
+export async function createOne(data: InterfaceAPI) {
     try {
         const response = await fetch(API_URL, {
             method: "POST",

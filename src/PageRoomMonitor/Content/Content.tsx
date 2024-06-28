@@ -1,12 +1,19 @@
-import { IRoomSocketData } from "../Utils";
+import { RoomDetail, RoomSocketData, UserData } from "../Utils";
 import { UserInRoomCard } from "./UserInRoomCard";
 
-export function Content(roomSocketData: IRoomSocketData) {
+export function Content(room: RoomSocketData) {
     return (
-        <div className="grid grid-cols-5 gap-3">
-            {roomSocketData.PlayDatas.map((ele) => (
-                <UserInRoomCard key={ele.User.UserId} {...ele} />
-            ))}
+        <div className="h-full">
+            {room.UserDatas.length == 0 && <div>Chưa có người vào phòng!</div>}
+            <div className="grid grid-cols-5 gap-3 h-full overflow-y-scroll">
+                {room.UserDatas.map((ele, idx) => (
+                    <UserInRoomCard 
+                        key={ele.User.UserId} 
+                        userdata={ele}
+                        message={room.Messages[idx]}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

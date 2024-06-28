@@ -138,6 +138,12 @@ if (!VITE_SERVER_PATH) {
     throw new Error("Missing VITE_SERVER_PATH");
 }
 
+export const VITE_SERVER_PATH_SOCKET = import.meta.env.VITE_SERVER_PATH_SOCKET;
+
+if (!VITE_SERVER_PATH_SOCKET) {
+    throw new Error("Missing VITE_SERVER_PATH_SOCKET");
+}
+
 export const VITE_OPENAI_KEY = import.meta.env.VITE_OPENAI_KEY;
 
 if (!VITE_OPENAI_KEY) {

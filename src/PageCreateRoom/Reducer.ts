@@ -1,13 +1,16 @@
 import dayjs, { Dayjs } from "dayjs";
 import { Action, ActionType } from "./Action";
 import {
-    RoomDetail,
+    CreateRoomDetail,
     convertDayjsToNumber,
     convertNumberToDate,
     convertNumberToDayjs,
 } from "./Utils";
 
-export function reducer(state: RoomDetail, action: Action): RoomDetail {
+export function reducer(
+    state: CreateRoomDetail,
+    action: Action
+): CreateRoomDetail {
     switch (action.type) {
         case ActionType.ChangeCapacity: {
             const Capacity = action.payload;

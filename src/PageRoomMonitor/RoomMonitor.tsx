@@ -1,4 +1,4 @@
-import { CardParentClass, VITE_SERVER_PATH } from "@/Utils";
+import { VITE_SERVER_PATH_SOCKET } from "@/Utils";
 import {
     Card,
     CardHeader,
@@ -8,95 +8,64 @@ import {
 import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 import { Content } from "./Content/Content";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getOne } from "@/api/RoomDetail";
-import { User } from "@/InterfacesDatabase";
 import io from "socket.io-client";
-import { useUser } from "@clerk/clerk-react";
-import { getOneByClerkId } from "@/api/User";
-import { RoomDetail } from "@/PageRoomView/Utils";
-import { IRoomSocketData } from "./Utils";
+import { RoomDetail, RoomSocketData, UserData, isRoomTimeout } from "./Utils";
+import { toast } from "react-toastify";
 
 export function RoomMonitor() {
     const { RoomId } = useParams();
-    const { user } = useUser();
-    const [room, setRoom] = useState<RoomDetail>();
-    const [isRoomCreator, setIsRoomCreator] = useState(false);
-    const [roomSocketData, setRoomSocketData] = useState<IRoomSocketData>();
+    const navigate = useNavigate();
+    const [room, setRoom] = useState<RoomSocketData>();
 
     useEffect(() => {
-        console.log("User is the room creator.");
-    }, [isRoomCreator]);
+        const socket = io(VITE_SERVER_PATH_SOCKET);
 
-    useEffect(() => {
-        async function fetchData() {
-            if (user?.id && room && !("error" in room)) {
-                const ClerkId = user.id;
-                const currentUser: User = await getOneByClerkId(ClerkId);
-                if (currentUser.UserId == room.User.UserId) {
-                    setIsRoomCreator(true);
-                }
-            }
-        }
-        fetchData();
-    }, [room, user]); // Include user as a dependency to watch for changes
-
-    useEffect(() => {
-        async function fetchData() {
-            if (!RoomId) return;
-            const _room: RoomDetail = await getOne(RoomId);
-            setRoom(_room);
-        }
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        if (room) console.log("Get RoomDetail by RoomId success!", room);
-    }, [room]);
-
-    useEffect(() => {
-        const socket = io(VITE_SERVER_PATH);
-
-        socket.on("connect", () => {
-            if (!room || "error" in room) {
-                console.log("Room is not available or has an error.");
-                return;
-            }
-            socket.emit("SetRoom", room);
-        });
-
-        // This event listener should be outside the interval
-        socket.on("GetRoomSocketData", (payload: IRoomSocketData) => {
-            if (!payload) return;
-            setRoomSocketData(payload);
-        });
-
-        const intervalId = setInterval(() => {
-            socket.emit("RequestRoomSocketData");
+        const interval_id = setInterval(() => {
+            socket.emit("GET_MONITOR", null);
         }, 1000);
 
+        socket.on("SEND_MONITOR", (data: RoomSocketData[]) => {
+            if (!data) return;
+            const room = data.find((ele) => ele.Room.RoomId == RoomId);
+            if (!room) return;
+            setRoom(room);
+        });
+
+        socket.emit("CREATE_ROOM", { RoomId });
+
+        socket.on("END_ROOM_SERVER_TO_CLIENT", (data) => {
+            console.log(data)
+            if ("error" in data) {
+                toast.error("Có lỗi xảy ra!");
+                console.log(data);
+            } else {
+                toast.success("Tạo thành công!");
+                navigate(`/RoomRanking/${RoomId}`);
+            }
+        });
+
         return () => {
-            clearInterval(intervalId);
+            clearInterval(interval_id);
             socket.disconnect();
         };
-    }, [room]);
+    }, []);
 
-    if (!room) return <div>Không tìm thấy phòng trên CSDL!</div>;
-    if ("error" in room) return <div>Lỗi tìm phòng thi!</div>;
-    if (!isRoomCreator) return <div>Bạn không phải chủ phòng!</div>;
-    if (!roomSocketData) return <div>Không tìm thấy phòng trên Socket!</div>;
+    if (!room) return <div>Đang tải phòng!</div>;
+    if (isRoomTimeout(room.Room.EndTime.toString()))
+        return <div>{room.Room.EndTime.toString()}</div>;
 
     return (
-        <Card>
+        <Card className="flex flex-col h-[90vh]">
             <CardHeader>
-                <Header {...roomSocketData} />
+                <Header {...room} />
             </CardHeader>
-            <CardContent>
-                <Content {...roomSocketData} />
-            </CardContent>
+            <div className="flex-1 bg-gray-200 mx-6 p-3 shadow mb-2 rounded-lg">
+                <Content {...room} />
+            </div>
             <CardFooter>
-                <Footer {...roomSocketData} />
+                <Footer {...room} />
             </CardFooter>
         </Card>
     );

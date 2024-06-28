@@ -1,42 +1,30 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { IRoomSocketData } from "../Utils";
-import dayjs from "dayjs";
+import { RoomSocketData, getRemainingTime } from "../Utils";
 
-function getRemainingTime(endTime: string) {
-    const endTimeObject = dayjs(endTime);
-    const currentTime = dayjs();
-    const diffMilliseconds = endTimeObject.diff(currentTime);
-    const remainingSeconds = Math.floor(diffMilliseconds / 1000);
-    const minute = Math.floor(remainingSeconds / 60);
-    const second = remainingSeconds % 60;
-    return `${minute} phút ${second} giây`;
-}
-
-export function Header(roomSocketData: IRoomSocketData) {
+export function Header(room: RoomSocketData) {
     return (
         <div>
-            <div>
+            <div className="flex gap-3">
+            <div className="flex-1">
                 <Label>Tên phòng</Label>
-                <Input
-                    className="shadow"
-                    defaultValue={roomSocketData.Room?.Name}
-                />
+                <Input readOnly className="shadow" defaultValue={room.Room.Name} />
+            </div>
+            <div className="flex-1">
+                <Label>Đề thi</Label>
+                <Input readOnly className="shadow" defaultValue={room.Room.Quiz.Name || ""} />
+            </div>
             </div>
 
-            <div className="mt-2 flex justify-between gap-5">
-                <Label className="w-full border shadow p-4 rounded-xl">
-                    Số người tham gia: {roomSocketData.PlayDatas.length}/
-                    {roomSocketData.Room?.Capacity}
-                </Label>
-                <Label className="w-full border shadow p-4 rounded-xl">
+
+            <div className="mt-2 flex justify-between gap-3">
+                <div className="text-sm w-full border shadow px-2 py-3 rounded-md">
+                    Số người tham gia: {room.UserDatas.length}/{room.Room.Capacity}
+                </div>
+                <div className="text-sm w-full border shadow px-2 py-3 rounded-md">
                     Đếm ngược kết thúc:{" "}
-                    {roomSocketData.Room
-                        ? getRemainingTime(
-                              roomSocketData.Room.EndTime.toString()
-                          )
-                        : ""}
-                </Label>
+                    {getRemainingTime(room.Room.EndTime.toString())}
+                </div>
             </div>
         </div>
     );

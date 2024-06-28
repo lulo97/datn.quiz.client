@@ -14,8 +14,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getRecords } from "./Utils";
 import { getOne } from "@/api/QuizDetail";
 import { getOneByClerkId } from "@/api/User";
-import { createOne as createOnePlay } from "./Api/Play";
-import { createOne as createOneSelectedAnswer } from "./Api/SelectedAnswer";
 import { toast } from "react-toastify";
 import { useUser } from "@clerk/clerk-react";
 import { getInitalState } from "@/PageCreateQuiz/Utils";
@@ -26,9 +24,10 @@ import {
     getDataFromStorage,
 } from "./ReducerLocalStorage";
 import { User } from "@/InterfacesDatabase";
+import { createOne } from "./API";
 
 export function QuizPlayTime() {
-    const { QuizId, Sort, RoomId } = useParams();
+    const { QuizId, Sort } = useParams();
     const { user } = useUser();
     const [currentUser, setCurrectUser] = useState<User>();
     const navigate = useNavigate();
@@ -58,7 +57,6 @@ export function QuizPlayTime() {
         //First fetch the quiz than inital localstorage
         async function fetchData() {
             if (!currentUser) {
-                console.log("currentUser = ", currentUser);
                 return;
             }
             const quiz_detail = await getOne(QuizId || "");
@@ -69,7 +67,6 @@ export function QuizPlayTime() {
             dispatchLS(quiz_detail, {
                 type: ActionTypeLS.SetData,
                 payload: {
-                    RoomId: RoomId,
                     User: currentUser,
                 },
             });
@@ -84,7 +81,7 @@ export function QuizPlayTime() {
             const localPlay = getDataFromStorage();
             if (!localPlay) return;
             if (localPlay.EndTime <= localPlay.CurrentTime) {
-                //CreatePlayByTimeOut();
+                CreatePlayByTimeOut();
             }
         }, 1000);
 
@@ -105,23 +102,23 @@ export function QuizPlayTime() {
 
     async function CreatePlayByTimeOut() {
         try {
-            if (!currentUser) return;
+            const ClerkId = user?.id || "";
+            const currentUser = await getOneByClerkId(ClerkId);
             const data = getRecords(state, currentUser.UserId);
-
-            if (data == undefined) return;
-
-            const { PlayRecordInsert, SelectedAnswersInsert } = data;
-            await createOnePlay(PlayRecordInsert);
-            for (const answer of SelectedAnswersInsert) {
-                await createOneSelectedAnswer(answer);
-                const SubmitPath = `/QuizResultTime/${PlayRecordInsert.PlayId}`;
+            if (!data) return;
+            const result = await createOne(data);
+            if ("error" in result) {
+                toast.warning("Hết giờ, nộp bài thất bại!");
+                console.log(result);
+            } else {
+                toast.success("Hết giờ, nộp bài thành công!");
+                const SubmitPath = `/QuizResultTime/${data.PlayRecordInsert.PlayId}`;
                 localStorage.clear();
-                toast.success("Hết giờ!");
                 navigate(SubmitPath);
             }
         } catch (error) {
             console.error(error);
-            toast.warning("Nộp bài thất bại!");
+            toast.warning("Hết giờ, nộp bài thất bại!");
         }
     }
 

@@ -1,11 +1,8 @@
+import { RoomDetail } from "@/PageRoomMonitor/Utils";
 import { getDummyImage, BACKEND_URL } from "@/Utils";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { Star } from "lucide-react";
-import { useEffect, useState } from "react";
-import { getOne } from "@/api/User";
-import { User } from "@/InterfacesDatabase";
-import { RoomDetail } from "../Utils";
 
 export function QuizCardDetail(room: RoomDetail) {
     return (

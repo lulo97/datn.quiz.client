@@ -20,7 +20,7 @@ export function QuizCardDetail(props: CreateRoomProps) {
         fetchData();
     }, [state.Quiz.UserId]);
 
-    if (!user) return <div>Hãy thêm đề thi!</div>;
+    if (!user) return <div className="min-h-[40vh]">Hãy thêm đề thi!</div>;
 
     return (
         <div className="flex flex-row gap-1">
