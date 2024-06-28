@@ -21,10 +21,6 @@ export function ReportReason() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<IReportReason> = useMemo(
         () => [
             {

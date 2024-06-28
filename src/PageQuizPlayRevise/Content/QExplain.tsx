@@ -1,10 +1,8 @@
 import { Label } from "@/components/ui/label";
 import { ReviseProps } from "../Utils";
 export function QExplain(props: ReviseProps) {
-    const { state, dispatch } = props;
+    const { state } = props;
     const question = state.Quiz?.Questions[state.QuestionIdx];
-
-    //if (!state.Response[state.QuestionIdx].ShowExplanation) return;
 
     return (
         <div className="flex items-center">

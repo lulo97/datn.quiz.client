@@ -7,7 +7,7 @@ export function Header(Quiz: QuizDetail) {
     return (
         <div>
             <div className="flex justify-between px-4 mb-5">
-                <HeaderLeft {...Quiz} />
+                <HeaderLeft />
                 <HeaderRight {...Quiz} />
             </div>
             <HeaderBottom {...Quiz} />

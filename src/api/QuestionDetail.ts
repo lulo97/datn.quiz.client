@@ -62,7 +62,6 @@ export async function getAllByEducationLevel(EducationLevelId: string) {
         const response = await fetch(
             API_URL + `/ReadAllByEducationLevel/${EducationLevelId}`
         );
-        console.log(API_URL + `/ReadAllByEducationLevel/${EducationLevelId}`)
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
         }

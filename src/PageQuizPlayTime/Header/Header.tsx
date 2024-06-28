@@ -2,7 +2,7 @@ import { Label } from "@/components/ui/label";
 import {  PlayTimeProps } from "../Utils";
 
 export function Header(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
+    const { state, localPlay } = props;
     const PassedTime = localPlay.CurrentTime - localPlay.StartTime;
     const TotalTime = localPlay.EndTime - localPlay.StartTime;
     return (

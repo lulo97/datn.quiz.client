@@ -16,11 +16,11 @@ import { useUser } from "@clerk/clerk-react";
 import { User } from "@/InterfacesDatabase";
 import { io } from "socket.io-client";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { toast } from "react-toastify";
 
 export function QuizPlayTimeRoom() {
     const { RoomId } = useParams();
     const { user } = useUser();
-    const [currentUser, setCurrentUser] = useState<User>();
     const [state, setState] = useState<Message>();
     const [quiz, setQuiz] = useState<QuizDetail>();
     const navigate = useNavigate();
@@ -32,7 +32,6 @@ export function QuizPlayTimeRoom() {
             if (!user) return;
             const ClerkId = user.id;
             const currentUser: User = await getOneByClerkId(ClerkId);
-            setCurrentUser(currentUser);
 
             // Once currentUser is fetched, set up interval
             const interval_id = setInterval(() => {
@@ -55,10 +54,10 @@ export function QuizPlayTimeRoom() {
         socket.on("SEND_MONITOR", (data: any) => {
             const RoomData = data.find((ele: any) => ele.Room.RoomId == RoomId);
             if (!RoomData) {
-                console.log("Room not exist");
+                toast.warning("Phòng không tồn tại!");
                 return;
             }
-            const { Room, UserDatas, Messages } = RoomData;
+            const { Room } = RoomData;
             setQuiz(Room.Quiz);
         });
 

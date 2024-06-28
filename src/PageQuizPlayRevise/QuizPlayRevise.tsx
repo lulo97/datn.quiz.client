@@ -1,4 +1,3 @@
-import { CardParentClass } from "@/Utils";
 import {
     Card,
     CardHeader,
@@ -9,7 +8,7 @@ import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 import { Content } from "./Content/Content";
 import { getOne } from "@/api/QuizDetail";
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import { reducer } from "./Reducer";
 import { ActionType, getInitialState } from "./Utils";

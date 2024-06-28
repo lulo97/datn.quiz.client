@@ -1,10 +1,6 @@
 import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
+    Card
 } from "@/components/ui/card";
-import { CardParentClass } from "@/Utils";
 import { Header } from "./Header/Header";
 import { Content } from "./Content/Content";
 import { Footer } from "./Footer/Footer";

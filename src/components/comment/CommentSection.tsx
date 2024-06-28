@@ -1,37 +1,22 @@
 import { useEffect, useState } from "react";
 import { CommentDetail } from "./Utils";
-import { useUser } from "@clerk/clerk-react";
-import { User } from "@/InterfacesDatabase";
-import { getOneByClerkId } from "@/api/User";
 import { Label } from "../ui/label";
 import { CommentInput } from "./CommentInput/CommentInput";
 import { CommentCard } from "./CommentCard/CommentCard";
 import { getAllByQuiz } from "./API/getAllByQuiz";
+import { QuizDetailProps } from "@/PageQuizDetail/QuizDetail";
 
-interface Props {
-    QuizId: string;
-}
-
-export function CommentSection(props: Props) {
-    const { QuizId } = props;
-    const { user } = useUser();
-
+export function CommentSection(props: QuizDetailProps) {
+    const { quiz, currentUser } = props;
+    const QuizId = quiz.QuizId;
     const [comments, setComments] = useState<CommentDetail[]>();
-    const [currentUser, setCurrentUser] = useState<User>();
 
     async function fetchData() {
         setComments(await getAllByQuiz(QuizId));
     }
 
-    async function fetchUser() {
-        const ClerkId = user?.id;
-        setCurrentUser(await getOneByClerkId(ClerkId || ""));
-    }
-
     useEffect(() => {
         fetchData();
-
-        fetchUser();
     }, []);
 
     if (comments == undefined || currentUser == undefined)

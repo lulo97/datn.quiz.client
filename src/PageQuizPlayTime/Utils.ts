@@ -58,7 +58,7 @@ export function getSelectedQuestions(
 
 function getCorrectAnswersQuestions(Quiz: QuizDetail) {
     const Questions = Quiz.Questions;
-    const _Question = Questions.map((q, i) => {
+    const _Question = Questions.map((q, _i) => {
         const _Answers = q.Answers.filter((a) => {
             if (a.IsCorrect) return true;
             return false;

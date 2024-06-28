@@ -7,7 +7,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { EllipsisVertical, Menu } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import { numberToDateStringHSM } from "@/PageCreateRoom/Utils";
 
 interface Props {

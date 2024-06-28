@@ -7,7 +7,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { PenBox, X } from "lucide-react";
+import { X } from "lucide-react";
 import { CommentCardProps } from "../Utils";
 import { deleteOne } from "../API/deleteOne";
 import { toast } from "react-toastify";
@@ -24,7 +24,7 @@ export function ModalDelete(props: CommentCardProps) {
             setOpen(false);
         } catch (error) {
             toast.success("Xóa thất bại");
-            console.log(error);
+            console.error(error);
         }
     }
     const [open, setOpen] = useState(false);
@@ -36,7 +36,9 @@ export function ModalDelete(props: CommentCardProps) {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Xác nhận xóa bình luận</DialogTitle>
-                    <DialogDescription>Bình luận đã xóa sẽ không thể khôi phục!</DialogDescription>
+                    <DialogDescription>
+                        Bình luận đã xóa sẽ không thể khôi phục!
+                    </DialogDescription>
                     <div className="w-full flex justify-between">
                         <Button onClick={() => setOpen(false)}>Hủy</Button>
                         <Button onClick={handleDelete}>Xóa</Button>

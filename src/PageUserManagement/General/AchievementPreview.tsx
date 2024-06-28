@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 import { AchievementCard } from "./AchievementCard";
 import { User } from "@/InterfacesDatabase";
 
-export function AchievementPreview(currentUser: User) {
+export function AchievementPreview(_currentUser: User) {
     return (
         <Card>
             <CardHeader>

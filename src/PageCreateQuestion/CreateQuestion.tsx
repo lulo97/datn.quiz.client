@@ -12,7 +12,6 @@ import {
     ActionType,
     CreateQuestionProps,
     InterfaceFromOutside,
-    QuestionDetail,
     getInitalState,
 } from "./Utils";
 import { reducer } from "./Reducer";

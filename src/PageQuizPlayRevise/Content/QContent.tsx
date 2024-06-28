@@ -1,6 +1,6 @@
 import { ReviseProps } from "../Utils";
 export function QContent(props: ReviseProps) {
-    const { state, dispatch } = props;
+    const { state } = props;
     const question = state.Quiz?.Questions[state.QuestionIdx];
 
     return (

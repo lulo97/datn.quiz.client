@@ -34,7 +34,7 @@ export function QAnswers(props: QuizPlayTimeRoomProps) {
 
     return (
         <div className="max-h-64 overflow-y-auto border rounded-sm p-1 mt-2 flex flex-col gap-3">
-            {CurrentQuestion.Answers.map((ans, idx) => {
+            {CurrentQuestion.Answers.map((ans) => {
                 const isChecked = Response.SelectedAnswers.includes(
                     ans.AnswerId
                 );

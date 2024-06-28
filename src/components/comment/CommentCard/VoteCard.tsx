@@ -12,7 +12,7 @@ import {
 import { toast } from "react-toastify";
 
 export function VoteCard(props: CommentCardProps) {
-    const { comment, currentUser, QuizId, fetchData } = props;
+    const { comment, currentUser, fetchData } = props;
 
     const flatUpvotesToUserId = comment.Upvotes.map((ele) => ele.UserId);
     const isCurrentUserUpvoted = flatUpvotesToUserId.includes(
@@ -26,9 +26,9 @@ export function VoteCard(props: CommentCardProps) {
 
     async function handleUpvote() {
         if (!isCurrentUserUpvoted && isCurrentUserDownvoted) {
-            toast.warning("Hãy bỏ Downvote bình luận")
+            toast.warning("Hãy bỏ Downvote bình luận");
             return;
-        };
+        }
         try {
             if (isCurrentUserUpvoted) {
                 const Upvote = comment.Upvotes.find(
@@ -45,16 +45,16 @@ export function VoteCard(props: CommentCardProps) {
                 await createOneUpvote(data);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
         fetchData();
     }
 
     async function handleDownvote() {
         if (isCurrentUserUpvoted && !isCurrentUserDownvoted) {
-            toast.warning("Hãy bỏ Upvote bình luận")
+            toast.warning("Hãy bỏ Upvote bình luận");
             return;
-        };
+        }
         try {
             if (isCurrentUserDownvoted) {
                 const Downvote = comment.Downvotes.find(
@@ -72,7 +72,7 @@ export function VoteCard(props: CommentCardProps) {
             }
             fetchData();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

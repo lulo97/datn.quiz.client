@@ -18,7 +18,7 @@ export function QAnswers(props: PlayTimeProps) {
 
     return (
         <div className="max-h-64 overflow-y-auto border rounded-sm p-1 mt-2 flex flex-col gap-3">
-            {Question.Answers.map((ans, idx) => {
+            {Question.Answers.map((ans) => {
                 const isChecked = Response.SelectedAnswers.includes(
                     ans.AnswerId
                 );

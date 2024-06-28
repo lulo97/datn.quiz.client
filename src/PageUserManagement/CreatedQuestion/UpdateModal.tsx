@@ -1,5 +1,4 @@
-import { ModalSizeClass, ModelWidthClass } from "@/Utils";
-import { Button } from "@/components/ui/button";
+import { ModelWidthClass } from "@/Utils";
 import {
     Dialog,
     DialogContent,

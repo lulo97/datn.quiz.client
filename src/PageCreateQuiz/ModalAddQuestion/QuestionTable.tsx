@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 import { TableColumnsType } from "antd";
-import { Eye, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
     getAllByEducationLevel,
     getAllBySubject,

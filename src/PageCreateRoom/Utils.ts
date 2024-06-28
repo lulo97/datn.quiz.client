@@ -1,5 +1,5 @@
 import { Room } from "@/InterfacesDatabase";
-import { getObjectId, getUUID } from "@/Utils";
+import { getUUID } from "@/Utils";
 import { Action } from "./Action";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { getInitalState as getInitalQuiz } from "@/PageCreateQuiz/Utils";

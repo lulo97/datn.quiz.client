@@ -7,7 +7,7 @@ export function Right(props: AIProps) {
         <div className="w-1/2 border rounded-l-lg p-2 overflow-y-scroll max-h-full bg-gray-100">
             {state.Output == null && <div>Kết quả...</div>}
             {state.Output != null &&
-                state.Output.map((ele, idx) => (
+                state.Output.map((_ele, idx) => (
                     <RightQuestion
                         key={idx}
                         state={state}

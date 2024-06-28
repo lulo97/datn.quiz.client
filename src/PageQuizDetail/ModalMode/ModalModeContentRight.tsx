@@ -1,4 +1,3 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -13,8 +12,10 @@ import { SelectQuestionNumber } from "./SelectQuestionNumber";
 import { SortEasyHard } from "./SortEasyHard";
 import { useState } from "react";
 import { SORT } from "@/Utils";
+import { QuizDetailProps } from "../QuizDetail";
 
-export function ModalModeContentRight(quiz: QuizDetail) {
+export function ModalModeContentRight(props: QuizDetailProps) {
+    const { quiz } = props;
     const navigate = useNavigate();
     const [QuestionNumber, setQuestionNumber] = useState(quiz.Questions.length);
     const [Sort, setSort] = useState(SORT.REVISE_EASY);

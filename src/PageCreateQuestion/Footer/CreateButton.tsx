@@ -15,9 +15,6 @@ export function CreateButton(props: CreateQuestionProps) {
         state,
         dispatch,
         IsUpdate,
-        DataFromUpdate,
-        IsInModal,
-        QuestionFromAI,
         FetchDataAfterUpdate,
     } = props;
 

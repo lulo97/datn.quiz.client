@@ -13,7 +13,6 @@ import {
 import { QuizCardDetail } from "./QuizCardDetailed";
 import { ActionType } from "../Action";
 import { toast } from "react-toastify";
-import dayjs from "dayjs";
 import { createOne } from "../../api/Room";
 import { useNavigate } from "react-router-dom";
 
@@ -43,7 +42,7 @@ export function Header(props: CreateRoomProps) {
                 navigate(`/RoomMonitor/${record.RoomId}`);
             } catch (error) {
                 toast.success("Tạo phòng thất bại!");
-                console.log(error);
+                console.error(error);
             }
         }
     }

@@ -10,7 +10,7 @@ export function Header(Quiz: QuizDetail) {
                 <HeaderLeft {...Quiz} />
                 <HeaderRight {...Quiz} />
             </div>
-            <HeaderBottom {...Quiz} />
+            <HeaderBottom />
         </div>
     );
 }

@@ -276,7 +276,7 @@ async function runTryDetectCircles(
             let minDist = (maxRadius + minRadius) / 2;
 
             if (iteration_count % Math.trunc(max_iterations / 10) == 1) {
-                console.log(iteration_count);
+                //console.log(iteration_count);
             }
 
             let circles = await runDetectCircles(

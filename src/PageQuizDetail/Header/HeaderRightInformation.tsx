@@ -1,21 +1,9 @@
-import { User } from "@/InterfacesDatabase";
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
-import { MySQLDatetimeFormat } from "@/Utils";
-import { getOne } from "@/api/User";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { useEffect, useState } from "react";
+import { QuizDetailProps } from "../QuizDetail";
 
-export function HeaderRightInformation(quiz: QuizDetail) {
-    const [currentUser, setCurrectUser] = useState<User>();
-
-    useEffect(() => {
-        async function fetchData() {
-            setCurrectUser(await getOne(quiz.UserId));
-        }
-        fetchData();
-    }, []);
-
+export function HeaderRightInformation(props: QuizDetailProps) {
+    const {quiz, currentUser} = props;
     return (
         <Card>
             <CardHeader>

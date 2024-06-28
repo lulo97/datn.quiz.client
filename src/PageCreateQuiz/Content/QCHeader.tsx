@@ -9,7 +9,7 @@ interface QCHeaderProps extends CreateQuizProps {
 }
 
 export function QCHeader(props: QCHeaderProps) {
-    const { state, dispatch, question, idx } = props;
+    const { dispatch, question, idx } = props;
     function handleDeleteQuestion() {
         dispatch({
             type: ActionType.DeleteQuestion,

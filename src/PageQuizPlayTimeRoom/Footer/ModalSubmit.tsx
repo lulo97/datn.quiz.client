@@ -11,13 +11,10 @@ import {
 import { QuizPlayTimeRoomProps } from "../Utils";
 import { Button } from "@/components/ui/button";
 import { ModelWidthClass } from "@/Utils";
-import { useNavigate } from "react-router-dom";
 import { ModalSubmitAnswers } from "./ModalSubmitAnswers";
-import { useUser } from "@clerk/clerk-react";
 
 export function ModalSubmit(props: QuizPlayTimeRoomProps) {
-    const { state, setState, quiz } = props;
-    const { user } = useUser();
+    const { state, setState } = props;
 
     async function CreatePlayByButton() {
         setState({

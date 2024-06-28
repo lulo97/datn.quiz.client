@@ -1,4 +1,3 @@
-import { CardParentClass } from "@/Utils";
 import {
     Card,
     CardHeader,
@@ -35,7 +34,7 @@ export function QuizResultRevise() {
                     <Content {...Quiz} />
                 </CardContent>
                 <CardFooter>
-                    <Footer {...Quiz} />
+                    <Footer />
                 </CardFooter>
             </Card>
     );

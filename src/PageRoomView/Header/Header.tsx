@@ -2,13 +2,9 @@ import { Label } from "@/components/ui/label";
 import { QuizCardDetail } from "./QuizCardDetailed";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { SORT, VITE_SERVER_PATH_SOCKET } from "@/Utils";
 import { RoomDetail } from "@/PageRoomMonitor/Utils";
 import { toast } from "react-toastify";
 import { canStartPlayQuiz } from "../Utils";
-import { useUser } from "@clerk/clerk-react";
-import { getOneByClerkId } from "@/api/User";
-import { io } from "socket.io-client";
 
 export function Header(room: RoomDetail) {
     const navigate = useNavigate();

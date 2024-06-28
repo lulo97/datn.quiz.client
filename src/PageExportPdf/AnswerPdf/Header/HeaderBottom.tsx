@@ -2,6 +2,7 @@ import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { AnswerBubble } from "../AnswerBubble";
 import QRCode from "qrcode";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function STTRow() {
     return (
@@ -28,10 +29,10 @@ export function HeaderBottom(Quiz: QuizDetail) {
     const generateQRCode = async () => {
         try {
             const url = await QRCode.toDataURL(Quiz.QuizId);
-            console.log(url);
             setQRCodeImage(url);
         } catch (error) {
-            console.error("Error generating QR code:", error);
+            toast.error("Lỗi lấy mã QR!")
+            console.error(error);
         }
     };
 

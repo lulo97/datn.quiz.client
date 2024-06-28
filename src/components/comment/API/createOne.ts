@@ -7,7 +7,6 @@ const API_URL = BACKEND_URL + BACKEND_PAGE;
 export async function createOne(
     data: Omit<Comment, "CommentId" | "CreatedAt" | "UpdatedAt">
 ) {
-    console.log(data)
     try {
         const response = await fetch(API_URL, {
             method: "POST",

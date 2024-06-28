@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { TableColumnsType, TableProps } from "antd";
-import { toDDMMYYY } from "@/Utils";
 import { GetAllOptions, SubSubjectDetail, getAll } from "./UtilApi";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";

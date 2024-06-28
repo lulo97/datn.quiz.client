@@ -21,10 +21,6 @@ export function DifficultLevel() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<IDifficultLevel> = useMemo(
         () => [
             {

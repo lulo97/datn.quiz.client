@@ -3,7 +3,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { Ellipsis, PenBox, X } from "lucide-react";
+import { Ellipsis } from "lucide-react";
 import { CommentCardProps } from "../Utils";
 import { ModalDelete } from "./ModalDelete";
 import { ModalEdit } from "./ModalEdit";

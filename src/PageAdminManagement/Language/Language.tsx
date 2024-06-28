@@ -21,10 +21,6 @@ export function Language() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<ILanguage> = useMemo(
         () => [
             {

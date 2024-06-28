@@ -1,6 +1,4 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
-
-export function HeaderBottom(Quiz: QuizDetail) {
+export function HeaderBottom() {
     return (
         <div>
             <div className="relative w-[400px]">

@@ -1,9 +1,8 @@
 import { Label } from "@/components/ui/label";
 import { QuizPlayTimeRoomProps } from "../Utils";
-import { useEffect, useState } from "react";
 
 export function Header(props: QuizPlayTimeRoomProps) {
-    const { state, setState, quiz } = props;
+    const { state, quiz } = props;
     const PassedTime = Math.trunc((Date.now() - state.StartTimePlay)/1000);
     const TotalTime = quiz.Time? quiz.Time.Value*60 : 0;
 

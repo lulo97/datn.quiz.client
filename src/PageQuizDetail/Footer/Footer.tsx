@@ -1,6 +1,6 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { CommentSection } from "@/components/comment/CommentSection";
+import { QuizDetailProps } from "../QuizDetail";
 
-export function Footer(quiz: QuizDetail) {
-    return <CommentSection QuizId={quiz.QuizId} />;
+export function Footer(props: QuizDetailProps) {
+    return <CommentSection {...props} />;
 }

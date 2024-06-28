@@ -8,7 +8,7 @@ import { getOne } from "@/api/User";
 import { User } from "@/InterfacesDatabase";
 
 export function QuizCardDetail(props: CreateRoomProps) {
-    const { state, dispatch } = props;
+    const { state } = props;
     const [user, setUser] = useState<User>();
 
     useEffect(() => {

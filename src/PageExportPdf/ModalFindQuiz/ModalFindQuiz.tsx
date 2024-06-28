@@ -1,4 +1,4 @@
-import { ModalSizeClass, ModelWidthClass } from "@/Utils";
+import { ModelWidthClass } from "@/Utils";
 import {
     Dialog,
     DialogContent,

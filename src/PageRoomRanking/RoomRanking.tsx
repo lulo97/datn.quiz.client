@@ -9,7 +9,7 @@ import { Footer } from "./Footer/Footer";
 import { Content } from "./Content/Content";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Ranking, getDataForContent } from "./Utils";
+import { Ranking } from "./Utils";
 import { getOne } from "./API";
 import { toast } from "react-toastify";
 

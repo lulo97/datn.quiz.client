@@ -1,12 +1,11 @@
-import { BACKEND_URL, VITE_SERVER_PATH } from "@/Utils";
+import { VITE_SERVER_PATH } from "@/Utils";
 import { useState, useEffect } from "react";
 import { QuizPlayTimeRoomProps } from "../Utils";
 
 export function QMedia(props: QuizPlayTimeRoomProps) {
-    const { state, setState, quiz } = props;
+    const { state, quiz } = props;
     const QuestionIdx = state.QuestionIdx;
     const Question = quiz.Questions[QuestionIdx];
-    const API_URL = BACKEND_URL + "public/Image/DummyImage.png";
     const [imageSrc, setImageSrc] = useState<string>();
 
     useEffect(() => {

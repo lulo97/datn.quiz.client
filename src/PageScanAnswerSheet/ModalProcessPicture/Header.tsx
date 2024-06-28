@@ -12,7 +12,6 @@ import { getQuizId } from "../Utils/getQuizId";
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 import { getAllByQuizId } from "@/api/QuestionDetail";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
 
 export function Header(props: PropsScanAnswerSheet) {
     const {
@@ -32,7 +31,7 @@ export function Header(props: PropsScanAnswerSheet) {
         if (files) {
             setFile(files[0]);
             const reader = new FileReader();
-            reader.onload = function (e) {
+            reader.onload = function () {
                 imageRefFromFile.current.src = reader.result as string;
             };
             reader.readAsDataURL(files[0]);
@@ -111,7 +110,6 @@ export function Header(props: PropsScanAnswerSheet) {
             Questions,
             userResponse
         );
-        console.log(userResponseDetail);
         setUserResponseDetail(userResponseDetail);
         toast.update(id, {
             render: "Xử lý ảnh thành công!",

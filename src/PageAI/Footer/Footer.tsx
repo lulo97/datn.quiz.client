@@ -30,7 +30,7 @@ export function Footer(props: AIProps) {
             }
         } catch (error) {
             toast.error("Lỗi tạo câu hỏi?");
-            console.log(error);
+            console.error(error);
         }
     }
     return (

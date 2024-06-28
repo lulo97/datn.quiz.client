@@ -27,7 +27,7 @@ export function SelectDifficultLevel(props: AIProps) {
                 setOptions(result);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

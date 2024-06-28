@@ -1,4 +1,3 @@
-import { CardParentClass } from "@/Utils";
 import {
     Card,
     CardHeader,

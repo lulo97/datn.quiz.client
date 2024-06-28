@@ -1,7 +1,7 @@
 import { QuizPlayTimeRoomProps } from "../Utils";
 
 export function QContent(props: QuizPlayTimeRoomProps) {
-    const { state, setState, quiz } = props;
+    const { state, quiz } = props;
     const QuestionIdx = state.QuestionIdx;
     const Question = quiz.Questions[QuestionIdx];
     return (

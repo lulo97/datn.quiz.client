@@ -12,7 +12,6 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { createOne } from "./UtilApi";
 import { Switch } from "@/components/ui/switch";
-import { toast } from "react-toastify";
 
 interface AddModalProps {
     fetchData: () => Promise<void>;

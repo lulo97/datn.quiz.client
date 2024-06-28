@@ -1,12 +1,11 @@
-import { getSelectedQuestions, caculateScore } from "@/PageQuizPlayTime/Utils";
+import { getSelectedQuestions } from "@/PageQuizPlayTime/Utils";
 import { QuizPlayTimeRoomProps } from "../Utils";
 
 export function ModalSubmitAnswers(props: QuizPlayTimeRoomProps) {
-    const { state, setState, quiz } = props;
+    const { state, quiz } = props;
 
     const UserResponseDetail = getSelectedQuestions(quiz, state.Response);
     if (!UserResponseDetail) return <div>Đang tải</div>;
-    const Score = caculateScore(quiz, UserResponseDetail);
 
     return (
         <div className="p-4 bg-gray-50 rounded-lg shadow-md">

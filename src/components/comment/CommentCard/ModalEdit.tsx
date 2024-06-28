@@ -8,7 +8,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { PenBox, X } from "lucide-react";
+import { PenBox } from "lucide-react";
 import { useState } from "react";
 import { CommentCardProps } from "../Utils";
 import { toast } from "react-toastify";

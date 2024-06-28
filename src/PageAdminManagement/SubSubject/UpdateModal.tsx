@@ -1,4 +1,4 @@
-import { EducationLevel, SubSubject, Subject } from "@/InterfacesDatabase";
+import { EducationLevel, Subject } from "@/InterfacesDatabase";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -64,25 +64,24 @@ export function UpdateModal(props: UpdateModalProps) {
                 SubjectId: data.Subject?.SubjectId,
                 EducationLevelId: data.EducationLevel?.EducationLevelId,
                 Name: data.Name,
-                Description: data.Description
-            }
+                Description: data.Description,
+            };
             if (record.Name == "") return;
             if (!record.SubjectId) return;
             if (!record.EducationLevelId) return;
             const result = await updateOne(record);
             if ("error" in result) {
-                toast.error("Cập nhật thất bại!")
-                console.log(result)
+                toast.error("Cập nhật thất bại!");
+                console.log(result);
             } else {
-                toast.success("Cập nhật thành công!")
+                toast.success("Cập nhật thành công!");
                 await fetchData();
                 setIsOpen(false);
             }
         } catch (error) {
-            toast.error("Cập nhật thất bại!")
-            console.log(error)
+            toast.error("Cập nhật thất bại!");
+            console.error(error);
         }
-
     };
 
     return (
@@ -123,33 +122,33 @@ export function UpdateModal(props: UpdateModalProps) {
                             </SelectContent>
                         </Select>
                     </div>
-                            <div>
-                            <Label>Trình độ học vấn</Label>{" "}
-                            <Select
-                        onValueChange={(value) =>
-                            setData({
-                                ...data,
-                                EducationLevel: JSON.parse(value),
-                            })
-                        }
-                    >
-                        <SelectTrigger>
-                            <SelectValue
-                                placeholder={record.EducationLevel?.Name}
-                            />
-                        </SelectTrigger>
-                        <SelectContent className="h-52">
-                            {educationLevels.map((ele) => (
-                                <SelectItem
-                                    key={ele.EducationLevelId}
-                                    value={JSON.stringify(ele)}
-                                >
-                                    {ele.Name}
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                            </div>
+                    <div>
+                        <Label>Trình độ học vấn</Label>{" "}
+                        <Select
+                            onValueChange={(value) =>
+                                setData({
+                                    ...data,
+                                    EducationLevel: JSON.parse(value),
+                                })
+                            }
+                        >
+                            <SelectTrigger>
+                                <SelectValue
+                                    placeholder={record.EducationLevel?.Name}
+                                />
+                            </SelectTrigger>
+                            <SelectContent className="h-52">
+                                {educationLevels.map((ele) => (
+                                    <SelectItem
+                                        key={ele.EducationLevelId}
+                                        value={JSON.stringify(ele)}
+                                    >
+                                        {ele.Name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
 
                     <div>
                         <Label>Chủ đề phụ</Label>

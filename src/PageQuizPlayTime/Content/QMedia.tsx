@@ -1,12 +1,11 @@
 import { PlayTimeProps } from "../Utils";
-import { BACKEND_URL, VITE_SERVER_PATH } from "@/Utils";
+import { VITE_SERVER_PATH } from "@/Utils";
 import { useState, useEffect } from "react";
 
 export function QMedia(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
+    const { state, localPlay } = props;
     const QuestionIdx = localPlay.QuestionIdx;
     const Question = state.Questions[QuestionIdx];
-    const API_URL = BACKEND_URL + "public/Image/DummyImage.png";
 
     const [imageSrc, setImageSrc] = useState<string>();
 

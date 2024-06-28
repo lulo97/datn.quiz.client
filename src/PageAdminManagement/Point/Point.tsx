@@ -21,9 +21,6 @@ export function Point() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
 
     const columns: TableColumnsType<IPoint> = useMemo(
         () => [

@@ -1,5 +1,5 @@
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
-import { BACKEND_URL, VITE_SERVER_PATH, getDummyImage } from "@/Utils";
+import { BACKEND_URL, VITE_SERVER_PATH } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
     Card,

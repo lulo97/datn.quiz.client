@@ -13,7 +13,6 @@ import { Label } from "@/components/ui/label";
 import { PenBox } from "lucide-react";
 import { useState } from "react";
 import { updateOne } from "./UtilApi";
-import { Switch } from "@/components/ui/switch";
 
 interface DeleteModalProps {
     record: Time;

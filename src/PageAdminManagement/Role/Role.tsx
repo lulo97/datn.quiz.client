@@ -21,10 +21,6 @@ export function Role() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<IRole> = useMemo(
         () => [
             {

@@ -5,9 +5,7 @@ import { getOneByClerkId } from "@/api/User";
 import { User } from "@/InterfacesDatabase";
 import { useUser } from "@clerk/clerk-react";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
-import { useNavigate } from "react-router-dom";
 import { getAllByUser } from "@/api/QuizDetail";
-import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { ReadModal } from "./ReadModal";
 
@@ -16,7 +14,6 @@ export function CreatedQuiz(props: {
 }) {
     const { handleFetchData } = props;
     const [data, setData] = useState<QuizDetail[]>([]);
-    const navigate = useNavigate();
     const { user } = useUser();
 
     async function fetchData() {

@@ -19,7 +19,7 @@ export interface PageProps {
 }
 
 export function createSubQuizzes(
-    quiz: QuizDetail,
+    props: QuizDetailProps,
     chunkSize: number
 ): QuizDetail[] {
     let subQuizzes = [];

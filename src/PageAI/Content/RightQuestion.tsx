@@ -1,4 +1,4 @@
-import { InputAI, QuestionAI } from "../Utils";
+import { InputAI } from "../Utils";
 import { getAnswerStyle, getUUID } from "@/Utils";
 import { Label } from "@/components/ui/label";
 import { ModalCreateQuestion } from "./ModalCreateQuestion";

@@ -21,13 +21,13 @@ export function General() {
                 }
             } catch (error) {
                 toast.error("Lỗi hệ thống!");
-                console.log(error);
+                console.error(error);
             }
         }
         fetchData();
     }, []);
 
-    if (!data) return <div>Đang tải!</div>
+    if (!data) return <div>Đang tải!</div>;
 
     return (
         <Card>

@@ -30,12 +30,7 @@ const editorOptions = {
 export function Footer(props: CreateQuestionProps) {
     const {
         state, 
-        dispatch,
-        IsUpdate,
-        DataFromUpdate,
-        IsInModal,
-        QuestionFromAI,
-        FetchDataAfterUpdate,
+        dispatch
     } = props;
 
     function handleChangeExplain(content: string) {

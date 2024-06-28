@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { getRandomAvatar } from "@/Utils";
 import { User } from "@/InterfacesDatabase";
 
 export function UserInformation(currentUser: User) {

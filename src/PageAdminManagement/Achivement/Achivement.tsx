@@ -21,10 +21,6 @@ export function Achievement() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<IAchievement> = useMemo(
         () => [
             {

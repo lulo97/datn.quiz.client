@@ -1,4 +1,3 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { SORT } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,9 +19,11 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { QuizDetailProps } from "../QuizDetail";
 
-export function ModalModeContentLeft(quiz: QuizDetail) {
-    const navigate = useNavigate()
+export function ModalModeContentLeft(props: QuizDetailProps) {
+    const { quiz } = props;
+    const navigate = useNavigate();
     const [sort, setSort] = useState(SORT.TIME_DEFAULT);
     return (
         <Card className="w-1/2">
@@ -57,9 +58,7 @@ export function ModalModeContentLeft(quiz: QuizDetail) {
             <CardFooter>
                 <Button
                     onClick={() =>
-                        navigate(
-                            `/QuizPlayTime/${quiz.QuizId}/${sort}`
-                        )
+                        navigate(`/QuizPlayTime/${quiz.QuizId}/${sort}`)
                     }
                     className="w-full"
                 >

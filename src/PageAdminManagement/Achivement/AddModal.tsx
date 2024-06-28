@@ -44,7 +44,7 @@ export function AddModal(props: AddModalProps) {
             }
         } catch (error) {
             toast.error("Thêm thất bại!");
-            console.log(error);
+            console.error(error);
         }
     };
 

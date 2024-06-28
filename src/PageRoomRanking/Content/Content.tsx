@@ -1,19 +1,8 @@
-import { getRandomAvatar } from "@/Utils";
 import { AntdTable } from "@/components/antd_table/AntdTable";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { TableColumnsType } from "antd";
 import { Ranking, getDataForContent } from "../Utils";
-
-// const data = [
-//     {
-//         Username: "Nguyễn Thị Hằng",
-//         ImageUrl: getRandomAvatar(),
-//         Score: 1305,
-//         TimeTaken: 56,
-//         TotalCorrectAnswer: 15,
-//     },
-// ];
 
 export function Content(rankData: Ranking) {
     const data = getDataForContent(rankData);

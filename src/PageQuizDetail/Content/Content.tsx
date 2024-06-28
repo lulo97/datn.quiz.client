@@ -1,11 +1,11 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { ModalMode } from "../ModalMode/ModalMode";
 import { ModalReport } from "../ModalReport/ModalReport";
+import { QuizDetailProps } from "../QuizDetail";
 
-export function Content(quiz: QuizDetail) {
+export function Content(props: QuizDetailProps) {
     return (
         <div className="flex gap-10">
-            <ModalMode {...quiz} />
+            <ModalMode {...props} />
             <ModalReport />
         </div>
     );

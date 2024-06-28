@@ -1,18 +1,13 @@
 import {
-    LocalPlayingKey,
-    LocalPlayData,
     PlayTimeProps,
-    caculateScore,
     getSelectedQuestions,
 } from "../Utils";
 
 export function ModalSubmitAnswers(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
+    const { state, localPlay } = props;
 
     const UserResponseDetail = getSelectedQuestions(state, localPlay.Response);
     if (!UserResponseDetail) return <div>Đang tải</div>;
-
-    const Score = caculateScore(state, UserResponseDetail);
 
     return (
         <div className="p-4 bg-gray-50 rounded-lg shadow-md">

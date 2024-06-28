@@ -21,10 +21,6 @@ export function Time() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<ITime> = useMemo(
         () => [
             {
@@ -62,7 +58,6 @@ export function Time() {
             data={data}
             defaultPageSize={5}
             addModal={<AddModal fetchData={fetchData} />}
-
         />
     );
 }

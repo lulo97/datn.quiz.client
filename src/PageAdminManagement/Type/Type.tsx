@@ -21,10 +21,6 @@ export function Type() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<IType> = useMemo(
         () => [
             {

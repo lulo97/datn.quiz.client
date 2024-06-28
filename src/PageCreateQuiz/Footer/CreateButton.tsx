@@ -37,7 +37,7 @@ export function CreateButton(props: CreateQuizProps) {
                 isLoading: false,
                 autoClose: 1000,
             });
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -47,7 +47,7 @@ export function CreateButton(props: CreateQuizProps) {
                 const ImageUrl = await uploadFile(file);
                 return ImageUrl;
             } catch (error) {
-                console.log(error);
+                console.error(error);
             }
         }
         return null;

@@ -34,15 +34,15 @@ Question Object:
 function generatePrompt(data: InputAI) {
     let Difficult = "medium";
 
-    if (data.DifficultLevel == "Nhận biết") Difficult = "easy";
-    if (data.DifficultLevel == "Vận dụng") Difficult = "hard";
-    if (data.DifficultLevel == "Vận dụng cao") Difficult = "extreme";
+    if (data.DifficultLevel?.Name == "Nhận biết") Difficult = "easy";
+    if (data.DifficultLevel?.Name == "Vận dụng") Difficult = "hard";
+    if (data.DifficultLevel?.Name == "Vận dụng cao") Difficult = "extreme";
 
     let Type = "single response";
-    if (data.Type == "Nhiều đáp án") Type = "multiple response";
+    if (data.Type?.Name == "Nhiều đáp án") Type = "multiple response";
 
     let Language = "vietnamese";
-    if (data.Type == "Tiếng Anh") Type = "English";
+    if (data.Type?.Name == "Tiếng Anh") Type = "English";
 
     const output = `
 Input Parameters:

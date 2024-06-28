@@ -1,5 +1,5 @@
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
-import { BACKEND_URL, VITE_SERVER_PATH, getDummyImage } from "@/Utils";
+import { BACKEND_URL, VITE_SERVER_PATH } from "@/Utils";
 import { useEffect, useState } from "react";
 
 export function QCRightImg(question: QuestionDetail) {

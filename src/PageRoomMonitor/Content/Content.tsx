@@ -1,4 +1,4 @@
-import { RoomDetail, RoomSocketData, UserData } from "../Utils";
+import { RoomSocketData } from "../Utils";
 import { UserInRoomCard } from "./UserInRoomCard";
 
 export function Content(room: RoomSocketData) {

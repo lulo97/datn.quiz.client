@@ -1,5 +1,5 @@
 import Draggable from "react-draggable";
-import { useRef, createRef, useEffect, useState } from "react";
+import { useRef, createRef, useEffect } from "react";
 import {
     PropsScanAnswerSheet,
     drawPolygonByPositions,

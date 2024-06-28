@@ -1,4 +1,3 @@
-import { CardParentClass } from "@/Utils";
 import {
     Card,
     CardHeader,
@@ -12,31 +11,62 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { QuizDetail as IQuizDetail } from "@/PageCreateQuiz/Utils";
 import { getOne } from "@/api/QuizDetail";
+import { getOneByClerkId } from "@/api/User";
+import { toast } from "react-toastify";
+import { User } from "@/InterfacesDatabase";
+import { useUser } from "@clerk/clerk-react";
+
+export interface QuizDetailProps {
+    quiz: IQuizDetail;
+    currentUser: User;
+}
 
 export function QuizDetail() {
     const { QuizId } = useParams();
     const [quiz, setQuiz] = useState<IQuizDetail>();
-    async function fetchData() {
-        const data = await getOne(QuizId || "");
-        setQuiz(data);
-    }
+    const { user } = useUser();
+    const [currentUser, setCurrentUser] = useState<User>();
+
     useEffect(() => {
-        fetchData();
+        async function fetchDataUser() {
+            try {
+                if (!user) return;
+                const ClerkId = user.id;
+                setCurrentUser(await getOneByClerkId(ClerkId));
+            } catch (error) {
+                toast.error("Có lỗi!");
+                console.error(error);
+            }
+        }
+        fetchDataUser();
     }, []);
 
-    if (quiz == undefined) return "Đang tải";
+    useEffect(() => {
+        async function fetchDataQuiz() {
+            try {
+                const data = await getOne(QuizId || "");
+                setQuiz(data);
+            } catch (error) {
+                toast.error("Có lỗi!");
+                console.error(error);
+            }
+        }
+        fetchDataQuiz();
+    }, []);
 
+    if (!quiz || !currentUser) return "Đang tải";
+    const props = { quiz, currentUser };
     return (
-            <Card>
-                <CardHeader>
-                    <Header {...quiz} />
-                </CardHeader>
-                <CardContent>
-                    <Content {...quiz} />
-                </CardContent>
-                <CardFooter>
-                    <Footer {...quiz} />
-                </CardFooter>
-            </Card>
+        <Card>
+            <CardHeader>
+                <Header {...props} />
+            </CardHeader>
+            <CardContent>
+                <Content {...props} />
+            </CardContent>
+            <CardFooter>
+                <Footer {...props} />
+            </CardFooter>
+        </Card>
     );
 }

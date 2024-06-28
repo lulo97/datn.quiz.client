@@ -73,7 +73,7 @@ export const handleDrag =
         setPositions: SetPositionsFunction,
         parentRef: HTMLImageElement | null
     ) =>
-    (e: any, data: DraggableData) => {
+    (_e: any, data: DraggableData) => {
         if (parentRef) {
             const { width, height } = parentRef.getBoundingClientRect();
 
@@ -197,9 +197,9 @@ export function drawPolygonByPositions(
 
 export function getScore(userResponseDetail: UserResponseDetail) {
     let score = 0;
-    userResponseDetail.Response.forEach((q, q_idx) => {
+    userResponseDetail.Response.forEach((q, _q_idx) => {
         let isCurrentCorrect = true;
-        q.Answers.map((ans, ans_idx) => {
+        q.Answers.map((ans, _ans_idx) => {
             if (ans.IsCorrect != ans.UserChoice) {
                 isCurrentCorrect = false;
             }

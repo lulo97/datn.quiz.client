@@ -1,15 +1,15 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { BACKEND_URL, VITE_SERVER_PATH } from "@/Utils";
 import { Label } from "@/components/ui/label";
 import { useState, useEffect } from "react";
+import { QuizDetailProps } from "../QuizDetail";
 
-export function HeaderLeft(quiz: QuizDetail) {
-
+export function HeaderLeft(props: QuizDetailProps) {
+    const { quiz } = props;
     const API_URL = BACKEND_URL + "public/Image/DummyImage.png";
     const [imageSrc, setImageSrc] = useState<string>(API_URL);
     useEffect(() => {
         if (quiz.ImageUrl) {
-            setImageSrc(VITE_SERVER_PATH + quiz.ImageUrl)
+            setImageSrc(VITE_SERVER_PATH + quiz.ImageUrl);
         }
     }, [quiz.ImageUrl]);
 
@@ -18,10 +18,7 @@ export function HeaderLeft(quiz: QuizDetail) {
             <Label>{quiz.Name}</Label>
             <p>{quiz.Description || "Không có mô tả"}</p>
 
-            <img
-                className="object-contain rounded-2xl"
-                src={imageSrc}
-            ></img>
+            <img className="object-contain rounded-2xl" src={imageSrc}></img>
         </div>
     );
 }

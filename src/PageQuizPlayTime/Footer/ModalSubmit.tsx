@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { PlayTimeProps, getRecords } from "../Utils";
 import { Button } from "@/components/ui/button";
-import { ModelWidthClass, getObjectId } from "@/Utils";
+import { ModelWidthClass } from "@/Utils";
 import { useNavigate } from "react-router-dom";
 import { ModalSubmitAnswers } from "./ModalSubmitAnswers";
 import { useUser } from "@clerk/clerk-react";
@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 import { createOne } from "../API";
 
 export function ModalSubmit(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
+    const { state } = props;
     const navigate = useNavigate();
 
     const { user } = useUser();

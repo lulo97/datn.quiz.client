@@ -1,6 +1,4 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
-
-export function HeaderLeft(Quiz: QuizDetail) {
+export function HeaderLeft() {
     return (
         <div className="flex justify-between items-center flex-col">
             <div className="font-semibold uppercase">

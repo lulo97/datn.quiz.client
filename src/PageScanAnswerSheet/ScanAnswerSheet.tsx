@@ -3,11 +3,9 @@ import { Header } from "./Header/Header";
 import { Content } from "./Content/Content";
 import { useRef, useState } from "react";
 import { Point, UserResponseDetail, intialPoints } from "./Utils/Utils";
-import { mock_data } from "./Content/ASRTable";
 
 export function ScanAnswerSheet() {
     const imageRefFromFile = useRef<HTMLImageElement>(new Image());
-    //const parentRef = useRef<HTMLImageElement | null>(null);
     const [parentRef, setParentRef] = useState<HTMLImageElement | null>(null);
     const canvasPolygonRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -17,13 +15,7 @@ export function ScanAnswerSheet() {
     const [userResponseDetail, setUserResponseDetail] =
         useState<UserResponseDetail | null>(null);
 
-    const [dataASR, setDataASR] = useState<UserResponseDetail[]>([
-        // mock_data,
-        // mock_data,
-        // mock_data,
-        // mock_data,
-        // mock_data,
-    ]);
+    const [dataASR, setDataASR] = useState<UserResponseDetail[]>([]);
 
     const props = {
         file: file,

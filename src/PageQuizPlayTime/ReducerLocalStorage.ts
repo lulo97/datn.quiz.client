@@ -1,7 +1,6 @@
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { LocalPlayingKey, LocalPlayData } from "./Utils";
-import { MCQ, SCQ, VITE_SERVER_PATH, nowSecond } from "@/Utils";
-import { io } from "socket.io-client";
+import { MCQ, SCQ, nowSecond } from "@/Utils";
 
 // Function to update local storage
 function updateDataLocalStorage(data: LocalPlayData) {

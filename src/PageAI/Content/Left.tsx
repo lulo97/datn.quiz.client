@@ -1,4 +1,3 @@
-import { Card, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { SelectQuestionNumber } from "./SelectQuestionNumber";
 import { AutosizeTextarea } from "@/components/ui/AutoSizeTexarea/AutosizeTextarea";

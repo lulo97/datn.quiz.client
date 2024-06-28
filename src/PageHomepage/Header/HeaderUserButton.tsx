@@ -2,7 +2,7 @@ import { User } from "@/InterfacesDatabase";
 import { getOneByClerkId } from "@/api/User";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useClerk, useUser } from "@clerk/clerk-react";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Popover,
     PopoverContent,

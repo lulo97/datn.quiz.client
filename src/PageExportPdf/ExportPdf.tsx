@@ -1,10 +1,8 @@
-import { CardParentClass } from "@/Utils";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Header } from "./Header/Header";
 import { Content } from "./Content/Content";
 import { useRef, useState } from "react";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
-import { createSubQuizzes } from "./Utils";
 import jsPDF from "jspdf";
 import { toPng } from "html-to-image";
 import { toast } from "react-toastify";

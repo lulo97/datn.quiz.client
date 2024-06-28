@@ -28,10 +28,6 @@ export function CreatedQuestion() {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
-
     const columns: TableColumnsType<QuestionDetail> = useMemo(
         () => [
             {

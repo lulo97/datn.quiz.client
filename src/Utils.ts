@@ -2,7 +2,6 @@
 
 import { CSSProperties } from "react";
 import { MenuItem } from "./Interfaces";
-import { Answer } from "./InterfacesDatabase";
 
 export function getObjectId() {
     var timestamp = ((new Date().getTime() / 1000) | 0).toString(16);

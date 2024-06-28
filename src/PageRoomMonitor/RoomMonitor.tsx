@@ -2,7 +2,6 @@ import { VITE_SERVER_PATH_SOCKET } from "@/Utils";
 import {
     Card,
     CardHeader,
-    CardContent,
     CardFooter,
 } from "@/components/ui/card";
 import { Header } from "./Header/Header";
@@ -11,7 +10,7 @@ import { Content } from "./Content/Content";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import { RoomDetail, RoomSocketData, UserData, isRoomTimeout } from "./Utils";
+import { RoomSocketData, isRoomTimeout } from "./Utils";
 import { toast } from "react-toastify";
 
 export function RoomMonitor() {

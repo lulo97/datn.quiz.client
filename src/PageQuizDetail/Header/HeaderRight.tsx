@@ -1,12 +1,12 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { HeaderRightInformation } from "./HeaderRightInformation";
 import { HeaderRightRating } from "./HeaderRightRating";
+import { QuizDetailProps } from "../QuizDetail";
 
-export function HeaderRight(quiz: QuizDetail) {
+export function HeaderRight(props: QuizDetailProps) {
     return (
         <div className="w-1/3 flex flex-col gap-3">
-            <HeaderRightInformation {...quiz} />
-            <HeaderRightRating {...quiz} />
+            <HeaderRightInformation {...props} />
+            <HeaderRightRating {...props} />
         </div>
     );
 }

@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/Utils";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
-export function HeaderRight(Quiz: QuizDetail) {
+export function HeaderRight(_Quiz: QuizDetail) {
     return (
         <div className="w-1/3 flex flex-col gap-3">
             <Card>

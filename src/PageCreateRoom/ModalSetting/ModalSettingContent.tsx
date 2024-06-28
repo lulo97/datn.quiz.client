@@ -10,7 +10,6 @@ import {
     convertNumberToDayjs,
 } from "../Utils";
 import { ActionType } from "../Action";
-import { CSSProperties } from "react";
 import { CustomCSSProperties } from "@/Utils";
 
 export function ModalSettingContent(props: CreateRoomProps) {

@@ -18,7 +18,7 @@ import { ActionType } from "../Action";
 import { User } from "@/InterfacesDatabase";
 
 export function ModalFindQuiz(props: CreateRoomProps) {
-    const { state, dispatch } = props;
+    const { dispatch } = props;
     const [open, setOpen] = useState(false);
     const [data, setData] = useState<QuizDetail[]>([]);
     const { user } = useUser();
@@ -32,16 +32,12 @@ export function ModalFindQuiz(props: CreateRoomProps) {
 
     function handleChangeQuiz(record: QuizDetail) {
         dispatch({ type: ActionType.ChangeQuiz, payload: record });
-        setOpen(!open)
+        setOpen(!open);
     }
 
     useEffect(() => {
         fetchData();
     }, []);
-
-    useEffect(() => {
-        console.log(data.length);
-    }, [data]);
 
     const columns: TableColumnsType<QuizDetail> = useMemo(
         () => [

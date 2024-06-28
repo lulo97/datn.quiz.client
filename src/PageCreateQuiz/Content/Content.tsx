@@ -1,4 +1,3 @@
-import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { CreateQuizProps } from "../Utils";
 import { QC } from "./QC";

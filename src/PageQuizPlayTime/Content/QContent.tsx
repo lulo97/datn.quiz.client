@@ -1,7 +1,7 @@
 import { PlayTimeProps } from "../Utils";
 
 export function QContent(props: PlayTimeProps) {
-    const { state, localPlay, dispatchLS } = props;
+    const { state, localPlay } = props;
     const QuestionIdx = localPlay.QuestionIdx;
     const Question = state.Questions[QuestionIdx];
     return (

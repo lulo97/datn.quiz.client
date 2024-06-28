@@ -59,7 +59,7 @@ function QuizResultCard() {
     );
 }
 
-export function Content(Quiz: QuizDetail) {
+export function Content(_Quiz: QuizDetail) {
     return (
         <div>
             <Card className="bg-gray-200">
