@@ -51,7 +51,7 @@ export function QuestionTable(props: CreateQuizProps) {
             );
         }
         if ("error" in fetched_data) {
-            toast.warning("Không có bản ghi!");
+            toast.error("Không có bản ghi!");
             setData([]);
         } else {
             setData(fetched_data);

@@ -88,11 +88,11 @@ export function CreateButton(props: CreateQuestionProps) {
             );
             await new Promise((resolve) => setTimeout(resolve, 1000));
             if (state.ImageFile && !ImageUrl) {
-                toast.warning("Lỗi tải ImageUrl!");
+                toast.error("Lỗi tải ImageUrl!");
                 return;
             }
             if (state.AudioFile && !AudioUrl) {
-                toast.warning("Lỗi tải AudioUrl!");
+                toast.error("Lỗi tải AudioUrl!");
                 return;
             }
             const { QuestionRecord, QuestionInfoRecord, AnswerRecords } =

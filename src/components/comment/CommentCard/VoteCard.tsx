@@ -26,7 +26,7 @@ export function VoteCard(props: CommentCardProps) {
 
     async function handleUpvote() {
         if (!isCurrentUserUpvoted && isCurrentUserDownvoted) {
-            toast.warning("Hãy bỏ Downvote bình luận");
+            toast.warning("Hãy bỏ phản đối bình luận");
             return;
         }
         try {
@@ -52,7 +52,7 @@ export function VoteCard(props: CommentCardProps) {
 
     async function handleDownvote() {
         if (isCurrentUserUpvoted && !isCurrentUserDownvoted) {
-            toast.warning("Hãy bỏ Upvote bình luận");
+            toast.warning("Hãy bỏ ủng hộ bình luận");
             return;
         }
         try {

@@ -32,17 +32,17 @@ export function ModalSubmit(props: PlayTimeProps) {
             if (!data) return;
             const result = await createOne(data);
             if ("error" in result) {
-                toast.warning("Nộp bài thất bại!");
+                toast.error("Nộp bài thất bại!");
                 console.log(result);
             } else {
                 toast.success("Nộp bài thành công!");
-                const SubmitPath = `/QuizResultTime/${data.PlayRecordInsert.PlayId}`;
+                const SubmitPath = `/lam-de-tinh-gio-ket-qua/${data.PlayRecordInsert.PlayId}`;
                 localStorage.clear();
                 navigate(SubmitPath);
             }
         } catch (error) {
             console.error(error);
-            toast.warning("Nộp bài thất bại!");
+            toast.error("Nộp bài thất bại!");
         }
     }
 

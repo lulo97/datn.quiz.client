@@ -20,11 +20,11 @@ export function ModalEdit(props: CommentCardProps) {
     async function handleUpdate() {
         try {
             await updateOne({ CommentId: comment.CommentId, Content: content });
-            toast.warning("Sửa thành công!");
+            //toast.success("Sửa thành công!");
             fetchData();
             setOpen(false)
         } catch (error) {
-            toast.warning("Sửa thất bại!");
+            toast.error("Sửa thất bại!");
         }
     }
 

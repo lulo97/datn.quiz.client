@@ -16,5 +16,5 @@ export interface Message {
 export interface QuizPlayTimeRoomProps {
     state: Message;
     setState: Dispatch<SetStateAction<Message | undefined>>;
-    props: QuizDetailProps;
+    quiz: QuizDetail;
 }

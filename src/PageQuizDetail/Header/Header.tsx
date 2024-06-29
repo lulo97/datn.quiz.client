@@ -1,5 +1,5 @@
-import { HeaderLeft } from "./HeaderLeft";
-import { HeaderRight } from "./HeaderRight";
+import { HeaderLeft } from "./Left/HeaderLeft";
+import { HeaderRight } from "./Right/HeaderRight";
 import { QuizDetailProps } from "../QuizDetail";
 
 export function Header(props: QuizDetailProps) {

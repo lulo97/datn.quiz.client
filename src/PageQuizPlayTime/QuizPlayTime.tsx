@@ -108,17 +108,17 @@ export function QuizPlayTime() {
             if (!data) return;
             const result = await createOne(data);
             if ("error" in result) {
-                toast.warning("Hết giờ, nộp bài thất bại!");
+                toast.error("Hết giờ, nộp bài thất bại!");
                 console.log(result);
             } else {
                 toast.success("Hết giờ, nộp bài thành công!");
-                const SubmitPath = `/QuizResultTime/${data.PlayRecordInsert.PlayId}`;
+                const SubmitPath = `/lam-de-tinh-gio-ket-qua/${data.PlayRecordInsert.PlayId}`;
                 localStorage.clear();
                 navigate(SubmitPath);
             }
         } catch (error) {
             console.error(error);
-            toast.warning("Hết giờ, nộp bài thất bại!");
+            toast.error("Hết giờ, nộp bài thất bại!");
         }
     }
 

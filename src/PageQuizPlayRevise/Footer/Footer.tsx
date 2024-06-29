@@ -32,7 +32,7 @@ export function Footer(props: ReviseProps) {
                 <ChevronLeft />
             </Button>
             {IsLast && (
-                <Button onClick={() => navigate(`/QuizResultRevise/${state.Quiz.QuizId}`)}>
+                <Button onClick={() => navigate(`/lam-de-on-tap-ket-qua/${state.Quiz.QuizId}`)}>
                     Nộp bài
                 </Button>
             )}

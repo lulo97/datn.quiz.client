@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { Achievement } from "@/InterfacesDatabase";
-import { deleteOne } from "./UtilApi";
+import { deleteOne } from "./API";
 import { toast } from "react-toastify";
 
 interface DeleteModalProps {

@@ -55,12 +55,12 @@ export function Header(props: PropsScanAnswerSheet) {
     }
 
     function handleAddDataASR() {
-        if (userResponseDetail) {
-            setDataASR([...dataASR, userResponseDetail]);
-            toast.success("Thêm thành công");
-            return;
+        if (!userResponseDetail) {
+            toast.warning("Dữ liệu người chơi rỗng!");
+            return
         }
-        toast.warning("Dữ liệu người chơi rỗng!");
+        setDataASR([...dataASR, userResponseDetail]);
+        toast.success("Thêm thành công");
     }
 
     async function fetchData(dataUrl: any) {

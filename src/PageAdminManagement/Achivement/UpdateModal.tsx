@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PenBox } from "lucide-react";
 import { useState } from "react";
-import { updateOne } from "./UtilApi";
+import { updateOne } from "./API";
 
 interface DeleteModalProps {
     record: Achievement;

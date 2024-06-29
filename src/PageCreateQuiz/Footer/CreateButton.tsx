@@ -70,7 +70,7 @@ export function CreateButton(props: CreateQuizProps) {
         );
         await new Promise((resolve) => setTimeout(resolve, 1000));
         if (!ImageUrl) {
-            toast.warning("Lỗi tải file!");
+            toast.error("Lỗi tải file!");
             return;
         }
         const { QuizRecord, QuizInfoRecord, QuizQuestionRecords } =

@@ -1,13 +1,11 @@
-import { QuizDetail, getInitalState } from "@/PageCreateQuiz/Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
 
 export enum ActionType {
-    ChangeQuiz,
-    Sort,
     QuestionNumber,
     ChangeQuestionIdx,
     ChangeSelectedAnswer,
     ChangeExplain,
-    InitialResponse,
+    Initial
 }
 
 export interface Action {
@@ -16,7 +14,7 @@ export interface Action {
 }
 
 export interface Revise {
-    Quiz: QuizDetail;
+    Quiz: QuizDetail | null;
     QuestionIdx: 0;
     Response: {
         QuestionId: string;
@@ -32,7 +30,7 @@ export interface ReviseProps {
 
 export function getInitialState(): Revise {
     return {
-        Quiz: getInitalState(),
+        Quiz: null,
         QuestionIdx: 0,
         Response: [],
     };

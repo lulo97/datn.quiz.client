@@ -14,7 +14,7 @@ const data = {
     },
     ImageUrl: getDummyImage(),
     Rating: 4.5,
-    TotalPlayTime: 1000,
+    AttemptsTime: 1000,
     IsVerified: true,
     VerifiedAt: "12/05/2023",
     CreatedAt: "20/04/2023",
@@ -77,7 +77,7 @@ export function QuizCardDetail() {
                         </div>
                     </div>
                     <div>
-                        <div>{data.TotalPlayTime}</div>
+                        <div>{data.AttemptsTime}</div>
                         <div>{data.IsVerified == true ? "Rồi" : "Chưa"}</div>
                         <div>
                             <Label>Ngày sửa: </Label>12/5/2024

@@ -12,6 +12,7 @@ import { useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import { reducer } from "./Reducer";
 import { ActionType, getInitialState } from "./Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
 
 export function QuizPlayRevise() {
     const { QuizId, QuestionNum, Sort } = useParams();
@@ -19,14 +20,12 @@ export function QuizPlayRevise() {
 
     useEffect(() => {
         async function fetchData() {
-            const data = await getOne(QuizId || "");
-            dispatch({ type: ActionType.ChangeQuiz, payload: data });
-            dispatch({ type: ActionType.Sort, payload: Sort });
+            if (!QuizId) return;
+            const Quiz: QuizDetail = await getOne(QuizId);
             dispatch({
-                type: ActionType.QuestionNumber,
-                payload: QuestionNum,
+                type: ActionType.Initial,
+                payload: { Quiz: Quiz, QuestionNum: QuestionNum, Sort: Sort },
             });
-            dispatch({ type: ActionType.InitialResponse, payload: null });
         }
         fetchData();
     }, []);
@@ -34,16 +33,16 @@ export function QuizPlayRevise() {
     if (!state.Quiz) return <div>Đang tải</div>;
 
     return (
-            <Card>
-                <CardHeader>
-                    <Header state={state} dispatch={dispatch} />
-                </CardHeader>
-                <CardContent>
-                    <Content state={state} dispatch={dispatch} />
-                </CardContent>
-                <CardFooter>
-                    <Footer state={state} dispatch={dispatch} />
-                </CardFooter>
-            </Card>
+        <Card>
+            <CardHeader>
+                <Header state={state} dispatch={dispatch} />
+            </CardHeader>
+            <CardContent>
+                <Content state={state} dispatch={dispatch} />
+            </CardContent>
+            <CardFooter>
+                <Footer state={state} dispatch={dispatch} />
+            </CardFooter>
+        </Card>
     );
 }

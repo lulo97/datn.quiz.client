@@ -16,7 +16,7 @@ import { findMenuItemByName } from "@/Utils";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
-    { name: "Đề đã làm", element: <PlayedQuiz /> },
+    { name: "Đề đã thi", element: <PlayedQuiz /> },
     { name: "Đề đã tạo", element: <CreatedQuiz /> },
     { name: "Câu hỏi", element: <CreatedQuestion /> },
     {

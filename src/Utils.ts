@@ -149,6 +149,12 @@ if (!VITE_OPENAI_KEY) {
     throw new Error("Missing VITE_OPENAI_KEY");
 }
 
+export const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLISHABLE_KEY) {
+    throw new Error("Missing Publishable Key");
+}
+
 export const SCQ = "Một đáp án";
 export const MCQ = "Nhiều đáp án";
 
@@ -182,7 +188,7 @@ export function nowSecond() {
     return Math.floor(Date.now() / 1000);
 }
 
-export function MySQLDatetimeFormat(dateStr: string) {
+export function formatMySQLDatetime(dateStr: string) {
     const date = new Date(dateStr);
     return new Intl.DateTimeFormat("vi-VI", {
         year: "numeric",

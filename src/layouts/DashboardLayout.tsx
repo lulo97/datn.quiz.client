@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useUser } from "@clerk/clerk-react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Header } from "@/PageHomepage/Header/Header";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { createOne, getOneByClerkId } from "@/api/User";
 import { getUUID } from "@/Utils";
+import { Header } from "./Header/Header";
 
 export function DashboardLayout() {
     const { user, isSignedIn, isLoaded } = useUser();
@@ -18,25 +18,29 @@ export function DashboardLayout() {
 
     React.useEffect(() => {
         if (isLoaded && !ClerkId) {
-            navigate("/sign-in");
+            navigate("/dang-nhap");
         }
     }, [isLoaded]);
 
     React.useEffect(() => {
+        if (!isSignedIn) return;
         const fetchAndCreateUser = async () => {
-            if (isSignedIn) {
+            try {
                 const record = await getOneByClerkId(ClerkId);
-                if (record?.error === "Not found") {
-                    const new_user = {
-                        UserId: getUUID(),
-                        ClerkId: ClerkId,
-                        Fullname: Fullname,
-                        Username: Username,
-                        Email: Email,
-                        ImageUrl: ImageUrl,
-                    };
-                    await createOne(new_user);
-                }
+                if (record?.error != "Not found") return;
+                const UserId = getUUID();
+                const new_user = {
+                    UserId: UserId,
+                    ClerkId: ClerkId,
+                    Fullname: Fullname,
+                    Username: Username,
+                    Email: Email,
+                    ImageUrl: ImageUrl,
+                };
+                await createOne(new_user);
+            } catch (error) {
+                toast.error("Có lỗi");
+                console.error(error);
             }
         };
 
@@ -52,7 +56,7 @@ export function DashboardLayout() {
                 <Header />
             </header>
 
-                <Outlet />
+            <Outlet />
 
             <ToastContainer
                 position="top-right"

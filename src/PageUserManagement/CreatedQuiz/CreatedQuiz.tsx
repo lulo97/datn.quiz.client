@@ -94,7 +94,7 @@ export function CreatedQuiz() {
             data={data}
             defaultPageSize={6}
             addModal={
-                <Button onClick={() => navigate("/CreateQuiz")}>Tạo đề</Button>
+                <Button onClick={() => navigate("/tao-de-thi")}>Tạo đề</Button>
             }
         />
     );

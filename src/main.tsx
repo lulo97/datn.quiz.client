@@ -1,22 +1,13 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-// Import your publishable key
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!PUBLISHABLE_KEY) {
-    throw new Error("Missing Publishable Key");
-}
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import { Homepage } from "./PageHomepage/Homepage";
 import { QuizDetail } from "./PageQuizDetail/QuizDetail";
 import { QuizPlayTime } from "./PageQuizPlayTime/QuizPlayTime";
 import { QuizPlayRevise } from "./PageQuizPlayRevise/QuizPlayRevise";
 import { QuizResultRevise } from "./PageQuizResultRevise/QuizResultRevise";
 import { QuizResultTime } from "./PageQuizResultTime/QuizResultTime";
-import { smi } from "./PageHomepage/Header/Header";
 import { QuizSubject } from "./PageQuizSubject/QuizSubject";
 import { ModeratorManagement } from "./PageModeratorManagement/ModeratorManagement";
 import { RoomMonitor } from "./PageRoomMonitor/RoomMonitor";
@@ -36,6 +27,7 @@ import { CreateQuiz } from "./PageCreateQuiz/CreateQuiz";
 import { ExportPdf } from "./PageExportPdf/ExportPdf";
 import { ScanAnswerSheet } from "./PageScanAnswerSheet/ScanAnswerSheet";
 import { RoomJoin } from "./PageRoomJoin/RoomJoin";
+import { smi } from "./layouts/Header/Header";
 
 const browser_routes = [];
 
@@ -45,108 +37,108 @@ browser_routes.push({
 });
 
 browser_routes.push({
-    path: "/ModeratorManagement",
+    path: "/quan-ly-kiem-duyet",
     element: <ModeratorManagement />,
 });
 
 browser_routes.push({
-    path: "/AdminManagement",
+    path: "/quan-tri",
     element: <AdminManagement />,
 });
 
 browser_routes.push({
-    path: "/UserManagement",
+    path: "/trang-ca-nhan",
     element: <UserManagement />,
 });
 
 browser_routes.push({
-    path: "/CreateQuestion",
+    path: "/tao-cau-hoi",
     element: <CreateQuestion />,
 });
 
 browser_routes.push({
-    path: "/AI",
+    path: "/tao-cau-hoi-chatgpt",
     element: <AI />,
 });
 
 browser_routes.push({
-    path: "/CreateQuiz",
+    path: "/tao-de-thi",
     element: <CreateQuiz />,
 });
 
 browser_routes.push({
-    path: "/CreateRoom",
+    path: "/tao-phong",
     element: <CreateRoom />,
 });
 
 browser_routes.push({
-    path: "/ExportPdf",
+    path: "/xuat-de-thi",
     element: <ExportPdf />,
 });
 
 browser_routes.push({
-    path: "/ScanAnswerSheet",
+    path: "/quet-to-dap-an",
     element: <ScanAnswerSheet />,
 });
 
 browser_routes.push({
-    path: "/RoomJoin",
+    path: "/vao-phong",
     element: <RoomJoin />,
 });
 
 browser_routes.push({
-    path: "/QuizDetail/:QuizId",
+    path: "/de-thi/:QuizId",
     element: <QuizDetail />,
 });
 
 browser_routes.push({
-    path: "/QuizPlayRevise/:QuizId/:QuestionNum/:Sort",
+    path: "/lam-de-on-tap/:QuizId/:QuestionNum/:Sort",
     element: <QuizPlayRevise />,
 });
 
 browser_routes.push({
-    path: "/QuizResultRevise/:QuizId",
+    path: "/lam-de-on-tap-ket-qua/:QuizId",
     element: <QuizResultRevise />,
 });
 
 browser_routes.push({
-    path: "/QuizPlayTime/:QuizId/:Sort/:RoomId",
+    path: "/lam-de-tinh-gio/:QuizId/:Sort/:RoomId",
     element: <QuizPlayTime />,
 });
 
 browser_routes.push({
-    path: "/QuizPlayTime/:QuizId/:Sort",
+    path: "/lam-de-tinh-gio/:QuizId/:Sort",
     element: <QuizPlayTime />,
 });
 
 browser_routes.push({
-    path: "/QuizResultTime/:PlayId",
+    path: "/lam-de-tinh-gio-ket-qua/:PlayId",
     element: <QuizResultTime />,
 });
 
 browser_routes.push({
-    path: "/RoomMonitor/:RoomId",
+    path: "/quan-tri-phong/:RoomId",
     element: <RoomMonitor />,
 });
 
 browser_routes.push({
-    path: "/RoomView/:RoomId",
+    path: "/phong-thi-xem/:RoomId",
     element: <RoomView />,
 });
 
 browser_routes.push({
-    path: "/QuizPlayTimeRoom/:RoomId",
+    path: "/phong-thi-lam-de/:RoomId",
     element: <QuizPlayTimeRoom />,
 });
 
 browser_routes.push({
-    path: "/RoomRanking/:RoomId",
+    path: "/phong-thi-xep-hang/:RoomId",
     element: <RoomRanking />,
 });
 
 smi.forEach((ele) => {
     browser_routes.push({
-        path: `/subject/${ele.UrlName}`,
+        path: `/chu-de/${ele.UrlName}`,
         element: <QuizSubject SubjectId={ele.SubjectId} />, // Render Subject component with props
     });
 });
@@ -155,8 +147,8 @@ const router = createBrowserRouter([
     {
         element: <RootLayout />,
         children: [
-            { path: "/sign-in/*", element: <SignInPage /> },
-            { path: "/sign-up/*", element: <SignUpPage /> },
+            { path: "/dang-nhap/*", element: <SignInPage /> },
+            { path: "/dang-ky/*", element: <SignUpPage /> },
             {
                 element: <DashboardLayout />,
                 path: "/",

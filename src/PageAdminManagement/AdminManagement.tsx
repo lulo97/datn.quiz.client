@@ -16,6 +16,7 @@ import { Navbar } from "@/components/navbar/Navbar";
 import { findMenuItemByName } from "@/Utils";
 import { Point } from "./Point/Point";
 import { Time } from "./Time/Time";
+import { AllUser } from "./AllUser/AllUser";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
@@ -47,6 +48,7 @@ export const menu_names: MenuItem[] = [
     },
     { name: "Vai trò", element: <Role /> },
     { name: "Quyền", element: <Permission /> },
+    { name: "Người dùng", element: <AllUser /> }
 ];
 
 export function AdminManagement() {

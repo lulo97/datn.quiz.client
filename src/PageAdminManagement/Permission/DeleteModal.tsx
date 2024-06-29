@@ -10,12 +10,12 @@ import {
 import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { Permission } from "@/InterfacesDatabase";
-import { deleteOne } from "./UtilApi";
+import { deleteOne } from "./API";
 import { toast } from "react-toastify";
+import { PermissionDetail } from "./Utils";
 
 interface DeleteModalProps {
-    record: Permission;
+    record: PermissionDetail;
     fetchData: () => Promise<void>;
 }
 
@@ -25,7 +25,10 @@ export function DeleteModal(props: DeleteModalProps) {
 
     async function handleClick() {
         try {
-            if (record.PermissionId == "") return;
+            if (record.PermissionId == "") {
+                toast.error("Lỗi mã quyền rỗng!");
+                return;
+            }
             const result = await deleteOne(record.PermissionId);
             if ("error" in result) {
                 toast.error("Xóa thất bại!");
@@ -55,7 +58,10 @@ export function DeleteModal(props: DeleteModalProps) {
                         <Label>Id: </Label> {record.PermissionId}
                     </div>
                     <div>
-                        <Label>Tên: </Label> {record.Name}
+                        <Label>Quyền: </Label> {record.Name}
+                    </div>
+                    <div>
+                        <Label>Vai trò: </Label> {record.Role?.Name}
                     </div>
                 </div>
                 <DialogFooter>

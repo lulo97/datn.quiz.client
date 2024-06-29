@@ -1,3 +1,4 @@
+import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
 
 export const AnswerPrefix = [
@@ -13,29 +14,13 @@ export const AnswerPrefix = [
 
 export interface PageProps {
     PageIdx: number;
-    Quiz: QuizDetail;
-    FirstPage: boolean;
     MaxPage: number;
-}
-
-export function createSubQuizzes(
-    props: QuizDetailProps,
-    chunkSize: number
-): QuizDetail[] {
-    let subQuizzes = [];
-    for (let i = 0; i < quiz.Questions.length; i += chunkSize) {
-        let subQuiz = {
-            ...quiz,
-            Questions: quiz.Questions.slice(i, i + chunkSize),
-        };
-        subQuizzes.push(subQuiz);
-    }
-    return subQuizzes;
+    quiz?: QuizDetail;
+    questions?: QuestionDetail[];
 }
 
 export interface ExamPdfProps {
-    Quizs: QuizDetail[] | null;
-    handleDownload: () => Promise<void>;
-    componentRefs: React.MutableRefObject<HTMLDivElement[]>;
-    fetchData: (Quiz: QuizDetail) => Promise<void>;
+    quiz: QuizDetail | undefined;
+    setQuiz: React.Dispatch<React.SetStateAction<QuizDetail | undefined>>;
+    pagesRef: React.MutableRefObject<HTMLDivElement[]>;
 }

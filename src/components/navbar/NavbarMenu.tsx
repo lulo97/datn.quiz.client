@@ -15,7 +15,7 @@ export function NavbarMenu(props: NavbarProps) {
                 <MenubarMenu key={ele.name}>
                     <MenubarTrigger
                         onClick={(event) => handleMenubarClick(event)}
-                        className="w-full"
+                        className="w-full text-xs"
                     >
                         {ele.name}
                     </MenubarTrigger>

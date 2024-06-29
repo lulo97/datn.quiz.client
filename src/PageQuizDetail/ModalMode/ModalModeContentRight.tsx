@@ -41,7 +41,7 @@ export function ModalModeContentRight(props: QuizDetailProps) {
                 <Button
                     onClick={() =>
                         navigate(
-                            `/QuizPlayRevise/${quiz.QuizId}/${QuestionNumber}/${Sort}`
+                            `/lam-de-on-tap/${quiz.QuizId}/${QuestionNumber}/${Sort}`
                         )
                     }
                     className="w-full"

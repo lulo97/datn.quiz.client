@@ -1,6 +1,6 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { BACKEND_URL, MySQLDatetimeFormat } from "@/Utils";
+import { BACKEND_URL, formatMySQLDatetime } from "@/Utils";
 import { CommentCardProps } from "../Utils";
 import { ReplyInput } from "./ReplyInput";
 import { useState } from "react";
@@ -54,7 +54,7 @@ export function CommentCard(props: CommentCardProps) {
                             </Button>
 
                             <div className="text-sm text-gray-500">
-                                {MySQLDatetimeFormat(comment.CreatedAt)}
+                                {formatMySQLDatetime(comment.CreatedAt)}
                             </div>
                         </div>
                     </div>

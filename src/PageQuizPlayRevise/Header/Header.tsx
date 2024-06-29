@@ -1,8 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { ActionType, ReviseProps } from "../Utils";
+
+function getAccuracy(Correct: number, Incorrect: number) {
+    if (Correct + Incorrect == 0) return 0;
+    const output = (100 * Correct) / (Correct + Incorrect);
+    return Math.round(output * 100) / 100;
+}
+
 export function Header(props: ReviseProps) {
     const { state, dispatch } = props;
+    if (!state.Quiz) return;
     let ShowExplanation = false;
     let Correct = 0;
     let Incorrect = 0;
@@ -30,7 +38,7 @@ export function Header(props: ReviseProps) {
                             Tỉ lệ chính xác:{" "}
                             <Label className="text-green-500">
                                 {" "}
-                                {(100 * Correct) / (Correct + Incorrect)} %
+                                {getAccuracy(Correct, Incorrect)} %
                             </Label>
                         </Label>
                     </div>

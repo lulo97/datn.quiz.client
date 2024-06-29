@@ -9,7 +9,7 @@ export function Content(props: ReviseProps) {
 
     return (
         <div>
-            <div className="flex gap-5">
+            <div className="min-h-[50vh] flex gap-5">
                 <div className="w-full flex flex-col justify-between">
                     <div>
                         <QContent state={state} dispatch={dispatch} />

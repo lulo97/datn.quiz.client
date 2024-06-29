@@ -41,7 +41,7 @@ export function RoomMonitor() {
                 console.log(data);
             } else {
                 toast.success("Tạo thành công!");
-                navigate(`/RoomRanking/${RoomId}`);
+                navigate(`/phong-thi-xep-hang/${RoomId}`);
             }
         });
 

@@ -12,7 +12,7 @@ export function Header(room: RoomDetail) {
     function handlePlayQuiz() {
         if (room) {
             if (canStartPlayQuiz(room.StartQuizTime.toString())) {
-                navigate(`/QuizPlayTimeRoom/${room.RoomId}`);
+                navigate(`/phong-thi-lam-de/${room.RoomId}`);
                 toast.success("Vào thi thành công!");
             } else {
                 toast.warning("Chưa đến giờ vào thi!");

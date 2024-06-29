@@ -39,7 +39,7 @@ export function Header(props: CreateRoomProps) {
                 const record = getRecords(state);
                 await createOne(record);
                 toast.success("Tạo phòng thành công!");
-                navigate(`/RoomMonitor/${record.RoomId}`);
+                navigate(`/quan-tri-phong/${record.RoomId}`);
             } catch (error) {
                 toast.success("Tạo phòng thất bại!");
                 console.error(error);

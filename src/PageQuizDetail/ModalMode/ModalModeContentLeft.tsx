@@ -58,7 +58,7 @@ export function ModalModeContentLeft(props: QuizDetailProps) {
             <CardFooter>
                 <Button
                     onClick={() =>
-                        navigate(`/QuizPlayTime/${quiz.QuizId}/${sort}`)
+                        navigate(`/lam-de-tinh-gio/${quiz.QuizId}/${sort}`)
                     }
                     className="w-full"
                 >

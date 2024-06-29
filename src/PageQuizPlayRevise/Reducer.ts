@@ -1,8 +1,10 @@
 import { MCQ, SCQ, SORT } from "@/Utils";
 import { Revise, Action, ActionType } from "./Utils";
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
 
 function getCorrectPercent(q: QuestionDetail) {
+    if (q.CorrectUserCount + q.IncorrectUserCount == 0) return 0;
     return q.CorrectUserCount / (q.CorrectUserCount + q.IncorrectUserCount);
 }
 
@@ -23,33 +25,27 @@ export function reducer(state: Revise, action: Action): Revise {
             const QuestionIdx = action.payload;
             return { ...state, QuestionIdx: QuestionIdx };
         }
-        case ActionType.ChangeQuiz: {
-            const Quiz = action.payload;
-            return { ...state, Quiz: Quiz };
-        }
-        case ActionType.Sort: {
-            const sort = action.payload;
-            if (sort == SORT.REVISE_DEFAULT) return state;
-            const _Question = state.Quiz.Questions.sort((a, b) =>
-                compareCorrectPercert(a, b, sort)
+        case ActionType.Initial: {
+            const { Quiz, Sort, QuestionNum }: { Quiz: QuizDetail; Sort: string, QuestionNum: number } =
+                action.payload;
+
+            if (Sort == SORT.REVISE_DEFAULT) return state;
+            const SortedQuestions = Quiz.Questions.sort((a, b) =>
+                compareCorrectPercert(a, b, Sort)
             );
-            const _Quiz = { ...state.Quiz, Questions: _Question };
-            return { ...state, Quiz: _Quiz };
-        }
-        case ActionType.QuestionNumber: {
-            const QuestionNumber = action.payload;
-            const _Question = state.Quiz.Questions.slice(0, QuestionNumber);
-            const _Quiz = { ...state.Quiz, Questions: _Question };
-            return { ...state, Quiz: _Quiz };
-        }
-        case ActionType.InitialResponse: {
-            const Response = state.Quiz?.Questions.map((ele) => ({
+            const QuizSortedQuestions = { ...Quiz, Questions: SortedQuestions };
+
+            const QuestionSlice = QuizSortedQuestions.Questions.slice(0, QuestionNum);
+            const QuizSortedQuestionsSlice = { ...QuizSortedQuestions, Questions: QuestionSlice };
+
+            const Response = QuizSortedQuestionsSlice.Questions.map((ele) => ({
                 QuestionId: ele.QuestionId,
                 SelectedAnswers: [],
                 ShowExplanation: false,
             }));
-            return { ...state, Response: Response };
+            return { ...state, Quiz: QuizSortedQuestionsSlice, Response: Response };
         }
+
         case ActionType.ChangeSelectedAnswer: {
             const AnswerId = action.payload;
             const Question = state.Quiz?.Questions[state.QuestionIdx];

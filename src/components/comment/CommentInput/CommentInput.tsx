@@ -27,7 +27,7 @@ export function CommentInput(props: CommentSectionProps) {
             fetchData()
         } catch (error) {
             console.error(error);
-            toast.warning("Bình luận thất bại!");
+            toast.error("Bình luận thất bại!");
         }
     }
 

@@ -4,29 +4,45 @@ import { Label } from "../ui/label";
 import { CommentInput } from "./CommentInput/CommentInput";
 import { CommentCard } from "./CommentCard/CommentCard";
 import { getAllByQuiz } from "./API/getAllByQuiz";
-import { QuizDetailProps } from "@/PageQuizDetail/QuizDetail";
+import { User } from "@/InterfacesDatabase";
+import { getOneByClerkId } from "@/api/User";
+import { useUser } from "@clerk/clerk-react";
 
-export function CommentSection(props: QuizDetailProps) {
-    const { quiz, currentUser } = props;
-    const QuizId = quiz.QuizId;
+interface CommentSection {
+    QuizId: string;
+}
+
+export function CommentSection(props: CommentSection) {
+    const { QuizId } = props;
+    const { user } = useUser();
     const [comments, setComments] = useState<CommentDetail[]>();
+    const [currentUser, setCurrentUser] = useState<User>();
 
-    async function fetchData() {
+    useEffect(() => {
+        async function fetchUser() {
+            const ClerkId = user?.id || "";
+            if (ClerkId != "") {
+                setCurrentUser(await getOneByClerkId(ClerkId));
+            }
+        }
+        fetchUser();
+    }, []);
+
+    async function fetchComment() {
         setComments(await getAllByQuiz(QuizId));
     }
 
     useEffect(() => {
-        fetchData();
+        fetchComment();
     }, []);
 
-    if (comments == undefined || currentUser == undefined)
-        return <div>Đang tải</div>;
+    if (!comments || !currentUser) return <div>Đang tải</div>;
 
     return (
         <div className="w-full">
             <Label>Bình luận</Label>
             <CommentInput
-                fetchData={fetchData}
+                fetchData={fetchComment}
                 QuizId={QuizId}
                 comments={comments}
                 currentUser={currentUser}
@@ -34,7 +50,7 @@ export function CommentSection(props: QuizDetailProps) {
             {comments.length == 0 && <div>Chưa có bình luận nào</div>}
             {comments.map((comment) => (
                 <CommentCard
-                    fetchData={fetchData}
+                    fetchData={fetchComment}
                     key={comment.CommentId}
                     QuizId={QuizId}
                     comment={comment}

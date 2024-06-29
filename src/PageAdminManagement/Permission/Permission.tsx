@@ -1,16 +1,16 @@
 import { BaseScreen } from "@/components/base_screen/BaseScreen";
-import { Permission as IPermission } from "@/InterfacesDatabase";
 import { useState, useEffect, useMemo } from "react";
 import { AddModal } from "./AddModal";
-import { getAll } from "./UtilApi";
+import { getAll } from "./API";
 import { toDDMMYYY } from "@/Utils";
 import { TableColumnsType } from "antd";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
 import { UpdateModal } from "./UpdateModal";
+import { PermissionDetail } from "./Utils";
 
 export function Permission() {
-    const [data, setData] = useState<IPermission[]>([]);
+    const [data, setData] = useState<PermissionDetail[]>([]);
 
     async function fetchData() {
         const data_fetched = await getAll();
@@ -21,13 +21,21 @@ export function Permission() {
         fetchData();
     }, []);
 
-    const columns: TableColumnsType<IPermission> = useMemo(
+    const columns: TableColumnsType<PermissionDetail> = useMemo(
         () => [
             {
-                title: "Tên",
+                title: "Quyền",
                 dataIndex: "Name",
                 sorter: true,
                 width: "20%",
+            },
+            {
+                title: "Vai trò",
+                sorter: true,
+                width: "20%",
+                render: (_item, record, _index) => (
+                    <div>{record.Role ? record.Role.Name : "NULL"}</div>
+                ),
             },
             {
                 title: "Mô tả",

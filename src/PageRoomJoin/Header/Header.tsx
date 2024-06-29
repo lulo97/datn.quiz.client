@@ -13,7 +13,7 @@ export function Header() {
     });
     function handleJoin() {
         if (state.RoomId != "") {
-            navigate(`/RoomView/${state.RoomId}`);
+            navigate(`/phong-thi-xem/${state.RoomId}`);
         }
     }
     return (

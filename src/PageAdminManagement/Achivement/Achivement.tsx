@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { TableColumnsType } from "antd";
 import { Achievement as IAchievement } from "@/InterfacesDatabase";
 import { BaseScreen } from "@/components/base_screen/BaseScreen";
-import { getAll } from "./UtilApi";
+import { getAll } from "./API";
 import { DeleteModal } from "./DeleteModal";
 import { ReadModal } from "./ReadModal";
 import { UpdateModal } from "./UpdateModal";

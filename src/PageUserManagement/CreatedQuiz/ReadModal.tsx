@@ -50,9 +50,7 @@ export function ReadModal(props: ReadModalProps) {
                                     <Button
                                         className="p-0 m-0 h-fit"
                                         onClick={() =>
-                                            navigate(
-                                                `/QuizDetail/${record.QuizId}`
-                                            )
+                                            navigate(`/de-thi/${record.QuizId}`)
                                         }
                                         variant="link"
                                     >

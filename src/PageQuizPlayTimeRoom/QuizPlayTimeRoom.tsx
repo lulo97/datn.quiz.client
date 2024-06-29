@@ -64,7 +64,7 @@ export function QuizPlayTimeRoom() {
         socket.on("SEND_MESSAGE_SERVER_TO_CLIENT", (data) => {
             setState(data);
             if (data.EndTimePlay != -1) {
-                navigate(`/RoomRanking/${RoomId}`);
+                navigate(`/phong-thi-xep-hang/${RoomId}`);
             }
         });
 

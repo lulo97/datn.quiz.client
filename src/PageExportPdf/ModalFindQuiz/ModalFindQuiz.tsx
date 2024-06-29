@@ -6,31 +6,29 @@ import {
 } from "@/components/mydialog/mydialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { CreatedQuiz } from "./CreatedQuiz";
-import { ExamPdfProps } from "../Utils";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { ExamPdfProps } from "../Utils";
+import { TableCreatedQuiz } from "./TableCreatedQuiz";
 
 export function ModalFindQuiz(props: ExamPdfProps) {
-    const { fetchData } = props;
+    const { setQuiz } = props;
     const [open, setOpen] = useState(false);
-    function handleFetchData(Quiz: QuizDetail) {
+    function handleSetQuizAndCloseModal(quiz: QuizDetail) {
         setOpen(false);
-        fetchData(Quiz);
+        setQuiz(quiz);
     }
     return (
-        <div>
-            <div>
-                <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogTrigger asChild>
-                        <Button>Tìm đề thi</Button>
-                    </DialogTrigger>
-                    <DialogContent
-                        className={`${ModelWidthClass} bg-gray-200 overflow-y-scroll h-[95%]`}
-                    >
-                        <CreatedQuiz handleFetchData={handleFetchData} />
-                    </DialogContent>
-                </Dialog>
-            </div>
-        </div>
+        <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+                <Button>Tìm đề thi</Button>
+            </DialogTrigger>
+            <DialogContent
+                className={`${ModelWidthClass} bg-gray-200 h-[95%]`}
+            >
+                <TableCreatedQuiz
+                    handleSetQuizAndCloseModal={handleSetQuizAndCloseModal}
+                />
+            </DialogContent>
+        </Dialog>
     );
 }

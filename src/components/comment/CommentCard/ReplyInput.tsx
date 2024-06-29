@@ -22,12 +22,12 @@ export function ReplyInput(props: CommentCardProps) {
         };
         try {
             await createOne(NewComment);
+            //toast.success("Bình luận thành công!");
             setContent("")
-            toast.success("Bình luận thành công!");
             fetchData()
         } catch (error) {
             console.error(error);
-            toast.warning("Bình luận thất bại!");
+            toast.error("Bình luận thất bại!");
         }
     }
     return (

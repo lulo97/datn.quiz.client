@@ -14,7 +14,6 @@ import { useState } from "react";
 import { QuizDetailProps } from "../QuizDetail";
 
 export function ModalMode(props: QuizDetailProps) {
-    const { quiz } = props;
     const [open, setOpen] = useState(false);
     return (
         <div className="w-2/3">
