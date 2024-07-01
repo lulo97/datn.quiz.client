@@ -58,9 +58,7 @@ export function QuizCardDetail(room: RoomDetail) {
                     <div>
                         <div>{100}</div>
                         <div>
-                            {room.Quiz.IsVerified == true
-                                ? "Đã kiểm duyệt"
-                                : "NULL"}
+                            {room.Quiz.UserVertify ? "Đã kiểm duyệt" : "NULL"}
                         </div>
                         <div>
                             <Label>Ngày sửa: </Label>12/5/2024

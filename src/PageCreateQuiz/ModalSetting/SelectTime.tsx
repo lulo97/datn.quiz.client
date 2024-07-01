@@ -9,7 +9,7 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
-import { getAll } from "@/PageAdminManagement/Time/UtilApi";
+import { getAll } from "@/PageManagementAdmin/Time/UtilApi";
 import { ActionType } from "../Action";
 
 export function SelectTime(props: CreateQuizProps) {

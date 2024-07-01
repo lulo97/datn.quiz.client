@@ -48,6 +48,7 @@ export function Like(props: QuizDetailProps) {
                 handleFetchError(result);
             } else {
                 setLike(true);
+                toast.success("Lưu vào mục yêu thích!")
             }
         } catch (error) {
             handleTryCatchError(error);

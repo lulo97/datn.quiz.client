@@ -1,4 +1,4 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
 import { HeaderLeft } from "./HeaderLeft";
 import { HeaderRight } from "./HeaderRight";
 

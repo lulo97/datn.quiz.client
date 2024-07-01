@@ -75,9 +75,7 @@ export function QuizCardDetail(props: CreateRoomProps) {
                     <div>
                         <div>{100}</div>
                         <div>
-                            {state.Quiz.IsVerified == true
-                                ? "Đã kiểm duyệt"
-                                : "NULL"}
+                            {state.Quiz.UserVertify ? "Đã kiểm duyệt" : "NULL"}
                         </div>
                         <div>
                             <Label>Ngày sửa: </Label>12/5/2024

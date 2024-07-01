@@ -12,7 +12,7 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { getRandomAvatar } from "@/Utils";
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
 
 export function HeaderRight(_Quiz: QuizDetail) {
     return (
@@ -24,23 +24,23 @@ export function HeaderRight(_Quiz: QuizDetail) {
                 <CardContent>
                     <ul>
                         <li>
-                            <Label>Số câu đúng: </Label>xxx
+                            <Label>Số câu đúng: </Label>NULL
                         </li>
                         <li>
-                            <Label>Số điểm: </Label>xxx
+                            <Label>Số điểm: </Label>NULL
                         </li>
                         <li>
-                            <Label>Thời gian: </Label>xxx
+                            <Label>Thời gian: </Label>NULL
                         </li>
                     </ul>
                 </CardContent>
             </Card>
 
-            <Card>
+            <Card className="flex-1 flex flex-col">
                 <CardHeader>
                     <CardTitle>Bảng xếp hạng</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="h-full flex flex-col justify-between">
                     <Table>
                         <TableHeader>
                             <TableRow>

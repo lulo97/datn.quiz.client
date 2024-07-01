@@ -66,8 +66,7 @@ export interface QuizInformation {
     Attempts: number;
     IsPublic: boolean;
     IsDeleted: boolean;
-    IsVerified: boolean;
-    UserVerify: string;
+    UserVertify: string;
     VerifiedAt: string;
     CreatedAt: string;
     UpdatedAt: string;

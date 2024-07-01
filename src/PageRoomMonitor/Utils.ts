@@ -59,8 +59,7 @@ export interface QuizDetail {
     //
     Attempts: number;
     IsDeleted: boolean;
-    IsVerified: boolean;
-    UserVerify: string | null;
+    UserVertify: string | null;
     VerifiedAt: string | null;
     CreatedAt: string | null;
     UpdatedAt: string | null;

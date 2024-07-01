@@ -10,12 +10,12 @@ import {
 export function NavbarMenu(props: NavbarProps) {
     const { handleMenubarClick, menu_names } = props;
     return (
-        <Menubar className="w-fit h-full flex flex-col justify-start gap-4 shadow">
+        <Menubar className="w-full h-full flex flex-col justify-start gap-4 shadow">
             {menu_names.map((ele) => (
                 <MenubarMenu key={ele.name}>
                     <MenubarTrigger
                         onClick={(event) => handleMenubarClick(event)}
-                        className="w-full text-xs"
+                        className="w-full text-xs whitespace-nowrap"
                     >
                         {ele.name}
                     </MenubarTrigger>

@@ -15,7 +15,7 @@ import {
     getInitalState,
 } from "./Utils";
 import { reducer } from "./Reducer";
-import { getAll } from "@/PageAdminManagement/Type/UtilApi";
+import { getAll } from "@/PageManagementAdmin/Type/UtilApi";
 import { Type, User } from "@/InterfacesDatabase";
 import { useUser } from "@clerk/clerk-react";
 import { getOneByClerkId } from "@/api/User";
@@ -84,8 +84,8 @@ export function CreateQuestion(props: InterfaceFromOutside) {
         QuestionFromAI,
         FetchDataAfterUpdate,
         state,
-        dispatch
-    }
+        dispatch,
+    };
 
     if (state.UserId == "") return <div>Đang tải!</div>;
 

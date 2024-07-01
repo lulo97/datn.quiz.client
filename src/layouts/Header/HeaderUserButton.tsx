@@ -1,5 +1,6 @@
-import { User } from "@/InterfacesDatabase";
-import { getOneByClerkId } from "@/api/User";
+import { Role, User } from "@/InterfacesDatabase";
+import { getOneByClerkId as getOneUserByClerkId } from "@/api/User";
+import { getOneByClerkId as getOneRoleByClerkId } from "@/api/Role";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
@@ -10,27 +11,60 @@ import {
 } from "@/components/ui/popover";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { toast } from "react-toastify";
 
 export function HeaderUserButton() {
     const { user, isLoaded, isSignedIn } = useUser();
     const [openPopover, setOpenPopover] = useState(false);
     const clerk = useClerk();
     const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const [role, setRole] = useState<Role | null>(null);
 
     useEffect(() => {
         async function fetchUser() {
-            const ClerkId = user?.id || "";
-            if (ClerkId != "") {
-                setCurrentUser(await getOneByClerkId(ClerkId));
+            try {
+                if (!user) return;
+                const ClerkId = user.id;
+                const result = await getOneUserByClerkId(ClerkId);
+                if ("error" in result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                } else {
+                    setCurrentUser(result);
+                }
+            } catch (error) {
+                toast.error("Có lỗi!");
+                console.log(error);
             }
         }
         fetchUser();
+    }, [isSignedIn]);
+
+    useEffect(() => {
+        async function fetchRole() {
+            try {
+                if (!user) return;
+                const ClerkId = user.id;
+                const result = await getOneRoleByClerkId(ClerkId);
+                if ("error" in result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                } else {
+                    setRole(result);
+                }
+            } catch (error) {
+                toast.error("Có lỗi!");
+                console.log(error);
+            }
+        }
+        fetchRole();
     }, [isSignedIn]);
 
     function handleLogOut() {
         setOpenPopover(false);
         clerk.signOut();
         setCurrentUser(null);
+        setRole(null);
     }
 
     if (!isLoaded)
@@ -49,41 +83,47 @@ export function HeaderUserButton() {
             </Button>
         );
 
-    const isAdmin =
-    currentUser && currentUser.Username && currentUser.Username.toLowerCase() == "admin";
+    const isAdmin = role && role.Name == "Quản trị viên";
+    const isModerator = role && role.Name == "Người kiểm duyệt";
 
     return (
-        <div>
-            <Popover open={openPopover} onOpenChange={setOpenPopover}>
-                <PopoverTrigger>
-                    <Avatar>
-                        <AvatarImage src={currentUser?.ImageUrl} />
-                        <AvatarFallback>...</AvatarFallback>
-                    </Avatar>
-                </PopoverTrigger>
-                <PopoverContent className="mr-5 w-fit flex flex-col gap-2 text-sm font-semibold">
-                    {" "}
-                    {isAdmin && (
-                        <Link
-                            className="w-full"
-                            to="/quan-tri"
-                            onClick={() => setOpenPopover(false)}
-                        >
-                            Trang quản trị
-                        </Link>
-                    )}
+        <Popover open={openPopover} onOpenChange={setOpenPopover}>
+            <PopoverTrigger>
+                <Avatar>
+                    <AvatarImage src={currentUser?.ImageUrl} />
+                    <AvatarFallback>...</AvatarFallback>
+                </Avatar>
+            </PopoverTrigger>
+            <PopoverContent className="mr-5 w-fit flex flex-col gap-2 text-sm font-semibold">
+                {isAdmin && (
                     <Link
                         className="w-full"
-                        to="/trang-ca-nhan"
+                        to="/trang-quan-tri"
                         onClick={() => setOpenPopover(false)}
                     >
-                        Trang cá nhân
+                        Trang quản trị
                     </Link>
-                    <Link className="w-full" to="" onClick={handleLogOut}>
-                        Đăng xuất
+                )}
+                {isModerator && (
+                    <Link
+                        className="w-full"
+                        to="/trang-kiem-duyet"
+                        onClick={() => setOpenPopover(false)}
+                    >
+                        Trang kiểm duyệt
                     </Link>
-                </PopoverContent>
-            </Popover>
-        </div>
+                )}
+                <Link
+                    className="w-full"
+                    to="/trang-ca-nhan"
+                    onClick={() => setOpenPopover(false)}
+                >
+                    Trang cá nhân
+                </Link>
+                <Link className="w-full" to="" onClick={handleLogOut}>
+                    Đăng xuất
+                </Link>
+            </PopoverContent>
+        </Popover>
     );
 }

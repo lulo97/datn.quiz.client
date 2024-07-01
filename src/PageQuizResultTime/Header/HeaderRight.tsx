@@ -16,9 +16,9 @@ import { PlayDetail, getTotalCorrectCount } from "../Utils";
 
 export function HeaderRight(data: PlayDetail) {
     const count = getTotalCorrectCount(data);
-    const StartT = new Date(data.StartTime)
-    const SubmitT = new Date(data.SubmitTime)
-    const TimeTaken = SubmitT.getTime() - StartT.getTime()
+    const StartT = new Date(data.StartTime);
+    const SubmitT = new Date(data.SubmitTime);
+    const TimeTaken = SubmitT.getTime() - StartT.getTime();
     return (
         <div className="w-1/3 flex flex-col gap-3">
             <Card>
@@ -36,7 +36,8 @@ export function HeaderRight(data: PlayDetail) {
                             {data.Score}
                         </li>
                         <li>
-                            <Label>Thời gian: </Label>{TimeTaken/1000}/300s
+                            <Label>Thời gian: </Label>
+                            {TimeTaken / 1000}/300s
                         </li>
                         <li>
                             <Label>Hạng 111 trên 120 người thi </Label>
@@ -45,11 +46,11 @@ export function HeaderRight(data: PlayDetail) {
                 </CardContent>
             </Card>
 
-            <Card>
+            <Card className="flex-1 flex flex-col">
                 <CardHeader>
                     <CardTitle>Bảng xếp hạng</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="h-full flex flex-col justify-between">
                     <Table>
                         <TableHeader>
                             <TableRow>

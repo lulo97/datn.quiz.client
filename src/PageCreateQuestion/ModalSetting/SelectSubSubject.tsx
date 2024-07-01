@@ -3,7 +3,7 @@ import { SubSubject } from "@/InterfacesDatabase";
 import {
     getBySubject,
     getBySubjectAndEducationLevel,
-} from "@/PageAdminManagement/SubSubject/UtilApi";
+} from "@/PageManagementAdmin/SubSubject/UtilApi";
 import { ActionType, CreateQuestionProps } from "../Utils";
 import { Label } from "@/components/ui/label";
 import {

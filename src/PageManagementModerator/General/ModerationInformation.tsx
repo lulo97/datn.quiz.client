@@ -3,7 +3,7 @@ import { Label } from "@/components/ui/label";
 
 export function ModerationInformation() {
     return (
-        <Card className="w-1/2">
+        <Card>
             <CardHeader>
                 <Label>Thông tin kiểm duyệt</Label>
             </CardHeader>

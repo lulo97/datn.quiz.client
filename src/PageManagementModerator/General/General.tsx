@@ -1,5 +1,4 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { UserInformation } from "./UserInformation";
 import { ModerationInformation } from "./ModerationInformation";
 import { Permission } from "./Permission";
 
@@ -11,12 +10,9 @@ export function General() {
                     <CardTitle>Tổng quan</CardTitle>
                 </div>
             </CardHeader>
-            <CardContent className="h-5/6 flex flex-col gap-3">
-                <UserInformation />
-                <div className="flex flex-row gap-5">
-                    <ModerationInformation />
-                    <Permission />
-                </div>
+            <CardContent className="h-full flex flex-col gap-3">
+                <ModerationInformation />
+                <Permission />
             </CardContent>
         </Card>
     );

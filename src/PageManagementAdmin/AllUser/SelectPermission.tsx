@@ -1,20 +1,12 @@
-import { useEffect, useState } from "react";
-import { Permission } from "@/InterfacesDatabase";
+import { useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { getAll } from "../Permission/API";
 import { ModalRoleData } from "./ModalRole";
-import { getAllByRole } from "./API";
 import { toast } from "react-toastify";
+import { getAllByRole } from "@/api/Permission";
 
 export function SelectPermission(props: ModalRoleData) {
     const { role, permissions, setPermissions } = props;
-    const [options, setOptions] = useState<Permission[]>();
-
-    async function fetchData() {
-        const records: Permission[] = await getAll();
-        setOptions(records);
-    }
 
     useEffect(() => {
         async function fetchData() {
@@ -29,12 +21,6 @@ export function SelectPermission(props: ModalRoleData) {
         }
         fetchData();
     }, [role]);
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    if (!options) return <div>Đang tải!</div>;
 
     return (
         <div>

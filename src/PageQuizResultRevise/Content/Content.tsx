@@ -1,73 +1,93 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { getDummyImage } from "@/Utils";
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { QuestionDetail } from "@/PageCreateQuestion/Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
+import { VITE_SERVER_PATH, getAnswerStyleBG } from "@/Utils";
 
-function QuizResultCard() {
+export function Content(quiz: QuizDetail) {
     return (
-        <div className="flex flex-col gap-5 ">
-            <Card>
-                <CardHeader>
-                    <Label>Câu 1: Con gì bơi nhanh nhất?</Label>
+        <div>
+            <Card className="bg-gray-200">
+                <CardHeader className="flex flex-col gap-3">
+                    {quiz.Questions.map((ele, idx) => (
+                        <QuestionCard
+                            key={ele.QuestionId}
+                            Question={ele}
+                            Idx={idx}
+                        />
+                    ))}
                 </CardHeader>
-                <CardContent className="flex gap-5">
-                    <div className="w-1/2 overflow-y-auto h-72 flex flex-col gap-3 p-2 border rounded-lg">
-                        <div className="flex items-center gap-5 border px-3 py-1 rounded-lg bg-green-300">
-                            <Checkbox />
-                            <p>Con cá</p>
-                        </div>
-
-                        <div className="flex items-center gap-5 border px-3 py-1 rounded-lg bg-red-300">
-                            <Checkbox checked />
-                            <p>Con mèo</p>
-                        </div>
-                        <div className="flex items-center gap-5 border px-3 py-1 rounded-lg bg-green-300">
-                            <Checkbox checked />
-                            <p>Con chó</p>
-                        </div>
-                        <div className="flex items-center gap-5 border px-3 py-1 rounded-lg">
-                            <Checkbox />
-                            <p>Con gà</p>
-                        </div>
-                    </div>
-                    <div className="w-1/2">
-                        <img
-                            className="object-contain rounded-lg"
-                            src={getDummyImage()}
-                        ></img>
-                        <audio controls className="w-full mt-5">
-                            <source
-                                type="audio/ogg"
-                                src="https://www.w3schools.com/tags/horse.ogg"
-                            ></source>
-                        </audio>
-                    </div>
-                </CardContent>
-                <CardContent>
-                    <Label>Giải thích</Label>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Vel nemo dolorem hic tempora unde quae, magnam
-                        voluptatibus. Ab quaerat repudiandae nihil assumenda
-                        repellendus, rem minus accusantium, corrupti enim, harum
-                        odio!
-                    </p>
-                </CardContent>
             </Card>
         </div>
     );
 }
 
-export function Content(_Quiz: QuizDetail) {
+interface Props {
+    Question: QuestionDetail;
+    Idx: number;
+}
+
+function QuestionCard(props: Props) {
+    const { Question, Idx } = props;
     return (
-        <div>
-            <Card className="bg-gray-200">
-                <CardHeader className="flex flex-col gap-3">
-                    <QuizResultCard />
-                    <QuizResultCard />
-                    <QuizResultCard />
+        <div className="flex flex-col gap-5 ">
+            <Card>
+                <CardHeader>
+                    <div className="flex gap-1 items-center">
+                        <div className="font-semibold">Câu {Idx + 1}:</div>
+                        <div
+                            dangerouslySetInnerHTML={{
+                                __html: Question.Content || "",
+                            }}
+                        ></div>
+                    </div>
                 </CardHeader>
+                <CardContent className="flex gap-5">
+                    <div className="w-full h-fit flex flex-col gap-3 p-2 border rounded-l-lg">
+                        {Question.Answers.map((ele) => {
+                            const CorrectClass = getAnswerStyleBG(
+                                ele.IsCorrect
+                            );
+                            return (
+                                <div
+                                    key={ele.AnswerId}
+                                    className={`${CorrectClass} flex items-center gap-5 border px-3 py-1 rounded-lg`}
+                                >
+                                    <Checkbox />
+                                    <p>{ele.Content}</p>
+                                </div>
+                            );
+                        })}
+                        <div className="gap-1">
+                            <div className="font-semibold">Giải thích: </div>
+                            <div
+                                dangerouslySetInnerHTML={{
+                                    __html: Question.Explanation || "",
+                                }}
+                            ></div>
+                        </div>
+                    </div>
+
+                    {(Question.ImageUrl || Question.AudioUrl) && (
+                        <div className="w-1/3 flex flex-col gap-1 justify-between">
+                            {Question.ImageUrl && (
+                                <img
+                                    className="object-contain rounded-lg"
+                                    src={VITE_SERVER_PATH + Question.ImageUrl}
+                                ></img>
+                            )}
+
+                            {Question.AudioUrl && (
+                                <audio controls className="w-full">
+                                    <source
+                                        type="audio/ogg"
+                                        src={Question.AudioUrl}
+                                    ></source>
+                                </audio>
+                            )}
+                        </div>
+                    )}
+                </CardContent>
             </Card>
         </div>
     );

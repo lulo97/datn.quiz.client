@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { getAll } from "../Role/UtilApi";
 import { ModalRoleData } from "./ModalRole";
+
 export function SelectRole(props: ModalRoleData) {
     const { role, setRole } = props;
     const [options, setOptions] = useState<Role[]>();

@@ -15,9 +15,9 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import React from "react";
 import { PermissionDetail } from "../Permission/Utils";
-import { updateOneUserRole } from "./API";
 import { toast } from "react-toastify";
 import { UserRoleDetail } from "./Utils";
+import { updateOne } from "@/api/UserRole";
 
 export interface ModalRoleData {
     user: User;
@@ -51,7 +51,7 @@ export function ModalRole(props: Props) {
     async function handleSubmit() {
         if (!role) return;
         try {
-            const result = await updateOneUserRole({
+            const result = await updateOne({
                 UserId: userrole.User.UserId,
                 RoleId: role.RoleId,
             });

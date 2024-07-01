@@ -44,8 +44,14 @@ export function QuizDetail() {
     useEffect(() => {
         async function fetchDataQuiz() {
             try {
-                const data = await getOne(QuizId || "");
-                setQuiz(data);
+                if (!QuizId) return;
+                const result = await getOne(QuizId);
+                if ("error" in result) {
+                    toast.error("Có lỗi");
+                    console.log(result);
+                } else {
+                    setQuiz(result);
+                }
             } catch (error) {
                 toast.error("Có lỗi!");
                 console.error(error);

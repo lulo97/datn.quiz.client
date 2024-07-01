@@ -1,4 +1,4 @@
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
 import { BACKEND_URL, VITE_SERVER_PATH } from "@/Utils";
 import { Button } from "@/components/ui/button";
 import {

@@ -5,13 +5,13 @@ import { useState, } from "react";
 import { General } from "./General/General";
 import { ProcessedReport } from "./ProcessedReport/ProcessedReport";
 import { NeedProcessReport } from "./NeedProcessReport/NeedProcessReport";
-import { VerifiedQuiz } from "./VerifiedQuiz/VerifiedQuiz";
+import { VertifyQuiz } from "./VertifyQuiz/VertifyQuiz";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
     { name: "Cần xử lý", element: <NeedProcessReport /> },
     { name: "Đã xử lý", element: <ProcessedReport /> },
-    { name: "Kiểm duyệt", element: <VerifiedQuiz /> },
+    { name: "Kiểm duyệt",  element: <VertifyQuiz /> }
 ];
 
 export function ModeratorManagement() {
@@ -34,7 +34,7 @@ export function ModeratorManagement() {
                 menu_names={menu_names}
                 handleMenubarClick={handleMenubarClick}
             />
-            <div className="bg-gray-200 pl-1 w-full">
+            <div className="bg-gray-200 pl-2 w-full">
                 {curMenuItem.element}
             </div>
         </div>

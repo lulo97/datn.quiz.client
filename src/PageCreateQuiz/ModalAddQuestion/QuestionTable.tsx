@@ -12,7 +12,7 @@ import { CreateQuizProps } from "../Utils";
 import { QuestionDetailList } from "./QuestionDetailList";
 import { toast } from "react-toastify";
 import { ActionType } from "../Action";
-import { ReadModal } from "@/PageUserManagement/CreatedQuestion/ReadModal";
+import { ReadModal } from "@/PageManagementUser/CreatedQuestion/ReadModal";
 
 export function QuestionTable(props: CreateQuizProps) {
     const { state, dispatch } = props;

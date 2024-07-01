@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { EducationLevel } from "@/InterfacesDatabase";
-import { getAll } from "@/PageAdminManagement/EducationLevel/UtilApi";
+import { getAll } from "@/PageManagementAdmin/EducationLevel/UtilApi";
 import { Label } from "@/components/ui/label";
 import {
     Select,

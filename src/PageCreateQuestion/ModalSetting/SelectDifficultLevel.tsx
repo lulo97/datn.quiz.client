@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DifficultLevel } from "@/InterfacesDatabase";
-import { getAll } from "@/PageAdminManagement/DifficultLevel/UtilApi";
+import { getAll } from "@/PageManagementAdmin/DifficultLevel/UtilApi";
 import { ActionType, CreateQuestionProps } from "../Utils";
 import { Label } from "@/components/ui/label";
 import {

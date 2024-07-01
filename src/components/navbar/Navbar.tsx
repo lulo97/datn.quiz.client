@@ -1,6 +1,5 @@
 import { CardParentClass } from "@/Utils";
 import { NavbarAvatar } from "./NavbarAvatar";
-import { NavbarLogoutBtn } from "./NavbarLogoutBtn";
 import { NavbarMenu } from "./NavbarMenu";
 import { NavbarProps } from "@/Interfaces";
 
@@ -15,7 +14,6 @@ export function Navbar(props: NavbarProps) {
                 menu_names={menu_names}
                 handleMenubarClick={handleMenubarClick}
             />
-            <NavbarLogoutBtn />
         </div>
     );
 }

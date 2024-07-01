@@ -10,7 +10,7 @@ import { Content } from "./Content/Content";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getOne } from "@/api/QuizDetail";
-import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { QuizDetail } from "@/PageRoomMonitor/Utils";
 
 export function QuizResultRevise() {
     const { QuizId } = useParams();
@@ -34,7 +34,7 @@ export function QuizResultRevise() {
                     <Content {...Quiz} />
                 </CardContent>
                 <CardFooter>
-                    <Footer />
+                    <Footer {...Quiz} />
                 </CardFooter>
             </Card>
     );

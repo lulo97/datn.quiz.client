@@ -9,7 +9,7 @@ import { QuizPlayRevise } from "./PageQuizPlayRevise/QuizPlayRevise";
 import { QuizResultRevise } from "./PageQuizResultRevise/QuizResultRevise";
 import { QuizResultTime } from "./PageQuizResultTime/QuizResultTime";
 import { QuizSubject } from "./PageQuizSubject/QuizSubject";
-import { ModeratorManagement } from "./PageModeratorManagement/ModeratorManagement";
+import { ModeratorManagement } from "./PageManagementModerator/ModeratorManagement";
 import { RoomMonitor } from "./PageRoomMonitor/RoomMonitor";
 import { RoomView } from "./PageRoomView/RoomView";
 import { RoomRanking } from "./PageRoomRanking/RoomRanking";
@@ -18,8 +18,8 @@ import { DashboardLayout } from "./layouts/DashboardLayout";
 import { SignInPage } from "./PageSignIn/PageSignIn";
 import { SignUpPage } from "./PageSignUp/PageSignUp";
 import { QuizPlayTimeRoom } from "./PageQuizPlayTimeRoom/QuizPlayTimeRoom";
-import { AdminManagement } from "./PageAdminManagement/AdminManagement";
-import { UserManagement } from "./PageUserManagement/UserManagement";
+import { AdminManagement } from "./PageManagementAdmin/AdminManagement";
+import { UserManagement } from "./PageManagementUser/UserManagement";
 import { CreateRoom } from "./PageCreateRoom/CreateRoom";
 import { CreateQuestion } from "./PageCreateQuestion/CreateQuestion";
 import { AI } from "./PageAI/AI";
@@ -37,12 +37,12 @@ browser_routes.push({
 });
 
 browser_routes.push({
-    path: "/quan-ly-kiem-duyet",
+    path: "/trang-kiem-duyet",
     element: <ModeratorManagement />,
 });
 
 browser_routes.push({
-    path: "/quan-tri",
+    path: "/trang-quan-tri",
     element: <AdminManagement />,
 });
 
@@ -117,7 +117,7 @@ browser_routes.push({
 });
 
 browser_routes.push({
-    path: "/quan-tri-phong/:RoomId",
+    path: "/trang-quan-tri-phong/:RoomId",
     element: <RoomMonitor />,
 });
 

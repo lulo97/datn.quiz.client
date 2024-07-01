@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Point } from "@/InterfacesDatabase";
-import { getAll } from "@/PageAdminManagement/Point/UtilApi";
+import { getAll } from "@/PageManagementAdmin/Point/UtilApi";
 import { ActionType, CreateQuestionProps } from "../Utils";
 import { Label } from "@/components/ui/label";
 import {
