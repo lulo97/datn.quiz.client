@@ -31,7 +31,7 @@ export function ModalSubmit(props: PlayTimeProps) {
             const data = getRecords(state, currentUser.UserId);
             if (!data) return;
             const result = await createOne(data);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Nộp bài thất bại!");
                 console.log(result);
             } else {

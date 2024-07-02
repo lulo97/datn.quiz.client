@@ -12,6 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-toastify";
+import { ROLE } from "@/Utils";
 
 export function HeaderUserButton() {
     const { user, isLoaded, isSignedIn } = useUser();
@@ -26,7 +27,7 @@ export function HeaderUserButton() {
                 if (!user) return;
                 const ClerkId = user.id;
                 const result = await getOneUserByClerkId(ClerkId);
-                if ("error" in result) {
+                if (!result || "error" in result) {
                     toast.error("Có lỗi!");
                     console.log(result);
                 } else {
@@ -46,7 +47,7 @@ export function HeaderUserButton() {
                 if (!user) return;
                 const ClerkId = user.id;
                 const result = await getOneRoleByClerkId(ClerkId);
-                if ("error" in result) {
+                if (!result || "error" in result) {
                     toast.error("Có lỗi!");
                     console.log(result);
                 } else {
@@ -83,8 +84,8 @@ export function HeaderUserButton() {
             </Button>
         );
 
-    const isAdmin = role && role.Name == "Quản trị viên";
-    const isModerator = role && role.Name == "Người kiểm duyệt";
+    const isAdmin = role && role.Name == ROLE.ADMIN;
+    const isModerator = role && role.Name == ROLE.MODERATOR;
 
     return (
         <Popover open={openPopover} onOpenChange={setOpenPopover}>

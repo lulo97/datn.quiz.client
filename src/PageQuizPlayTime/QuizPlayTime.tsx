@@ -107,7 +107,7 @@ export function QuizPlayTime() {
             const data = getRecords(state, currentUser.UserId);
             if (!data) return;
             const result = await createOne(data);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Hết giờ, nộp bài thất bại!");
                 console.log(result);
             } else {

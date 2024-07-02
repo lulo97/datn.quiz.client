@@ -70,7 +70,7 @@ export function UpdateModal(props: UpdateModalProps) {
             if (!record.SubjectId) return;
             if (!record.EducationLevelId) return;
             const result = await updateOne(record);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Cập nhật thất bại!");
                 console.log(result);
             } else {

@@ -1,5 +1,5 @@
 import { BACKEND_URL, MY_HEADER } from "@/Utils";
-import { QuizVertifyUpdate } from "../Utils";
+import { QuizVertifyUpdate } from "../VertifyQuiz/Utils";
 
 const BACKEND_PAGE = "Moderator/QuizVertify";
 const API_URL = BACKEND_URL + BACKEND_PAGE;
@@ -31,4 +31,3 @@ export async function updateOne(data: QuizVertifyUpdate) {
         console.error("Error fetching data:", error);
     }
 }
-

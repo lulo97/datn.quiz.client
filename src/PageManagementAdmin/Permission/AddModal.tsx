@@ -31,13 +31,14 @@ interface AddModalProps {
 export function AddModal(props: AddModalProps) {
     const { fetchData } = props;
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] =
-        useState<Omit<PermissionDetail, "CreatedAt" | "UpdatedAt">>({
-            PermissionId: getUUID(),
-            Name: "",
-            Description: "",
-            Role: null,
-        });
+    const [data, setData] = useState<
+        Omit<PermissionDetail, "CreatedAt" | "UpdatedAt">
+    >({
+        PermissionId: getUUID(),
+        Name: "",
+        Description: "",
+        Role: null,
+    });
 
     const handleAddClick = async () => {
         if (data.Name == "") {
@@ -50,7 +51,7 @@ export function AddModal(props: AddModalProps) {
         }
         try {
             const result = await createOne(data);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Có lỗi!");
                 console.error(result);
             } else {

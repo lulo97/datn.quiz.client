@@ -1,11 +1,13 @@
 import { toDDMMYYY } from "@/Utils";
 import { TableColumnsType } from "antd";
-import { QuizForVertify } from "../Utils";
+import { QuizForVertify } from "./Utils";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ModalVertify } from "./ModalVertify";
+import { User } from "@/InterfacesDatabase";
 
 export function getColumn(
-    handleCheck: (record: QuizForVertify) => Promise<void>,
+    currentUser: User,
+    fetchDataQuizForVertify: () => Promise<void>,
     navigate: any
 ) {
     const columns: TableColumnsType<QuizForVertify> = [
@@ -54,9 +56,10 @@ export function getColumn(
             width: "14%",
             render: (_value, record, _index) => (
                 <div className="flex justify-center items-center h-fit">
-                    <Checkbox
-                        onClick={() => handleCheck(record)}
-                        checked={record.UserVertify ? true : false}
+                    <ModalVertify
+                        record={record}
+                        fetchDataQuizForVertify={fetchDataQuizForVertify}
+                        currentUser={currentUser}
                     />
                 </div>
             ),

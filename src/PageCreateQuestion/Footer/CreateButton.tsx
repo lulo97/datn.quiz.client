@@ -11,12 +11,7 @@ import { InterfaceAPI, createOne, updateOne } from "../API";
 import { uploadFile } from "@/api/Upload";
 
 export function CreateButton(props: CreateQuestionProps) {
-    const {
-        state,
-        dispatch,
-        IsUpdate,
-        FetchDataAfterUpdate,
-    } = props;
+    const { state, dispatch, IsUpdate, FetchDataAfterUpdate } = props;
 
     const handleCreateOrUpdate = async (data: InterfaceAPI) => {
         const id = toast.loading(
@@ -27,7 +22,7 @@ export function CreateButton(props: CreateQuestionProps) {
                 ? await updateOne(data)
                 : await createOne(data);
 
-            const isError = "error" in result;
+            const isError = !result || "error" in result;
             toast.update(id, {
                 render: isError
                     ? IsUpdate

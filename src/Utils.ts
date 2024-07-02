@@ -208,3 +208,15 @@ export const RED500_HEX = "#dc2626";
 export interface CustomCSSProperties extends CSSProperties {
     WebkitTextSecurity?: string;
 }
+
+export const ROLE = {
+    ADMIN: "Quản trị viên",
+    MODERATOR: "Người kiểm duyệt",
+    USER: "Người dùng"
+}
+
+export const REPORT_TARGET = {
+    QUIZ: "Đề",
+    COMMENT: "Bình luận",
+    USER: "Người dùng"
+}

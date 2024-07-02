@@ -45,7 +45,7 @@ export function UpdateModal(props: UpdateModalProps) {
         }
         try {
             const result = await updateOne(data);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Có lỗi!");
                 console.error(result);
             } else {

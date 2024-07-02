@@ -30,7 +30,7 @@ export function DeleteModal(props: DeleteModalProps) {
                 return;
             }
             const result = await deleteOne(record.PermissionId);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Xóa thất bại!");
                 console.log(result);
             } else {

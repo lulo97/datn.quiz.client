@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 
 interface DeleteModalProps {
     record: SubSubjectDetail;
-    fetchData: () => Promise<void>
+    fetchData: () => Promise<void>;
 }
 
 export function DeleteModal(props: DeleteModalProps) {
@@ -26,7 +26,7 @@ export function DeleteModal(props: DeleteModalProps) {
         try {
             if (record.SubSubjectId == "") return;
             const result = await deleteOne(record.SubSubjectId);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Xóa thất bại!");
                 console.log(result);
             } else {

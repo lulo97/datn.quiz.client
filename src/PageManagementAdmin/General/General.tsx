@@ -14,7 +14,7 @@ export function General() {
         async function fetchData() {
             try {
                 const result = await getOne();
-                if ("error" in result) {
+                if (!result || "error" in result) {
                     console.log(result);
                 } else {
                     setData(result);

@@ -1,4 +1,3 @@
-import { QuizDetailProps } from "@/PageQuizDetail/QuizDetail";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,7 +44,7 @@ export function ModalRate(props: RateLikeProps) {
                 Score: Score,
                 Content: Content,
             });
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 handleFetchError(result);
             } else {
                 toast.success("Đánh giá thành công!");

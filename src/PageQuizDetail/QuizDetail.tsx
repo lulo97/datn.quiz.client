@@ -46,7 +46,7 @@ export function QuizDetail() {
             try {
                 if (!QuizId) return;
                 const result = await getOne(QuizId);
-                if ("error" in result) {
+                if (!result || "error" in result) {
                     toast.error("Có lỗi");
                     console.log(result);
                 } else {

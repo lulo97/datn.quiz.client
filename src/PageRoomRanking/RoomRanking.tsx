@@ -15,23 +15,23 @@ import { toast } from "react-toastify";
 
 export function RoomRanking() {
     const { RoomId } = useParams();
-    const [rankData, setRankData] = useState<Ranking>()
+    const [rankData, setRankData] = useState<Ranking>();
 
     useEffect(() => {
         async function fetchData() {
             if (!RoomId) return;
-            const result = await getOne(RoomId)
-            if ("error" in result) {
-                toast.error("Lỗi lấy dữ liệu!")
-                console.log(result)
+            const result = await getOne(RoomId);
+            if (!result || "error" in result) {
+                toast.error("Lỗi lấy dữ liệu!");
+                console.log(result);
             } else {
-                setRankData(result)
+                setRankData(result);
             }
         }
-        fetchData()
-    }, [])
+        fetchData();
+    }, []);
 
-    if (!rankData) return <div>Đang tải!</div>
+    if (!rankData) return <div>Đang tải!</div>;
 
     return (
         <Card>

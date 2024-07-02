@@ -17,7 +17,7 @@ export function Rate(props: QuizDetailProps) {
     useEffect(() => {
         async function fetchData() {
             const result = await getAllByQuiz(quiz.QuizId);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Có lỗi!");
                 console.log(result);
             } else {

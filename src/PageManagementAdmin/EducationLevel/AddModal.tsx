@@ -31,7 +31,7 @@ export function AddModal(props: AddModalProps) {
         try {
             if (data.Name == "") return;
             const result = await createOne(data);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Thêm thất bại!");
                 console.log(result);
             } else {

@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 
 interface DeleteModalProps {
     record: Subject;
-    fetchData: () => Promise<void>
+    fetchData: () => Promise<void>;
 }
 
 export function DeleteModal(props: DeleteModalProps) {
@@ -25,15 +25,15 @@ export function DeleteModal(props: DeleteModalProps) {
 
     async function handleClick() {
         try {
-            if (record.SubjectId == "") return
-            const result = await deleteOne(record.SubjectId)
-            if ("error" in result) {
+            if (record.SubjectId == "") return;
+            const result = await deleteOne(record.SubjectId);
+            if (!result || "error" in result) {
                 toast.error("Xóa thất bại!");
                 console.log(result);
             } else {
                 toast.success("Xóa thành công!");
-                await fetchData()
-                setIsOpen(false)
+                await fetchData();
+                setIsOpen(false);
             }
         } catch (error) {
             toast.error("Xóa thất bại!");

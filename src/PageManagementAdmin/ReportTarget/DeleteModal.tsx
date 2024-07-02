@@ -27,7 +27,7 @@ export function DeleteModal(props: DeleteModalProps) {
         try {
             if (record.ReportTargetId == "") return;
             const result = await deleteOne(record.ReportTargetId);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Xóa thất bại!");
                 console.log(result);
             } else {

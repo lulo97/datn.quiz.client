@@ -10,10 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
-import {
-    SubSubjectDetailForInsert,
-    createOne,
-} from "./UtilApi";
+import { SubSubjectDetailForInsert, createOne } from "./UtilApi";
 import {
     Select,
     SelectContent,
@@ -76,7 +73,7 @@ export function AddModal(props: AddModalProps) {
                 Description: data.Description,
             };
             const result = await createOne(SubSubjectRecord);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Thêm thất bại!");
                 console.log(result);
             } else {

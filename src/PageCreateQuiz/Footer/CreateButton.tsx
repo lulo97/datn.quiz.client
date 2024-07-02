@@ -12,7 +12,7 @@ export function CreateButton(props: CreateQuizProps) {
         const id = toast.loading("Đang tạo đề...");
         try {
             const result = await createOne(data);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.update(id, {
                     render: "Tạo thất bại!",
                     type: "error",

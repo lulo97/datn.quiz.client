@@ -55,7 +55,7 @@ export function ModalRole(props: Props) {
                 UserId: userrole.User.UserId,
                 RoleId: role.RoleId,
             });
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Có lỗi");
                 console.error(result);
             } else {

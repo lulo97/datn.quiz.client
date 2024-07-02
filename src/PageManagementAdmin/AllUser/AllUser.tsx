@@ -15,7 +15,7 @@ export function AllUser() {
     async function fetchData() {
         try {
             const result = await getAll();
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Có lỗi!");
                 console.log(result);
             } else {

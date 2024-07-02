@@ -13,9 +13,9 @@ export function Permission() {
     useEffect(() => {
         async function fetchData() {
             if (!user) return;
-            const ClerkId = user.id
+            const ClerkId = user.id;
             const result = await getAllByClerkId(ClerkId);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 toast.error("Có lỗi");
                 console.log(result);
             } else {
@@ -32,7 +32,9 @@ export function Permission() {
             </CardHeader>
             <CardContent>
                 <ul className="text-sm list-disc pl-4 pt-2">
-                    {permissions.map(ele => <li key={ele.PermissionId}>{ele.Name}</li>)}
+                    {permissions.map((ele) => (
+                        <li key={ele.PermissionId}>{ele.Name}</li>
+                    ))}
                 </ul>
             </CardContent>
         </Card>

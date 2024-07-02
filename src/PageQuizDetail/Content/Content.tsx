@@ -6,7 +6,7 @@ export function Content(props: QuizDetailProps) {
     return (
         <div className="flex gap-10">
             <ModalMode {...props} />
-            <ModalReport />
+            <ModalReport {...props} />
         </div>
     );
 }

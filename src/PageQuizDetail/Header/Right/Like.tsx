@@ -25,7 +25,7 @@ export function Like(props: QuizDetailProps) {
         async function fetchDataLike() {
             try {
                 const result = await getOne(QuizId, UserId);
-                if (result != null && "error" in result) {
+                if (!result || "error" in result) {
                     handleFetchError(result);
                     return;
                 }
@@ -44,11 +44,11 @@ export function Like(props: QuizDetailProps) {
     async function handleLike() {
         try {
             const result = await createOne({ QuizId, UserId });
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 handleFetchError(result);
             } else {
                 setLike(true);
-                toast.success("Lưu vào mục yêu thích!")
+                toast.success("Lưu vào mục yêu thích!");
             }
         } catch (error) {
             handleTryCatchError(error);
@@ -58,7 +58,7 @@ export function Like(props: QuizDetailProps) {
     async function handleDislike() {
         try {
             const result = await deleteOne(QuizId, UserId);
-            if ("error" in result) {
+            if (!result || "error" in result) {
                 handleFetchError(result);
             } else {
                 setLike(false);
