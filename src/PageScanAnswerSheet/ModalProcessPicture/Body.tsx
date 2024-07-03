@@ -7,7 +7,7 @@ import {
     inverseCalculateScaledPoints,
 } from "../Utils/Utils";
 import { detectPoint } from "../Utils/detectPoint";
-import { QuestionCards } from "./QuestionCard";
+import { QuestionCardsScanAnswer } from "./QuestionCard";
 
 export function Body(props: PropsScanAnswerSheet) {
     const {
@@ -84,7 +84,9 @@ export function Body(props: PropsScanAnswerSheet) {
                         <div className="font-semibold">Số thứ tự:</div>
                         <div>{userResponseDetail.STT}</div>
                     </div>
-                    <QuestionCards userResponseDetail={userResponseDetail} />
+                    <QuestionCardsScanAnswer
+                        userResponseDetail={userResponseDetail}
+                    />
                 </div>
             )}
         </div>

@@ -6,11 +6,12 @@ import { ModalRate } from "./ModalRate";
 import { useState } from "react";
 
 export interface RateLikeProps extends QuizDetailProps {
+    render: boolean;
     setRender: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function RateLike(props: QuizDetailProps) {
-    const [_render, setRender] = useState(true);
+    const [render, setRender] = useState(true);
     return (
         <Card>
             <CardHeader>
@@ -18,10 +19,16 @@ export function RateLike(props: QuizDetailProps) {
             </CardHeader>
             <CardContent className="flex flex-col gap-3">
                 <Like {...props} />
-                <Rate {...props} />
+                <Rate
+                    quiz={props.quiz}
+                    currentUser={props.currentUser}
+                    render={render}
+                    setRender={setRender}
+                />
                 <ModalRate
                     quiz={props.quiz}
                     currentUser={props.currentUser}
+                    render={render}
                     setRender={setRender}
                 />
             </CardContent>

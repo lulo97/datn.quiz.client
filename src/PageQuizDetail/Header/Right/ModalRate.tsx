@@ -8,12 +8,13 @@ import { createOne } from "../../API/Rating";
 import { RateLikeProps } from "./RateLike";
 
 export function ModalRate(props: RateLikeProps) {
-    const { quiz, currentUser, setRender } = props;
+    const { quiz, currentUser, render, setRender } = props;
     const QuizId = quiz.QuizId;
     const UserId = currentUser.UserId;
 
     const [stars, setStars] = useState([false, false, false, false, false]);
     const [Content, setContent] = useState("");
+    const [open, setOpen] = useState(false);
 
     function handleFetchError(result: any) {
         toast.error("Có lỗi!");
@@ -44,13 +45,19 @@ export function ModalRate(props: RateLikeProps) {
                 Score: Score,
                 Content: Content,
             });
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 handleFetchError(result);
             } else {
                 toast.success("Đánh giá thành công!");
                 setStars([false, false, false, false, false]);
                 setContent("");
-                setRender(true);
+                setOpen(false);
+                setRender(!render);
             }
         } catch (error) {
             handleTryCatchError(error);
@@ -58,7 +65,7 @@ export function ModalRate(props: RateLikeProps) {
     }
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button className="bg-blue-500 hover:bg-blue-600 text-white">
                     Viết đánh giá

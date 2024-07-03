@@ -2,8 +2,8 @@ import { BACKEND_URL, MY_HEADER } from "@/Utils";
 
 import { Question, Answer, QuestionInformation } from "@/InterfacesDatabase";
 
-const CREATE_BACKEND_PAGE = "CreateQuestion";
-const UPDATE_BACKEND_PAGE = "UpdateQuestion";
+const BACKEND_PAGE = "Question";
+const API_URL = BACKEND_URL + BACKEND_PAGE;
 
 export interface InterfaceAPI {
     QuestionRecord: Question;
@@ -15,8 +15,8 @@ export interface InterfaceAPI {
 
 export async function updateOne(data: InterfaceAPI) {
     try {
-        const response = await fetch(BACKEND_URL + UPDATE_BACKEND_PAGE, {
-            method: "POST",
+        const response = await fetch(API_URL, {
+            method: "PUT",
             headers: MY_HEADER,
             body: JSON.stringify(data),
         });
@@ -31,10 +31,26 @@ export async function updateOne(data: InterfaceAPI) {
 
 export async function createOne(data: InterfaceAPI) {
     try {
-        const response = await fetch(BACKEND_URL + CREATE_BACKEND_PAGE, {
+        const response = await fetch(API_URL, {
             method: "POST",
             headers: MY_HEADER,
             body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            console.error("Failed to fetch data:", response.statusText);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+export async function deleteOne(QuestionId: string) {
+    try {
+        const response = await fetch(API_URL, {
+            method: "DELETE",
+            headers: MY_HEADER,
+            body: JSON.stringify({ QuestionId: QuestionId }),
         });
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);

@@ -15,7 +15,7 @@ import {
     getInitalState,
 } from "./Utils";
 import { reducer } from "./Reducer";
-import { getAll } from "@/PageManagementAdmin/Type/UtilApi";
+import { getAll as getAllType } from "@/PageManagementAdmin/Type/UtilApi";
 import { Type, User } from "@/InterfacesDatabase";
 import { useUser } from "@clerk/clerk-react";
 import { getOneByClerkId } from "@/api/User";
@@ -56,7 +56,7 @@ export function CreateQuestion(props: InterfaceFromOutside) {
 
     useEffect(() => {
         async function initalType() {
-            const types: Type[] = await getAll();
+            const types: Type[] = await getAllType();
             dispatch({
                 type: ActionType.ChangeType,
                 payload: types[0],

@@ -20,8 +20,13 @@ export function SelectDifficultLevel(props: AIProps) {
     async function fetchData() {
         try {
             const result = await getAll();
-            if (!result || "error" in result) {
-                toast.error("Lỗi hệ thống!");
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
+                toast.error("Có lỗi!");
                 console.log(result);
             } else {
                 setOptions(result);

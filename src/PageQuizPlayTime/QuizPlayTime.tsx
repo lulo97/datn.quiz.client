@@ -46,7 +46,8 @@ export function QuizPlayTime() {
 
     useEffect(() => {
         async function fetchData() {
-            const ClerkId = user?.id || "";
+            if (!user) return;
+            const ClerkId = user.id;
             const currentUser = await getOneByClerkId(ClerkId);
             setCurrectUser(currentUser);
         }
@@ -54,12 +55,10 @@ export function QuizPlayTime() {
     }, []);
 
     useEffect(() => {
-        //First fetch the quiz than inital localstorage
-        async function fetchData() {
-            if (!currentUser) {
-                return;
-            }
-            const quiz_detail = await getOne(QuizId || "");
+        //First fetch the quiz
+        async function fetchQuizData() {
+            if (!currentUser || !QuizId) return;
+            const quiz_detail = await getOne(QuizId);
             dispatchState({
                 type: ActionTypeState.SetQuiz,
                 payload: { Sort, quiz_detail },
@@ -71,7 +70,7 @@ export function QuizPlayTime() {
                 },
             });
         }
-        fetchData();
+        fetchQuizData();
     }, [currentUser]);
 
     useEffect(() => {
@@ -102,12 +101,18 @@ export function QuizPlayTime() {
 
     async function CreatePlayByTimeOut() {
         try {
-            const ClerkId = user?.id || "";
+            if (!user) return;
+            const ClerkId = user.id;
             const currentUser = await getOneByClerkId(ClerkId);
             const data = getRecords(state, currentUser.UserId);
             if (!data) return;
             const result = await createOne(data);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Hết giờ, nộp bài thất bại!");
                 console.log(result);
             } else {

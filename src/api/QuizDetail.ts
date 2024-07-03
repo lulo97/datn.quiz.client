@@ -15,22 +15,6 @@ export async function getOne(QuizId: string) {
     }
 }
 
-export async function deleteOne(QuizId: string) {
-    try {
-        const response = await fetch(API_URL, {
-            method: "DELETE",
-            headers: MY_HEADER,
-            body: JSON.stringify({ QuizId: QuizId }),
-        });
-        if (!response.ok) {
-            console.error("Failed to fetch data:", response.statusText);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
-}
-
 
 export async function getAllByUser(UserId: string) {
     try {

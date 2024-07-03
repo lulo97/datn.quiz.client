@@ -5,19 +5,20 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { Rating, User } from "@/InterfacesDatabase";
 import { QuizDetailProps } from "@/PageQuizDetail/QuizDetail";
+import { RateLikeProps } from "./RateLike";
 
 export interface RatingDetail extends Omit<Rating, "UserId"> {
     User: User;
 }
 
-export function Rate(props: QuizDetailProps) {
-    const { quiz } = props;
-    const [rates, setRates] = useState<RatingDetail[]>();
+export function Rate(props: RateLikeProps) {
+    const { quiz, render } = props;
+    const [rates, setRates] = useState<RatingDetail[]>([]);
 
     useEffect(() => {
         async function fetchData() {
             const result = await getAllByQuiz(quiz.QuizId);
-            if (!result || "error" in result) {
+            if ("error" in result) {
                 toast.error("Có lỗi!");
                 console.log(result);
             } else {
@@ -25,7 +26,7 @@ export function Rate(props: QuizDetailProps) {
             }
         }
         fetchData();
-    }, [open]);
+    }, [open, render]);
 
     if (!rates) return <div>Đang tải!</div>;
 

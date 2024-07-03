@@ -3,7 +3,7 @@ import { SubSubject } from "@/InterfacesDatabase";
 import {
     getBySubject,
     getBySubjectAndEducationLevel,
-} from "@/PageManagementAdmin/SubSubject/UtilApi";
+} from "@/PageManagementAdmin/SubSubject/API";
 import { ActionType, CreateQuestionProps } from "../Utils";
 import { Label } from "@/components/ui/label";
 import {
@@ -13,13 +13,14 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
+import { TONG_HOP } from "@/Utils";
 export function SelectSubSubject(props: CreateQuestionProps) {
     const { state, dispatch } = props;
     const [options, setOptions] = useState<SubSubject[]>();
 
     async function fetchData() {
         if (!state.Subject || !state.EducationLevel) return;
-        if (state.EducationLevel.Name != "Tổng hợp") {
+        if (state.EducationLevel.Name != TONG_HOP) {
             const records: SubSubject[] = await getBySubjectAndEducationLevel(
                 state.Subject.SubjectId,
                 state.EducationLevel?.EducationLevelId

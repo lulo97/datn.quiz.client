@@ -27,9 +27,17 @@ export function AddModal(props: AddModalProps) {
 
     const handleAddClick = async () => {
         try {
-            if (data.Name == "") return;
+            if (data.Name == "") {
+                toast.warning("Tên trống");
+                return;
+            }
             const result = await createOne(data);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Thêm thất bại!");
                 console.log(result);
             } else {

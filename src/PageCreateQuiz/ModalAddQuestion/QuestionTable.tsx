@@ -13,6 +13,7 @@ import { QuestionDetailList } from "./QuestionDetailList";
 import { toast } from "react-toastify";
 import { ActionType } from "../Action";
 import { ReadModal } from "@/PageManagementUser/CreatedQuestion/ReadModal";
+import { TONG_HOP } from "@/Utils";
 
 export function QuestionTable(props: CreateQuizProps) {
     const { state, dispatch } = props;
@@ -23,43 +24,48 @@ export function QuestionTable(props: CreateQuizProps) {
         toast.success("Thêm thành công!");
     }
 
-    async function fetchSubjectDatas() {
-        if (!state.CurrentUser) return;
-        let fetched_data: any[] = [];
-        //1. Education = Subject = Tổng hợp
-        if (
-            state.Subject?.Name == "Tổng hợp" &&
-            state.EducationLevel?.Name == "Tổng hợp"
-        ) {
-            fetched_data = await getAllByUser(state.CurrentUser.UserId);
-        }
-        //2. Education = Education, Subject = Tổng hợp
-        else if (state.Subject?.Name == "Tổng hợp" && state.EducationLevel) {
-            fetched_data = await getAllByEducationLevel(
-                state.EducationLevel.EducationLevelId
-            );
-        }
-        //3. Education = Tổng hợp, Subject = Subject
-        else if (state.EducationLevel?.Name == "Tổng hợp" && state.Subject) {
-            fetched_data = await getAllBySubject(state.Subject.SubjectId);
-        }
-        //4. Education = Education, Subject = Subject
-        else if (state.Subject && state.EducationLevel) {
-            fetched_data = await getAllBySubjectAndEducationLevel(
-                state.Subject.SubjectId,
-                state.EducationLevel.EducationLevelId
-            );
-        }
-        if ("error" in fetched_data) {
-            toast.error("Không có bản ghi!");
-            setData([]);
-        } else {
-            setData(fetched_data);
+    async function fetchData() {
+        try {
+            if (!state.CurrentUser) return;
+            let fetched_data: any[] = [];
+            //1. Education = Subject = TONG_HOP
+            if (
+                state.Subject?.Name == TONG_HOP &&
+                state.EducationLevel?.Name == TONG_HOP
+            ) {
+                fetched_data = await getAllByUser(state.CurrentUser.UserId);
+            }
+            //2. Education = Education, Subject = TONG_HOP
+            else if (state.Subject?.Name == TONG_HOP && state.EducationLevel) {
+                fetched_data = await getAllByEducationLevel(
+                    state.EducationLevel.EducationLevelId
+                );
+            }
+            //3. Education = TONG_HOP, Subject = Subject
+            else if (state.EducationLevel?.Name == TONG_HOP && state.Subject) {
+                fetched_data = await getAllBySubject(state.Subject.SubjectId);
+            }
+            //4. Education = Education, Subject = Subject
+            else if (state.Subject && state.EducationLevel) {
+                fetched_data = await getAllBySubjectAndEducationLevel(
+                    state.Subject.SubjectId,
+                    state.EducationLevel.EducationLevelId
+                );
+            }
+            if ("error" in fetched_data) {
+                toast.error("Không có bản ghi!");
+                setData([]);
+            } else {
+                setData(fetched_data);
+            }
+        } catch (error) {
+            toast.error("Có lỗi");
+            console.error(error);
         }
     }
 
     useEffect(() => {
-        fetchSubjectDatas();
+        fetchData();
     }, [state.Subject]);
 
     const columns: TableColumnsType<QuestionDetail> = useMemo(
@@ -125,7 +131,7 @@ export function QuestionTable(props: CreateQuizProps) {
                 width: "10%",
             },
         ],
-        [fetchSubjectDatas]
+        [fetchData]
     );
 
     if (!state.CurrentUser) return <div>Đang tải!</div>;

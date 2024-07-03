@@ -21,7 +21,12 @@ export function RoomRanking() {
         async function fetchData() {
             if (!RoomId) return;
             const result = await getOne(RoomId);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Lỗi lấy dữ liệu!");
                 console.log(result);
             } else {

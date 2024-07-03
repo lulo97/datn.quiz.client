@@ -1,17 +1,15 @@
 import { MenuClickTarget, MenuItem } from "@/Interfaces";
 import { findMenuItemByName } from "@/Utils";
 import { Navbar } from "@/components/navbar/Navbar";
-import { useState, } from "react";
+import { useState } from "react";
 import { General } from "./General/General";
-import { ProcessedReport } from "./ProcessedReport/ProcessedReport";
-import { NeedProcessReport } from "./NeedProcessReport/NeedProcessReport";
 import { VertifyQuiz } from "./VertifyQuiz/VertifyQuiz";
+import { ProcessReport } from "./ProcessReport/ProcessReport";
 
 export const menu_names: MenuItem[] = [
     { name: "Tổng quan", element: <General /> },
-    { name: "Cần xử lý", element: <NeedProcessReport /> },
-    { name: "Đã xử lý", element: <ProcessedReport /> },
-    { name: "Kiểm duyệt",  element: <VertifyQuiz /> }
+    { name: "Báo cáo", element: <ProcessReport /> },
+    { name: "Kiểm duyệt", element: <VertifyQuiz /> },
 ];
 
 export function ModeratorManagement() {
@@ -34,9 +32,7 @@ export function ModeratorManagement() {
                 menu_names={menu_names}
                 handleMenubarClick={handleMenubarClick}
             />
-            <div className="bg-gray-200 pl-2 w-full">
-                {curMenuItem.element}
-            </div>
+            <div className="bg-gray-200 pl-2 w-full">{curMenuItem.element}</div>
         </div>
     );
 }

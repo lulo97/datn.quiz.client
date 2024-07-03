@@ -17,7 +17,7 @@ import {
     TableHead,
     TableRow,
 } from "@/components/ui/table";
-import { ModelWidthClass } from "@/Utils";
+import { ModelWidthClass, VITE_SERVER_PATH } from "@/Utils";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
 import { useNavigate } from "react-router-dom";
 
@@ -75,7 +75,14 @@ export function ReadModal(props: ReadModalProps) {
                             <TableRow>
                                 <TableHead>Ảnh:</TableHead>
                                 <TableCell>
-                                    {record.ImageUrl || "NULL"}
+                                    {record.ImageUrl ? (
+                                        <img
+                                            className="object-contain h-40"
+                                            src={VITE_SERVER_PATH + record.ImageUrl}
+                                        />
+                                    ) : (
+                                        "NULL"
+                                    )}
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -95,6 +102,10 @@ export function ReadModal(props: ReadModalProps) {
                             <TableRow>
                                 <TableHead>Số câu:</TableHead>
                                 <TableCell>{record.Questions.length}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableHead>Lượt chơi:</TableHead>
+                                <TableCell>{record.Attempts}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

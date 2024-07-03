@@ -35,9 +35,7 @@ export function Answer(props: AnswerProps) {
 
     return (
         <div className="flex gap-5 justify-between items-center">
-            <Menu
-                
-            />
+            <Menu className="cursor-pointer" />
             <Checkbox
                 checked={answer.IsCorrect}
                 onClick={() => handleToggleAnswer(answer.AnswerId)}

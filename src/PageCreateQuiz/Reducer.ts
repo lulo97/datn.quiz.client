@@ -4,6 +4,10 @@ import { Action, ActionType } from "./Action";
 
 export function reducer(state: QuizDetail, action: Action): QuizDetail {
     switch (action.type) {
+        case ActionType.ReorderQuestions: {
+            const Questions = action.payload;
+            return { ...state, Questions: Questions };
+        }
         case ActionType.SetCurrentUser: {
             const currentUser = action.payload;
             return { ...state, CurrentUser: currentUser };

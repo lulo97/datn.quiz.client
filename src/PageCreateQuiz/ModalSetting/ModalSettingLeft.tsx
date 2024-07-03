@@ -47,6 +47,7 @@ export function ModalSettingContentLeft(props: CreateQuizProps) {
                 <div className="flex gap-2 items-center">
                     <Label>Công khai</Label>
                     <Switch
+                        checked={state.IsPublic}
                         onClick={hanleToggleIsPublic}
                         className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-slate-200"
                     />

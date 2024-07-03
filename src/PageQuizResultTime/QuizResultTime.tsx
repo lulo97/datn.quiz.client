@@ -9,8 +9,8 @@ import { Footer } from "./Footer/Footer";
 import { Content } from "./Content/Content";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getOne } from "./Api";
 import { PlayDetail } from "./Utils";
+import { getOne } from "@/api/PlayDetail";
 
 export function QuizResultTime() {
     const { PlayId } = useParams();

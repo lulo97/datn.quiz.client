@@ -1,7 +1,8 @@
-import { PenBox, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { CreateQuizProps } from "../Utils";
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 import { ActionType } from "../Action";
+import { UpdateModal } from "./UpdateModal";
 
 interface QCHeaderProps extends CreateQuizProps {
     question: QuestionDetail;
@@ -20,7 +21,10 @@ export function QCHeader(props: QCHeaderProps) {
         <div className="flex justify-between">
             <div className="font-semibold">Câu {idx}:</div>
             <div className="flex gap-2">
-                <PenBox className="text-green-500 hover:cursor-pointer" />
+                <Menu className="cursor-pointer" />
+                <UpdateModal
+                    record={question}
+                />
                 <X
                     onClick={handleDeleteQuestion}
                     className="text-red-500 hover:cursor-pointer"

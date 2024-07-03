@@ -1,64 +1,28 @@
-import { EducationLevel, SubSubject, Subject } from "@/InterfacesDatabase";
+import { SubSubject } from "@/InterfacesDatabase";
 import { MY_HEADER, BACKEND_URL } from "@/Utils";
-import { FilterValue } from "antd/es/table/interface";
 import { SubSubjectDetailForUpdate } from "./UpdateModal";
 
 const BACKEND_PAGE = "SubSubject";
 const API_URL = BACKEND_URL + BACKEND_PAGE;
 
-export interface SubSubjectDetail
-    extends Omit<SubSubject, "SubjectId" | "EducationLevelId"> {
-    Subject: Subject | null;
-    EducationLevel: EducationLevel | null;
-}
-
-export type SubSubjectDetailForInsert = Omit<
-    SubSubjectDetail,
-    "CreatedAt" | "UpdatedAt"
->;
-
-export interface GetAllOptions {
-    filterFields?: FilterValue | string[]; // Array of filter fields
-    sortField?: string; // Field to sort by
-    sortDirection?: "asc" | "desc"; // Sorting direction
-}
-
-function buildFilterQueryParams(
-    filterFields: FilterValue | string[]
-): string[] {
-    return filterFields.map(
-        (field) => `fields=${encodeURIComponent(field.toString())}`
-    );
-}
-
-function buildSortQueryParams(
-    sortField: string,
-    sortDirection: string
-): string[] {
-    return [
-        `sortField=${encodeURIComponent(sortField)}`,
-        `sortDirection=${sortDirection}`,
-    ];
-}
-
-export async function getAll(options?: GetAllOptions) {
+export async function getAll(
+    field: string | undefined,
+    sort: string | undefined,
+    subjectFilter: string | undefined,
+    educationFilter: string | undefined
+) {
     let url = API_URL;
-
-    if (options) {
-        const { filterFields, sortField, sortDirection } = options;
-        const queryParams = [];
-        if (filterFields && filterFields.length > 0) {
-            queryParams.push(...buildFilterQueryParams(filterFields));
-        }
-        if (sortField && sortDirection) {
-            queryParams.push(...buildSortQueryParams(sortField, sortDirection));
-        }
-        const joinedQuery = queryParams.join("&");
-        url += joinedQuery.length > 0 ? `?${joinedQuery}` : "";
-    }
-
+    const _field = encodeURIComponent(field ? field : "undefined");
+    const _sort = encodeURIComponent(sort ? sort : "undefined");
+    const _subjectFilter = encodeURIComponent(
+        subjectFilter ? subjectFilter : "undefined"
+    );
+    const _educationFilter = encodeURIComponent(
+        educationFilter ? educationFilter : "undefined"
+    );
+    const option_path = `/${_field}/${_sort}/${_subjectFilter}/${_educationFilter}`;
     try {
-        const response = await fetch(url);
+        const response = await fetch(url + option_path);
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
         }
@@ -88,9 +52,7 @@ export async function getBySubjectAndEducationLevel(
 
 export async function getBySubject(SubjectId: string) {
     try {
-        const response = await fetch(
-            API_URL + `/GetBySubject/${SubjectId}`
-        );
+        const response = await fetch(API_URL + `/GetBySubject/${SubjectId}`);
         if (!response.ok) {
             console.error("Failed to fetch data:", response.statusText);
         }

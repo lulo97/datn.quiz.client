@@ -1,6 +1,6 @@
 import { Play, SelectedAnswer } from "@/InterfacesDatabase";
-import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
+import { getQuestionsWithSelectedAnswers } from "@/components/question_card/Utils";
 import { isEqual } from "lodash";
 
 export interface PlayDetail extends Play {
@@ -8,36 +8,10 @@ export interface PlayDetail extends Play {
     SelectedAnswers: SelectedAnswer[];
 }
 
-export interface IQWSA extends QuestionDetail {
-    SelectedAnswers: string[]
-}
-
-//QWSA = Questions With Selected Answers
-export function getQWSA(data: PlayDetail): IQWSA[] {
-    const questions: QuestionDetail[] = data.Quiz.Questions;
-    const selectedAnswers: SelectedAnswer[] = data.SelectedAnswers;
-    const selectedAnswerMap: { [key: string]: boolean } =
-        selectedAnswers.reduce((acc: { [key: string]: boolean }, sa) => {
-            acc[sa.AnswerId] = true;
-            return acc;
-        }, {});
-
-    return questions.map((question) => {
-        const selectedAnswers = question.Answers.filter(
-            (answer) => selectedAnswerMap[answer.AnswerId]
-        ).map((answer) => answer.AnswerId);
-
-        return {
-            ...question,
-            SelectedAnswers: selectedAnswers,
-        };
-    });
-}
-
 export function getTotalCorrectCount(data: PlayDetail) {
-    const QWSA = getQWSA(data);
+    const QuestionsWithSelectedAnswers = getQuestionsWithSelectedAnswers(data);
     let count = 0;
-    QWSA.forEach((ele) => {
+    QuestionsWithSelectedAnswers.forEach((ele) => {
         const CorrectAnswers = ele.Answers.filter(
             (ele) => ele.IsCorrect == true
         );

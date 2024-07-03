@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { PenBox } from "lucide-react";
 import { useState } from "react";
 import { updateOne } from "./UtilApi";
+import { toast } from "react-toastify";
 
 interface DeleteModalProps {
     record: Subject;
@@ -28,10 +29,26 @@ export function UpdateModal(props: DeleteModalProps) {
     });
 
     const handleAddClick = async () => {
-        if (data.Name == "") return;
-        await updateOne(data);
-        await fetchData();
-        setIsOpen(false);
+        try {
+            if (data.Name == "") return;
+            const result = await updateOne(data);
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+            } else {
+                toast.success("Cập nhật thành công!");
+                setIsOpen(false);
+                await fetchData();
+            }
+        } catch (error) {
+            toast.error("Có lỗi!");
+            console.log(error);
+        }
     };
 
     return (

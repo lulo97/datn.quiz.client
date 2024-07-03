@@ -43,7 +43,7 @@ export function ModalReport(props: QuizDetailProps) {
         async function fetchReportReason() {
             try {
                 const result = await getAll();
-                if (!result || "error" in result) {
+                if ("error" in result) {
                     toast.error("Có lỗi");
                     console.log(result);
                 } else {
@@ -71,7 +71,12 @@ export function ModalReport(props: QuizDetailProps) {
         };
         try {
             const result = await createOne(record);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Có lỗi!");
                 console.log(result);
             } else {

@@ -5,8 +5,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 interface Props {
     userResponseDetail: UserResponseDetail;
 }
-
-export function QuestionCards(props: Props) {
+ 
+export function QuestionCardsScanAnswer(props: Props) {
     const { userResponseDetail } = props;
     return (
         <div className="flex flex-col gap-2">

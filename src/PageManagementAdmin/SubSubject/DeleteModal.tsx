@@ -10,8 +10,9 @@ import {
 import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
 import { useState } from "react";
-import { SubSubjectDetail, deleteOne } from "./UtilApi";
+import { deleteOne } from "./API";
 import { toast } from "react-toastify";
+import { SubSubjectDetail } from "./Utils";
 
 interface DeleteModalProps {
     record: SubSubjectDetail;
@@ -26,7 +27,12 @@ export function DeleteModal(props: DeleteModalProps) {
         try {
             if (record.SubSubjectId == "") return;
             const result = await deleteOne(record.SubSubjectId);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Xóa thất bại!");
                 console.log(result);
             } else {

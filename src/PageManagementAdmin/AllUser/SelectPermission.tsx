@@ -12,7 +12,12 @@ export function SelectPermission(props: ModalRoleData) {
         async function fetchData() {
             if (!role) return;
             const result = await getAllByRole(role.RoleId);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Có lỗi");
                 console.log(result);
             } else {

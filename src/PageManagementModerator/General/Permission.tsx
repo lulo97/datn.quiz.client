@@ -15,7 +15,12 @@ export function Permission() {
             if (!user) return;
             const ClerkId = user.id;
             const result = await getAllByClerkId(ClerkId);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Có lỗi");
                 console.log(result);
             } else {

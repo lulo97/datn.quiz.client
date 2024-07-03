@@ -74,7 +74,6 @@ export function caculateScore(
 ) {
     //CorrectAnswersQuestions = CAQ
     const CAQ = getCorrectAnswersQuestions(Quiz);
-    if (!CAQ) return -1;
     let Score = 0;
     for (let i = 0; i < UserResponse.length; i++) {
         if (UserResponse[i].Answers.length == 0) continue;
@@ -89,6 +88,45 @@ export function caculateScore(
     return Score;
 }
 
+function compare(IsSelected: boolean, IsCorrect: boolean) {
+    if (IsCorrect.toString() == "1") {
+        if (IsSelected == true) return true;
+    }
+    if (IsCorrect.toString() == "0") {
+        if (IsSelected == false) return true;
+    }
+    return false;
+}
+
+function getMetricUserCount(Quiz: QuizDetail, Response: UserResponse[]) {
+    const Questions = Quiz.Questions;
+    let MetricUserCount: any = [];
+    Questions.map((q) => {
+        const currentResponse = Response.find(
+            (ele) => ele.QuestionId == q.QuestionId
+        );
+        if (!currentResponse) return q;
+        const _Answers = q.Answers.map((a) => {
+            const currentAnswer = {
+                ...a,
+                IsSelected: currentResponse.SelectedAnswers.includes(
+                    a.AnswerId
+                ),
+            };
+            return currentAnswer;
+        });
+        const allEqual = _Answers.every((item) =>
+            compare(item.IsSelected, item.IsCorrect)
+        );
+        MetricUserCount.push({
+            QuestionId: q.QuestionId,
+            CorrectUserCount: allEqual == true ? 1 : 0,
+            IncorrectUserCount: allEqual == false ? 1 : 0,
+        });
+    });
+    return MetricUserCount;
+}
+
 export function getRecords(Quiz: QuizDetail, UserId: string) {
     const localPlay = getDataFromStorage();
     if (!localPlay) return;
@@ -96,6 +134,7 @@ export function getRecords(Quiz: QuizDetail, UserId: string) {
     const Response = localPlay.Response;
     const UserResponseDetail = getSelectedQuestions(Quiz, Response);
     const Score = caculateScore(Quiz, UserResponseDetail);
+    const MetricUserCount = getMetricUserCount(Quiz, Response);
     const PlayRecordInsert = {
         PlayId: PlayId,
         UserId: UserId,
@@ -114,5 +153,6 @@ export function getRecords(Quiz: QuizDetail, UserId: string) {
     return {
         PlayRecordInsert: PlayRecordInsert,
         SelectedAnswersInsert: SelectedAnswersInsert,
+        MetricUserCount: MetricUserCount,
     };
 }

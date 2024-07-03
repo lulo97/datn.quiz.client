@@ -11,11 +11,12 @@ import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { QuizDetail } from "@/PageCreateQuiz/Utils";
-import { deleteOne } from "@/api/QuizDetail";
+import { toast } from "react-toastify";
+import { deleteOne } from "@/api/Quiz";
 
 interface DeleteModalProps {
     record: QuizDetail;
-    fetchData: () => Promise<void>
+    fetchData: () => Promise<void>;
 }
 
 export function DeleteModal(props: DeleteModalProps) {
@@ -23,10 +24,26 @@ export function DeleteModal(props: DeleteModalProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     async function handleClick() {
-        if (record.QuizId == "") return
-        await deleteOne(record.QuizId)
-        await fetchData()
-        setIsOpen(false)
+        try {
+            if (record.QuizId == "") return;
+            const result = await deleteOne(record.QuizId);
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
+                toast.error("Có lỗi!");
+                console.error(result);
+            } else {
+                toast.success("Xóa thành công!")
+                await fetchData();
+                setIsOpen(false);
+            }
+        } catch (error) {
+            toast.error("Có lỗi!");
+            console.error(error);
+        }
     }
 
     return (

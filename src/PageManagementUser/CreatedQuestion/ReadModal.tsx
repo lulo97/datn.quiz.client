@@ -94,7 +94,16 @@ export function ReadModal(props: ReadModalProps) {
                             <TableRow>
                                 <TableHead>Âm thanh:</TableHead>
                                 <TableCell>
-                                    {record.AudioUrl || "NULL"}
+                                    {record.AudioUrl ? (
+                                        <audio
+                                            className="w-full"
+                                            controls
+                                        >
+                                            <source src={VITE_SERVER_PATH + record.AudioUrl} />
+                                        </audio>
+                                    ) : (
+                                        "NULL"
+                                    )}
                                 </TableCell>
                             </TableRow>
                             <TableRow>
@@ -147,6 +156,16 @@ export function ReadModal(props: ReadModalProps) {
                                 <TableHead>Điểm phạt:</TableHead>
                                 <TableCell>
                                     {record.PenaltyPoint?.Value || "NULL"}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableHead>Số người trả lời đúng:</TableHead>
+                                <TableCell>{record.CorrectUserCount}</TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableHead>Số người trả lời sai:</TableHead>
+                                <TableCell>
+                                    {record.IncorrectUserCount}
                                 </TableCell>
                             </TableRow>
                         </TableBody>

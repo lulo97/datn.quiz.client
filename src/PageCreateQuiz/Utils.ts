@@ -1,7 +1,6 @@
 import {
     EducationLevel,
     Quiz,
-    QuizInformation,
     QuizQuestion,
     Subject,
     Time,
@@ -10,6 +9,7 @@ import {
 import { QuestionDetail } from "@/PageCreateQuestion/Utils";
 import { getUUID } from "@/Utils";
 import { Action } from "./Action";
+import { QIForInsert } from "@/api/Quiz";
 
 export interface QuizDetail {
     CurrentUser: User | null;
@@ -29,8 +29,6 @@ export interface QuizDetail {
     IsDeleted: boolean;
     UserVertify: string | null;
     VerifiedAt: string | null;
-    CreatedAt: string | null;
-    UpdatedAt: string | null;
 }
 
 export function getErrors(state: QuizDetail) {
@@ -44,8 +42,6 @@ export function getErrors(state: QuizDetail) {
     if (state.Questions.length <= 1) errors.push("Phải có ít nhất 2 câu hỏi!");
     return errors;
 }
-
-export type QIForInsert = Omit<QuizInformation, "CreatedAt" | "UpdatedAt">;
 
 export function getRecords(state: QuizDetail) {
     const QuizRecord: Quiz = {
@@ -81,6 +77,10 @@ export function getRecords(state: QuizDetail) {
 export interface CreateQuizProps {
     state: QuizDetail;
     dispatch: React.Dispatch<Action>;
+    IsUpdate?: boolean;
+    FetchDataAfterUpdate?: () => Promise<void>;
+    DataFromUpdate?: QuizDetail;
+    IsInModal?: boolean;
 }
 
 export function getInitalState(): QuizDetail {
@@ -104,7 +104,5 @@ export function getInitalState(): QuizDetail {
         IsDeleted: false,
         UserVertify: null,
         VerifiedAt: null,
-        CreatedAt: null,
-        UpdatedAt: null,
     };
 }

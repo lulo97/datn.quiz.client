@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PenBox } from "lucide-react";
 import { useEffect, useState } from "react";
-import { SubSubjectDetail, updateOne } from "./UtilApi";
+import { updateOne } from "./API";
 import {
     Select,
     SelectContent,
@@ -24,9 +24,11 @@ interface UpdateModalProps {
     record: SubSubjectDetail;
     fetchData: () => Promise<void>;
 }
+
 import { getAll as getAllSubject } from "../Subject/UtilApi";
 import { getAll as getAllEducationLevel } from "../EducationLevel/UtilApi";
 import { toast } from "react-toastify";
+import { SubSubjectDetail } from "./Utils";
 
 export interface SubSubjectDetailForUpdate {
     SubSubjectId: string;
@@ -70,7 +72,12 @@ export function UpdateModal(props: UpdateModalProps) {
             if (!record.SubjectId) return;
             if (!record.EducationLevelId) return;
             const result = await updateOne(record);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Cập nhật thất bại!");
                 console.log(result);
             } else {

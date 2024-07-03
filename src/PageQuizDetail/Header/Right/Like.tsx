@@ -25,14 +25,17 @@ export function Like(props: QuizDetailProps) {
         async function fetchDataLike() {
             try {
                 const result = await getOne(QuizId, UserId);
-                if (!result || "error" in result) {
+                if (result == null) {
+                    setLike(false);
+                    return;
+                }
+                if ("error" in result) {
                     handleFetchError(result);
                     return;
                 }
                 if (result != null) {
                     setLike(true);
-                } else {
-                    setLike(false);
+                    return;
                 }
             } catch (error) {
                 handleTryCatchError(error);
@@ -44,7 +47,12 @@ export function Like(props: QuizDetailProps) {
     async function handleLike() {
         try {
             const result = await createOne({ QuizId, UserId });
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 handleFetchError(result);
             } else {
                 setLike(true);
@@ -58,7 +66,12 @@ export function Like(props: QuizDetailProps) {
     async function handleDislike() {
         try {
             const result = await deleteOne(QuizId, UserId);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 handleFetchError(result);
             } else {
                 setLike(false);

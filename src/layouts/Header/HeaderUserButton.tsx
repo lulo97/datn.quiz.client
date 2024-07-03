@@ -27,7 +27,12 @@ export function HeaderUserButton() {
                 if (!user) return;
                 const ClerkId = user.id;
                 const result = await getOneUserByClerkId(ClerkId);
-                if (!result || "error" in result) {
+                if (!result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                    return;
+                }
+                if ("error" in result) {
                     toast.error("Có lỗi!");
                     console.log(result);
                 } else {
@@ -47,7 +52,12 @@ export function HeaderUserButton() {
                 if (!user) return;
                 const ClerkId = user.id;
                 const result = await getOneRoleByClerkId(ClerkId);
-                if (!result || "error" in result) {
+                if (!result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                    return;
+                }
+                if ("error" in result) {
                     toast.error("Có lỗi!");
                     console.log(result);
                 } else {

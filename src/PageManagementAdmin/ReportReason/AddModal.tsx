@@ -29,7 +29,12 @@ export function AddModal(props: AddModalProps) {
         try {
             if (data.Name == "") return;
             const result = await createOne(data);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Thêm thất bại!");
                 console.log(result);
             } else {

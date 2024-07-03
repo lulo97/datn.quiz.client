@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dialog";
 import { Eye } from "lucide-react";
 import { useState } from "react";
-
 import {
     Table,
     TableBody,
@@ -18,7 +17,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { ModalSizeClass } from "@/Utils";
-import { SubSubjectDetail } from "./UtilApi";
+import { SubSubjectDetail } from "./Utils";
 
 interface ReadModalProps {
     record: SubSubjectDetail;
@@ -46,7 +45,9 @@ export function ReadModal(props: ReadModalProps) {
                             </TableRow>
                             <TableRow>
                                 <TableHead>Trình độ học vấn:</TableHead>
-                                <TableCell>{record.EducationLevel?.Name}</TableCell>
+                                <TableCell>
+                                    {record.EducationLevel?.Name}
+                                </TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableHead>Chủ đề phụ:</TableHead>

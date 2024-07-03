@@ -272,8 +272,7 @@ export interface Report {
     UserId: string;
     ParentId: string;
     Content: string;
-    CreatedAt: string;
-    IsResolved: boolean;
+    ResolvedAt: string;
     UserResolve: string;
 }
 

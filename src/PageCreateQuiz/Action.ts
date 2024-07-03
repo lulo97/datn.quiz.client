@@ -11,7 +11,8 @@ export enum ActionType {
     AddQuestion,
     DeleteQuestion,
     ChangeQuestion,
-    SetCurrentUser
+    SetCurrentUser,
+    ReorderQuestions,
 }
 
 export interface Action {

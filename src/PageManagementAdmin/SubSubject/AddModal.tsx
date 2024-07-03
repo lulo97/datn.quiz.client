@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
-import { SubSubjectDetailForInsert, createOne } from "./UtilApi";
+import { createOne } from "./API";
 import {
     Select,
     SelectContent,
@@ -22,6 +22,7 @@ import { getAll as getAllSubject } from "../Subject/UtilApi";
 import { getAll as getAllEducationLevel } from "../EducationLevel/UtilApi";
 import { toast } from "react-toastify";
 import { EducationLevel, SubSubject, Subject } from "@/InterfacesDatabase";
+import { SubSubjectDetailForInsert } from "./Utils";
 
 interface AddModalProps {
     fetchData: () => Promise<void>;
@@ -42,26 +43,68 @@ export function AddModal(props: AddModalProps) {
     const [educationLevels, setEducationLevels] = useState<EducationLevel[]>(
         []
     );
+    const [data, setData] = useState<SubSubjectDetailForInsert>(INITIAL_DATA);
 
     useEffect(() => {
         async function fetchSubjects() {
-            setSubjects(await getAllSubject());
-        }
-
-        async function fetchEducationLevels() {
-            setEducationLevels(await getAllEducationLevel());
+            try {
+                const result = await getAllSubject();
+                if (!result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                    return;
+                }
+                if ("error" in result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                } else {
+                    setSubjects(result);
+                }
+            } catch (error) {
+                toast.error("Có lỗi!");
+                console.log(error);
+            }
         }
         fetchSubjects();
+    }, []);
+
+    useEffect(() => {
+        async function fetchEducationLevels() {
+            try {
+                const result = await getAllEducationLevel();
+                if (!result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                    return;
+                }
+                if ("error" in result) {
+                    toast.error("Có lỗi!");
+                    console.log(result);
+                } else {
+                    setEducationLevels(result);
+                }
+            } catch (error) {
+                toast.error("Có lỗi!");
+                console.log(error);
+            }
+        }
         fetchEducationLevels();
     }, []);
 
-    const [data, setData] = useState<SubSubjectDetailForInsert>(INITIAL_DATA);
-
     const handleAddClick = async () => {
         try {
-            if (!data.Name) return;
-            if (!data.Subject) return;
-            if (!data.EducationLevel) return;
+            if (!data.Name) {
+                toast.warning("Tên trống!");
+                return;
+            }
+            if (!data.Subject) {
+                toast.warning("Chủ đề trống!");
+                return;
+            }
+            if (!data.EducationLevel) {
+                toast.warning("Trình độ học vấn trống!");
+                return;
+            }
             const SubSubjectRecord: Omit<
                 SubSubject,
                 "CreatedAt" | "UpdatedAt"
@@ -73,7 +116,12 @@ export function AddModal(props: AddModalProps) {
                 Description: data.Description,
             };
             const result = await createOne(SubSubjectRecord);
-            if (!result || "error" in result) {
+            if (!result) {
+                toast.error("Có lỗi!");
+                console.log(result);
+                return;
+            }
+            if ("error" in result) {
                 toast.error("Thêm thất bại!");
                 console.log(result);
             } else {

@@ -10,6 +10,7 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
+
 export function SelectType(props: CreateQuestionProps) {
     const { state, dispatch } = props;
     const [options, setOptions] = useState<Type[]>();

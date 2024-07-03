@@ -212,11 +212,13 @@ export interface CustomCSSProperties extends CSSProperties {
 export const ROLE = {
     ADMIN: "Quản trị viên",
     MODERATOR: "Người kiểm duyệt",
-    USER: "Người dùng"
-}
+    USER: "Người dùng",
+};
 
 export const REPORT_TARGET = {
     QUIZ: "Đề",
     COMMENT: "Bình luận",
-    USER: "Người dùng"
-}
+    USER: "Người dùng",
+};
+
+export const TONG_HOP = "Tổng hợp";

@@ -5,16 +5,17 @@ import { AIProps } from "../Utils";
 import { SelectDifficultLevel } from "./SelectDifficultLevel";
 import { SelectLanguage } from "./SelectLanguge";
 import { SelectType } from "./SelectType";
+import { Textarea } from "@/components/ui/textarea";
 
 export function Left(props: AIProps) {
     const { state, setState } = props;
     return (
         <div className="w-1/2 border p-2 rounded-lg max-h-full bg-gray-100">
             <Label htmlFor="content">Văn bản</Label>
-            <AutosizeTextarea
+            <Textarea
                 value={state.Text}
                 onChange={(e) => setState({ ...state, Text: e.target.value })}
-                minHeight={300}
+                className="h-[300px] overflow-y-auto resize-none"
                 placeholder="Văn bản..."
             />
 
